@@ -132,6 +132,8 @@ function creaGriglia(){
         "    display: grid;" +
         "    grid-template-columns: repeat(" + colonne +", 64px);" +
         "    padding: 10px;" +
+        "    width: fit-content;" +
+        "    block-size: fit-content;" +
         "}"));
 
     document.head.append(style);
@@ -230,12 +232,7 @@ function selettoreTile() {
 
 function getimg() {
 
-    let images = document.querySelectorAll("img");
-
-    let i = combine(images);
-
-    download(i);
-
+    combine();
 
 }
 
@@ -243,7 +240,6 @@ async function download(url) {
 
     const a = document.createElement("a");
 
-    //a.href = await toDataURL(url);
     a.href = url.toDataURL();
     a.download = "grid.png";
 
@@ -255,51 +251,14 @@ async function download(url) {
 
 }
 
-function combine(imgs){
+function combine(){
 
-    let canvas = document.createElement("canvas");
-    canvas.classList.add("canvas");
-    let div = document.getElementById("result");
+    html2canvas(document.querySelector("#griglia")).then(canvas => {
 
-    let coordX = 0;
-    let coordY = x; //altezza = numero di righe
-    let i = 0;
+        document.getElementById("result").append(canvas);
 
-    imgs.forEach(function (a) {
-
-        canvas.width += a.width;
-        let context = canvas.getContext("2d");
-        context.globalAlpha = 1.0;
-        context.drawImage(a, coordX, coordY);
-
-        if(i == y){
-
-            i = 0;
-            coordX = 0;
-            coordY--;
-            canvas.height += a.height;
-
-        } else {
-
-            coordX += a.width + 1;
-            i++;
-
-        }
+        download(canvas);
 
     });
-
-    let style = document.createElement("style");
-
-    style.appendChild(document.createTextNode(
-        ".canvas{ " +
-        " width:" + document.getElementById("griglia").width + " px;" +
-        " heigt:" + document.getElementById("griglia").height + " px;" +
-        "}"));
-
-    document.head.append(style);
-
-    div.append(canvas);
-
-    return canvas;
 
 }
