@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+    <link th:href="@{/styles/General.css}">
+
+</head>
+
+<section layout:fragment="header">
+
+    <!--HEADER-->
+
+    <div class="header">
+        <div class="cart-user">
+            <input type="image" th:src="@{/images/coin.png}" height="45" width="45">
+            <a href="login"><input type="image" th:src="@{/images/users.png}" height="45" width="45"></a>
+        </div>
+        <div class="logo">
+            <a href="/"><input type="image" th:src="@{/images/logo_quixel_texel.png}" width="60" height="60"></a>
+        </div>
+
+        <button class="burger" onclick="toggleMenu()">
+            <input type="image" th:src="@{/images/close.png}" height="45" width="45">
+        </button>
+    </div>
+
+
+    <script type="text/javascript">
+
+        const toggleMenu=() =>
+            document.body.classList.toggle("open")
+
+    </script>
+
+
+    <div class="menu">
+        <nav>
+            <a href="griglia" style="animation-delay: 0.2s">Griglia</a>
+            <a href="#" style="animation-delay: 0.3s">Nodi</a>
+            <a href="#" style="animation-delay: 0.4s">Entity Manager</a>
+            <a href="#" style="animation-delay: 0.5s">Gestione di Eventi</a>
+            <a href="#" style="animation-delay: 0.6s">Simulazione di Battaglia</a>
+            <a href="#" style="animation-delay: 0.7s">Tile Creator</a>
+            <a href="#" style="animation-delay: 0.8s">Pacchetti</a>
+            <a href="#" style="animation-delay: 0.9s">Forum</a>
+        </nav>
+    </div>
+
+</section>
+
+</html>

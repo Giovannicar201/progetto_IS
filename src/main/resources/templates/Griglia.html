@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+
+  <link rel="stylesheet" th:href="@{/styles/Griglia/Griglia.css}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+
+<div>
+
+  <!--PROVA DELLA GRIGLIA, VA MODIFICATO L'HTML-->
+
+  Dammi un numero:
+  <input type="number" id="righe" onchange="updateButton()">
+  <input type="number" id="colonne" disabled>
+  <button onclick="creaGriglia()">crea</button>
+  <button onclick="disegnaTile()">disegna Tile</button>
+  <button onclick="cancellaTile()">cancella Tile</button>
+  <button onclick="selettoreTile()">selettore Tile</button>
+  <button onclick="getimg()">download</button>
+
+</div>
+
+<div id = "griglia" class="griglia"></div>
+<div id = "result"></div>
+
+<script th:src="@{/js/Griglia/Griglia.js}"></script>
+
+</body>
+</html>

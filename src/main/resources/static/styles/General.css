@@ -1,0 +1,296 @@
+/*HEADER*/
+
+.header {
+    margin: -16px;
+    position: fixed;
+    padding: 5px;
+    text-align: center;
+    background: #E5A632;
+    width: 1535px;
+}
+
+.cart-user {
+    position: fixed;
+    display: flex;
+    left: 92%;
+    margin-top: 20px;
+}
+
+.logo {
+    position: fixed;
+    display: flex;
+    left: 45%;
+    margin-top: 10px;
+}
+
+/*SIDEBAR*/
+
+button {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.burger {
+    z-index: 3;
+    top: 0;
+    left: 20px;
+    display: grid;
+    place-items: center;
+    width: 88px;
+    height: 88px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.burger .menu {
+    position: fixed;
+}
+
+.menu {
+    z-index: 2;
+    top: 89px;
+    left: 0;
+    position: fixed;
+    display: grid;
+    place-items: center;
+    width: 320px;
+    background: linear-gradient(to bottom, #E5A632,#F7A842,#EF4E28,#E03C30,#A91519,#981D26);
+    translate: -100% 0;
+    transition: translate 0.375s;
+    /*cubic-bezier(0.175,0.885,0.32,1);*/
+}
+
+.menu nav {
+    opacity: 0;
+}
+
+.menu nav:hover a{
+    opacity: 0.25;
+}
+
+.menu nav a:hover {
+    opacity: 1;
+}
+
+.menu nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu a {
+    font-family: 'TheGoodMonolith', sans-serif;
+    position: relative;
+    color: #f9f9f9;
+    font-size: 28px;
+    padding: 20px 0;
+    width: 300px;
+    text-decoration: none;
+}
+
+.menu a,
+.menu a::before,
+.menu a::after {
+    transition: 0.4s;
+}
+
+.menu a::before,
+.menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+}
+
+.menu a::before {
+    opacity: 0;
+    background: rgb(255 255 255 /20%);
+}
+
+.menu a::after {
+    transform: scaleX(0);
+    transform-origin: 0% 50%;
+    background: #f7f7f7;
+}
+
+.menu a:hover::before {
+    opacity: 1;
+}
+
+.menu a:hover::after {
+    transform: scaleY(1);
+}
+
+body.open .menu {
+    opacity: 1;
+    visibility: visible;
+    translate: 0;
+    animation: menu-in 0.375s;
+}
+
+body.open .menu nav {
+    opacity: 1;
+}
+
+body.open .menu a {
+    animation: appear 0.25s backwards;
+}
+
+@keyframes menu-in {
+    0% {
+        clip-path: ellipse(60% 60% at 0% 50%);
+    }
+    100% {
+        clip-path: ellipse(120% 120% at 0% 50%);
+    }
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        translate: -30px 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/*FOOTER*/
+
+footer {
+    background: linear-gradient(to bottom,#E5A632,#F7A842,#EF4E28,#E03C30,#A91519,#981D26);
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.3);
+    font-size: 16px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.footer-sections {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 48px;
+    margin: 0 auto;
+    max-width: 720px;
+    padding: 16px;
+}
+
+.logo-insta-face-ult {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin: 0 60px;
+}
+
+.logo-insta-face-ult img {
+    width: 20px;
+    height: 20px;
+}
+
+.logo-text {
+    max-width: 160px;
+    margin: 0 200px 10px 0;
+}
+
+h2 {
+    text-align: left;
+    color: black;
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+menu li {
+    margin-bottom: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*.footer {
+    margin: -16px;
+    position: relative;
+    padding: 5px;
+    display: flex;
+    text-align: center;
+    background: linear-gradient(to bottom,#E5A632,#F7A842,#EF4E28,#E03C30,#A91519,#981D26);
+    width: 1517px;
+    color: white;
+    justify-content: space-evenly;
+}
+
+.boxtitle {
+    font-family: 'TheGoodMonolith', sans-serif;
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-weight: 600;
+}
+
+.imgDescr {
+    width: 8%;
+    height: auto;
+    position: relative;
+    margin: 0 5px;
+}
+
+.SpedOrdCam {
+    font-family: 'TheGoodMonolith', sans-serif;
+    flex-direction: column;
+    display: flex;
+    width: 30%;
+}
+
+.info2 a{
+    font-family: 'TheGoodMonolith', sans-serif;
+    color: white;
+    text-decoration: none;
+}
+
+.email {
+    margin-left: 25px;
+}
+
+.number {
+    margin-left: 25px;
+}
+
+.fax {
+    margin-left: 25px;
+}
+
+.email, .number, .fax {
+    font-size: 12px;
+}
+
+.logo-insta-face-ult {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    left: 45%;
+}*/

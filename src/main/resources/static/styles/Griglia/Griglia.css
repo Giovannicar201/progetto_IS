@@ -1,0 +1,23 @@
+/*css per la griglia*/
+
+.square{
+
+    width: 64px;
+    height: 64px;
+    background-color: white;
+    border: solid 2px black;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/*css per i div della griglia*/
+
+.cella{
+
+    border: 0px;
+    max-width: 64px;
+
+}
