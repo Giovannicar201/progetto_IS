@@ -131,7 +131,7 @@ function creaGriglia(){
         ".griglia{ " +
         "    display: grid;" +
         "    grid-template-columns: repeat(" + colonne +", 64px);" +
-        "    padding: 10px;" +
+        "    padding: 0px;" +
         "    width: fit-content;" +
         "    block-size: fit-content;" +
         "}"));
@@ -258,6 +258,8 @@ function combine(){
         document.getElementById("result").append(canvas);
 
         download(canvas);
+
+        document.getElementById("result").removeChild(canvas);
 
     });
 
