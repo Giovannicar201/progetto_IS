@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" th:href="@{/styles/Griglia/Griglia.css}">
+</head>
+<body>
+
+<div>
+
+    <button onclick="creaPixelArt('5', '5')">crea</button>
+    <button onclick="disegnaTile()">disegna Tile</button>
+    <button onclick="cancellaTile()">cancella Tile</button>
+    <button onclick="selettoreTile()">selettore Tile</button>
+    <button onclick="getimg()">download</button>
+
+</div>
+
+<br>
+
+<div id = "griglia" class="griglia"></div>
+<br>
+<div id = "color" class="color"></div>
+<br>
+COLORE SCELTO:
+<div id = "colorScelto" class="squarePixelArt"></div>
+<div id = "result" hidden="hidden"></div>
+
+</body>
+
+<script src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script th:src = "@{/js/Strumenti/PixelArt/PixelArtJS.js}"></script>
+<script th:src = "@{/js/Async.js}"></script>
+<script th:src = "@{/js/Strumenti/DrawJS.js}"></script>
+
+
+</html>

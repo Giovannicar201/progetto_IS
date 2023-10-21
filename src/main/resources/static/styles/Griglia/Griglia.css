@@ -13,6 +13,24 @@
 
 }
 
+.squarePixelArt{
+
+    width: 32px;
+    height: 32px;
+    border: solid 2px black;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.squarePixelArt:hover{
+
+    filter: brightness(1.5);
+
+}
+
 /*css per i div della griglia*/
 
 .cella{
@@ -22,7 +40,7 @@
 
 }
 
-.cella:hover{
+.cella:hover {
 
     filter: brightness(1.5);
 

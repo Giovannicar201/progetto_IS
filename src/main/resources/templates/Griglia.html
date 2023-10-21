@@ -12,10 +12,7 @@
 
   <!--PROVA DELLA GRIGLIA, VA MODIFICATO L'HTML-->
 
-  Dammi un numero:
-  <input type="number" id="righe" onchange="updateButton()">
-  <input type="number" id="colonne" disabled>
-  <button onclick="creaGriglia()">crea</button>
+  <button onclick="creaGriglia('3', '10')">crea</button>
   <button onclick="disegnaTile()">disegna Tile</button>
   <button onclick="cancellaTile()">cancella Tile</button>
   <button onclick="selettoreTile()">selettore Tile</button>
@@ -26,11 +23,15 @@
 <br>
 
 <div id = "griglia" class="griglia"></div>
+<br>
+<div id = "tileScelto" class="squarePixelArt"></div>
 <div id = "result" hidden="hidden"></div>
 
 </body>
 
 <script src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-<script th:src = "@{/js/Griglia/Griglia.js}"></script>
+<script th:src = "@{/js/Strumenti/Griglia/Griglia.js}"></script>
+<script th:src = "@{/js/Async.js}"></script>
+<script th:src = "@{/js/Strumenti/DrawJS.js}"></script>
 
 </html>

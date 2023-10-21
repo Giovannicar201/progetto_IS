@@ -54,11 +54,11 @@ public class HTMLMapping {
 
     }
 
-    @GetMapping("/prova")
+    @GetMapping("/pixelArt")
 
-    public String prova() {
+    public String pixelArt () {
 
-        return "prova";
+        return "PixelArtCreator";
 
     }
 
