@@ -5,16 +5,11 @@ function initDrawingTools(cella, flag) {
 
     cella.onclick = function test() {
 
-        if(cella.childElementCount == 0 && flagTile == 0){
-
+        if(flagTile == 0){
 
             if(flag === 1) {
 
-                let img = document.createElement("img");
-
-                img.className = "cella";
-                img.src = document.getElementById("tileScelto").children[0].src;
-                cella.append(img);
+                cella.children[0].src = document.getElementById("tileScelto").children[0].src;
 
             } else{
 
@@ -24,9 +19,13 @@ function initDrawingTools(cella, flag) {
 
         }
 
-        if(cella.childElementCount == 1 && flagTile == 1 && cella.className === "square"){
+        if(flagTile == 1 && cella.className === "square"){
 
             cella.innerHTML = "";
+
+            let img = document.createElement("img");
+            img.className = "cella";
+            cella.append(img);
 
         } else if(flagTile == 1 && cella.className === "squarePixelArt") {
 
@@ -107,28 +106,21 @@ function disegnaTile(){
 
         for(let i = 0; i < selectorGriglia.length; i++) {
 
-            let cella = document.getElementById(selectorGriglia[i]);
-            console.log(selectorGriglia);
+        let cella = document.getElementById(selectorGriglia[i]);
 
-            if (cella.childElementCount == 0){
+        if(cella.className === "square") {
 
-                if(cella.className === "square") {
+            cella.children[0].src = document.getElementById("tileScelto").children[0].src;
+            cella.removeAttribute("style");
 
-                    let img = document.createElement("img");
+        } else {
 
-                    img.className = "cella";
-                    img.src = document.getElementById("tileScelto").children[0].src;
-                    cella.append(img);
-                    cella.removeAttribute("style");
+            cella.removeAttribute("style");
+            cella.style.backgroundColor = document.getElementById("colorScelto").style.backgroundColor;
 
-                } else {
+        }
 
-                    cella.removeAttribute("style");
-                    cella.style.backgroundColor = document.getElementById("colorScelto").style.backgroundColor;
 
-                }
-
-            }
 
         }
 
@@ -158,6 +150,10 @@ function cancellaTile(){
 
                 cella.removeAttribute("style");
                 cella.innerHTML = "";
+
+                let img = document.createElement("img");
+                img.className = "cella";
+                cella.append(img);
 
             } else {
 
