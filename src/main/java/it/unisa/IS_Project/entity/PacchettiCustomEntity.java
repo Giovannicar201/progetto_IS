@@ -24,4 +24,7 @@ public class PacchettiCustomEntity {
     @MapsId("username")
     @JoinColumn(name = "username")
     private UtenteEntity idPacchettiCustomUtenti;
+
+    @OneToMany(mappedBy = "pacchettiCustomEntity")
+    private List<ComprendeEntity> idPacchettiCustomComprende;
 }
