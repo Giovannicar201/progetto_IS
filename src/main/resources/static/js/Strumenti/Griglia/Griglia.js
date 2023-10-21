@@ -1,5 +1,33 @@
+let div = document.getElementById("tileset");
 let x;
 let y;
+
+function tileset() {
+
+    for (let i = 0; i < 2; i++) {
+
+        let tile = document.createElement("div");
+        tile.classList.add("squarePixelArt");
+
+        let img = document.createElement("img");
+
+        img.className = "squarePixelArt";
+        img.src = "/images/tileset/tile" + i +".png";
+        tile.append(img);
+
+        tile.onclick = function test() {
+
+            document.getElementById("tileScelto").children[0].src = img.src;
+
+        };
+
+        div.append(tile);
+
+    }
+
+}
+
+tileset();
 
 function creaGriglia(righe, colonne){
 

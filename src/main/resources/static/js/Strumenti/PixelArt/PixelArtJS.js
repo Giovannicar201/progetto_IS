@@ -16,8 +16,6 @@ function createColor(){
 
             document.getElementById("colorScelto").style.backgroundColor = colors[i];
 
-            console.log(document.getElementById("colorScelto").style.backgroundColor);
-
         };
 
         div.append(color);

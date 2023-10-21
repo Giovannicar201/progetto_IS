@@ -13,7 +13,7 @@ function initDrawingTools(cella, flag) {
                 let img = document.createElement("img");
 
                 img.className = "cella";
-                img.src = "/images/tile.png";
+                img.src = document.getElementById("tileScelto").children[0].src;
                 cella.append(img);
 
             } else{
@@ -117,7 +117,7 @@ function disegnaTile(){
                     let img = document.createElement("img");
 
                     img.className = "cella";
-                    img.src = "/images/tile.png";
+                    img.src = document.getElementById("tileScelto").children[0].src;
                     cella.append(img);
                     cella.removeAttribute("style");
 

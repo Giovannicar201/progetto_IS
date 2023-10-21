@@ -25,12 +25,6 @@
 
 }
 
-.squarePixelArt:hover{
-
-    filter: brightness(1.5);
-
-}
-
 /*css per i div della griglia*/
 
 .cella{
