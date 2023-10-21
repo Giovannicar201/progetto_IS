@@ -6,22 +6,18 @@ function tileset() {
 
     for (let i = 0; i < 2; i++) {
 
-        let tile = document.createElement("div");
-        tile.classList.add("squarePixelArt");
-
         let img = document.createElement("img");
 
         img.className = "squarePixelArt";
         img.src = "/images/tileset/tile" + i +".png";
-        tile.append(img);
 
-        tile.onclick = function test() {
+        img.onclick = function test() {
 
             document.getElementById("tileScelto").children[0].src = img.src;
 
         };
 
-        div.append(tile);
+        div.append(img);
 
     }
 
@@ -54,8 +50,12 @@ function disegna(div, righe, colonne) {
 
             let cella = document.createElement("div");
 
+            let img = document.createElement("img");
+            img.className = "cella";
+
             cella.id = i + "," + j;
             cella.className = "square";
+            cella.append(img);
 
             initDrawingTools(cella, 1);
 
