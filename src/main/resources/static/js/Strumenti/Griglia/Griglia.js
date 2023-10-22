@@ -65,6 +65,12 @@ function disegna(div, righe, colonne) {
 
     }
 
+    if (document.head.children.length > 2) {
+
+        document.head.children[2].remove();
+
+    }
+
     let style = document.createElement("style");
     style.appendChild(document.createTextNode(
         ".griglia{ " +

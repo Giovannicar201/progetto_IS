@@ -1,4 +1,4 @@
-package it.unisa.IS_Project.entity;
+package it.unisa.IS_Project.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

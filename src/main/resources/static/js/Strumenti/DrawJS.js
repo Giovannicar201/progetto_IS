@@ -50,12 +50,11 @@ function initDrawingTools(cella, flag) {
                     let y1 = parseInt(primaCoordinata[1]);
                     let y2 = parseInt(secondaCoordinata[1]);
 
-                    while (x1 <= x2)
-                    {
+                    while (x1 <= x2) {
+
                         y1 = parseInt(primaCoordinata[1]);
 
-                        while(y1 < y2)
-                        {
+                        while(y1 < y2) {
                             selectorGriglia[selectorGriglia.length] = x1 + "," + y1;
                             y1++;
                         }
@@ -106,21 +105,19 @@ function disegnaTile(){
 
         for(let i = 0; i < selectorGriglia.length; i++) {
 
-        let cella = document.getElementById(selectorGriglia[i]);
+            let cella = document.getElementById(selectorGriglia[i]);
 
-        if(cella.className === "square") {
+            if(cella.className === "square") {
 
-            cella.children[0].src = document.getElementById("tileScelto").children[0].src;
-            cella.removeAttribute("style");
+                cella.children[0].src = document.getElementById("tileScelto").children[0].src;
+                cella.removeAttribute("style");
 
-        } else {
+            } else {
 
-            cella.removeAttribute("style");
-            cella.style.backgroundColor = document.getElementById("colorScelto").style.backgroundColor;
+                cella.removeAttribute("style");
+                cella.style.backgroundColor = document.getElementById("colorScelto").style.backgroundColor;
 
-        }
-
-
+            }
 
         }
 

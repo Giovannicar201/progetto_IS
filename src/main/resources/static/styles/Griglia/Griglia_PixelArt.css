@@ -39,3 +39,13 @@
     filter: brightness(1.5);
 
 }
+
+.colori{
+
+    display: grid;
+    grid-template-columns: repeat(3 , 32px);
+    padding: 0px;
+    width: fit-content;
+    block-size: fit-content;
+
+}

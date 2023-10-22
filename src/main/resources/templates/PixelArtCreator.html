@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" th:href="@{/styles/Griglia/Griglia.css}">
+    <link rel="stylesheet" th:href="@{/styles/Griglia/Griglia_PixelArt.css}">
 </head>
 <body>
 
@@ -14,6 +14,8 @@
     <button onclick="cancellaTile()">cancella Tile</button>
     <button onclick="selettoreTile()">selettore Tile</button>
     <button onclick="getimg()">download</button>
+    <input type="text" id="colore">
+    <button onclick="generatorePalette()">Genera</button>
 
 </div>
 
@@ -23,6 +25,9 @@
 <br>
 <div id = "color" class="color"></div>
 <br>
+<div id = "randomHex" class="color"></div>
+<br>
+
 COLORE SCELTO:
 <div id = "colorScelto" class="squarePixelArt"></div>
 <div id = "result" hidden="hidden"></div>
