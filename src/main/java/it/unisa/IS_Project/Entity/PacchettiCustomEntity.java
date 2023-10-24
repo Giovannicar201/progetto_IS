@@ -20,11 +20,9 @@ public class PacchettiCustomEntity {
     private int id;
     private String nome;
 
-    @ManyToOne
-    @MapsId("username")
-    @JoinColumn(name = "username")
-    private UtenteEntity idPacchettiCustomUtenti;
-
     @OneToMany(mappedBy = "pacchettiCustomEntity")
     private List<ComprendeEntity> idPacchettiCustomComprende;
+
+    @OneToMany(mappedBy = "pacchettiCustom")
+    private List<CreaEntity> idPacchettiCustomCrea;
 }

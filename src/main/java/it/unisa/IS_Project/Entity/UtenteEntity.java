@@ -26,6 +26,6 @@ public class UtenteEntity {
     @OneToMany(mappedBy = "usernameUtente")
     private List<CompraEntity> usernameUtenteList;
 
-    @OneToMany(mappedBy = "idPacchettiCustomUtenti")
-    private List<PacchettiCustomEntity> pacchettiCustomEntityList;
+    @OneToMany(mappedBy = "utenteEntity")
+    private List<CreaEntity> usernameUtenteCreaList;
 }

@@ -25,4 +25,7 @@ public class TileEntity {
 
     @OneToMany(mappedBy = "tileEntity")
     private List<ComprendeEntity> idTileComprende;
+
+    @OneToMany(mappedBy = "idIileEntity")
+    private List<PiazzatoEntity> idTilePiazzato;
 }
