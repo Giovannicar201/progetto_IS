@@ -62,4 +62,11 @@ public class HTMLMapping {
 
     }
 
+    @GetMapping("/pacchetti")
+
+    public String pacchetti () {
+
+        return "pacchetti";
+    }
+
 }
