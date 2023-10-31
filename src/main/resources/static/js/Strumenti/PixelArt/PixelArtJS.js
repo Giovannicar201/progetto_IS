@@ -4,7 +4,7 @@ let y;
 
 function createColor(){
 
-    const colors = ["#FF0000", "#FFFF00", "#00FF00", "#0000FF", "#663300", "#00FFFF", "#606060", "#000000", "#FFFFFF"];
+    const colors = ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF","#00FFFF", "#000000", "#FFFFFF"];
 
     for(let i = 0; i < colors.length; i++){
 
@@ -122,13 +122,14 @@ function generatorePalette() {
     let colore = document.getElementById("colore").value;
     let hex;
 
+
     fetch('/JSON/colours.json')
         .then((response) => response.json())
         .then(json => {
 
             let key = Object.keys(json);
 
-            if (key.some(f)) {
+            if (colore in key) {
 
                 hex = json[colore];
                 generaPaletteCasuale(hex);
@@ -140,13 +141,5 @@ function generatorePalette() {
             }
 
         });
-
-}
-
-function f(key){
-
-    let colore = document.getElementById("colore").value;
-
-    return key === colore;
 
 }
