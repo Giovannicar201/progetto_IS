@@ -28,4 +28,7 @@ public class UtenteEntity {
 
     @OneToMany(mappedBy = "utenteEntity")
     private List<CreaEntity> usernameUtenteCreaList;
+
+    @OneToMany(mappedBy = "newUsernameUtente")
+    private List<ComponeEntity> usernameUtenteComponeList;
 }

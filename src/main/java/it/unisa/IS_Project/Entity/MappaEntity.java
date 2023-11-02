@@ -21,7 +21,4 @@ public class MappaEntity {
     private String nome;
     private int lunghezza;
     private int larghezza;
-
-    @OneToMany(mappedBy = "mappaEntity")
-    private List<PiazzatoEntity> idMappaEntity;
 }

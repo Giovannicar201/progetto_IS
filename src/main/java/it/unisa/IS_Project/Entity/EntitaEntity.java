@@ -17,15 +17,15 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "tile")
-public class TileEntity {
+public class EntitaEntity {
     @Id
     private int id;
     private String proprieta;
     private String collisione;
 
-    @OneToMany(mappedBy = "tileEntity")
-    private List<ComprendeEntity> idTileComprende;
+    @OneToMany(mappedBy = "entitaEntity")
+    private List<ComprendeEntity> idEntitaComprende;
 
-    @OneToMany(mappedBy = "idIileEntity")
-    private List<PiazzatoEntity> idTilePiazzato;
+    @OneToMany(mappedBy = "newIdEntitaEntity")
+    private List<ComponeEntity> idEnitaEntityCompone;
 }

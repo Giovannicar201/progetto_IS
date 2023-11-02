@@ -20,8 +20,8 @@ public class ComprendeEntity {
     @AllArgsConstructor
     @NoArgsConstructor
     public class PrimaryKey implements Serializable {
-        @Column(name="idTile")
-        private int idTile;
+        @Column(name="idEntita")
+        private int idEntita;
         @Column(name = "idPacchettiCustom")
         private int idPacchettiCustom;
     }
@@ -30,9 +30,9 @@ public class ComprendeEntity {
     private PrimaryKey primaryKey;
 
     @ManyToOne
-    @MapsId("idTile")
-    @JoinColumn(name = "idTile")
-    private TileEntity tileEntity;
+    @MapsId("idEntita")
+    @JoinColumn(name = "idEntita")
+    private EntitaEntity entitaEntity;
 
     @ManyToOne
     @MapsId("idPacchettiCustom")

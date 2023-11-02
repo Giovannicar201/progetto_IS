@@ -13,31 +13,29 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "piazzato")
-public class PiazzatoEntity {
+@Table(name = "compone")
+public class ComponeEntity {
     @Embeddable
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PrimaryKey implements Serializable{
-        @Column(name = "idMappa")
-        private int idMappa;
-        @Column(name = "idTile")
-        private int idTile;
-        @Column(name = "coordinate")
-        private String coordinate;
+        @Column(name = "usernameUtente")
+        private String usernameUtente;
+        @Column(name = "idEntita")
+        private int idEntita;
     }
 
     @EmbeddedId
     private PrimaryKey primaryKey;
 
     @ManyToOne
-    @MapsId("idMappa")
-    @JoinColumn(name = "idMappa")
-    private MappaEntity mappaEntity;
+    @MapsId("usernameUtente")
+    @JoinColumn(name = "usernameUtente")
+    private UtenteEntity newUsernameUtente;
 
     @ManyToOne
-    @MapsId("idTile")
-    @JoinColumn(name = "idTile")
-    private TileEntity idIileEntity;
+    @MapsId("idEntita")
+    @JoinColumn(name = "idEntita")
+    private EntitaEntity newIdEntitaEntity;
 }
