@@ -1,4 +1,4 @@
-package it.unisa.IS_Project.Entity;
+package it.unisa.IS_Project.Model.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,4 +31,12 @@ public class UtenteEntity {
 
     @OneToMany(mappedBy = "newUsernameUtente")
     private List<ComponeEntity> usernameUtenteComponeList;
+
+    @OneToMany(mappedBy = "utente")
+    private List<GeneraEntity> usernameUtenteGenera;
+
+    @ManyToOne
+    @MapsId("idMappa")
+    @JoinColumn(name = "idMappa")
+    private MappaEntity idMappa;
 }

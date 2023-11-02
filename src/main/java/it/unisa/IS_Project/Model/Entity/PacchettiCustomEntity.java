@@ -1,4 +1,4 @@
-package it.unisa.IS_Project.Entity;
+package it.unisa.IS_Project.Model.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

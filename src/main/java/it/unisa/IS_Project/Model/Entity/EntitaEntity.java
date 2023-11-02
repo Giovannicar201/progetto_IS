@@ -1,4 +1,4 @@
-package it.unisa.IS_Project.Entity;
+package it.unisa.IS_Project.Model.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -28,4 +28,7 @@ public class EntitaEntity {
 
     @OneToMany(mappedBy = "newIdEntitaEntity")
     private List<ComponeEntity> idEnitaEntityCompone;
+
+    @OneToMany(mappedBy = "entita")
+    private List<ProprietaEntity> idEntitaEntityProprieta;
 }

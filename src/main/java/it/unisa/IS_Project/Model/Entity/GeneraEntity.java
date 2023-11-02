@@ -1,4 +1,4 @@
-package it.unisa.IS_Project.Entity;
+package it.unisa.IS_Project.Model.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,29 +13,28 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "crea")
-public class CreaEntity {
+@Table(name = "genera")
+public class GeneraEntity {
     @Embeddable
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PrimaryKey implements Serializable {
-        @Column(name = "idPacchettiCustom")
-        private int idPacchettiCustom;
         @Column(name = "usernameUtente")
-        private String usernameEntity;
+        private String usernameUtente;
+        @Column(name = "nomePalette")
+        private String nomePalette;
     }
-
     @EmbeddedId
     private PrimaryKey primaryKey;
 
     @ManyToOne
-    @MapsId("idPacchettiCustom")
-    @JoinColumn(name = "idPacchettiCustom")
-    private PacchettiCustomEntity pacchettiCustom;
-
-    @ManyToOne
     @MapsId("usernameUtente")
     @JoinColumn(name = "usernameUtente")
-    private UtenteEntity utenteEntity;
+    private UtenteEntity utente;
+
+    @ManyToOne
+    @MapsId("nomePalette")
+    @JoinColumn(name = "nomePalette")
+    private PaletteEntity paletteEntity;
 }

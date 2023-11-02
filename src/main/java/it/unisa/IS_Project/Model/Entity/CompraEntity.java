@@ -1,4 +1,4 @@
-package it.unisa.IS_Project.Entity;
+package it.unisa.IS_Project.Model.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,14 +7,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Time;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "compone")
-public class ComponeEntity {
+@Table(name = "compra")
+public class CompraEntity {
     @Embeddable
     @Data
     @NoArgsConstructor
@@ -22,8 +24,12 @@ public class ComponeEntity {
     public static class PrimaryKey implements Serializable{
         @Column(name = "usernameUtente")
         private String usernameUtente;
-        @Column(name = "idEntita")
-        private int idEntita;
+        @Column(name = "idPacchettiPremium")
+        private Integer idPacchettiPremium;
+        @Column(name = "data")
+        private Date data;
+        @Column(name = "time")
+        private Time time;
     }
 
     @EmbeddedId
@@ -32,10 +38,10 @@ public class ComponeEntity {
     @ManyToOne
     @MapsId("usernameUtente")
     @JoinColumn(name = "usernameUtente")
-    private UtenteEntity newUsernameUtente;
+    private UtenteEntity usernameUtente;
 
     @ManyToOne
-    @MapsId("idEntita")
-    @JoinColumn(name = "idEntita")
-    private EntitaEntity newIdEntitaEntity;
+    @MapsId("idPacchettiPremium")
+    @JoinColumn(name = "idPacchettiPremium")
+    private PacchettiPremiumEntity idPacchettiPremium;
 }

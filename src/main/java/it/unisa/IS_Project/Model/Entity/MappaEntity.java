@@ -1,4 +1,4 @@
-package it.unisa.IS_Project.Entity;
+package it.unisa.IS_Project.Model.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,4 +21,7 @@ public class MappaEntity {
     private String nome;
     private int lunghezza;
     private int larghezza;
+
+    @OneToMany(mappedBy = "idMappa")
+    private List<UtenteEntity> idMappaUtente;
 }
