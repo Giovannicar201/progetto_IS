@@ -1,9 +1,6 @@
 package it.unisa.IS_Project.Model.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +16,7 @@ import java.util.List;
 @Table(name = "entita")
 public class EntitaEntity {
     @Id
+    @Column(name = "idEntita")
     private int id;
     private String proprieta;
     private String collisione;
