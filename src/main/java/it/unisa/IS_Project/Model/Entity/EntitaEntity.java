@@ -34,5 +34,5 @@ public class EntitaEntity {
     private List<ContieneEntity> idEntitaEntityContiene;
 
     @OneToMany(mappedBy = "e")
-    private List<ImmagineEntitaEntity> idEntiaEntityFoto;
+    private List<ImmagineEntitaEntity> idEntitaEntityFoto;
 }
