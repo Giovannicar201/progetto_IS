@@ -7,41 +7,34 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Time;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "compra")
-public class CompraEntity {
+@Table(name = "contiene")
+public class ContieneEntity {
     @Embeddable
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PrimaryKey implements Serializable{
-        @Column(name = "usernameUtente")
-        private String usernameUtente;
         @Column(name = "idTilesetPremium")
-        private Integer idTilesetPremium;
-        @Column(name = "data")
-        private Date data;
-        @Column(name = "time")
-        private Time time;
+        private int idTilesetPremium;
+        @Column(name = "idEntita")
+        private int idEntita;
     }
-
     @EmbeddedId
     private PrimaryKey primaryKey;
 
     @ManyToOne
-    @MapsId("usernameUtente")
-    @JoinColumn(name = "usernameUtente")
-    private UtenteEntity usernameUtente;
+    @MapsId("idEntita")
+    @JoinColumn(name = "idEntita")
+    private EntitaEntity entity;
 
     @ManyToOne
     @MapsId("idTilesetPremium")
     @JoinColumn(name = "idTilesetPremium")
-    private TilesetPremiumEntity idTilesetPremium;
+    private TilesetPremiumEntity idTilesetPrem;
 }

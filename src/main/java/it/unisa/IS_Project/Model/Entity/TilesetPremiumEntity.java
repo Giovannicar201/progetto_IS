@@ -13,14 +13,17 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "pacchettiPremium")
-public class PacchettiPremiumEntity {
+@Table(name = "tilesetPremium")
+public class TilesetPremiumEntity {
     @Id
-    @Column(name = "idPacchettiPremium")
+    @Column(name = "idTilesetPremium")
     private int id;
     private String nome;
     private double prezzo;
 
-    @OneToMany(mappedBy = "idPacchettiPremium")
-    private List<CompraEntity> pacchettiPremiumList;
+    @OneToMany(mappedBy = "idTilesetPremium")
+    private List<CompraEntity> tilesetPremiumList;
+
+    @OneToMany(mappedBy = "idTilesetPrem")
+    private List<ContieneEntity> idTilesetPremiumContiene;
 }

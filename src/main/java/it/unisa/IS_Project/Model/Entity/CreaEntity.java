@@ -20,7 +20,7 @@ public class CreaEntity {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PrimaryKey implements Serializable {
-        @Column(name = "idPacchettiCustom")
+        @Column(name = "idTilesetCustom")
         private int idPacchettiCustom;
         @Column(name = "usernameUtente")
         private String usernameEntity;
@@ -30,9 +30,9 @@ public class CreaEntity {
     private PrimaryKey primaryKey;
 
     @ManyToOne
-    @MapsId("idPacchettiCustom")
-    @JoinColumn(name = "idPacchettiCustom")
-    private PacchettiCustomEntity pacchettiCustom;
+    @MapsId("idTilesetCustom")
+    @JoinColumn(name = "idTilesetCustom")
+    private TilesetCustomEntity tilesetCustom;
 
     @ManyToOne
     @MapsId("usernameUtente")

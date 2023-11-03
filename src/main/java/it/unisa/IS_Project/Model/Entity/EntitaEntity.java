@@ -31,4 +31,10 @@ public class EntitaEntity {
 
     @OneToMany(mappedBy = "entita")
     private List<ProprietaEntity> idEntitaEntityProprieta;
+
+    @OneToMany(mappedBy = "entity")
+    private List<ContieneEntity> idEntitaEntityContiene;
+
+    @OneToMany(mappedBy = "e")
+    private List<ImmagineEntitaEntity> idEntiaEntityFoto;
 }

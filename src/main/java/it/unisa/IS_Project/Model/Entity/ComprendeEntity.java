@@ -22,8 +22,8 @@ public class ComprendeEntity {
     public class PrimaryKey implements Serializable {
         @Column(name="idEntita")
         private int idEntita;
-        @Column(name = "idPacchettiCustom")
-        private int idPacchettiCustom;
+        @Column(name = "idTilesetCustom")
+        private int idTilesetCustom;
     }
 
     @EmbeddedId
@@ -35,7 +35,7 @@ public class ComprendeEntity {
     private EntitaEntity entitaEntity;
 
     @ManyToOne
-    @MapsId("idPacchettiCustom")
-    @JoinColumn(name = "idPacchettiCustom")
-    private PacchettiCustomEntity pacchettiCustomEntity;
+    @MapsId("idTilesetCustom")
+    @JoinColumn(name = "idTilesetCustom")
+    private TilesetCustomEntity tilesetCustomEntity;
 }
