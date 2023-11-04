@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GeneraModel {
-    private String usernameUtente;
-    private String nomePalette;
+    private UtenteModel usernameUtente;
+    private PaletteModel nomePalette;
 }

@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ComponeModel {
-    private String usernameUtente;
-    private int idEntita;
+    private UtenteModel usernameUtente;
+    private EntitaModel idEntita;
 }

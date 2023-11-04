@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreaModel {
-    private int idPacchettiCustom;
-    private String usernameUtente;
+    private TilesetCustomModel idTilesetCustom;
+    private EntitaModel usernameUtente;
 }

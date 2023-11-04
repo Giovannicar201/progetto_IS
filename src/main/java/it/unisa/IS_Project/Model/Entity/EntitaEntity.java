@@ -25,7 +25,7 @@ public class EntitaEntity {
     private List<ComprendeEntity> idEntitaComprende;
 
     @OneToMany(mappedBy = "newIdEntitaEntity")
-    private List<ComponeEntity> idEnitaEntityCompone;
+    private List<ComponeEntity> idEntitaEntityCompone;
 
     @OneToMany(mappedBy = "entita")
     private List<ProprietaEntity> idEntitaEntityProprieta;

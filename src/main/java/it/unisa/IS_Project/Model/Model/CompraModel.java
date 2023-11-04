@@ -11,8 +11,8 @@ import java.sql.Time;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CompraModel {
-    private String usernameUtente;
-    private int idTilesetPremium;
+    private UtenteModel usernameUtente;
+    private TilesetPremiumModel idTilesetPremium;
     private Date data;
     private Time time;
 }

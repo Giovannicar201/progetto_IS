@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContieneModel {
-    private int idTilesetPremium;
-    private int idEntita;
+    private TilesetPremiumModel idTilesetPremium;
+    private EntitaModel idEntita;
 }

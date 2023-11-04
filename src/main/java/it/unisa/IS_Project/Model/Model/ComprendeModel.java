@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ComprendeModel {
-    private int idEntita;
-    private int idTilesetCustom;
+    private EntitaModel idEntita;
+    private TilesetCustomModel idTilesetCustom;
 }

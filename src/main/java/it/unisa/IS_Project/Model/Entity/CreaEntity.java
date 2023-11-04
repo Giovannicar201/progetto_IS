@@ -21,7 +21,7 @@ public class CreaEntity {
     @AllArgsConstructor
     public static class PrimaryKey implements Serializable {
         @Column(name = "idTilesetCustom")
-        private int idPacchettiCustom;
+        private int idTilesetCustom;
         @Column(name = "usernameUtente")
         private String usernameEntity;
     }

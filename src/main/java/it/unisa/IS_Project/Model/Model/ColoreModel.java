@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class ColoreModel {
     private String esadecimale;
     private String nomeColore;
+    private PaletteModel paletteModel;
 }
