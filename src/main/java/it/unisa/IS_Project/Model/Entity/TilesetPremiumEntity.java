@@ -22,7 +22,7 @@ public class TilesetPremiumEntity {
     private double prezzo;
 
     @OneToMany(mappedBy = "idTilesetPremium")
-    private List<CompraEntity> tilesetPremiumList;
+    private List<CompraEntity> tilesetPremiumCompra;
 
     @OneToMany(mappedBy = "idTilesetPrem")
     private List<ContieneEntity> idTilesetPremiumContiene;

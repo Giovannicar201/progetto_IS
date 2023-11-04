@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class ProprietaModel {
     private String nome;
     private String valore;
-
+    private EntitaModel entitaModel;
 }

@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ImmagineEntitaModel {
     private String foto;
-    private int idEntita;
+    private EntitaModel idEntita;
 }

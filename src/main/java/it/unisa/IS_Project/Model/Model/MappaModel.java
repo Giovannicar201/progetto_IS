@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,4 +14,6 @@ public class MappaModel {
     private String nome;
     private int lunghezza;
     private int larghezza;
+
+    private List<UtenteModel> idMappaUtente;
 }
