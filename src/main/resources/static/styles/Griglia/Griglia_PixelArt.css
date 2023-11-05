@@ -17,11 +17,17 @@
 
     width: 32px;
     height: 32px;
-    border: solid 2px black;
-    box-sizing: border-box;
-    display: flex;
+    box-sizing: content-box;
+    display: unset;
     justify-content: center;
     align-items: center;
+
+}
+
+.cellaTile{
+
+    max-width: 32px;
+    border: 0px;
 
 }
 
@@ -37,6 +43,15 @@
 .cella:hover {
 
     filter: brightness(1.5);
+
+}
+
+div.coordinate {
+
+    display: unset;
+    top: 0%;
+    position: sticky;
+    font-size: 20px;
 
 }
 

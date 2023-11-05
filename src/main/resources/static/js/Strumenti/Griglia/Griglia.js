@@ -8,7 +8,7 @@ function tileset() {
 
         let img = document.createElement("img");
 
-        img.className = "squarePixelArt";
+        img.className = "cellaTile";
         img.src = "/images/tileset/tile" + i +".png";
 
         img.onclick = function test() {
@@ -33,7 +33,6 @@ function creaGriglia(righe, colonne){
 
     disegna(contenitoreGriglia, righe, colonne);
 
-
 }
 
 function disegna(div, righe, colonne) {
@@ -55,7 +54,14 @@ function disegna(div, righe, colonne) {
 
             cella.id = i + "," + j;
             cella.className = "square";
+
             cella.append(img);
+
+            cella.onmouseover = function test() {
+
+                document.getElementById("valore").value = cella.id;
+
+            };
 
             initDrawingTools(cella, 1);
 

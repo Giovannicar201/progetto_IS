@@ -120,8 +120,6 @@ function creaDiv(hex, palette){
 function generatorePalette() {
 
     let colore = document.getElementById("colore").value;
-    let hex;
-
 
     fetch('/JSON/colours.json')
         .then((response) => response.json())
@@ -131,7 +129,7 @@ function generatorePalette() {
 
             if (colore in key) {
 
-                hex = json[colore];
+                let hex = json[colore];
                 generaPaletteCasuale(hex);
 
             } else {

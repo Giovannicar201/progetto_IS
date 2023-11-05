@@ -9,26 +9,25 @@
 <body>
 
 <div>
+  <div class="coordinate" id="coordinate">
 
-  <!--PROVA DELLA GRIGLIA, VA MODIFICATO L'HTML-->
+    <button onclick="creaGriglia('50', '50')">crea</button>
+    <button onclick="disegnaTile()">disegna Tile</button>
+    <button onclick="cancellaTile()">cancella Tile</button>
+    <button onclick="selettoreTile()">selettore Tile</button>
+    <button onclick="getimg()">download</button>
 
-  <button onclick="creaGriglia('3', '10')">crea</button>
-  <button onclick="disegnaTile()">disegna Tile</button>
-  <button onclick="cancellaTile()">cancella Tile</button>
-  <button onclick="selettoreTile()">selettore Tile</button>
-  <button onclick="getimg()">download</button>
+    <input type="text" id = "valore" disabled>
+
+    <div id="tileset" class="squarePixelArt"></div>
+    <div id = "tileScelto" class="squarePixelArt"><img class="squarePixelArt"></div>
+
+  </div>
+
+  <div id = "griglia" class="griglia"></div>
 
 </div>
 
-<br>
-
-<div id = "griglia" class="griglia"></div>
-<br>
-Tileset:
-<div id="tileset" class="squarePixelArt"></div>
-<br>
-Tile Scelto:
-<div id = "tileScelto" class="squarePixelArt"><img class="squarePixelArt"></div>
 <div id = "result" hidden="hidden"></div>
 
 </body>
