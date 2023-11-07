@@ -8,27 +8,50 @@
 </head>
 <body>
 
-<div>
+
   <div class="coordinate" id="coordinate">
 
-    <button onclick="creaGriglia('50', '50')">crea</button>
-    <button onclick="disegnaTile()">disegna Tile</button>
-    <button onclick="cancellaTile()">cancella Tile</button>
-    <button onclick="selettoreTile()">selettore Tile</button>
-    <button onclick="getimg()">download</button>
+    <button onclick="crea()" id="crea">crea</button>
 
-    <input type="text" id = "valore" disabled>
+    <div id = "devtools" hidden="hidden">
 
-    <div id="tileset" class="squareTools"></div>
-    <div id = "tileScelto" class="squareTools"><img class="cellaTile"></div>
+      <button onclick="disegnaTile()">disegna Tile</button>
+      <button onclick="cancellaTile()">cancella Tile</button>
+      <button onclick="selettoreTile()">selettore Tile</button>
+      <button onclick="getimg()">download</button>
+
+      <input type="text" id = "valore" disabled>
+
+      <div id="tileset" class="squareTools"></div>
+      <div id = "tileScelto" class="squareTools"><img class="cellaTile"></div>
+
+    </div>
 
   </div>
 
   <div id = "griglia" class="griglia"></div>
 
-</div>
+  <div class = "menuMappa" id="menuMappa">
 
-<div id = "result" hidden="hidden"></div>
+    <div id = "popup" class="popdown">
+
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome">
+      <label for="righe">righe:</label>
+      <input type="number" id="righe" min="1" max="32">
+      <label for="righe">colonne:</label>
+      <input type="number" id="colonne" min="1" max="32">
+
+      <button onclick="creaGriglia()">Crea</button>
+
+    </div>
+
+  </div>
+
+  <br>
+
+
+  <div id = "result" hidden="hidden"></div>
 
 </body>
 

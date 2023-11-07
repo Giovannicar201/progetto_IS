@@ -2,10 +2,10 @@
 
 .square{
 
-    width: 64px;
-    height: 64px;
+    width: 32px;
+    height: 32px;
     background-color: white;
-    border: solid 2px black;
+    border: solid 1px black;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -43,12 +43,59 @@
 
 }
 
+div#devtools{
+
+    margin-left: 20px;
+
+}
+
+button#crea{
+
+    margin-left: 20px;
+
+}
+
+.menuMappa{
+
+    width: 100%;
+    height: 100vh;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.popdown{
+
+    visibility: hidden;
+    top: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+
+}
+
+.popup{
+
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+
+}
+
+.popup-open{
+
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+
+}
+
 /*css per i div della griglia*/
 
 .cella{
 
     border: 0px;
-    max-width: 64px;
+    max-width: 32px;
 
 }
 
@@ -62,7 +109,8 @@ div.coordinate {
 
     display: unset;
     top: 0%;
-    position: sticky;
+    left: 0%;
+    position: fixed;
     font-size: 20px;
 
 }

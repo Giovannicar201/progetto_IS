@@ -25,11 +25,30 @@ function tileset() {
 
 tileset();
 
-function creaGriglia(righe, colonne){
+function crea(){
+
+    document.getElementById("crea").hidden = "hidden";
+
+    document.getElementById("menuMappa").visibility = "visible";
+    document.getElementById("popup").classList.remove("popdown");
+    document.getElementById("popup").classList.add("popup");
+
+}
+
+function creaGriglia(){
+
+    document.getElementById("menuMappa").visibility = "hidden";
+    document.getElementById("popup").classList.remove("popup");
+    document.getElementById("popup").classList.add("popdown");
+
+    document.getElementById("devtools").removeAttribute("hidden");
 
     let contenitoreGriglia = document.getElementById("griglia");
 
     contenitoreGriglia.innerHTML = "";
+
+    let righe = parseInt(document.getElementById("righe").value);
+    let colonne = parseInt(document.getElementById("colonne").value);
 
     disegna(contenitoreGriglia, righe, colonne);
 
@@ -39,7 +58,7 @@ function disegna(div, righe, colonne) {
 
     x = parseInt(righe)
     y = parseInt(colonne);
-    let px = "64px";
+    let px = "32px";
 
     for(let i = 0; i < x; i++){
 
@@ -78,11 +97,12 @@ function disegna(div, righe, colonne) {
     }
 
     let style = document.createElement("style");
+
     style.appendChild(document.createTextNode(
         ".griglia{ " +
         "    display: grid;" +
         "    grid-template-columns: repeat(" + colonne +","  + px +");" +
-        "    padding: 0px;" +
+        "    padding: 50px;" +
         "    width: fit-content;" +
         "    block-size: fit-content;" +
         "}"));
