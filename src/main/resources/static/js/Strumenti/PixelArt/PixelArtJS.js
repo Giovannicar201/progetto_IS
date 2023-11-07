@@ -83,19 +83,40 @@ function disegnaPixelArt(div, righe, colonne) {
 
 }
 
-function generaPaletteCasuale(colore){
+function generaPaletteCasuale(){
 
     let palette = document.getElementById("randomHex");
-    palette.innerHTML = "";
+    let children = palette.children;
 
-    creaDiv(colore, palette);
+    if(children.length != 0){
 
-    for(let i = 0; i < 6; i++){
+        for (let i = 0; i < children.length; i++) {
 
-        let randomHex = Math.floor(Math.random() * 0xffffff).toString(16);
-        randomHex = '#' + randomHex;
+            if(children[i].classList != undefined) {
 
-        creaDiv(randomHex, palette);
+                if (children[i].classList.contains("unlocked")) {
+
+                    let randomHex = Math.floor(Math.random() * 0xffffff).toString(16);
+                    randomHex = '#' + randomHex;
+
+                    children[i].style.backgroundColor = randomHex;
+
+                }
+
+            }
+
+        }
+
+    } else {
+
+        for (let i = 0; i < 6; i++) {
+
+            let randomHex = Math.floor(Math.random() * 0xffffff).toString(16);
+            randomHex = '#' + randomHex;
+
+            creaDiv(randomHex, palette);
+
+        }
 
     }
 
@@ -103,8 +124,9 @@ function generaPaletteCasuale(colore){
 
 function creaDiv(hex, palette){
 
-    let color = document.createElement("div");
+    let color = document.createElement('div');
     color.classList.add("squarePixelArt");
+    color.classList.add("unlocked");
     color.style.backgroundColor = hex;
 
     color.onclick = function test() {
@@ -113,31 +135,30 @@ function creaDiv(hex, palette){
 
     };
 
-    palette.append(color);
+    let lock = document.createElement("button");
+    lock.innerHTML = "blocca";
 
-}
+    lock.addEventListener("click", function lockPalette(){
 
-function generatorePalette() {
+        if(lock.innerHTML === "blocca"){
 
-    let colore = document.getElementById("colore").value;
+            color.classList.add("locked");
+            color.classList.remove("unlocked");
 
-    fetch('/JSON/colours.json')
-        .then((response) => response.json())
-        .then(json => {
+            lock.innerHTML = "bloccato";
 
-            let key = Object.keys(json);
+        } else if(lock.innerHTML === "bloccato"){
 
-            if (colore in key) {
+            color.classList.add("unlocked");
+            color.classList.remove("locked");
 
-                let hex = json[colore];
-                generaPaletteCasuale(hex);
+            lock.innerHTML = "blocca";
 
-            } else {
+        }
 
-                alert("colore non valido");
+    });
 
-            }
-
-        });
+    palette.appendChild(color);
+    palette.appendChild(lock);
 
 }
