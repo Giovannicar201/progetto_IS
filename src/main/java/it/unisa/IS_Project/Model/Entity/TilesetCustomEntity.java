@@ -20,9 +20,11 @@ public class TilesetCustomEntity {
     private int id;
     private String nome;
 
-    @OneToMany(mappedBy = "tilesetCustomEntity")
-    private List<ComprendeEntity> idTilesetCustomComprende;
-
     @OneToMany(mappedBy = "tilesetCustom")
     private List<CreaEntity> idTilesetCustomCrea;
+
+    @OneToOne
+    @MapsId("idEntita")
+    @JoinColumn(name = "idEntita")
+    private EntitaEntity entitaEntity;
 }

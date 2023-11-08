@@ -21,18 +21,12 @@ public class EntitaEntity {
     private String proprieta;
     private String collisione;
 
-    @OneToMany(mappedBy = "entitaEntity")
-    private List<ComprendeEntity> idEntitaComprende;
-
-    @OneToMany(mappedBy = "newIdEntitaEntity")
-    private List<ComponeEntity> idEntitaEntityCompone;
-
     @OneToMany(mappedBy = "entita")
     private List<ProprietaEntity> idEntitaEntityProprieta;
 
-    @OneToMany(mappedBy = "entity")
-    private List<ContieneEntity> idEntitaEntityContiene;
-
     @OneToMany(mappedBy = "e")
     private List<ImmagineEntitaEntity> idEntitaEntityFoto;
+
+    @OneToOne(mappedBy = "entitaEntity")
+    private TilesetCustomEntity tilesetCustomEntita;
 }

@@ -23,7 +23,4 @@ public class TilesetPremiumEntity {
 
     @OneToMany(mappedBy = "idTilesetPremium")
     private List<CompraEntity> tilesetPremiumCompra;
-
-    @OneToMany(mappedBy = "idTilesetPrem")
-    private List<ContieneEntity> idTilesetPremiumContiene;
 }
