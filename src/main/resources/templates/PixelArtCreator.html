@@ -2,9 +2,11 @@
 <html lang="en" xmlns:th="http://thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" th:href="@{/styles/Griglia/Griglia_PixelArt.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
 
@@ -14,6 +16,7 @@
     <button onclick="disegnaTile()">disegna Tile</button>
     <button onclick="cancellaTile()">cancella Tile</button>
     <button onclick="selettoreTile()">selettore Tile</button>
+    <button onclick="showPreview()">preview</button>
     <button onclick="getimg()">download</button>
     <button onclick="generaPaletteCasuale()">Genera</button>
 
@@ -22,10 +25,31 @@
 <br>
 
 <div id = "griglia" class="griglia"></div>
+
+
+<div class = "tilePopUP" id="tile">
+
+    <div class="tileHeader">
+
+        <div class = "title">Preview</div>
+        <button class="close" id="close">X</button>
+
+    </div>
+
+    <div class="tileBody" id = "tileBody"></div>
+
+</div>
+
+<div id = "s-popup"></div>
+
 <br>
+
 <div id = "color" class="color"></div>
+
 <br>
+
 <div id = "randomHex" class="color"></div>
+
 <br>
 
 COLORE SCELTO:

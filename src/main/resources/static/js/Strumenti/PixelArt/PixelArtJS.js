@@ -162,3 +162,57 @@ function creaDiv(hex, palette){
     palette.appendChild(lock);
 
 }
+
+function showPreview(){
+
+    let preview = document.getElementById("tile");
+    let shadow = document.getElementById("s-popup");
+
+    let divTilePreview = document.getElementById("tileBody");
+    let divGriglia = document.getElementById("griglia");
+    let maxN = 9;
+
+    preview.classList.add("active");
+    shadow.classList.add("active");
+
+    shadow.addEventListener("click", function (){
+
+        if(shadow.classList.contains("active")){
+
+            preview.classList.remove("active");
+            shadow.classList.remove("active");
+
+            divTilePreview.innerHTML = "";
+
+        }
+
+    })
+
+    document.getElementById("close").addEventListener("click", function (){
+
+        preview.classList.remove("active");
+        shadow.classList.remove("active");
+
+        divTilePreview.innerHTML = "";
+
+    })
+
+    for (let i = 0; i < maxN; i++){
+
+        let div = document.createElement("div");
+
+        div.innerHTML = divGriglia.innerHTML;
+        div.classList.add("griglia");
+
+        for (let child of div.children) {
+
+            child.classList.remove("squarePixelArt");
+            child.classList.add("popStyle");
+
+        }
+
+        divTilePreview.append(div);
+
+    }
+
+}
