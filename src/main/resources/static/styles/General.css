@@ -20,8 +20,8 @@
 .logo {
     position: fixed;
     display: flex;
-    left: 45%;
-    margin-top: 10px;
+    left: 40%;
+    margin-top: 20px;
 }
 
 /*NAVBAR*/
@@ -48,50 +48,6 @@ button {
 .burger .menu {
     position: fixed;
 }
-
-/*.menu {
-    background: #353540;
-    display: flex;
-    position: fixed;
-    justify-content: center;
-    align-items: self-end;
-    margin: 75px 0 0 0;
-    height: 85px;
-}*/
-
-/*.menu2 ul{
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    padding: 0 0 0 100px;
-    position: sticky;
-}
-
-.menu2 a {
-    font-family: 'TheGoodMonolith', sans-serif;
-    position: relative;
-    color: #f9f9f9;
-    font-size: 20px;
-    padding: 20px 0;
-    width: 170px;
-    text-decoration: none;
-}
-
-.menu a,
-.menu a::before,
-.menu a::after {
-    transition: 0.4s;
-}
-
-.menu a::before,
-.menu a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 10px;
-    width: 100%;
-    height: 2px;
-}*/
 
 body.open .menu {
     display: flex;
@@ -135,6 +91,8 @@ body.open .menu a {
         opacity: 1;
     }
 }
+
+
 
 /*FOOTER*/
 
