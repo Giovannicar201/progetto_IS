@@ -5,8 +5,9 @@
     position: fixed;
     padding: 5px;
     text-align: center;
-    background: #E5A632;
-    width: 1535px;
+    background: #25242A;
+    width: 2566px;
+    border-bottom: 8px #353540;
 }
 
 .cart-user {
@@ -23,7 +24,7 @@
     margin-top: 10px;
 }
 
-/*SIDEBAR*/
+/*NAVBAR*/
 
 button {
     border: 0;
@@ -48,46 +49,31 @@ button {
     position: fixed;
 }
 
-.menu {
-    z-index: 2;
-    top: 89px;
-    left: 0;
-    position: fixed;
-    display: grid;
-    place-items: center;
-    width: 320px;
-    background: linear-gradient(to bottom, #E5A632,#F7A842,#EF4E28,#E03C30,#A91519,#981D26);
-    translate: -100% 0;
-    transition: translate 0.375s;
-    /*cubic-bezier(0.175,0.885,0.32,1);*/
-}
-
-.menu nav {
-    opacity: 0;
-}
-
-.menu nav:hover a{
-    opacity: 0.25;
-}
-
-.menu nav a:hover {
-    opacity: 1;
-}
-
-.menu nav {
+/*.menu {
+    background: #353540;
     display: flex;
-    flex-direction: column;
+    position: fixed;
     justify-content: center;
-    align-items: center;
+    align-items: self-end;
+    margin: 75px 0 0 0;
+    height: 85px;
+}*/
+
+/*.menu2 ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0 0 0 100px;
+    position: sticky;
 }
 
-.menu a {
+.menu2 a {
     font-family: 'TheGoodMonolith', sans-serif;
     position: relative;
     color: #f9f9f9;
-    font-size: 28px;
+    font-size: 20px;
     padding: 20px 0;
-    width: 300px;
+    width: 170px;
     text-decoration: none;
 }
 
@@ -105,33 +91,22 @@ button {
     bottom: 10px;
     width: 100%;
     height: 2px;
-    border-radius: 2px;
-}
-
-.menu a::before {
-    opacity: 0;
-    background: rgb(255 255 255 /20%);
-}
-
-.menu a::after {
-    transform: scaleX(0);
-    transform-origin: 0% 50%;
-    background: #f7f7f7;
-}
-
-.menu a:hover::before {
-    opacity: 1;
-}
-
-.menu a:hover::after {
-    transform: scaleY(1);
-}
+}*/
 
 body.open .menu {
+    display: flex;
+    background: #353540;
+    position: fixed;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    width: 1500px;
     opacity: 1;
     visibility: visible;
     translate: 0;
+    margin: 75px 0 0 0;
     animation: menu-in 0.375s;
+
 }
 
 body.open .menu nav {
@@ -164,7 +139,7 @@ body.open .menu a {
 /*FOOTER*/
 
 footer {
-    background: linear-gradient(to bottom,#E5A632,#F7A842,#EF4E28,#E03C30,#A91519,#981D26);
+    background: #353540;
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.3);
     font-size: 16px;
     color: white;
