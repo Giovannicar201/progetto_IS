@@ -20,7 +20,7 @@ public class PaletteEntity {
     private String nomePalette;
 
     @OneToMany(mappedBy = "paletteEntity")
-    private List<GeneraEntity> nomePaletteGenera;
+    private List<UtenteEntity> utentePalette;
 
     @OneToMany(mappedBy = "nomePaletteEntity")
     private List<ColoreEntity> coloreEntityList;

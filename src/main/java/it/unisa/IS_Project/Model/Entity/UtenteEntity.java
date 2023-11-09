@@ -29,14 +29,13 @@ public class UtenteEntity {
     @OneToMany(mappedBy = "utenteEntity")
     private List<CreaEntity> usernameUtenteCreaList;
 
-    @OneToMany(mappedBy = "newUsernameUtente")
-    private List<ComponeEntity> usernameUtenteComponeList;
-
-    @OneToMany(mappedBy = "utente")
-    private List<GeneraEntity> usernameUtenteGenera;
-
     @ManyToOne
     @MapsId("idMappa")
     @JoinColumn(name = "idMappa")
     private MappaEntity idMappa;
+
+    @ManyToOne
+    @MapsId("nomePalette")
+    @JoinColumn(name = "nomePalette")
+    private PaletteEntity paletteEntity;
 }

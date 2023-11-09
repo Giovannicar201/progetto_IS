@@ -7,35 +7,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "compone")
-public class ComponeEntity {
+@Table(name = "evento")
+public class EventoEntity {
     @Embeddable
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PrimaryKey implements Serializable{
-        @Column(name = "usernameUtente")
-        private String usernameUtente;
-        @Column(name = "idEntita")
-        private int idEntita;
+        @Column(name = "idMappa")
+        private int idMappa;
+        @Column(name = "idEvento")
+        private int idEvento;
     }
-
     @EmbeddedId
     private PrimaryKey primaryKey;
 
-    @ManyToOne
-    @MapsId("usernameUtente")
-    @JoinColumn(name = "usernameUtente")
-    private UtenteEntity newUsernameUtente;
+    private String nome;
 
     @ManyToOne
-    @MapsId("idEntita")
-    @JoinColumn(name = "idEntita")
-    private EntitaEntity newIdEntitaEntity;
+    @MapsId("idMappa")
+    @JoinColumn(name = "idMappa")
+    private MappaEntity idMappaEvento;
 }

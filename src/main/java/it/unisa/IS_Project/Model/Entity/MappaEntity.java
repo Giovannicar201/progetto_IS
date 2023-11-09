@@ -24,4 +24,7 @@ public class MappaEntity {
 
     @OneToMany(mappedBy = "idMappa")
     private List<UtenteEntity> idMappaUtente;
+
+    @OneToMany(mappedBy = "idMappaEvento")
+    private List<EventoEntity> idMappaEvento;
 }
