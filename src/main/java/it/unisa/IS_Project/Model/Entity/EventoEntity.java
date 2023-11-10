@@ -31,8 +31,11 @@ public class EventoEntity {
 
     private String nome;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("idMappa")
     @JoinColumn(name = "idMappa")
     private MappaEntity idMappaEvento;
+
+    @OneToMany(mappedBy = "eventoEntity")
+    private List<UtenteEntity> utenteEntities;
 }

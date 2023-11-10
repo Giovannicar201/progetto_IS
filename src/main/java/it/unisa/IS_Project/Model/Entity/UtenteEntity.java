@@ -26,16 +26,23 @@ public class UtenteEntity {
     @OneToMany(mappedBy = "usernameUtente")
     private List<CompraEntity> usernameUtenteList;
 
-    @OneToMany(mappedBy = "utenteEntity")
-    private List<CreaEntity> usernameUtenteCreaList;
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("idMappa")
     @JoinColumn(name = "idMappa")
     private MappaEntity idMappa;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("nomePalette")
     @JoinColumn(name = "nomePalette")
     private PaletteEntity paletteEntity;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @MapsId("idTilesetCustom")
+    @JoinColumn(name = "idTilesetCustom")
+    private TilesetCustomEntity tilesetCustom;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idEvento", referencedColumnName = "idEvento")
+    @JoinColumn(name = "idMappa", referencedColumnName = "idMappa")
+    private EventoEntity eventoEntity;
 }

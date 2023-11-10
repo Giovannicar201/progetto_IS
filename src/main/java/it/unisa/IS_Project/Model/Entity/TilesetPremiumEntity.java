@@ -23,4 +23,9 @@ public class TilesetPremiumEntity {
 
     @OneToMany(mappedBy = "idTilesetPremium")
     private List<CompraEntity> tilesetPremiumCompra;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @MapsId("idEntita")
+    @JoinColumn(name = "idEntita")
+    private EntitaEntity entityPrem;
 }
