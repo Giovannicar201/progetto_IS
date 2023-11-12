@@ -7,20 +7,20 @@
     text-align: center;
     background: #25242A;
     width: 2566px;
-    border-bottom: 8px #353540;
+    border-bottom: 8px solid #353540;
 }
 
-.cart-user {
+.cart-user-pacc {
     position: fixed;
     display: flex;
-    left: 92%;
+    left: 90%;
     margin-top: 20px;
 }
 
 .logo {
     position: fixed;
     display: flex;
-    left: 40%;
+    left: 39%;
     margin-top: 20px;
 }
 
@@ -47,6 +47,17 @@ button {
 
 .burger .menu {
     position: fixed;
+}
+
+body.open {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 8px 0 0 -1px;
+    font-family: 'Lemon Milk', sans-serif;
+    align-items: center;
+    justify-content: center;
 }
 
 body.open .menu {
@@ -98,7 +109,6 @@ body.open .menu a {
 
 footer {
     background: #353540;
-    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.3);
     font-size: 16px;
     color: white;
     display: flex;
@@ -110,33 +120,16 @@ footer {
     text-decoration: none;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    gap: 48px;
+    flex-wrap: inherit;
+    gap: 80px;
     margin: 0 auto;
-    max-width: 720px;
-    padding: 16px;
-}
-
-.logo-insta-face-ult {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    margin: 0 60px;
-}
-
-.logo-insta-face-ult img {
-    width: 20px;
-    height: 20px;
-}
-
-.logo-text {
-    max-width: 160px;
-    margin: 0 200px 10px 0;
+    max-width: 900px;
+    padding: 24px;
 }
 
 h2 {
     text-align: left;
-    color: black;
+    color: #ffffff;
     margin-top: 0;
     margin-bottom: 16px;
     font-size: 16px;
@@ -144,6 +137,7 @@ h2 {
 }
 
 menu {
+    font-size: 10px;
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -162,69 +156,3 @@ a {
 a:visited {
     color: white;
 }
-
-/*.footer {
-    margin: -16px;
-    position: relative;
-    padding: 5px;
-    display: flex;
-    text-align: center;
-    background: linear-gradient(to bottom,#E5A632,#F7A842,#EF4E28,#E03C30,#A91519,#981D26);
-    width: 1517px;
-    color: white;
-    justify-content: space-evenly;
-}
-
-.boxtitle {
-    font-family: 'TheGoodMonolith', sans-serif;
-    height: auto;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    font-weight: 600;
-}
-
-.imgDescr {
-    width: 8%;
-    height: auto;
-    position: relative;
-    margin: 0 5px;
-}
-
-.SpedOrdCam {
-    font-family: 'TheGoodMonolith', sans-serif;
-    flex-direction: column;
-    display: flex;
-    width: 30%;
-}
-
-.info2 a{
-    font-family: 'TheGoodMonolith', sans-serif;
-    color: white;
-    text-decoration: none;
-}
-
-.email {
-    margin-left: 25px;
-}
-
-.number {
-    margin-left: 25px;
-}
-
-.fax {
-    margin-left: 25px;
-}
-
-.email, .number, .fax {
-    font-size: 12px;
-}
-
-.logo-insta-face-ult {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    left: 45%;
-}*/
