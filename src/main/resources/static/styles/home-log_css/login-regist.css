@@ -4,8 +4,18 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    font-family: 'TheGoodMonolith', sans-serif;
+    margin: -8px 0 0 -1px;
+    font-family: 'Lemon Milk', sans-serif;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
+}
+
+.logo {
+    position: fixed;
+    display: flex;
+    left: 39%;
+    margin-top: 20px;
 }
 
 /*LOGIN*/
@@ -31,7 +41,7 @@ body {
     margin: 30px auto 0;
     height: 320px;
     background-color: #007FFF;
-    top: 50%;
+    top: 70%;
     margin-top: -288px;
     -moz-transition: all 0.5s;
     -o-transition: all 0.5s;
@@ -81,7 +91,7 @@ body {
     margin: 0 auto;
     width: 60px;
     color: #fff;
-    background-color: #E03C30;
+    background-color: #007FFF;
     opacity: 1;
     -moz-transition: all 0.5s;
     -o-transition: all 0.5s;
@@ -119,7 +129,7 @@ body {
     height: 320px;
     display: inline-block;
     vertical-align: top;
-    color: #F2EAC5;
+    color: #ffffff;
     opacity: 1;
     -moz-transition: all 0.3s;
     -o-transition: all 0.3s;
@@ -177,7 +187,7 @@ body {
 
 .container .container-form .btn {
     position: relative;
-    box-shadow: 0 0 10px 1px #E03C30;
+    box-shadow: 0 0 10px 1px #1072d5;
     margin-top: 30px;
 }
 
@@ -266,3 +276,6 @@ body {
     height: 0%;
     opacity: 0;
 }
+
+/*FOOTER*/
+
