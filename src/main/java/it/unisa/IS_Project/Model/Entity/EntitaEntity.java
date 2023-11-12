@@ -24,9 +24,14 @@ public class EntitaEntity {
     @OneToMany(mappedBy = "entita")
     private List<ProprietaEntity> idEntitaEntityProprieta;
 
-    @OneToMany(mappedBy = "e")
-    private List<ImmagineEntitaEntity> idEntitaEntityFoto;
-
     @OneToOne(mappedBy = "entitaEntity")
     private TilesetCustomEntity tilesetCustomEntita;
+
+    @OneToOne(mappedBy = "entityPrem")
+    private TilesetPremiumEntity tilesetPremiumEntita;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @MapsId("idFoto")
+    @JoinColumn(name = "idFoto")
+    private ImmagineEntitaEntity immagineEntita;
 }

@@ -20,11 +20,11 @@ public class TilesetCustomEntity {
     private int id;
     private String nome;
 
-    @OneToMany(mappedBy = "tilesetCustom")
-    private List<CreaEntity> idTilesetCustomCrea;
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @MapsId("idEntita")
     @JoinColumn(name = "idEntita")
     private EntitaEntity entitaEntity;
+
+    @OneToMany(mappedBy = "tilesetCustom")
+    private List<UtenteEntity> utenteEntities;
 }

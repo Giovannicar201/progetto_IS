@@ -20,7 +20,7 @@ public class ColoreEntity {
     private String esadecimale;
     private String nomeColore;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("nomePalette")
     @JoinColumn(name = "nomePalette")
     private PaletteEntity nomePaletteEntity;

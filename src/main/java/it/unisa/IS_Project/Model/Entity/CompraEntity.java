@@ -35,12 +35,12 @@ public class CompraEntity {
     @EmbeddedId
     private PrimaryKey primaryKey;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("usernameUtente")
     @JoinColumn(name = "usernameUtente")
     private UtenteEntity usernameUtente;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("idTilesetPremium")
     @JoinColumn(name = "idTilesetPremium")
     private TilesetPremiumEntity idTilesetPremium;

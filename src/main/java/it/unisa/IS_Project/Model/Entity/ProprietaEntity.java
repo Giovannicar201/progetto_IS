@@ -18,7 +18,7 @@ public class ProprietaEntity {
     private String nome;
     private String valore;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("idEntita")
     @JoinColumn(name = "idEntita")
     private EntitaEntity entita;

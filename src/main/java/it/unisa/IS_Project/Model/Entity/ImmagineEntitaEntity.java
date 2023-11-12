@@ -13,11 +13,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "immagineEntita")
 public class ImmagineEntitaEntity {
+    @Id
+    @Column(name = "idFoto")
+    private int idFoto;
+    private String nome;
     private String foto;
 
-    @Id
-    @ManyToOne
-    @MapsId("idEntita")
-    @JoinColumn(name = "idEntita")
-    private EntitaEntity e;
+    @OneToOne(mappedBy = "immagineEntita")
+    private EntitaEntity entity;
 }
