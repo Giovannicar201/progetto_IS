@@ -8,7 +8,6 @@ body {
     font-family: 'Lemon Milk', sans-serif;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
 }
 
 .logo {
@@ -37,16 +36,17 @@ body {
 
 .container {
     position: relative;
+    top: 30%;
+    left: 30%;
     width: 600px;
-    margin: 30px auto 0;
     height: 320px;
     background-color: #007FFF;
-    top: 70%;
-    margin-top: -288px;
     -moz-transition: all 0.5s;
     -o-transition: all 0.5s;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
+    z-index: 1;
+    margin-bottom: 20rem;
 }
 
 .container .box {
