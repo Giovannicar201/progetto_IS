@@ -37,9 +37,9 @@ body {
 .container {
     position: relative;
     top: 30%;
-    left: 30%;
-    width: 600px;
-    height: 320px;
+    left: 32%;
+    width: 38rem;
+    height: 20rem;
     background-color: #1d7db7;
     -moz-transition: all 0.5s;
     -o-transition: all 0.5s;
