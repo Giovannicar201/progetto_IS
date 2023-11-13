@@ -60,7 +60,7 @@ button {
     justify-content: space-around;
     align-items: center;
     height: 60px;
-    width: 1500px;
+    width: 100%;
     opacity: 1;
     visibility: visible;
     translate: 0;
