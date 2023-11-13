@@ -70,4 +70,11 @@ public class HTMLMapping {
         return "pacchetti";
     }
 
+    @GetMapping("/carrello")
+
+    public String carrello () {
+
+        return "carrello";
+    }
+
 }
