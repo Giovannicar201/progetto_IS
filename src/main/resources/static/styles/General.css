@@ -8,6 +8,7 @@
     background: #25242A;
     width: 2566px;
     border-bottom: 8px solid #353540;
+    z-index: 60;
 }
 
 .cart-user-pacc {
@@ -15,6 +16,7 @@
     display: flex;
     left: 90%;
     margin-top: 20px;
+    top: -11px;
 }
 
 .logo {
@@ -22,13 +24,14 @@
     display: flex;
     left: 39%;
     margin-top: 20px;
+    top: -11px;
 }
 
 /*NAVBAR*/
 
 button {
     border: 0;
-    padding: 0;
+    padding: 30px;
     background: transparent;
     cursor: pointer;
 }
@@ -46,21 +49,11 @@ button {
 }
 
 .burger .menu {
-    position: fixed;
-}
-
-body.open {
-    left: 0;
+    position: relative;
     top: 0;
-    width: 100%;
-    height: 100%;
-    margin: 8px 0 0 -1px;
-    font-family: 'Lemon Milk', sans-serif;
-    align-items: center;
-    justify-content: center;
 }
 
-body.open .menu {
+.menu {
     display: flex;
     background: #353540;
     position: fixed;
@@ -71,9 +64,14 @@ body.open .menu {
     opacity: 1;
     visibility: visible;
     translate: 0;
-    margin: 75px 0 0 0;
+    margin: 4px 0 0 0;
+    z-index: 1;
     animation: menu-in 0.375s;
 
+}
+
+.hidden {
+    display: none;
 }
 
 body.open .menu nav {
@@ -111,7 +109,7 @@ footer {
     background: #353540;
     font-size: 16px;
     color: white;
-    display: flex;
+    display: block;
     flex-direction: column;
     width: 100%;
 }
