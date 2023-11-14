@@ -30,6 +30,9 @@ public class EntitaEntity {
     @OneToOne(mappedBy = "entityPrem")
     private TilesetPremiumEntity tilesetPremiumEntita;
 
+    @OneToMany(mappedBy = "idEntitaPiazzato")
+    private List<PiazzatoEntity> idEntitaPiazzato;
+
     @OneToOne(cascade = CascadeType.ALL)
     @MapsId("idFoto")
     @JoinColumn(name = "idFoto")

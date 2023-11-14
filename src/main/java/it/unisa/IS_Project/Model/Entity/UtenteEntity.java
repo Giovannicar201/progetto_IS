@@ -26,7 +26,7 @@ public class UtenteEntity {
     @OneToMany(mappedBy = "usernameUtente")
     private List<CompraEntity> usernameUtenteList;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @MapsId("idMappa")
     @JoinColumn(name = "idMappa")
     private MappaEntity idMappa;
