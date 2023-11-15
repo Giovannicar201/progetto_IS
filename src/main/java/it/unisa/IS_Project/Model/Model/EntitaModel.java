@@ -14,13 +14,13 @@ public class EntitaModel {
     private String proprieta;
     private String collisione;
 
-    private List<ComprendeModel> idEntitaComprende;
-
-    private List<ComponeModel> idEntitaCompone;
-
     private List<ProprietaModel> idEntitaProprieta;
 
-    private List<ContieneModel> idEntitaContiene;
+    private TilesetCustomModel tilesetCustomEntita;
+
+    private TilesetPremiumModel tilesetPremiumEntita;
+
+    private List<PiazzatoModel> idEntitaPiazzato;
 
     private List<ImmagineEntitaModel> idEntitaFoto;
 }

@@ -4,10 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ComprendeModel {
-    private EntitaModel idEntita;
-    private TilesetCustomModel idTilesetCustom;
+public class EventoModel {
+    private String nome;
+
+    private MappaModel idMappaEvento;
+    private List<UtenteModel> utenteModels;
 }

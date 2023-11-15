@@ -16,5 +16,5 @@ public class TilesetPremiumModel {
 
     private List<CompraModel> tilesetPremiumList;
 
-    private List<ContieneModel> idTilesetPremiumContiene;
+    private EntitaModel idTilesetPremiumEntita;
 }

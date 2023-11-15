@@ -13,7 +13,7 @@ public class TilesetCustomModel {
     private int id;
     private String nome;
 
-    private List<ComprendeModel> idTilesetCustomComprende;
+    private EntitaModel idTilesetCustomEntita;
 
-    private List<CreaModel> idTilesetCustomCrea;
+    private List<UtenteModel> idTilesetCustomUtente;
 }

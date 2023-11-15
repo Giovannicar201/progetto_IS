@@ -18,11 +18,11 @@ public class UtenteModel {
 
     private List<CompraModel> usernameUtenteCompra;
 
-    private List<CreaModel> usernameUtenteCreaList;
-
-    private List<ComponeModel> usernameUtenteComponeList;
-
-    private List<GeneraModel> usernameUtenteGenera;
-
     private MappaModel idMappa;
+
+    private PaletteModel paletteModel;
+
+    private TilesetCustomModel idTilesetCustom;
+
+    private EventoModel eventoModel;
 }
