@@ -5,21 +5,32 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" th:href="@{/styles/Griglia/Griglia_PixelArt.css}">
+    <link rel="stylesheet" th:href="@{/styles/Griglia/menugriglia.css}">
+    <link rel="stylesheet" th:href="@{/styles/General.css}" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body>
+<body bgcolor="25242A">
 
-<div>
+<section layout:insert="navbar.html"></section>
 
-    <button onclick="creaPopUp()">crea</button>
-    <button onclick="disegnaTile()">disegna Tile</button>
-    <button onclick="cancellaTile()">cancella Tile</button>
-    <button onclick="selettoreTile()">selettore Tile</button>
-    <button onclick="showPreview()">preview</button>
-    <button onclick="getimg()">download</button>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+
+<div class="toolbar">
+    <ul>
+    <button onclick="creaPopUp()"><input type="image" th:src="@{https://i.postimg.cc/XJdw2cb9/Tavola-disegno-1.png}" height="20" width="20"></button>
+    <button onclick="getimg()"><input type="image" th:src="@{https://i.postimg.cc/CKZC8prP/Tavola-disegno-1-copia.png}" height="20" width="20"></button>
+    <button onclick="disegnaTile()"><input type="image" th:src="@{https://i.postimg.cc/7Lp3Mtpx/Tavola-disegno-1-copia-1.png}" height="20" width="20"></button>
+    <button onclick="cancellaTile()"><input type="image" th:src="@{https://i.postimg.cc/0jv7hMkF/Tavola-disegno-1-copia-2.png}" height="20" width="20"></button>
+    <button onclick="selettoreTile()"><input type="image" th:src="@{https://i.postimg.cc/pX2DZF1n/Tavola-disegno-1-copia-4.png}" height="20" width="20"></button>
+    <button onclick="showPreview()"><input type="image" th:src="@{https://i.postimg.cc/BnzH4wZx/Tavola-disegno-1-3.png}" height="20" width="20"></button>
+
     <button onclick="generaPaletteCasuale()">Genera</button>
-
+    </ul>
 </div>
 
 <br>

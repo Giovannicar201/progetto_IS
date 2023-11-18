@@ -1,0 +1,26 @@
+/* Reset CSS per rimuovere i margini e i padding predefiniti */
+body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Stile della toolbar */
+.toolbar {
+    background-color: #2d2d30;
+    color: #fff;
+    width: 75px;
+    margin: -10px;
+    padding: 3px;
+    border-radius: 10px;
+}
+
+/* Stile della lista */
+.toolbar ul {
+    margin: 20px;
+}
+
+/* Stile degli elementi della lista */
+.toolbar ul button {
+    text-align: center;
+    margin: -20px;
+}
