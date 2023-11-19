@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EventoModel {
+    private int idEvento;
     private String nome;
 
     private MappaModel idMappaEvento;
