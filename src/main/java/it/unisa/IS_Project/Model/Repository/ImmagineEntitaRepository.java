@@ -2,8 +2,13 @@ package it.unisa.IS_Project.Model.Repository;
 
 import it.unisa.IS_Project.Model.Entity.ImmagineEntitaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface ImmagineEntitaRepository extends JpaRepository<ImmagineEntitaEntity,String> {
+public interface ImmagineEntitaRepository extends JpaRepository<ImmagineEntitaEntity,Integer> {
+    @Query
+    Optional<ImmagineEntitaEntity> findAllByIdFoto(int idFoto);
 }
