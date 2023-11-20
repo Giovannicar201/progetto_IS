@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GeneraModel {
-    private UtenteModel usernameUtente;
-    private PaletteModel nomePalette;
+public class PiazzatoModel {
+    private MappaModel idMappaPiazzato;
+    private EntitaModel idEntitaPiazzato;
+    private String cordinate;
 }

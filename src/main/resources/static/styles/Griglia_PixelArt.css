@@ -1,5 +1,6 @@
 /*css per la griglia*/
 
+
 .popStyle{
 
     width: 2px;
@@ -63,6 +64,7 @@ div#devtools{
 button#crea{
 
     margin-left: 20px;
+    color: white;
 
 }
 
@@ -119,7 +121,7 @@ button#crea{
 div.coordinate {
 
     display: unset;
-    top: 0%;
+    top: 15%;
     left: 0%;
     position: fixed;
     font-size: 20px;

@@ -15,5 +15,7 @@ public class MappaModel {
     private int lunghezza;
     private int larghezza;
 
-    private List<UtenteModel> idMappaUtente;
+    private UtenteModel idMappaUtente;
+    private List<EntitaModel> idMappaEvento;
+    private List<PiazzatoModel> idMappaPiazzato;
 }

@@ -22,9 +22,12 @@ public class MappaEntity {
     private int lunghezza;
     private int larghezza;
 
-    @OneToMany(mappedBy = "idMappa")
-    private List<UtenteEntity> idMappaUtente;
+    @OneToOne(mappedBy = "idMappa")
+    private UtenteEntity idMappaUtente;
 
     @OneToMany(mappedBy = "idMappaEvento")
     private List<EventoEntity> idMappaEvento;
+
+    @OneToMany(mappedBy = "idMappaPiazzato")
+    private List<PiazzatoEntity> idMappaPiazzato;
 }
