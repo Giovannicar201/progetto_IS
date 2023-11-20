@@ -16,24 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 public class HTMLMapping {
 
-    /**
-     * GetMapping mappa l'url associato al file html
-     * @return il nome del file html associato alla home page
-     */
-
-    @GetMapping("/")
-
-    public String index() {
-
-        return "homepage";
-
-    }
-
-    /**
-     * GetMapping mappa l'url associato al file html
-     * @return il nome del file html associato alla griglia
-     */
-
     @GetMapping("/griglia")
 
     public String griglia() {
@@ -41,40 +23,12 @@ public class HTMLMapping {
         return "Griglia";
 
     }
-
-    /**
-     * GetMapping mappa l'url associato al file html
-     * @return il nome del file html associato al login
-     */
-
-    @GetMapping("/login")
-
-    public String login() {
-
-        return "login-regist";
-
-    }
-
     @GetMapping("/pixelArt")
 
     public String pixelArt () {
 
         return "PixelArtCreator";
 
-    }
-
-    @GetMapping("/pacchetti")
-
-    public String pacchetti () {
-
-        return "pacchetti";
-    }
-
-    @GetMapping("/carrello")
-
-    public String carrello () {
-
-        return "carrello";
     }
 
 }
