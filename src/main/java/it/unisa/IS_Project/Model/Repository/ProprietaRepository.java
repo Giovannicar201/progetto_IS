@@ -9,6 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface ProprietaRepository extends JpaRepository<ProprietaEntity,String> {
-    @Query
-    Optional<ProprietaEntity> findAllById(String nomeProprietà);
+    Optional<ProprietaEntity> findAllByNome(String nomeProprieta);
 }

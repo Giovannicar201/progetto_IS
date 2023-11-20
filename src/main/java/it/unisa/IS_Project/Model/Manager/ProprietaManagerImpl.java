@@ -22,7 +22,7 @@ public class ProprietaManagerImpl implements ProprietaManager{
 
     @Override
     public ProprietaEntity get(String nomeProprieta) {
-        return proprietaRepository.findAllById(nomeProprieta).orElseThrow(()->new RuntimeException("Proprietà non trovata"));
+        return proprietaRepository.findAllByNome(nomeProprieta).orElseThrow(()->new RuntimeException("Proprietà non trovata"));
     }
 
     @Override
