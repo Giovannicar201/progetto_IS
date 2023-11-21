@@ -9,10 +9,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProprietaManagerImpl implements ProprietaManager{
-    @Autowired
-    private ModelMapper modelMapper;
-    @Autowired
-    private ProprietaRepository proprietaRepository;
+    private final ModelMapper modelMapper;
+    private final ProprietaRepository proprietaRepository;
+
+    public ProprietaManagerImpl(ModelMapper modelMapper, ProprietaRepository proprietaRepository) {
+        this.modelMapper = modelMapper;
+        this.proprietaRepository = proprietaRepository;
+    }
 
     @Override
     public ProprietaEntity save(ProprietaModel proprietaModel) {
