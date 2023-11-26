@@ -9,7 +9,7 @@ function initDrawingTools(cella, flag) {
 
             if(flag === 1) {
 
-                cella.children[0].src = document.getElementById("tileScelto").children[0].src;
+                cella.children[0].src = "/images/tile1.png";
 
             } else{
 
@@ -45,6 +45,9 @@ function initDrawingTools(cella, flag) {
                     let secondaCoordinata = selectorGriglia[1].split(",");
                     selectorGriglia = [];
 
+                    document.getElementById("selectedPointOne").innerHTML = primaCoordinata;
+                    document.getElementById("selectedPointTwo").innerHTML = secondaCoordinata;
+
                     let x1 = parseInt(primaCoordinata[0]);
                     let x2 = parseInt(secondaCoordinata[0]);
                     let y1 = parseInt(primaCoordinata[1]);
@@ -66,7 +69,7 @@ function initDrawingTools(cella, flag) {
 
                     for(let i = 0; i < selectorGriglia.length; i++) {
 
-                        document.getElementById(selectorGriglia[i]).style.border = "solid 2px red";
+                        document.getElementById(selectorGriglia[i]).style.border = "solid 1px #516f96";
 
                     }
 
@@ -109,7 +112,7 @@ function disegnaTile(){
 
             if(cella.className === "square") {
 
-                cella.children[0].src = document.getElementById("tileScelto").children[0].src;
+                cella.children[0].src = "/images/tile1.png";
                 cella.removeAttribute("style");
 
             } else {

@@ -1,31 +1,28 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
 
   <link rel="stylesheet" th:href="@{/styles/topmenu.css}">
+  <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
 
 </head>
 
-  <section layout:fragment="menu">
+<div class="topmenu">
 
-    <div class="topmenu">
+    <img src="https://i.postimg.cc/wv5tLwGS/logo.png" class="logo" id="logo">
 
-      <img src="https://i.postimg.cc/wv5tLwGS/logo.png" class="logo" id="logo">
+    <ul>
 
-      <ul>
+      <li><a href="griglia">Mappa</a></li>
+      <li><a href="#">Entità</a></li>
+      <li><a href="#">Eventi</a></li>
+      <li><a href="pixelArt">Pixel Art</a></li>
+      <li><a href="#">Help</a></li>
+      <li><a href="login">Sign-up & Log-in</a></li>
 
-        <li><a href="griglia">Mappa</a></li>
-        <li><a href="#">Entità</a></li>
-        <li><a href="#">Eventi</a></li>
-        <li><a href="pixelArt">Pixel Art</a></li>
-        <li><a href="#">Help</a></li>
-        <li><a href="#">Sign-up & Log-in</a></li>
+    </ul>
 
-      </ul>
-
-    </div>
-
-  </section>
+</div>
 
 </html>
