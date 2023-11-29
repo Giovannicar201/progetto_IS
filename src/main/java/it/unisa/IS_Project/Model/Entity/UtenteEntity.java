@@ -16,33 +16,25 @@ import java.util.List;
 @Table(name="utente")
 public class UtenteEntity {
     @Id
-    @Column(name = "usernameUtente")
-    private String username;
+    @Column(name = "email")
     private String email;
     private String password;
     private String nome;
     private String cognome;
 
-    @OneToMany(mappedBy = "usernameUtente")
-    private List<CompraEntity> usernameUtenteList;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapsId("idMappa")
-    @JoinColumn(name = "idMappa")
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name = "idMappa", nullable = true)
     private MappaEntity idMappa;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("nomePalette")
-    @JoinColumn(name = "nomePalette")
-    private PaletteEntity paletteEntity;
+    @OneToMany(mappedBy = "emailUtente", cascade = CascadeType.ALL)
+    private List<PaletteEntity> paletteEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("idTilesetCustom")
-    @JoinColumn(name = "idTilesetCustom")
-    private TilesetCustomEntity tilesetCustom;
+    @OneToMany(mappedBy = "utenteEntity", cascade = CascadeType.ALL)
+    private List<CartellaEntity> cartellaEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idEvento", referencedColumnName = "idEvento")
-    @JoinColumn(name = "idMappa", referencedColumnName = "idMappa")
-    private EventoEntity eventoEntity;
+    @OneToMany(mappedBy = "utenteEntity", cascade = CascadeType.ALL)
+    private List<EventoEntity> eventoEntity;
+
+    @OneToMany(mappedBy = "email", cascade = CascadeType.ALL)
+    private List<ImmagineEntity> immagineEntity;
 }

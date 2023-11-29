@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface PaletteRepository extends JpaRepository<PaletteEntity,String> {
     @Query
-    Optional<PaletteEntity> findByNomePalette(String nomePalette);
+    PaletteEntity findByNomePalette(String nomePalette);
 }

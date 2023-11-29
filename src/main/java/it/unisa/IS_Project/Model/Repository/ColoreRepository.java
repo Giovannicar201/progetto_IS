@@ -8,7 +8,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ColoreRepository extends JpaRepository<ColoreEntity,String> {
-    @Query
-    Optional<ColoreEntity> findColoreEntityByEsadecimale(String esadecimale);
+public interface ColoreRepository extends JpaRepository<ColoreEntity,ColoreEntity.PrimaryKey> {
 }

@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
@@ -15,13 +15,21 @@ import java.util.List;
 @Entity
 @Table(name = "colore")
 public class ColoreEntity {
-    @Id
-    @Column(name = "esadecimale")
-    private String esadecimale;
-    private String nomeColore;
+    @Embeddable
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class PrimaryKey implements Serializable{
+        @Column(name = "esadecimale")
+        private String esadecimale;
+        @Column(name = "nomePalette")
+        private String nomePalette;
+    }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("nomePalette")
-    @JoinColumn(name = "nomePalette")
+    @EmbeddedId
+    private PrimaryKey primaryKey;
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name = "nomePalette",nullable = true,insertable=false, updatable=false)
     private PaletteEntity nomePaletteEntity;
 }

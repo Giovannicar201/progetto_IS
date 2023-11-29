@@ -12,7 +12,7 @@ import java.util.List;
 public class PaletteModel {
     private String nomePalette;
 
-    private List<UtenteModel> utentePalette;
+    private UtenteModel utentePalette;
 
     private List<ColoreModel> coloreModel;
 }

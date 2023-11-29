@@ -11,16 +11,15 @@ import java.util.List;
 @AllArgsConstructor
 public class EntitaModel {
     private int idEntita;
-    private String proprieta;
+    private String nome;
     private String collisione;
+    private String coordinate;
 
     private List<ProprietaModel> idEntitaProprieta;
 
-    private TilesetCustomModel tilesetCustomEntita;
+    private MappaModel mappaModels;
 
-    private TilesetPremiumModel tilesetPremiumEntita;
+    private CartellaModel CartellaEntita;
 
-    private List<PiazzatoModel> idEntitaPiazzato;
-
-    private List<ImmagineEntitaModel> idEntitaFoto;
+    private ImmagineModel idFoto;
 }

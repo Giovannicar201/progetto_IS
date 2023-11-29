@@ -14,12 +14,13 @@ import lombok.NoArgsConstructor;
 @Table(name = "proprieta")
 public class ProprietaEntity {
     @Id
-    @Column(name = "nomeProprieta")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idProprieta")
+    private int idProprieta;
     private String nome;
     private String valore;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("idEntita")
-    @JoinColumn(name = "idEntita")
+    @ManyToOne(cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name = "idEntita",nullable = true)
     private EntitaEntity entita;
 }

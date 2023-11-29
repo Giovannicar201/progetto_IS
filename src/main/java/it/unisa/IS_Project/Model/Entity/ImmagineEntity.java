@@ -11,14 +11,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "immagineEntita")
-public class ImmagineEntitaEntity {
+@Table(name = "immagine")
+public class ImmagineEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idFoto")
     private int idFoto;
-    private String nome;
     private String foto;
 
     @OneToOne(mappedBy = "immagineEntita")
     private EntitaEntity entity;
+
+    @ManyToOne(cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name = "email",referencedColumnName = "email",nullable = true)
+    private UtenteEntity email;
 }

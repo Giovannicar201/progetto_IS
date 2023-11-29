@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PiazzatoModel {
-    private MappaModel idMappaPiazzato;
-    private EntitaModel idEntitaPiazzato;
-    private String cordinate;
+public class ImmagineModel {
+    private int idFoto;
+    private String foto;
+
+    private EntitaModel idEntita;
+    private UtenteModel emailUtente;
 }

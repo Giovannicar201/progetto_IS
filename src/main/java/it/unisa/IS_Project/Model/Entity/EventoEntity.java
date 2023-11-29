@@ -21,21 +21,24 @@ public class EventoEntity {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PrimaryKey implements Serializable{
+        @Column(name = "idEvento")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int idEvento;
         @Column(name = "idMappa")
         private int idMappa;
-        @Column(name = "idEvento")
-        private int idEvento;
     }
     @EmbeddedId
     private PrimaryKey primaryKey;
 
     private String nome;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL,optional = true)
     @MapsId("idMappa")
     @JoinColumn(name = "idMappa")
     private MappaEntity idMappaEvento;
 
-    @OneToMany(mappedBy = "eventoEntity")
-    private List<UtenteEntity> utenteEntities;
+    @ManyToOne(cascade = CascadeType.ALL,optional = true)
+    @MapsId("email")
+    @JoinColumn(name = "email")
+    private UtenteEntity utenteEntity;
 }
