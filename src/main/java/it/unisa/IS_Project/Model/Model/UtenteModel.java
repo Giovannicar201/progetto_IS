@@ -10,19 +10,18 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UtenteModel {
-    private String username;
     private String email;
     private String password;
     private String nome;
     private String cognome;
 
-    private List<CompraModel> usernameUtenteCompra;
-
     private MappaModel idMappa;
 
-    private PaletteModel paletteModel;
+    private List<PaletteModel> paletteModel;
 
-    private TilesetCustomModel idTilesetCustom;
+    private List<CartellaModel> cartellaUtente;
 
-    private EventoModel eventoModel;
+    private List<EventoModel> eventoModel;
+
+    private List<ImmagineModel> immagineModel;
 }

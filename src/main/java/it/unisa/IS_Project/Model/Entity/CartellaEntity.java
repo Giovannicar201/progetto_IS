@@ -13,22 +13,19 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "mappa")
-public class MappaEntity {
+@Table(name = "cartella")
+public class CartellaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idMappa")
+    @Column(name = "idCartella")
     private int id;
     private String nome;
-    private int lunghezza;
-    private int larghezza;
+    private int numeroEntitaContenute;
 
-    @OneToOne(mappedBy = "idMappa")
-    private UtenteEntity idMappaUtente;
-
-    @OneToMany(mappedBy = "idMappaEvento")
-    private List<EventoEntity> idMappaEvento;
-
-    @OneToMany(mappedBy = "idMappaEntity")
+    @OneToMany(mappedBy = "cartellaEntity")
     private List<EntitaEntity> entitaEntity;
+
+    @ManyToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "email",referencedColumnName = "email", nullable = true)
+    private UtenteEntity utenteEntity;
 }

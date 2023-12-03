@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProprietaModel {
+    private int idProprieta;
     private String nome;
     private String valore;
     private EntitaModel entitaModel;

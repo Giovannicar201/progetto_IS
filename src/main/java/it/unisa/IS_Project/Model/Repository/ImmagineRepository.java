@@ -1,6 +1,6 @@
 package it.unisa.IS_Project.Model.Repository;
 
-import it.unisa.IS_Project.Model.Entity.ImmagineEntitaEntity;
+import it.unisa.IS_Project.Model.Entity.ImmagineEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ImmagineEntitaRepository extends JpaRepository<ImmagineEntitaEntity,Integer> {
+public interface ImmagineRepository extends JpaRepository<ImmagineEntity,Integer> {
     @Query
-    Optional<ImmagineEntitaEntity> findAllByIdFoto(int idFoto);
+    Optional<ImmagineEntity> findAllByIdFoto(int idFoto);
 }

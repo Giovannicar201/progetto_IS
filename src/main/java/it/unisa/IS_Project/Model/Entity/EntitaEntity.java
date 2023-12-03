@@ -16,25 +16,25 @@ import java.util.List;
 @Table(name = "entita")
 public class EntitaEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEntita")
     private int id;
-    private String proprieta;
+    private String nome;
     private String collisione;
+    private String coordinate;
 
     @OneToMany(mappedBy = "entita")
     private List<ProprietaEntity> idEntitaEntityProprieta;
 
-    @OneToOne(mappedBy = "entitaEntity")
-    private TilesetCustomEntity tilesetCustomEntita;
+    @ManyToOne(cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name = "idEntita",nullable = true,insertable=false, updatable=false)
+    private MappaEntity idMappaEntity;
 
-    @OneToOne(mappedBy = "entityPrem")
-    private TilesetPremiumEntity tilesetPremiumEntita;
+    @ManyToOne(cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name = "idCartella",nullable = true)
+    private CartellaEntity cartellaEntity;
 
-    @OneToMany(mappedBy = "idEntitaPiazzato")
-    private List<PiazzatoEntity> idEntitaPiazzato;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapsId("idFoto")
-    @JoinColumn(name = "idFoto")
-    private ImmagineEntitaEntity immagineEntita;
+    @OneToOne(cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name = "idFoto", nullable = true)
+    private ImmagineEntity immagineEntita;
 }

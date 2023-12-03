@@ -19,8 +19,9 @@ public class PaletteEntity {
     @Column(name = "nomePalette")
     private String nomePalette;
 
-    @OneToMany(mappedBy = "paletteEntity")
-    private List<UtenteEntity> utentePalette;
+    @ManyToOne(cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name = "email",referencedColumnName = "email",nullable = true)
+    private UtenteEntity emailUtente;
 
     @OneToMany(mappedBy = "nomePaletteEntity")
     private List<ColoreEntity> coloreEntityList;

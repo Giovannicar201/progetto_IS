@@ -9,11 +9,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TilesetCustomModel {
+public class CartellaModel {
     private int id;
     private String nome;
+    private int numeroEntitaContenute;
 
-    private EntitaModel idTilesetCustomEntita;
+    private EntitaModel CartellaEntita;
 
-    private List<UtenteModel> idTilesetCustomUtente;
+    private UtenteModel emailUtente;
 }

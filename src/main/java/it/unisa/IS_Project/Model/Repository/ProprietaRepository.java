@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ProprietaRepository extends JpaRepository<ProprietaEntity,String> {
-    Optional<ProprietaEntity> findAllByNome(String nomeProprieta);
+public interface ProprietaRepository extends JpaRepository<ProprietaEntity,Integer> {
+    Optional<ProprietaEntity> findByIdProprieta(int idProprieta);
 }

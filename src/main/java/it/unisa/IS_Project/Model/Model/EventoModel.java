@@ -14,5 +14,5 @@ public class EventoModel {
     private String nome;
 
     private MappaModel idMappaEvento;
-    private List<UtenteModel> utenteModels;
+    private UtenteModel utenteModel;
 }
