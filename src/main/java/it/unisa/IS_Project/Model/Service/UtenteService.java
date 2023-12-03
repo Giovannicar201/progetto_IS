@@ -9,7 +9,5 @@ public interface UtenteService {
 
     UtenteModel update(UtenteModel newUtenteModel,String email);
 
-    UtenteModel updateIdMappa(UtenteModel newUtenteModel,String email,int idMappa);
-
     void delete(String email);
 }

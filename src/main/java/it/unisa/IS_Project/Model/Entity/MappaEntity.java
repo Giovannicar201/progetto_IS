@@ -23,7 +23,8 @@ public class MappaEntity {
     private int lunghezza;
     private int larghezza;
 
-    @OneToOne(mappedBy = "idMappa")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name = "email",referencedColumnName = "email",nullable = true)
     private UtenteEntity idMappaUtente;
 
     @OneToMany(mappedBy = "idMappaEvento")

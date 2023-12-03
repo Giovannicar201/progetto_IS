@@ -27,14 +27,14 @@ public class EntitaEntity {
     private List<ProprietaEntity> idEntitaEntityProprieta;
 
     @ManyToOne(cascade = CascadeType.ALL,optional = true)
-    @JoinColumn(name = "idEntita",nullable = true,insertable=false, updatable=false)
+    @JoinColumn(name = "idMappa",referencedColumnName = "idMappa",nullable = true,insertable=false, updatable=false)
     private MappaEntity idMappaEntity;
 
     @ManyToOne(cascade = CascadeType.ALL,optional = true)
-    @JoinColumn(name = "idCartella",nullable = true)
+    @JoinColumn(name = "idCartella",referencedColumnName = "idCartella",nullable = true)
     private CartellaEntity cartellaEntity;
 
     @OneToOne(cascade = CascadeType.ALL,optional = true)
-    @JoinColumn(name = "idFoto", nullable = true)
+    @JoinColumn(name = "idFoto",referencedColumnName = "idFoto", nullable = true)
     private ImmagineEntity immagineEntita;
 }

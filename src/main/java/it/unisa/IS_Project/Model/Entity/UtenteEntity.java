@@ -22,8 +22,7 @@ public class UtenteEntity {
     private String nome;
     private String cognome;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,optional = true)
-    @JoinColumn(name = "idMappa", nullable = true)
+    @OneToOne(mappedBy = "idMappaUtente")
     private MappaEntity idMappa;
 
     @OneToMany(mappedBy = "emailUtente", cascade = CascadeType.ALL)

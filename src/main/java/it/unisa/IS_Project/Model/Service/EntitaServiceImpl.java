@@ -8,6 +8,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class EntitaServiceImpl implements EntitaService{
     @Autowired
@@ -45,5 +49,13 @@ public class EntitaServiceImpl implements EntitaService{
     @Transactional
     public void delete(int idEntita) {
         entitaRepository.deleteById(idEntita);
+    }
+
+    @Override
+    @Transactional
+    public List<EntitaModel> findAllEntity(int idCartella){
+        List<EntitaEntity> entitaEntities=entitaRepository.findAllByCartellaEntity(idCartella);
+
+        return entitaEntities.stream().map((entita)->modelMapper.map(entita,EntitaModel.class)).collect(Collectors.toList());
     }
 }

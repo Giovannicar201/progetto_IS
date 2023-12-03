@@ -46,21 +46,6 @@ public class UtenteServiceImpl implements UtenteService{
 
     @Override
     @Transactional
-    public UtenteModel updateIdMappa(UtenteModel newUtenteModel,String email,int idMappa){
-        UtenteEntity utenteEntity=utenteRepository.findByEmail(email);
-        newUtenteModel.setEmail(email);
-
-        MappaEntity mappaEntity=mappaRepository.findById(idMappa).get();
-        mappaEntity.setId(idMappa);
-
-        utenteEntity.setIdMappa(mappaEntity);
-
-        utenteRepository.updateIdMappaByEmail(email,mappaEntity);
-        return modelMapper.map(utenteEntity,UtenteModel.class);
-    }
-
-    @Override
-    @Transactional
     public void delete(String email) {
         utenteRepository.deleteById(email);
     }
