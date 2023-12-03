@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/styles/texelStyle.css}">
+
+</head>
+
+<div th:replace="fragments :: topmenu"></div>
+
+<body style="background-color:#1A1A1A;">
+
+    <div class="home">
+
+        <div class="row esplora">
+
+            <div class="col notShow">
+
+                <h1 style="font-size: 85px" class="h1 notShow">Quixel Texel</h1>
+
+                <p>"Dove i sogni diventano pixel, la fantasia diventa quadratino <br> e la felicità prende forma"</p>
+
+                <button type="button">Esplora Quixel Texel</button>
+
+            </div>
+
+            <div class="col" style="margin-left: 10.5%">
+
+                <div class="card notShow">
+
+                    <h5>TileMap Editor</h5>
+                    <a href="#tilemap">"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</a>
+
+                </div>
+
+                <div class="card notShow">
+
+                    <h5>TileMap Editor</h5>
+                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+
+                </div>
+
+                <div class="card notShow">
+
+                    <h5>TileMap Editor</h5>
+                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+
+                </div>
+
+                <div class="card notShow">
+
+                    <h5>TileMap Editor</h5>
+                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row tilemap" id="tilemap">
+
+            <div class="col notShow">
+
+                <img src="https://i.postimg.cc/wvRRQGpV/Screenshot-6.png" style="width: 720px; height: 420px;">
+
+            </div>
+
+            <div class="col notShow" style="margin-left: 10%">
+
+                <h1 style="font-size: 85px" class="h1 notShow">Il nostro <br> Map-Editor:</h1>
+
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+                <button type="button">Provalo Subito!</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+    <script th:src="@{/js/scrolling.js}"></script>
+    <script>
+
+        window.onload = function test() {
+
+            document.getElementById("topmenu").style.backgroundColor = "transparent";
+
+        }
+
+    </script>
+
+</html>

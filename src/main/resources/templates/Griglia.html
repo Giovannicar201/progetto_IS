@@ -8,13 +8,13 @@
 
 </head>
 
-<section layout:insert="topmenu.html"></section>
+<div th:replace="fragments :: topmenu"></div>
 
 <body>
 
   <div class = "break">
 
-      <div style="width: 32px; position: absolute; top: 36px;" id="strumenti">
+      <div style="width: 32px; position: absolute; top: 36px; animation: fade-down 2s;" id="strumenti">
 
           <button id="crea" class = "tools breakBar" onclick="crea()">
             <img src="https://i.postimg.cc/d1jQtQT7/Tavola-disegno-1-3.png">
@@ -51,8 +51,6 @@
   </div>
 
   <div id = "griglia" class="griglia" style="position: fixed;"></div>
-
-  <br>
 
   <div id = "result" hidden="hidden"></div>
 

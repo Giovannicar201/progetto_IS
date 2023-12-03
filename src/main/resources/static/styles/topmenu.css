@@ -46,6 +46,12 @@
 
     width: 16px;
     height: 16px;
-    margin: 6px 32px 4px 4px;
+    margin: 6px 10px 4px 8px;
+
+}
+
+.schiacciato{
+
+    background-color: #3F3F3F;
 
 }

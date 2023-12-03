@@ -43,4 +43,12 @@ public class HTMLMapping {
 
     }
 
+    @GetMapping("/")
+
+    public String index(){
+
+        return "homepage";
+
+    }
+
 }

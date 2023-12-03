@@ -73,7 +73,10 @@ function initDrawingTools(cella, flag) {
 
                     }
 
+                    document.getElementsByClassName("selezione")[0].style.backgroundColor = "#333333";
+
                 }
+
 
             }else{
 
@@ -104,31 +107,37 @@ function initDrawingTools(cella, flag) {
 
 function disegnaTile(){
 
-    if(flagTile == 2) {
+    flagTile = 0;
 
-        for(let i = 0; i < selectorGriglia.length; i++) {
+}
 
-            let cella = document.getElementById(selectorGriglia[i]);
+function disegnaTileSelezione(){
 
-            if(cella.className === "square") {
+    for(let i = 0; i < selectorGriglia.length; i++) {
 
-                cella.children[0].src = "/images/tile1.png";
-                cella.removeAttribute("style");
+        let cella = document.getElementById(selectorGriglia[i]);
 
-            } else {
+        if(cella.className === "square") {
 
-                cella.removeAttribute("style");
-                cella.style.backgroundColor = document.getElementById("colorScelto").style.backgroundColor;
+            cella.children[0].src = "/images/tile1.png";
+            cella.removeAttribute("style");
 
-            }
+        } else {
+
+            cella.removeAttribute("style");
+            cella.style.backgroundColor = document.getElementById("colorScelto").style.backgroundColor;
 
         }
 
     }
 
+    document.getElementsByClassName("matita")[0].style.backgroundColor = "#333333";
+
     flagTile = 0;
 
 }
+
+
 
 /**
  * cancellaTile():
@@ -140,33 +149,40 @@ function disegnaTile(){
 
 function cancellaTile(){
 
-    if (flagTile == 2) {
+    flagTile = 1;
 
-        for(let i = 0; i < selectorGriglia.length; i++) {
+}
 
-            let cella = document.getElementById(selectorGriglia[i]);
 
-            if(cella.className === "square") {
+function cancellaTileSelezione(){
 
-                cella.removeAttribute("style");
-                cella.innerHTML = "";
 
-                let img = document.createElement("img");
-                img.className = "cella";
-                cella.append(img);
+    for(let i = 0; i < selectorGriglia.length; i++) {
 
-            } else {
+        let cella = document.getElementById(selectorGriglia[i]);
 
-                cella.removeAttribute("style");
-                cella.style.backgroundColor = "#FFFFFF";
+        if(cella.className === "square") {
 
-            }
+            cella.removeAttribute("style");
+            cella.innerHTML = "";
+
+            let img = document.createElement("img");
+            img.className = "cella";
+            cella.append(img);
+
+        } else {
+
+            cella.removeAttribute("style");
+            cella.style.backgroundColor = "#FFFFFF";
 
         }
 
     }
 
+    document.getElementsByClassName("elimina")[0].style.backgroundColor = "#333333";
+
     flagTile = 1;
+
 
 }
 

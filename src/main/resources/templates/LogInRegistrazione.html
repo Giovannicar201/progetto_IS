@@ -10,7 +10,7 @@
 
 </head>
 
-<section layout:insert="topmenu.html"></section>
+<div th:replace="fragments :: topmenu"></div>
 
 <body>
 
@@ -22,7 +22,7 @@
 
 <div class = "break">
     
-    <img src="https://i.postimg.cc/xdwxc1w6/user.png" class = "breakBar" style="top: 64px; position: absolute;" id="userBar">
+    <img src="https://i.postimg.cc/xdwxc1w6/user.png" class = "breakBar" style="top: 64px; position: absolute; animation: fade-down 2s;" id="userBar">
 
     <div class="divBreak">
 

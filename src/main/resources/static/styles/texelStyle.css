@@ -26,6 +26,24 @@ label{
 
 }
 
+.home h1{
+
+    background-color: #262727;
+    color: transparent;
+    background-image: linear-gradient(#B7B7B7, #B7B7B7);
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-position: -700px 0;
+
+}
+
+.home h1.show{
+
+    animation: showColor 1s linear;
+    animation-fill-mode: forwards;
+
+}
+
 .divBreak{
 
     background-color: #333333;
@@ -153,5 +171,200 @@ label{
     margin: 8px 8px 16px 8px;
     display: grid;
     align-items: center;
+
+}
+
+.home{
+
+    width: 100%;
+    height: 100vh;
+    scroll-snap-type: y mandatory;
+
+}
+
+.esplora{
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("https://i.postimg.cc/cHyvGKJS/peakpx-1.jpg");
+    background-position: center;
+    background-size: cover;
+
+}
+
+.tilemap{
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("https://i.postimg.cc/6pZVBqSc/peakpx-3.jpg");
+    background-position: center;
+    background-size: cover;
+
+}
+
+.row{
+
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    scroll-snap-align: start;
+
+
+}
+
+.col{
+
+    flex-basis: 40%;
+    animation: fade-up 0.5s;
+    margin-left: 5%;
+
+}
+
+.col p{
+
+    font-size: 22px;
+
+}
+
+.col a{
+
+    color: #B7B7B7;
+    text-decoration: none;
+
+}
+
+.home button{
+
+    width: 180px;
+    color: #B7B7B7;
+    background-color: rgba(255,255,255,0.1);
+    text-decoration: none;
+    text-align: center;
+    font-size: 12px;
+    padding: 12px 0;
+    border: 0;
+    border-radius: 20px;
+    outline: none;
+    margin-top: 10px;
+
+}
+
+.home button:hover{
+
+    background-color: #516f96;
+
+}
+
+.card{
+
+    width: 200px;
+    height: 230px;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 20px 30px;
+    background-color: rgba(255,255,255,0.1);
+
+}
+
+.notShow{
+
+    opacity: 0;
+
+}
+
+.col.show{
+
+    transition: transform 5ms;
+    animation: fade-down 0.5s;
+
+}
+
+.card:hover{
+
+    transform: translate(-10px);
+    
+}
+
+.card p{
+
+    text-shadow: 0 0 5px #000;
+    font-size: 13px;
+
+}
+
+.card.show{
+
+    opacity: 1;
+    animation: fade-card 1s;
+
+}
+
+h5{
+
+    text-shadow: 0 0 5px #999;
+
+}
+
+@keyframes fade-down {
+
+    0%{
+
+        opacity: 0;
+        transform: translateY(-30px) scale(0.9);
+
+    }
+
+    100%{
+
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+
+    }
+
+}
+
+@keyframes fade-up {
+
+    0%{
+
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+
+    }
+
+    100%{
+
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+
+    }
+
+}
+
+@keyframes fade-card {
+
+    0%{
+
+        filter: blur(5px);
+        transform: translateX(-100%);
+        transition: all 1s;
+
+    }
+
+    100%{
+
+        filter: blur(0);
+        transform: translateX(0);
+
+    }
+    
+}
+
+@keyframes showColor {
+
+    100%{
+
+        background-position: 0 0;
+
+    }
 
 }
