@@ -16,8 +16,6 @@ public class ColoreServiceImpl implements ColoreService{
     @Autowired
     private ColoreRepository coloreRepository;
     @Autowired
-    private ModelMapper modelMapper;
-    @Autowired
     private PaletteRepository paletteRepository;
 
     @Override

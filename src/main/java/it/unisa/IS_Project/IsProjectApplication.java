@@ -12,12 +12,4 @@ public class IsProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(IsProjectApplication.class, args);
 	}
-
-	@Bean
-	public ModelMapper modelMapper(){
-		ModelMapper modelMapper=new ModelMapper();
-		modelMapper.getConfiguration().setAmbiguityIgnored(true);
-		return modelMapper;
-	}
-
 }

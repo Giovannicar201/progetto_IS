@@ -15,8 +15,6 @@ import java.sql.Blob;
 @Service
 public class ImmagineServiceImpl implements ImmagineService{
     @Autowired
-    private ModelMapper modelMapper;
-    @Autowired
     private ImmagineRepository immagineRepository;
     @Autowired
     private UtenteRepository utenteRepository;

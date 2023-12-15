@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UtenteServiceImpl implements UtenteService{
     @Autowired
-    private ModelMapper modelMapper;
-    @Autowired
     private UtenteRepository utenteRepository;
 
     @Override

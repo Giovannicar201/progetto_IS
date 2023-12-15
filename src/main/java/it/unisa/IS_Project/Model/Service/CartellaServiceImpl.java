@@ -19,8 +19,7 @@ public class CartellaServiceImpl implements CartellaService{
     private CartellaRepository cartellaRepository;
     @Autowired
     private UtenteRepository utenteRepository;
-    @Autowired
-    private ModelMapper modelMapper;
+
 
     @Override
     @Transactional

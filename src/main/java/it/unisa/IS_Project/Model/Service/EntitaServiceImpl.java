@@ -16,8 +16,6 @@ import java.util.stream.Collectors;
 @Service
 public class EntitaServiceImpl implements EntitaService{
     @Autowired
-    private ModelMapper modelMapper;
-    @Autowired
     private EntitaRepository entitaRepository;
     @Autowired
     private MappaRepository mappaRepository;

@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class PaletteServiceImpl implements PaletteService{
     @Autowired
-    private ModelMapper modelMapper;
-    @Autowired
     private PaletteRepository paletteRepository;
     @Autowired
     private UtenteRepository utenteRepository;

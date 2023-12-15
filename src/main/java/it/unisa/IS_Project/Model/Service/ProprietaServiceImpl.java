@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProprietaServiceImpl implements ProprietaService{
     @Autowired
-    private ModelMapper modelMapper;
-    @Autowired
     private ProprietaRepository proprietaRepository;
     @Autowired
     private EntitaRepository entitaRepository;
