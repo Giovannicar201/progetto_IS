@@ -16,11 +16,13 @@ import java.util.List;
 @Table(name = "Palette")
 public class PaletteEntity {
     @Id
-    @Column(name = "nomePalette")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idPalette")
+    private int idPalette;
     private String nomePalette;
 
-    @ManyToOne(cascade = CascadeType.ALL,optional = true)
-    @JoinColumn(name = "email",referencedColumnName = "email",nullable = true)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "email",referencedColumnName = "email")
     private UtenteEntity emailUtente;
 
     @OneToMany(mappedBy = "nomePaletteEntity")

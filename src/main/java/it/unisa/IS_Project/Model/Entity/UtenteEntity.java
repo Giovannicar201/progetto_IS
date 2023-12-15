@@ -22,7 +22,7 @@ public class UtenteEntity {
     private String nome;
     private String cognome;
 
-    @OneToOne(mappedBy = "idMappaUtente")
+    @OneToOne(mappedBy = "idMappaUtente",cascade = CascadeType.ALL)
     private MappaEntity idMappa;
 
     @OneToMany(mappedBy = "emailUtente", cascade = CascadeType.ALL)
@@ -36,4 +36,7 @@ public class UtenteEntity {
 
     @OneToMany(mappedBy = "email", cascade = CascadeType.ALL)
     private List<ImmagineEntity> immagineEntity;
+
+    @OneToMany(mappedBy = "email",cascade = CascadeType.ALL)
+    private List<EntitaEntity> entitaEntities;
 }

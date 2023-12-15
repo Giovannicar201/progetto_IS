@@ -22,17 +22,10 @@ public class ProprietaServiceImpl implements ProprietaService{
 
     @Override
     @Transactional
-    public ProprietaModel add(ProprietaModel proprietaModel) {
-        ProprietaEntity proprietaEntity=modelMapper.map(proprietaModel,ProprietaEntity.class);
-        proprietaRepository.save(proprietaEntity);
-        return modelMapper.map(proprietaEntity,ProprietaModel.class);
-    }
-
-    @Override
-    @Transactional
-    public ProprietaModel add2(ProprietaModel proprietaModel, int idProprieta, int idEntita) {
-        ProprietaEntity proprietaEntity=modelMapper.map(proprietaModel,ProprietaEntity.class);
-        proprietaEntity.setIdProprieta(idProprieta);
+    public ProprietaEntity add(String nomeProprieta,String valore,int idEntita) {
+        ProprietaEntity proprietaEntity=new ProprietaEntity();
+        proprietaEntity.setNome(nomeProprieta);
+        proprietaEntity.setValore(valore);
 
         EntitaEntity entitaEntity=entitaRepository.findAllById(idEntita).get();
         entitaEntity.setId(idEntita);
@@ -40,29 +33,29 @@ public class ProprietaServiceImpl implements ProprietaService{
         proprietaEntity.setEntita(entitaEntity);
 
         proprietaRepository.save(proprietaEntity);
-        return modelMapper.map(proprietaEntity,ProprietaModel.class);
+        return proprietaEntity;
     }
 
     @Override
     @Transactional
-    public ProprietaModel get(int idProprieta) {
-        ProprietaEntity proprietaEntity=proprietaRepository.findByIdProprieta(idProprieta).get();
-        return modelMapper.map(proprietaEntity,ProprietaModel.class);
+    public ProprietaEntity get(String nomeProprieta) {
+        ProprietaEntity proprietaEntity=proprietaRepository.findByNome(nomeProprieta).get();
+        return proprietaEntity;
     }
 
     @Override
     @Transactional
-    public ProprietaModel update(ProprietaModel newProprietaModel,int idProprieta) {
-        ProprietaEntity proprietaEntity=proprietaRepository.findByIdProprieta(idProprieta).orElse(null);
-        newProprietaModel.setIdProprieta(idProprieta);
-        proprietaEntity.setNome(newProprietaModel.getNome());
+    public ProprietaEntity update(ProprietaEntity newProprietaEntity,String nomeProprieta) {
+        ProprietaEntity proprietaEntity=proprietaRepository.findByNome(nomeProprieta).orElse(null);
+        newProprietaEntity.setNome(nomeProprieta);
+        proprietaEntity.setNome(newProprietaEntity.getNome());
         ProprietaEntity saved=proprietaRepository.save(proprietaEntity);
-        return modelMapper.map(saved,ProprietaModel.class);
+        return saved;
     }
 
     @Override
     @Transactional
-    public void delete(int idProprieta) {
-        proprietaRepository.deleteById(idProprieta);
+    public void delete(String nomeProprieta) {
+        proprietaRepository.deleteByNome(nomeProprieta);
     }
 }

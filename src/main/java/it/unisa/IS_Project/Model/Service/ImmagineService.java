@@ -1,15 +1,16 @@
 package it.unisa.IS_Project.Model.Service;
 
+import it.unisa.IS_Project.Model.Entity.ImmagineEntity;
 import it.unisa.IS_Project.Model.Model.ImmagineModel;
 
+import java.sql.Blob;
+
 public interface ImmagineService {
-    ImmagineModel add(ImmagineModel immagineModel);
+    ImmagineEntity add(Blob foto, String nomeFoto, String email);
 
-    ImmagineModel add2(ImmagineModel immagineModel,int idFoto,String email);
+    ImmagineEntity get(String nomeFoto);
 
-    ImmagineModel get(int idFoto);
+    ImmagineEntity update(ImmagineEntity newImmagineEntity, String nomeFoto);
 
-    ImmagineModel update(ImmagineModel newImmagineModel,int idFoto);
-
-    void delete(int idFoto);
+    void delete(String nomeFoto);
 }

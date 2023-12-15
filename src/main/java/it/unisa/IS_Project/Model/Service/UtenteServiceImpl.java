@@ -16,32 +16,34 @@ public class UtenteServiceImpl implements UtenteService{
     private ModelMapper modelMapper;
     @Autowired
     private UtenteRepository utenteRepository;
-    @Autowired
-    private MappaRepository mappaRepository;
 
     @Override
     @Transactional
-    public UtenteModel add(UtenteModel utenteModel) {
-        UtenteEntity utenteEntity=modelMapper.map(utenteModel,UtenteEntity.class);
+    public UtenteEntity add(String email,String password,String nome,String cognome){
+        UtenteEntity utenteEntity=new UtenteEntity();
+        utenteEntity.setEmail(email);
+        utenteEntity.setPassword(password);
+        utenteEntity.setCognome(cognome);
+        utenteEntity.setNome(nome);
         utenteRepository.save(utenteEntity);
-        return modelMapper.map(utenteEntity,UtenteModel.class);
+        return utenteEntity;
     }
 
     @Override
     @Transactional
-    public UtenteModel get(String email) {
+    public UtenteEntity get(String email) {
         UtenteEntity utenteEntity=utenteRepository.findByEmail(email);
-        return modelMapper.map(utenteEntity,UtenteModel.class);
+        return utenteEntity;
     }
 
     @Override
     @Transactional
-    public UtenteModel update(UtenteModel newUtenteModel, String email) {
+    public UtenteEntity update(UtenteEntity newUtenteEntity, String email) {
         UtenteEntity utenteEntity=utenteRepository.findByEmail(email);
-        newUtenteModel.setEmail(email);
-        utenteEntity.setPassword(newUtenteModel.getPassword());
+        newUtenteEntity.setEmail(email);
+        utenteEntity.setPassword(newUtenteEntity.getPassword());
         UtenteEntity saved=utenteRepository.save(utenteEntity);
-        return modelMapper.map(saved,UtenteModel.class);
+        return saved;
     }
 
     @Override

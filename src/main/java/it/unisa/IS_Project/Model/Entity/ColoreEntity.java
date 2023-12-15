@@ -22,14 +22,14 @@ public class ColoreEntity {
     public static class PrimaryKey implements Serializable{
         @Column(name = "esadecimale")
         private String esadecimale;
-        @Column(name = "nomePalette")
-        private String nomePalette;
+        @Column(name = "idPalette")
+        private int idPalette;
     }
 
     @EmbeddedId
     private PrimaryKey primaryKey;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,optional = true)
-    @JoinColumn(name = "nomePalette",nullable = true,insertable=false, updatable=false)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "idPalette",referencedColumnName = "idPalette",insertable=false, updatable=false)
     private PaletteEntity nomePaletteEntity;
 }

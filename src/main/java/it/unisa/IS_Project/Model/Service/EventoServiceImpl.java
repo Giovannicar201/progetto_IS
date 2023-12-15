@@ -2,10 +2,12 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.EventoEntity;
 import it.unisa.IS_Project.Model.Entity.MappaEntity;
+import it.unisa.IS_Project.Model.Entity.UtenteEntity;
 import it.unisa.IS_Project.Model.Model.EventoModel;
 import it.unisa.IS_Project.Model.Model.MappaModel;
 import it.unisa.IS_Project.Model.Repository.EventoRepository;
 import it.unisa.IS_Project.Model.Repository.MappaRepository;
+import it.unisa.IS_Project.Model.Repository.UtenteRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EventoServiceImpl implements EventoService{
     @Autowired
-    private ModelMapper modelMapper;
+    private UtenteRepository utenteRepository;
     @Autowired
     private EventoRepository eventoRepository;
     @Autowired
@@ -22,61 +24,46 @@ public class EventoServiceImpl implements EventoService{
 
     @Override
     @Transactional
-    public EventoModel add(EventoModel eventoModel) {
-        EventoEntity.PrimaryKey primaryKey=new EventoEntity.PrimaryKey(eventoModel.getIdEvento(),eventoModel.getIdMappaEvento().getId());
-        EventoEntity eventoEntity=modelMapper.map(eventoModel,EventoEntity.class);
-        eventoEntity.setPrimaryKey(primaryKey);
-        eventoRepository.save(eventoEntity);
-        return modelMapper.map(eventoEntity, EventoModel.class);
-    }
+    public EventoEntity add(String nomeEvento,String email) {
+        EventoEntity eventoEntity=new EventoEntity();
+        eventoEntity.setNome(nomeEvento);
 
-    @Override
-    @Transactional
-    public EventoModel add2(EventoModel eventoModel,int idEvento,int idMappa) {
-        EventoEntity.PrimaryKey primaryKey=new EventoEntity.PrimaryKey(idEvento,idMappa);
-        EventoEntity eventoEntity=modelMapper.map(eventoModel,EventoEntity.class);
-        primaryKey.setIdEvento(idEvento);
-        primaryKey.setIdMappa(idMappa);
-        eventoEntity.setPrimaryKey(primaryKey);
+        UtenteEntity utenteEntity=utenteRepository.findByEmail(email);
+        utenteEntity.setEmail(email);
+        eventoEntity.setUtenteEntity(utenteEntity);
 
-        MappaEntity mappaEntity=mappaRepository.findById(idMappa).get();
-        mappaEntity.setId(idMappa);
-
+        MappaEntity mappaEntity=mappaRepository.findAllByEmail(email);
+        mappaEntity.setId(mappaEntity.getId());
         eventoEntity.setIdMappaEvento(mappaEntity);
-        eventoEntity.setNome(eventoEntity.getNome());
 
         eventoRepository.save(eventoEntity);
-        return modelMapper.map(eventoEntity, EventoModel.class);
+        return eventoEntity;
     }
 
     @Override
     @Transactional
-    public EventoModel get(int idEvento, int idMappa) {
-        EventoEntity.PrimaryKey primaryKey=new EventoEntity.PrimaryKey(idEvento,idMappa);
-        EventoEntity eventoEntity=eventoRepository.findById(primaryKey).orElse(null);
-        return modelMapper.map(eventoEntity, EventoModel.class);
+    public EventoEntity get(String nomeEvento) {
+        EventoEntity eventoEntity=eventoRepository.findByNome(nomeEvento).orElse(null);
+        return eventoEntity;
     }
 
     @Override
     @Transactional
-    public EventoModel update(EventoModel newEventoModel, int idEvento, int idMappa) {
-        EventoEntity.PrimaryKey primaryKey=new EventoEntity.PrimaryKey(idEvento,idMappa);
-        EventoEntity eventoEntity=eventoRepository.findById(primaryKey).orElse(null);
+    public EventoEntity update(EventoEntity newEventoEntity,String nomeEvento) {
+        EventoEntity eventoEntity=eventoRepository.findByNome(nomeEvento).orElse(null);
 
-        newEventoModel.setIdEvento(idEvento);
+        newEventoEntity.setNome(nomeEvento);
 
-        newEventoModel.getIdMappaEvento().setId(idMappa);
 
-        eventoEntity.setNome(newEventoModel.getNome());
+        eventoEntity.setNome(newEventoEntity.getNome());
         EventoEntity saved=eventoRepository.save(eventoEntity);
 
-        return modelMapper.map(saved, EventoModel.class);
+        return saved;
     }
 
     @Override
     @Transactional
-    public void delete(int idEvento, int idMappa) {
-        EventoEntity.PrimaryKey primaryKey=new EventoEntity.PrimaryKey(idEvento,idMappa);
-        eventoRepository.deleteById(primaryKey);
+    public void delete(String nomeEvento) {
+        eventoRepository.deleteByNome(nomeEvento);
     }
 }

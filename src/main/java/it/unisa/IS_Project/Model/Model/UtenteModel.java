@@ -24,4 +24,6 @@ public class UtenteModel {
     private List<EventoModel> eventoModel;
 
     private List<ImmagineModel> immagineModel;
+
+    private List<EntitaModel> entitaModels;
 }

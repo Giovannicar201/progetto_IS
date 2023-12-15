@@ -1,15 +1,14 @@
 package it.unisa.IS_Project.Model.Service;
 
+import it.unisa.IS_Project.Model.Entity.ColoreEntity;
 import it.unisa.IS_Project.Model.Model.ColoreModel;
 
 public interface ColoreService {
-    ColoreModel add(ColoreModel coloreModel);
+    ColoreEntity add(String esadecimale,int idPalette);
 
-    ColoreModel add2(ColoreModel coloreModel,String esadecimale,String nomePalette);
+    ColoreEntity get(String esadecimale,int idPalette);
     
-    ColoreModel get(String esadecimale,String nomePalette);
+    ColoreEntity update(ColoreEntity newColoreEntity,String esadecimale,int idPalette);
     
-    ColoreModel update(ColoreModel newColoreModel,String esadecimale,String nomePalette);
-    
-    void delete(String esadecimale,String nomePalette);
+    void delete(String esadecimale,int idPalette);
 }

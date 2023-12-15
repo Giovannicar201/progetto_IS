@@ -21,5 +21,7 @@ public class EntitaModel {
 
     private CartellaModel CartellaEntita;
 
+    private UtenteModel utenteModel;
+
     private ImmagineModel idFoto;
 }

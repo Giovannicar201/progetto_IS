@@ -20,7 +20,7 @@ public class ProprietaEntity {
     private String nome;
     private String valore;
 
-    @ManyToOne(cascade = CascadeType.ALL,optional = true)
-    @JoinColumn(name = "idEntita",nullable = true)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "idEntita",referencedColumnName = "idEntita")
     private EntitaEntity entita;
 }

@@ -15,4 +15,5 @@ public class EventoModel {
 
     private MappaModel idMappaEvento;
     private UtenteModel utenteModel;
+    private List<IstruzioneModel> istruzioneModels;
 }

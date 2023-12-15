@@ -1,15 +1,14 @@
 package it.unisa.IS_Project.Model.Service;
 
+import it.unisa.IS_Project.Model.Entity.EventoEntity;
 import it.unisa.IS_Project.Model.Model.EventoModel;
 
 public interface EventoService {
-    EventoModel add(EventoModel eventoModel);
+    EventoEntity add(String nomeEvento,String email);
 
-    EventoModel add2(EventoModel eventoModel,int idEvento,int idMappa);
+    EventoEntity get(String nomeEvento);
 
-    EventoModel get(int idEvento,int idMappa);
+    EventoEntity update(EventoEntity newEventoEntity, String nomeEvento);
 
-    EventoModel update(EventoModel newEventoModel,int idEvento,int idMappa);
-
-    void delete(int idEvento,int idMappa);
+    void delete(String nomeEvento);
 }

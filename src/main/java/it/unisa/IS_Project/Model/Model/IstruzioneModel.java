@@ -4,16 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartellaModel {
-    private int id;
+public class IstruzioneModel {
+    private int idIstruzione;
     private String nome;
+    private String valore;
 
-    private List<EntitaModel> CartellaEntita;
-
-    private UtenteModel emailUtente;
+    private EventoModel eventoModel;
 }

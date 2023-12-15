@@ -8,7 +8,13 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PaletteRepository extends JpaRepository<PaletteEntity,String> {
+public interface PaletteRepository extends JpaRepository<PaletteEntity,Integer> {
     @Query
-    PaletteEntity findByNomePalette(String nomePalette);
+    PaletteEntity findByIdPalette(int idPalette);
+
+    @Query
+    Optional<PaletteEntity> findByNomePalette(String nomePalette);
+
+    @Query
+    void deleteByNomePalette(String nomePalette);
 }

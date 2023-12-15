@@ -16,29 +16,23 @@ import java.util.List;
 @Entity
 @Table(name = "evento")
 public class EventoEntity {
-    @Embeddable
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class PrimaryKey implements Serializable{
-        @Column(name = "idEvento")
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int idEvento;
-        @Column(name = "idMappa")
-        private int idMappa;
-    }
-    @EmbeddedId
-    private PrimaryKey primaryKey;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idEvento")
+    private int idEvento;
 
     private String nome;
 
-    @ManyToOne(cascade = CascadeType.ALL,optional = true)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @MapsId("idMappa")
     @JoinColumn(name = "idMappa")
     private MappaEntity idMappaEvento;
 
-    @ManyToOne(cascade = CascadeType.ALL,optional = true)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @MapsId("email")
     @JoinColumn(name = "email")
     private UtenteEntity utenteEntity;
+
+    @OneToMany(mappedBy = "eventoEntity")
+    private List<IstruzioneEntity> istruzioneEntities;
 }

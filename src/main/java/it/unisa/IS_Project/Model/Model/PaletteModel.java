@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaletteModel {
+    private int idPalette;
     private String nomePalette;
 
     private UtenteModel utentePalette;

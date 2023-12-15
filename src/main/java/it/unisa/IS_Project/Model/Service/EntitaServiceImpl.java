@@ -1,8 +1,9 @@
 package it.unisa.IS_Project.Model.Service;
 
-import it.unisa.IS_Project.Model.Entity.EntitaEntity;
+import it.unisa.IS_Project.Model.Entity.*;
 import it.unisa.IS_Project.Model.Model.EntitaModel;
-import it.unisa.IS_Project.Model.Repository.EntitaRepository;
+import it.unisa.IS_Project.Model.Model.ImmagineModel;
+import it.unisa.IS_Project.Model.Repository.*;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,44 +19,73 @@ public class EntitaServiceImpl implements EntitaService{
     private ModelMapper modelMapper;
     @Autowired
     private EntitaRepository entitaRepository;
+    @Autowired
+    private MappaRepository mappaRepository;
+    @Autowired
+    private UtenteRepository utenteRepository;
+    @Autowired
+    private ImmagineRepository immagineRepository;
+    @Autowired
+    private CartellaRepository cartellaRepository;
 
     @Override
     @Transactional
-    public EntitaModel add(EntitaModel entitaModel) {
-        EntitaEntity entitaEntity=modelMapper.map(entitaModel,EntitaEntity.class);
+    public EntitaEntity add(String nome,String collisione,String coordinate,String email,String nomeFoto,String nomeCartella){
+        EntitaEntity entitaEntity=new EntitaEntity();
+        entitaEntity.setNome(nome);
+        entitaEntity.setCollisione(collisione);
+        entitaEntity.setCoordinate(coordinate);
+
+        UtenteEntity utenteEntity=utenteRepository.findByEmail(email);
+        utenteEntity.setEmail(email);
+        entitaEntity.setEmail(utenteEntity);
+
+        MappaEntity mappaEntity=mappaRepository.findAllByEmail(email);
+        mappaEntity.setId(mappaEntity.getId());
+        entitaEntity.setIdMappaEntity(mappaEntity);
+
+        ImmagineEntity immagineEntity=immagineRepository.findByNomeAndEmail(nomeFoto,email).get();
+        immagineEntity.setIdFoto(immagineEntity.getIdFoto());
+        immagineEntity.setNome(nomeFoto);
+        entitaEntity.setImmagineEntita(immagineEntity);
+
+        CartellaEntity cartellaEntity=cartellaRepository.findAllByEmailAndNome(email,nomeCartella).get();
+        cartellaEntity.setId(cartellaEntity.getId());
+        cartellaEntity.setNome(nomeCartella);
+        entitaEntity.setCartellaEntity(cartellaEntity);
+
         entitaRepository.save(entitaEntity);
-        return modelMapper.map(entitaEntity,EntitaModel.class);
+
+        return entitaEntity;
     }
 
     @Override
     @Transactional
-    public EntitaModel get(int idEntita) {
-        EntitaEntity entitaEntity=entitaRepository.findAllById(idEntita).orElse(null);
-        return modelMapper.map(entitaEntity, EntitaModel.class);
+    public EntitaEntity get(String nomeEntita) {
+        EntitaEntity entitaEntity=entitaRepository.findByNome(nomeEntita).orElse(null);
+        return entitaEntity;
     }
 
     @Override
     @Transactional
-    public EntitaModel update(EntitaModel newEntitaModel, int idEntita) {
-        EntitaEntity entitaEntity=entitaRepository.findAllById(idEntita).orElse(null);
-        newEntitaModel.setIdEntita(idEntita);
-        entitaEntity.setNome(newEntitaModel.getNome());
-        entitaEntity.setCollisione(newEntitaModel.getCollisione());
+    public EntitaEntity update(EntitaEntity newEntitaEntity,String nomeEntita) {
+        EntitaEntity entitaEntity=entitaRepository.findByNome(nomeEntita).orElse(null);
+        newEntitaEntity.setNome(nomeEntita);
+        entitaEntity.setNome(newEntitaEntity.getNome());
+        entitaEntity.setCollisione(newEntitaEntity.getCollisione());
         EntitaEntity saved=entitaRepository.save(entitaEntity);
-        return modelMapper.map(saved, EntitaModel.class);
+        return saved;
     }
 
     @Override
     @Transactional
-    public void delete(int idEntita) {
-        entitaRepository.deleteById(idEntita);
+    public void delete(String nomeEntita) {
+        entitaRepository.deleteByNome(nomeEntita);
     }
 
     @Override
     @Transactional
-    public List<EntitaModel> findAllEntity(int idCartella){
-        List<EntitaEntity> entitaEntities=entitaRepository.findAllByCartellaEntity(idCartella);
-
-        return entitaEntities.stream().map((entita)->modelMapper.map(entita,EntitaModel.class)).collect(Collectors.toList());
+    public List<EntitaEntity> findAllEntity(String nomeCartella){
+        return entitaRepository.findAllByCartellaEntity(nomeCartella);
     }
 }

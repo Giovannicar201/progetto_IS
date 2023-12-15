@@ -1,17 +1,16 @@
 package it.unisa.IS_Project.Model.Service;
 
+import it.unisa.IS_Project.Model.Entity.CartellaEntity;
 import it.unisa.IS_Project.Model.Model.CartellaModel;
 
 import java.util.Optional;
 
 public interface CartellaService {
-    CartellaModel add(CartellaModel cartellaModel);
-
-    CartellaModel add2(CartellaModel cartellaModel,String nomeCartella,String email);
+    CartellaEntity add(String nomeCartella,String email);
     
-    CartellaModel get(int idCartella);
+    CartellaEntity get(String nomeCartella);
     
-    CartellaModel update(CartellaModel newCartellaModel,int idCartella);
+    CartellaEntity update(CartellaEntity newCartellaEntity,String nomeCartella);
 
-    void delete(int idCartella);
+    void delete(String nomeCartella);
 }

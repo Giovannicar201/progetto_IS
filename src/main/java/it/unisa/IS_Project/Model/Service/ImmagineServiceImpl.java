@@ -10,6 +10,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Blob;
+
 @Service
 public class ImmagineServiceImpl implements ImmagineService{
     @Autowired
@@ -21,47 +23,40 @@ public class ImmagineServiceImpl implements ImmagineService{
 
     @Override
     @Transactional
-    public ImmagineModel add(ImmagineModel immagineModel) {
-        ImmagineEntity immagineEntity=modelMapper.map(immagineModel,ImmagineEntity.class);
-        immagineRepository.save(immagineEntity);
-        return modelMapper.map(immagineEntity, ImmagineModel.class);
-    }
-
-    @Override
-    @Transactional
-    public ImmagineModel add2(ImmagineModel immagineModel,int idFoto,String email){
-        ImmagineEntity immagineEntity=modelMapper.map(immagineModel,ImmagineEntity.class);
-        immagineEntity.setIdFoto(idFoto);
+    public ImmagineEntity add(Blob foto,String nomeFoto,String email) {
+        ImmagineEntity immagineEntity=new ImmagineEntity();
+        immagineEntity.setNome(nomeFoto);
+        immagineEntity.setFoto(foto);
 
         UtenteEntity utenteEntity=utenteRepository.findByEmail(email);
         utenteEntity.setEmail(email);
-
         immagineEntity.setEmail(utenteEntity);
 
         immagineRepository.save(immagineEntity);
-        return modelMapper.map(immagineEntity,ImmagineModel.class);
+        return immagineEntity;
     }
 
     @Override
     @Transactional
-    public ImmagineModel get(int idFoto) {
-        ImmagineEntity immagineEntity=immagineRepository.findById(idFoto).get();
-        return modelMapper.map(immagineEntity,ImmagineModel.class);
+    public ImmagineEntity get(String nomeFoto){
+        ImmagineEntity immagineEntity=immagineRepository.findByNome(nomeFoto).get();
+        return immagineEntity;
     }
 
     @Override
     @Transactional
-    public ImmagineModel update(ImmagineModel newImmagineModel, int idFoto) {
-        ImmagineEntity immagineEntity=immagineRepository.findById(idFoto).get();
-        newImmagineModel.setIdFoto(idFoto);
-        immagineEntity.setFoto(newImmagineModel.getFoto());
+    public ImmagineEntity update(ImmagineEntity newImmagineEntity,String nomeFoto) {
+        ImmagineEntity immagineEntity=immagineRepository.findByNome(nomeFoto).get();
+        newImmagineEntity.setNome(nomeFoto);
+        immagineEntity.setFoto(newImmagineEntity.getFoto());
+        immagineEntity.setNome(newImmagineEntity.getNome());
         ImmagineEntity saved=immagineRepository.save(immagineEntity);
-        return modelMapper.map(saved, ImmagineModel.class);
+        return saved;
     }
 
     @Override
     @Transactional
-    public void delete(int idFoto) {
-        immagineRepository.deleteById(idFoto);
+    public void delete(String nomeFoto) {
+        immagineRepository.deleteByNome(nomeFoto);
     }
 }

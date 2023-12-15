@@ -1,13 +1,14 @@
 package it.unisa.IS_Project.Model.Service;
 
+import it.unisa.IS_Project.Model.Entity.MappaEntity;
 import it.unisa.IS_Project.Model.Model.MappaModel;
 
 public interface MappaService {
-    MappaModel add(MappaModel mappaModel);
+    MappaEntity add(String nome,int lunghezza,int larghezza,String email);
 
-    MappaModel get(int idMappa);
+    MappaEntity get(String nome);
 
-    MappaModel update(MappaModel newMappaModel,int idMappa);
+    MappaEntity update(MappaEntity newMappaEntity, String nomeMappa);
 
-    void delete(int idMappa);
+    void delete(String nomeMappa);
 }

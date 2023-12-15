@@ -21,16 +21,8 @@ public class PaletteServiceImpl implements PaletteService{
 
     @Override
     @Transactional
-    public PaletteModel add(PaletteModel paletteModel) {
-        PaletteEntity paletteEntity=modelMapper.map(paletteModel, PaletteEntity.class);
-        paletteRepository.save(paletteEntity);
-        return modelMapper.map(paletteEntity, PaletteModel.class);
-    }
-
-    @Override
-    @Transactional
-    public PaletteModel add2(PaletteModel paletteModel,String nomePalette,String email){
-        PaletteEntity paletteEntity=modelMapper.map(paletteModel,PaletteEntity.class);
+    public PaletteEntity add(String nomePalette,String email){
+        PaletteEntity paletteEntity= new PaletteEntity();
         paletteEntity.setNomePalette(nomePalette);
 
         UtenteEntity utenteEntity=utenteRepository.findByEmail(email);
@@ -39,29 +31,29 @@ public class PaletteServiceImpl implements PaletteService{
         paletteEntity.setEmailUtente(utenteEntity);
 
         paletteRepository.save(paletteEntity);
-        return modelMapper.map(paletteEntity, PaletteModel.class);
+        return paletteEntity;
     }
 
     @Override
     @Transactional
-    public PaletteModel get(String nomePalette) {
-        PaletteEntity paletteEntity=paletteRepository.findByNomePalette(nomePalette);
-        return modelMapper.map(paletteEntity, PaletteModel.class);
+    public PaletteEntity get(String nomePalette) {
+        PaletteEntity paletteEntity=paletteRepository.findByNomePalette(nomePalette).get();
+        return paletteEntity;
     }
 
     @Override
     @Transactional
-    public PaletteModel update(PaletteModel newPaletteModel, String nomePalette) {
-        PaletteEntity paletteEntity=paletteRepository.findByNomePalette(nomePalette);
-        newPaletteModel.setNomePalette(nomePalette);
-        paletteEntity.setNomePalette(newPaletteModel.getNomePalette());
+    public PaletteEntity update(PaletteEntity newPaletteEntity,String nomePalette) {
+        PaletteEntity paletteEntity=paletteRepository.findByNomePalette(nomePalette).get();
+        newPaletteEntity.setNomePalette(nomePalette);
+        paletteEntity.setNomePalette(newPaletteEntity.getNomePalette());
         PaletteEntity saved=paletteRepository.save(paletteEntity);
-        return modelMapper.map(saved, PaletteModel.class);
+        return saved;
     }
 
     @Override
     @Transactional
     public void delete(String nomePalette) {
-        paletteRepository.deleteById(nomePalette);
+        paletteRepository.deleteByNomePalette(nomePalette);
     }
 }

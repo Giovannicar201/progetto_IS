@@ -1,15 +1,14 @@
 package it.unisa.IS_Project.Model.Service;
 
+import it.unisa.IS_Project.Model.Entity.ProprietaEntity;
 import it.unisa.IS_Project.Model.Model.ProprietaModel;
 
 public interface ProprietaService {
-    ProprietaModel add(ProprietaModel proprietaModel);
+    ProprietaEntity add(String nomeProprieta,String valore,int idEntita);
 
-    ProprietaModel add2(ProprietaModel proprietaModel,int idProprieta,int idEntita);
+    ProprietaEntity get(String nomeProprieta);
 
-    ProprietaModel get(int idProprieta);
+    ProprietaEntity update(ProprietaEntity newProprietaEntity,String nomeProprieta);
 
-    ProprietaModel update(ProprietaModel newProprietaModel,int idProprieta);
-
-    void delete(int idProprieta);
+    void delete(String nomeProprieta);
 }

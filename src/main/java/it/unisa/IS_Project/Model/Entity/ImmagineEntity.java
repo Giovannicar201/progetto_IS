@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Blob;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,12 +19,14 @@ public class ImmagineEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idFoto")
     private int idFoto;
-    private String foto;
+    private String nome;
+    @Lob
+    private Blob foto;
 
     @OneToOne(mappedBy = "immagineEntita")
     private EntitaEntity entity;
 
-    @ManyToOne(cascade = CascadeType.ALL,optional = true)
-    @JoinColumn(name = "email",referencedColumnName = "email",nullable = true)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "email",referencedColumnName = "email")
     private UtenteEntity email;
 }

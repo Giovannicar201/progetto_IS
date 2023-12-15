@@ -26,15 +26,19 @@ public class EntitaEntity {
     @OneToMany(mappedBy = "entita")
     private List<ProprietaEntity> idEntitaEntityProprieta;
 
-    @ManyToOne(cascade = CascadeType.ALL,optional = true)
-    @JoinColumn(name = "idMappa",referencedColumnName = "idMappa",nullable = true,insertable=false, updatable=false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idMappa",referencedColumnName = "idMappa")
     private MappaEntity idMappaEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL,optional = true)
-    @JoinColumn(name = "idCartella",referencedColumnName = "idCartella",nullable = true)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idCartella",referencedColumnName = "idCartella")
     private CartellaEntity cartellaEntity;
 
-    @OneToOne(cascade = CascadeType.ALL,optional = true)
-    @JoinColumn(name = "idFoto",referencedColumnName = "idFoto", nullable = true)
+    @ManyToOne(cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name = "email",referencedColumnName = "email")
+    private UtenteEntity email;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idFoto",referencedColumnName = "idFoto")
     private ImmagineEntity immagineEntita;
 }

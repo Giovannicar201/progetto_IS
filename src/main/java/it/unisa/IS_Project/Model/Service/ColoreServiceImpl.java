@@ -19,61 +19,51 @@ public class ColoreServiceImpl implements ColoreService{
     private ModelMapper modelMapper;
     @Autowired
     private PaletteRepository paletteRepository;
-    
-    @Override
-    @Transactional
-    public ColoreModel add(ColoreModel coloreModel) {
-        ColoreEntity.PrimaryKey primaryKey=new ColoreEntity.PrimaryKey(coloreModel.getEsadecimale(),coloreModel.getPaletteModel().getNomePalette());
-        ColoreEntity coloreEntity= modelMapper.map(coloreModel,ColoreEntity.class);
-        coloreEntity.setPrimaryKey(primaryKey);
-        coloreRepository.save(coloreEntity);
-        return modelMapper.map(coloreEntity,ColoreModel.class);
-    }
 
     @Override
     @Transactional
-    public ColoreModel add2(ColoreModel coloreModel,String esadecimale,String nomePalette){
-        ColoreEntity.PrimaryKey primaryKey=new ColoreEntity.PrimaryKey(esadecimale,nomePalette);
-        ColoreEntity coloreEntity=modelMapper.map(coloreModel,ColoreEntity.class);
+    public ColoreEntity add(String esadecimale,int idPalette){
+        ColoreEntity.PrimaryKey primaryKey=new ColoreEntity.PrimaryKey(esadecimale,idPalette);
+        ColoreEntity coloreEntity=new ColoreEntity();
         primaryKey.setEsadecimale(esadecimale);
-        primaryKey.setNomePalette(nomePalette);
+        primaryKey.setIdPalette(idPalette);
         coloreEntity.setPrimaryKey(primaryKey);
 
-        PaletteEntity paletteEntity=paletteRepository.findByNomePalette(nomePalette);
-        paletteEntity.setNomePalette(nomePalette);
-
+        PaletteEntity paletteEntity=paletteRepository.findByIdPalette(idPalette);
+        paletteEntity.setIdPalette(idPalette);
         coloreEntity.setNomePaletteEntity(paletteEntity);
+
         coloreRepository.save(coloreEntity);
-        return modelMapper.map(coloreEntity,ColoreModel.class);
+        return coloreEntity;
     }
 
     @Override
     @Transactional
-    public ColoreModel get(String esadecimale, String nomePalette) {
-        ColoreEntity.PrimaryKey primaryKey=new ColoreEntity.PrimaryKey(esadecimale,nomePalette);
+    public ColoreEntity get(String esadecimale, int idPalette) {
+        ColoreEntity.PrimaryKey primaryKey=new ColoreEntity.PrimaryKey(esadecimale,idPalette);
         ColoreEntity coloreEntity=coloreRepository.findById(primaryKey).orElse(null);
-        return modelMapper.map(coloreEntity,ColoreModel.class);
+        return coloreEntity;
     }
 
     @Override
     @Transactional
-    public ColoreModel update(ColoreModel newColoreModel,String esadecimale,String nomePalette) {
-        ColoreEntity.PrimaryKey primaryKey=new ColoreEntity.PrimaryKey(esadecimale,nomePalette);
+    public ColoreEntity update(ColoreEntity newColoreEntity,String esadecimale,int idPalette) {
+        ColoreEntity.PrimaryKey primaryKey=new ColoreEntity.PrimaryKey(esadecimale,idPalette);
         ColoreEntity coloreEntity=coloreRepository.findById(primaryKey).orElse(null);
 
-        newColoreModel.setEsadecimale(esadecimale);
+        newColoreEntity.setPrimaryKey(coloreEntity.getPrimaryKey());
 
-        newColoreModel.getPaletteModel().setNomePalette(nomePalette);
+        newColoreEntity.getNomePaletteEntity().setIdPalette(idPalette);
 
-        coloreEntity.setNomePaletteEntity(modelMapper.map(newColoreModel.getPaletteModel(), PaletteEntity.class));
+        coloreEntity.setNomePaletteEntity(newColoreEntity.getNomePaletteEntity());
         ColoreEntity saved=coloreRepository.save(coloreEntity);
-        return modelMapper.map(saved,ColoreModel.class);
+        return saved;
     }
 
     @Override
     @Transactional
-    public void delete(String esadecimale, String nomePalette) {
-        ColoreEntity.PrimaryKey primaryKey=new ColoreEntity.PrimaryKey(esadecimale,nomePalette);
+    public void delete(String esadecimale, int idPalette) {
+        ColoreEntity.PrimaryKey primaryKey=new ColoreEntity.PrimaryKey(esadecimale,idPalette);
         coloreRepository.deleteById(primaryKey);
     }
 }

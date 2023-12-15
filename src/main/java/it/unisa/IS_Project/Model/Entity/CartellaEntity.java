@@ -20,12 +20,11 @@ public class CartellaEntity {
     @Column(name = "idCartella")
     private int id;
     private String nome;
-    private int numeroEntitaContenute;
 
     @OneToMany(mappedBy = "cartellaEntity")
     private List<EntitaEntity> entitaEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = true)
-    @JoinColumn(name = "email",referencedColumnName = "email", nullable = true)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "email",referencedColumnName = "email")
     private UtenteEntity utenteEntity;
 }

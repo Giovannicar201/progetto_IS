@@ -24,47 +24,39 @@ public class CartellaServiceImpl implements CartellaService{
 
     @Override
     @Transactional
-    public CartellaModel add(CartellaModel cartellaModel) {
-        CartellaEntity cartellaEntity=modelMapper.map(cartellaModel,CartellaEntity.class);
-        cartellaRepository.save(cartellaEntity);
-        return modelMapper.map(cartellaEntity,CartellaModel.class);
-    }
-
-    @Override
-    @Transactional
-    public CartellaModel add2(CartellaModel cartellaModel,String nomeCartella,String email){
-        CartellaEntity cartellaEntity=modelMapper.map(cartellaModel,CartellaEntity.class);
+    public CartellaEntity add(String nomeCartella,String email) {
+        CartellaEntity cartellaEntity=new CartellaEntity();
         cartellaEntity.setNome(nomeCartella);
 
         UtenteEntity utenteEntity=utenteRepository.findByEmail(email);
         utenteEntity.setEmail(email);
-
         cartellaEntity.setUtenteEntity(utenteEntity);
 
         cartellaRepository.save(cartellaEntity);
-        return modelMapper.map(cartellaEntity,CartellaModel.class);
+
+        return cartellaEntity;
     }
 
     @Override
     @Transactional
-    public CartellaModel get(int idCartella) {
-        CartellaEntity cartellaEntity=cartellaRepository.findAllById(idCartella).get();
-        return modelMapper.map(cartellaEntity,CartellaModel.class);
+    public CartellaEntity get(String nomeCartella) {
+        CartellaEntity cartellaEntity=cartellaRepository.findByNome(nomeCartella).get();
+        return cartellaEntity;
     }
 
     @Override
     @Transactional
-    public CartellaModel update(CartellaModel newCartellaModel,int idCartella) {
-        CartellaEntity cartellaEntity=cartellaRepository.findAllById(idCartella).orElse(null);
-        newCartellaModel.setId(idCartella);
-        cartellaEntity.setNome(newCartellaModel.getNome());
+    public CartellaEntity update(CartellaEntity newCartellaEntity,String nomeCartella) {
+        CartellaEntity cartellaEntity=cartellaRepository.findByNome(nomeCartella).get();
+        newCartellaEntity.setNome(nomeCartella);
+        cartellaEntity.setNome(newCartellaEntity.getNome());
         CartellaEntity saved=cartellaRepository.save(cartellaEntity);
-        return modelMapper.map(saved,CartellaModel.class);
+        return saved;
     }
 
     @Override
     @Transactional
-    public void delete(int idCartella) {
-        cartellaRepository.deleteById(idCartella);
+    public void delete(String nomeCartella) {
+        cartellaRepository.deleteByNome(nomeCartella);
     }
 }

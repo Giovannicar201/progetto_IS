@@ -1,17 +1,18 @@
 package it.unisa.IS_Project.Model.Service;
 
+import it.unisa.IS_Project.Model.Entity.EntitaEntity;
 import it.unisa.IS_Project.Model.Model.EntitaModel;
 
 import java.util.List;
 
 public interface EntitaService {
-    EntitaModel add(EntitaModel entitaModel);
+    EntitaEntity add(String nome,String collisione,String coordinate,String email,String nomeFoto,String nomeCartella);
 
-    EntitaModel get(int idEntita);
+    EntitaEntity get(String nomeEntita);
 
-    EntitaModel update(EntitaModel newEntitaModel,int idEntita);
+    EntitaEntity update(EntitaEntity newEntitaEntity,String nomeEntita);
 
-    void delete(int idEntita);
+    void delete(String nomeEntita);
 
-    List<EntitaModel> findAllEntity(int idCartella);
+    List<EntitaEntity> findAllEntity(String nomeCartella);
 }

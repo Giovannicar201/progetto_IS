@@ -18,8 +18,4 @@ public interface UtenteRepository extends JpaRepository<UtenteEntity,String> {
 
     @Query("SELECT u FROM UtenteEntity u WHERE u.email = :email")
     UtenteEntity findByEmail(String email);
-
-    @Modifying
-    @Query("UPDATE UtenteEntity u SET u.idMappa = :idMappa WHERE u.email = :email")
-    void updateIdMappaByEmail(@Param("email")String email, @Param("idMappa")MappaEntity mappaEntity);
 }
