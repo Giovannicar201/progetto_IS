@@ -33,7 +33,6 @@ public class EventoServiceImpl implements EventoService{
         eventoEntity.setUtenteEntity(utenteEntity);
 
         MappaEntity mappaEntity=mappaRepository.findAllByEmail(email);
-        mappaEntity.setId(mappaEntity.getId());
         eventoEntity.setIdMappaEvento(mappaEntity);
 
         eventoRepository.save(eventoEntity);

@@ -24,13 +24,11 @@ public class EventoEntity {
     private String nome;
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @MapsId("idMappa")
-    @JoinColumn(name = "idMappa")
+    @JoinColumn(name = "idMappa",referencedColumnName = "idMappa")
     private MappaEntity idMappaEvento;
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @MapsId("email")
-    @JoinColumn(name = "email")
+    @JoinColumn(name = "email",referencedColumnName = "email")
     private UtenteEntity utenteEntity;
 
     @OneToMany(mappedBy = "eventoEntity")
