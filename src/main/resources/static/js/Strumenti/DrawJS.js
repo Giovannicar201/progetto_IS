@@ -13,7 +13,7 @@ function initDrawingTools(cella, flag) {
 
             } else{
 
-                cella.style.backgroundColor = document.getElementById("colorScelto").style.backgroundColor;
+                cella.style.backgroundColor = document.getElementsByClassName("selected")[0].style.backgroundColor;
 
             }
 
@@ -29,7 +29,7 @@ function initDrawingTools(cella, flag) {
 
         } else if(flagTile == 1 && cella.className === "squarePixelArt") {
 
-            cella.style.backgroundColor = "#FFFFFF";
+            cella.style.backgroundColor = "#3F3F3F";
 
         }
 
@@ -125,7 +125,7 @@ function disegnaTileSelezione(){
         } else {
 
             cella.removeAttribute("style");
-            cella.style.backgroundColor = document.getElementById("colorScelto").style.backgroundColor;
+            cella.style.backgroundColor = document.getElementsByClassName("selected")[0].style.backgroundColor;
 
         }
 
@@ -173,7 +173,7 @@ function cancellaTileSelezione(){
         } else {
 
             cella.removeAttribute("style");
-            cella.style.backgroundColor = "#FFFFFF";
+            cella.style.backgroundColor = "#3F3F3F";
 
         }
 

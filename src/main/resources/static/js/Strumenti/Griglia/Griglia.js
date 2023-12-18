@@ -1,4 +1,4 @@
-let div = document.getElementById("tileset");
+let divMappa = document.getElementById("tileset");
 let x;
 let y;
 
@@ -17,7 +17,7 @@ function tileset() {
 
         };
 
-        div.append(img);
+        divMappa.append(img);
 
     }
 
@@ -40,31 +40,31 @@ function crea(){
 
             }
 
-            $(div).append('<div class = "titleBar" style="animation: fade-card 1s" id="titleBar">'+
+            $(div).append('<div class = "titleBar" id="titleBar">'+
                 '            <img class="iconTitle" src="https://i.postimg.cc/d1jQtQT7/Tavola-disegno-1-3.png" id="title">' +
                 '            <label for="title">Gestore Mappa</label>'+
                 '</div>'+
-                ' <div class="breakDivAction" style="animation: fade-card 1s">'+
-                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px; animation: fade-card 1s;">' +
+                ' <div class="breakDivAction">'+
+                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Creazione' +
                 '   </div>' +
-                    '<div class="actionDiv" style="animation: fade-card 1s">'+
+                    '<div class="actionDiv">'+
                     '                  <label for="larghezza">Larghezza:</label>' +
                     '                  <input type="number" id="larghezza" class="inputForm">' +
                     '              </div>' +
-                    '<div class="actionDiv" style="animation: fade-card 1s">' +
+                    '<div class="actionDiv">' +
                     '                  <label for="altezza">Altezza:</label>' +
                     '                  <input type="number" id="altezza" class="inputForm">' +
                     '              </div>' +
-                    '<div class="actionDiv" style="animation: fade-card 1s">' +
+                    '<div class="actionDiv">' +
                     '                  <button class="bottone" onclick="creaGriglia()">Crea Mappa</button>' +
                     '              </div>' +
                 '</div>' +
-                '<div class="breakDivAction" style="animation: fade-card 1s">'+
-                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px; animation: fade-card 1s;">' +
+                '<div class="breakDivAction">'+
+                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Esportazione' +
                 '   </div>' +
-                '<div class="actionDiv" style="animation: fade-card 1s">'+
+                '<div class="actionDiv">'+
                 '                  <label for="formato">Formato:</label>' +
                 '                  <div style="display: flex; margin-top: 8px;">' +
                 '                       <button onclick="downloadButton(\'png\')" class="bottone download png" style="width: 114px; background-color: #1A1A1A;">PNG</button>' +
@@ -72,52 +72,52 @@ function crea(){
                 '                       <button onclick="downloadButton(\'json\')" class="bottone download json" style="width: 114px; background-color: #1A1A1A;">JSON</button>' +
                 '                  </div>' +
                 '              </div>' +
-                '<div class="actionDiv" style="animation: fade-card 1s">' +
+                '<div class="actionDiv">' +
                 '                  <button class="bottone" onclick="downloadSelection()">Salva Mappa</button>' +
                 '              </div>' +
                 '</div>' +
-                '<div class="breakDivAction" style="animation: fade-card 1s">' +
-                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px; animation: fade-card 1s;">' +
+                '<div class="breakDivAction">' +
+                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Statistiche' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for= "LargezzaMappa">Larghezza Mappa - </label>' +
                 '       <div id="LarghezzaMappa"></div>' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for= "AltezzaMappa">Altezza Mappa - </label>' +
                 '       <div id="AltezzaMappa"></div>' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for= "copertura">Entità Piazzate - </label>' +
                 '       <div id="copertura"></div>' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for= "coperturaPercentuale">Entità Piazzate Percentuale - </label>' +
                 '       <div id="coperturaPercentuale"></div>' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for= "celleVuote">Celle vuote - </label>' +
                 '       <div id="celleVuote"></div>' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for= "celleVuotePercentuale">Celle vuote percentuale - </label>' +
                 '       <div id="celleVuotePercentuale"></div>' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for= "coperturaEventi">Eventi - </label>' +
                 '       <div id="coperturaEventi"></div>' +
                 '   </div>' +
                 '</div>' +
-                '<div class="breakDivAction" style="animation: fade-card 1s">' +
+                '<div class="breakDivAction">' +
                 '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Cursore' +
                 '   </div>' +
-                '   <div class="actionDiv" style="display: flex; animation: fade-card 1s;">' +
+                '   <div class="actionDiv" style="display: flex;">' +
                 '       <label for= "ascissa">Coordinata X -  </label>' +
                 '       <div id="ascissa"></div>' +
                 '   </div>' +
-                '   <div class="actionDiv" style="display: flex; animation: fade-card 1s;">' +
+                '   <div class="actionDiv" style="display: flex;">' +
                 '       <label for="ordinata">Coordinata Y -  </label>' +
                 '       <div id="ordinata"></div>' +
                 '   </div>' +
@@ -153,23 +153,23 @@ function creaCartella(){
 
         if(div.children.length === 0) {
 
-            $(div).append('<div class = "titleBar" style="animation: fade-card 1s" id="titleBar">'+
+            $(div).append('<div class = "titleBar" id="titleBar">'+
                 '            <img class="iconTitle" src="https://i.postimg.cc/BnB9xWyG/Tavola-disegno-1-4.png" id="title">' +
                 '            <label for="title">Gestore Cartelle</label>'+
                 '</div>'+
-                ' <div class="breakDivAction" style="animation: fade-card 1s">'+
-                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px; animation: fade-card 1s;">' +
+                ' <div class="breakDivAction">'+
+                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Creazione' +
                 '   </div>' +
-                '<div class="actionDiv" style="animation: fade-card 1s">'+
+                '<div class="actionDiv"'+
                 '                  <label for="nome">Nome:</label>' +
                 '                  <input type="text" id="nome" class="inputForm">' +
                 '              </div>'+
-                '<div class="actionDiv" style="animation: fade-card 1s">' +
+                '<div class="actionDiv">' +
                 '                  <button class="bottone" onclick="creaCartellaJs()">Crea Cartella</button>' +
                 '              </div>' +
                 '</div>' +
-                '<div class="breakDivAction" style="animation: fade-card 1s">'+
+                '<div class="breakDivAction">'+
                 '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Cartelle Entità' +
                 '   </div>' +
@@ -206,39 +206,39 @@ function creaMatita(){
 
         if(div.children.length === 0) {
 
-            $(div).append('<div class = "titleBar" style="animation: fade-card 1s" id="titleBar">'+
+            $(div).append('<div class = "titleBar" id="titleBar">'+
                 '            <img class="iconTitle" src="https://i.postimg.cc/BQPjnVVL/Tavola-disegno-1-5.png" id="title">' +
                 '            <label for="title">Strumento matita</label>'+
                 '</div>'+
-                ' <div class="breakDivAction" style="animation: fade-card 1s">'+
-                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px; animation: fade-card 1s;">' +
+                ' <div class="breakDivAction">'+
+                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Entità selezionata' +
                 '   </div>' +
-                '<div class="actionDiv" style="animation: fade-card 1s">'+
+                '<div class="actionDiv">'+
                 '                  <label for="nome">Nome entità:</label>' +
                 '                  <input type="text" id="nome" class="inputForm" disabled>' +
                 '              </div>'+
-                '<div class="actionDiv" style="animation: fade-card 1s">' +
+                '<div class="actionDiv">' +
                 '                  <button class="bottone">Visualizza entità</button>' +
                 '</div>' +
                 '</div>' +
-                '<div class="breakDivAction" style="animation: fade-card 1s">'+
-                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px; animation: fade-card 1s;">' +
+                '<div class="breakDivAction">'+
+                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Riempimento' +
                 '   </div>' +
-                '<div class="actionDiv" style="animation: fade-card 1s">' +
+                '<div class="actionDiv">' +
                 '                  <button onclick="matita()" class="bottone matita">Riempi Area</button>' +
                 '</div>' +
                 '</div>' +
-                '<div class="breakDivAction" style="animation: fade-card 1s">' +
-                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px; animation: fade-card 1s;">' +
+                '<div class="breakDivAction">' +
+                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Cursore' +
                 '   </div>' +
-                '   <div class="actionDiv" style="display: flex; animation: fade-card 1s;">' +
+                '   <div class="actionDiv" style="display: flex;">' +
                 '       <label for= "ascissa">Coordinata X -  </label>' +
                 '       <div id="ascissa"></div>' +
                 '   </div>' +
-                '   <div class="actionDiv" style="display: flex; animation: fade-card 1s;">' +
+                '   <div class="actionDiv" style="display: flex;">' +
                 '       <label for="ordinata">Coordinata Y -  </label>' +
                 '       <div id="ordinata"></div>' +
                 '   </div>' +
@@ -276,27 +276,27 @@ function creaStrumentoGomma(){
 
         if(div.children.length === 0) {
 
-            $(div).append('<div class = "titleBar" style="animation: fade-card 1s" id="titleBar">'+
+            $(div).append('<div class = "titleBar" id="titleBar">'+
                 '            <img class="iconTitle" src="https://i.postimg.cc/d0NsYxf3/Tavola-disegno-1-6.png" id="title">' +
                 '            <label for="title">Strumento gomma</label>'+
                 '</div>'+
-                '<div class="breakDivAction" style="animation: fade-card 1s">'+
+                '<div class="breakDivAction">'+
                 '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Cancellazione' +
                 '   </div>' +
-                '<div class="actionDiv" style="animation: fade-card 1s">' +
+                '<div class="actionDiv">' +
                 '                  <button onclick="elimina()" class="bottone elimina">Cancella Area</button>' +
                 '</div>' +
                 '</div>' +
-                '<div class="breakDivAction" style="animation: fade-card 1s">' +
-                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px; animation: fade-card 1s;">' +
+                '<div class="breakDivAction">' +
+                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Cursore' +
                 '   </div>' +
-                '   <div class="actionDiv" style="display: flex; animation: fade-card 1s;">' +
+                '   <div class="actionDiv" style="display: flex;">' +
                 '       <label for= "ascissa">Coordinata X -  </label>' +
                 '       <div id="ascissa"></div>' +
                 '   </div>' +
-                '   <div class="actionDiv" style="display: flex; animation: fade-card 1s;">' +
+                '   <div class="actionDiv" style="display: flex;">' +
                 '       <label for="ordinata">Coordinata Y -  </label>' +
                 '       <div id="ordinata"></div>' +
                 '   </div>' +
@@ -334,35 +334,35 @@ function creaStrumentoRettangolare(){
 
         if(div.children.length === 0) {
 
-            $(div).append('<div class = "titleBar" style="animation: fade-card 1s" id="titleBar">'+
+            $(div).append('<div class = "titleBar" id="titleBar">'+
                 '            <img class="iconTitle" src="https://i.postimg.cc/sggnzvSj/Tavola-disegno-1-7.png" id="title">' +
                 '            <label for="title">Strumento selezione rettangolare</label>'+
                 '</div>' +
-                '<div class="breakDivAction" style="animation: fade-card 1s">' +
-                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px; animation: fade-card 1s;">' +
+                '<div class="breakDivAction">' +
+                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Cursore' +
                 '   </div>' +
-                '   <div class="actionDiv" style="display: flex; animation: fade-card 1s;">' +
+                '   <div class="actionDiv" style="display: flex;">' +
                 '       <label for= "ascissa">Coordinata X -  </label>' +
                 '       <div id="ascissa"></div>' +
                 '   </div>' +
-                '   <div class="actionDiv" style="display: flex; animation: fade-card 1s;">' +
+                '   <div class="actionDiv" style="display: flex;">' +
                 '       <label for="ordinata">Coordinata Y -  </label>' +
                 '       <div id="ordinata"></div>' +
                 '   </div>' +
                 '</div>' +
-                '<div class="breakDivAction" style="animation: fade-card 1s">' +
-                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px; animation: fade-card 1s;">' +
+                '<div class="breakDivAction">' +
+                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Punti di selezione' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for= "selectedPointOne">Primo punto - </label>' +
                 '       <div id="selectedPointOne"></div>' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for="selectedPointTwo">Secondo punto - </label>' +
                 '       <div id="selectedPointTwo"></div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <button onclick="selezione()" class="bottone selezione">Selezione area</button>' +
                 '   </div>' +
                 '   </div>' +
@@ -399,41 +399,41 @@ function creaStrumentoScattering(){
 
         if(div.children.length === 0) {
 
-            $(div).append('<div class = "titleBar" style="animation: fade-card 1s" id="titleBar">'+
+            $(div).append('<div class = "titleBar" id="titleBar">'+
                 '            <img class="iconTitle" src="https://i.postimg.cc/RZV34bmt/Tavola-disegno-1-8.png" id="title">' +
                 '            <label for="title">Strumento di scattering</label>'+
                 '</div>' +
-                '<div class="breakDivAction" style="animation: fade-card 1s">' +
-                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px; animation: fade-card 1s;">' +
+                '<div class="breakDivAction">' +
+                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Parametri' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for= "cartella">Nome cartella</label>' +
                 '       <input type="text" id= "cartella" class="inputForm" disabled>' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '                  <button class="bottone">Visualizza entità</button>' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for="entità">Entità</label>' +
                 '       <div class="inputForm" id= "entità"></div>' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for="percentuale">Percentuale riempimento</label>' +
                 '       <input type= "text" id= "percentuale" class="inputForm">' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for="firstPriorità">Priorità entità 1 (%)</label>' +
                 '       <input type= "text" id= "firstPriorità" class="inputForm">' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for="secondPriorità">Priorità entità 2 (%)</label>' +
                 '       <input type= "text" id= "secondPriorità" class="inputForm">' +
-                '   </div><div class="actionDiv" style="animation: fade-card 1s">' +
+                '   </div><div class="actionDiv">' +
                 '       <label for="secondPriorità">Priorità entità 2 (%)</label>' +
                 '       <input type= "text" id= "secondPriorità" class="inputForm">' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <label for="thirdPriorità">Priorità entità 3 (%)</label>' +
                 '       <input type= "text" id= "thirdPriorità" class="inputForm">' +
                 '   </div>' +
@@ -470,15 +470,15 @@ function creaStrumentoGenerativa(){
 
         if(div.children.length === 0) {
 
-            $(div).append('<div class = "titleBar" style="animation: fade-card 1s" id="titleBar">'+
+            $(div).append('<div class = "titleBar" id="titleBar">'+
                 '            <img class="iconTitle" src="https://i.postimg.cc/KzPFKBhT/Tavola-disegno-1-9.png" id="title">' +
                 '            <label for="title">Strumento di scattering</label>'+
                 '</div>' +
-                '<div class="breakDivAction" style="animation: fade-card 1s">' +
-                '   <div class="topActionDiv" style="animation: fade-card 1s" style="margin: 12px 8px 8px 8px;">' +
+                '<div class="breakDivAction">' +
+                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Generazione' +
                 '   </div>' +
-                '   <div class="actionDiv" style="animation: fade-card 1s">' +
+                '   <div class="actionDiv">' +
                 '       <button class = "bottone">Genera</button>' +
                 '   </div>');
 
@@ -570,7 +570,11 @@ function creaGriglia(){
     let righe = parseInt(document.getElementById("altezza").value);
     let colonne = parseInt(document.getElementById("larghezza").value);
 
-    document.getElementsByClassName("break")[0].style.height = "150%";
+    if(document.getElementsByClassName("break")[0] !== undefined){
+
+        document.getElementsByClassName("break")[0].style.height = "150%";
+
+    }
 
     disegna(contenitoreGriglia, righe, colonne);
 

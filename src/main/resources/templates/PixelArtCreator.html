@@ -1,92 +1,58 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" th:href="@{/styles/Griglia_PixelArt.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/styles/grigliaPixelArt/Griglia_PixelArt.css}">
+    <link rel="stylesheet" th:href="@{/styles/texelStyle.css}">
 
 </head>
+
+<div th:replace="fragments :: topmenu"></div>
+
 <body>
 
-<div>
+<div class = "break">
 
-    <button onclick="creaPopUp()">crea</button>
-    <button onclick="disegnaTile()">disegna Tile</button>
-    <button onclick="cancellaTile()">cancella Tile</button>
-    <button onclick="selettoreTile()">selettore Tile</button>
-    <button onclick="showPreview()">preview</button>
-    <button onclick="getimg()">download</button>
-    <button onclick="generaPaletteCasuale()">Genera</button>
+    <div style="width: 32px; position: absolute; top: 36px;" id="strumenti">
 
-</div>
+        <button id="crea" class = "tools breakBar" onclick="creaPixel()">
+            <img src="https://i.postimg.cc/d1jQtQT7/Tavola-disegno-1-3.png">
+        </button>
 
-<br>
+        <button id="draw" class = "tools breakBar" onclick="creaMatitaPA()">
+            <img src="https://i.postimg.cc/BQPjnVVL/Tavola-disegno-1-5.png">
+        </button>
 
-<div id = "griglia" class="griglia"></div>
+        <button id="rubber" class = "tools breakBar" onclick="creaStrumentoGommaPA()">
+            <img src="https://i.postimg.cc/d0NsYxf3/Tavola-disegno-1-6.png">
+        </button>
 
+        <button id="rettangolare" class = "tools breakBar" onclick="creaStrumentoRettangolarePA()">
+            <img src="https://i.postimg.cc/sggnzvSj/Tavola-disegno-1-7.png">
+        </button>
 
-<div class = "tilePopUP" id="tile">
+        <button id="preview" class = "tools breakBar" onclick="creaPreview()">
+            <img src="https://i.postimg.cc/Gprst7tc/Tavola-disegno-1.png">
+        </button>
 
-    <div class="tileHeader">
-
-        <div class = "title">Preview</div>
-        <button class="close">X</button>
-
-    </div>
-
-    <label for="TilePreview">Numero Celle:</label>
-    <input type="number" id="TilePreview">
-
-    <div class="tilePreview" id = "tileBody"></div>
-
-</div>
-
-<div class = "tilePopUP" id="menuTile">
-
-    <div class="tileHeader">
-
-        <div class = "title">Preview</div>
-        <button class="close">X</button>
+        <button id="generatore" class = "tools breakBar" onclick="creaStrumentoGenerazioneCasuale()">
+            <img src="https://i.postimg.cc/vBtg5W1W/Tavola-disegno-1-1.png">
+        </button>
 
     </div>
 
-    <div id = "popup" class="tileBody">
-
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome">
-        <br>
-        <label for="tileset">Scegli il tileset in cui salvare il tile:</label>
-        <select id="tileset"></select>
-        <br>
-        <label for="sceltaPalette">Scegli la tua palette: (questa parte in js fa schifo ora, va migliorata con mongoDB)</label>
-        <select id="sceltaPalette"></select>
-        <br>
-        <button onclick="creaPixelArt()">Crea</button>
-
-    </div>
+    <div class="divBreak" id="info"></div>
 
 </div>
 
-<div id = "s-popup"></div>
-
-<br>
-
-<div id = "color" class="color"></div>
-
-<br>
-
-<div id = "randomHex" class="color"></div>
-
-<br>
-
-COLORE SCELTO:
-<div id = "colorScelto" class="squarePixelArt"></div>
-<div id = "result" hidden="hidden"></div>
+<div id = "griglia" class="griglia" style="position: fixed;"></div>
+<div id = "result"></div>
 
 </body>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script th:src = "@{/js/Strumenti/PixelArt/PixelArtJS.js}"></script>
 <script th:src = "@{/js/Async.js}"></script>

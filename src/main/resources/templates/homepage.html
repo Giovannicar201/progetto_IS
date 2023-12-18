@@ -2,11 +2,10 @@
 <html lang="en" xmlns:th="http://thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomePage</title>
 
-    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
     <link rel="stylesheet" th:href="@{/styles/texelStyle.css}">
 
 </head>
@@ -41,23 +40,23 @@
 
                 <div class="card notShow">
 
-                    <h5>TileMap Editor</h5>
-                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+                    <h5>Tile Creator</h5>
+                    <a href="#tilecreator">"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</a>
 
                 </div>
 
                 <div class="card notShow">
 
-                    <h5>TileMap Editor</h5>
-                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+                    <h5>Event Creator</h5>
+                    <a href="#event">"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</a>
 
                 </div>
 
                 <div class="card notShow">
 
-                    <h5>TileMap Editor</h5>
+                    <h5>Entity Manager</h5>
                     <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
 
@@ -69,9 +68,31 @@
 
         <div class="row tilemap" id="tilemap">
 
-            <div class="col notShow">
+            <div class="col notShow" style="margin-left: 1%">
 
-                <img src="https://i.postimg.cc/wvRRQGpV/Screenshot-6.png" style="width: 620px; height: 320px;">
+                <div class="demoEvent notShow" style="display: grid">
+
+                    <div class="demoEventDiv breakDivAction notShow" style="width: 260px;  margin: 34.5% 8px 8px;">
+
+                        <div class="demo topActionDiv notShow" style="margin: 12px 8px 8px 8px;">
+                            Demo mappa
+                        </div>
+
+                        <div class="demoName actionDiv notShow">
+                            <label for="largezza">Larghezza</label>
+                            <input type="number" id="largezza" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="5" value="5" disabled>
+                        </div>
+
+                        <div class="actionDiv notShow">
+                            <label for="altezza">Altezza</label>
+                            <input type="number" id="altezza" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="5" value="5" disabled>
+                        </div>
+
+                    </div>
+
+                    <div id="mappa" class = "griglia mappa" style="grid-row: 1; grid-column: 2; margin-top: 50%;"></div>
+
+                </div>
 
             </div>
 
@@ -91,11 +112,115 @@
 
         </div>
 
+        <div class="row manager" id="tilecreator">
+
+            <div class="col notShow">
+
+                <h1 style="font-size: 85px" class="h1 notShow">Crea i tuoi Tile:</h1>
+
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+                <button type="button">Provalo Subito!</button>
+
+            </div>
+
+            <div class="col notShow" style="margin-left: 1%">
+
+                <div class="demoEvent notShow" style="display: grid">
+
+                    <div class="demoEventDiv breakDivAction notShow" style="width: 260px;  margin: 34.5% 8px 8px;">
+
+                        <div class="demo topActionDiv notShow" style="margin: 12px 8px 8px 8px;">
+                            Demo Pixel-Art
+                        </div>
+
+                        <div class="demoName actionDiv notShow">
+                            <label for="cartella">Nome cartella</label>
+                            <input type="text" id="cartella" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="demo" disabled>
+                        </div>
+
+                    </div>
+
+                    <div id="pixelArt" class = "griglia pixelart" style="grid-row: 1; grid-column: 2; margin-top: 50%;"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row creator" id="event">
+
+            <div class="col notShow" style="margin-left: 1%">
+
+                <div class="demoEvent notShow">
+
+                    <div class="demoEventDiv breakDivAction notShow" style="width: 260px;  margin: 42.5% 8px 8px;">
+
+                        <div class="demo topActionDiv notShow" style="margin: 12px 8px 8px 8px;">
+                            Demo evento
+                        </div>
+
+                        <div class="demoName actionDiv notShow">
+                            <label for="nome">Nome evento</label>
+                            <input type="text" id="nome" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="Demo" disabled>
+                        </div>
+
+                        <div class="actionDiv notShow">
+                            <label for="istruzione1">1. Istruzione Dialogo (Testo)</label>
+                            <input type="text" id="istruzione1" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="Scrivi Qualcosa">
+                        </div>
+
+                        <div class="demoBottone actionDiv notShow">
+                            <button class="bottone" onclick="demo()" style="padding: unset; width: 212px; height: 28px;">Play Evento</button>
+                        </div>
+
+                    </div>
+
+                    <div class="demoShow notShow">
+
+                        <p class="demotesto demo" id="demotesto" style="margin-left: 8px;">
+
+
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col notShow" style="margin-left: 10%;">
+
+                <h1 style="font-size: 85px" class="h1 notShow">Event Creator:</h1>
+
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+                <button type="button">Provalo Subito!</button>
+
+            </div>
+
+
+        </div>
+
     </div>
 
 </body>
 
+    <script th:src = "@{/js/Strumenti/PixelArt/PixelArtJS.js}"></script>
+    <script th:src = "@{/js/Strumenti/Griglia/Griglia.js}"></script>
+    <script th:src = "@{/js/Strumenti/DrawJS.js}"></script>
     <script th:src="@{/js/scrolling.js}"></script>
+
     <script>
 
         window.onload = function test() {
@@ -105,5 +230,8 @@
         }
 
     </script>
+
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/styles/grigliaPixelArt/Griglia_PixelArt.css}">
 
 </html>

@@ -13,8 +13,8 @@
 
     width: 32px;
     height: 32px;
-    background-color: #3F3F3F;;
-    border: solid 1px #B7B7B7;;
+    background-color: #3F3F3F;
+    border: solid 1px #B7B7B7;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -22,15 +22,43 @@
 
 }
 
+.squareColor{
+
+    border: none;
+    height: 64px;
+    width: 64px;
+    margin-left: 50%;
+    margin-top: 4px;
+
+}
+
+.squareColor.selected{
+
+    border: solid 1px #516f96;
+
+}
+
 .squarePixelArt{
 
     width: 32px;
     height: 32px;
-    border: solid 0.5px black;
+    background-color: #3F3F3F;;
+    border: solid 0.5px #B7B7B7;;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
+
+}
+
+.coloriDiv{
+
+    width: 352px;
+    height: 150px;
+    display: grid;
+    background-color: #1A1A1A;
+    grid-template-columns: repeat(4, 64px);
+    grid-gap: 8px;
 
 }
 
