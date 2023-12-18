@@ -93,9 +93,31 @@ const observerDemoColora= new IntersectionObserver((entries) => {
 
         if (entry.isIntersecting) {
 
-            entry.target.innerHTML = "";
+            let griglia = document.getElementById("pixelArt");
+            griglia.innerHTML = "";
 
-            disegnaDiv(entry.target, 5, 5);
+            disegnaDiv(griglia, 5, 5);
+
+            if (document.head.children.length > 3) {
+
+                document.head.children[3].remove();
+
+            }
+
+            let style = document.createElement("style");
+
+            style.appendChild(document.createTextNode(
+                ".griglia{ " +
+                "    display: grid;" +
+                "    grid-template-columns: repeat(5, 32px);" +
+                "    width: fit-content;" +
+                "    top: 32px;" +
+                "    margin-top: 7%;" +
+                "    margin-left: 15%;" +
+                "    block-size: fit-content;" +
+                "}"));
+
+            document.head.append(style);
 
         }
 
@@ -103,7 +125,7 @@ const observerDemoColora= new IntersectionObserver((entries) => {
 
 });
 
-const tile = document.getElementsByClassName("pixelArt");
+const tile = document.getElementsByClassName("pixelart");
 
 for(let element of tile){
 
