@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Sign-up & Log-in</title>
 
-    <link rel="stylesheet" th:href="@{/styles/login/loginRegistrazione.css}">
     <link rel="stylesheet" th:href="@{/styles/texelStyle.css}">
 
 </head>
@@ -21,100 +20,23 @@
 </div>
 
 <div class = "break">
-    
-    <img src="https://i.postimg.cc/xdwxc1w6/user.png" class = "breakBar" style="top: 64px; position: absolute; animation: fade-down 2s;" id="userBar">
 
-    <div class="divBreak">
+    <div  style="width: 32px; position: absolute; top: 36px;" id="strumenti">
 
-        <div class = "titleBar" id="titleBar">
-
-            <img src="https://i.postimg.cc/xdwxc1w6/user.png" class="iconTitle" id="user">
-
-            <label for="user">Sign-up & Log-in</label>
-
-        </div>
-
-        <div class="breakDivAction" id="login">
-
-            <label for="formLogin" style="margin-left: 8px; margin-top: 8px">Log-in</label>
-
-            <form th:action="@{/login}" th:object = "${infoUtente}" id="formLogin" method="post">
-
-              <div class = "topActionDiv">
-
-                <label for="emailLogin">Email</label>
-                <input type="text" class="inputForm" id="emailLogin" th:field="*{email}" required>
-
-              </div>
-
-              <div class = "actionDiv">
-
-                <label for="PasswordLogin">Password</label>
-                <input type="text" class="inputForm" id = "PasswordLogin" th:field="*{Password}" required>
-
-              </div>
-
-              <div class = "actionDiv">
-
-                  <button class = "bottone">Log-in</button>
-
-              </div>
-
-            </form>
-
-        </div>
-
-        <div class="breakDivAction" id="registrazioneDiv">
-
-            <label for="registrazione" style="margin-left: 8px; margin-top: 8px">Sign-up</label>
-
-            <form th:action="@{/registrazione}" th:object = "${infoUtente}" id="registrazione" method="post">
-
-                <div class = "topActionDiv">
-
-                    <label for="emailRegistrazione">Email</label>
-                    <input type="text" class="inputForm" id="emailRegistrazione" th:field="*{email}" required>
-
-                </div>
-
-                <div class = "actionDiv">
-
-                    <label for="nomeRegistrazione">Nome</label>
-                    <input type="text" class="inputForm" id="nomeRegistrazione" th:field="*{nome}" required>
-
-                </div>
-
-
-                <div class = "actionDiv">
-
-                    <label for="PasswordRegistrazione">Password</label>
-                    <input type="text" class="inputForm" id="PasswordRegistrazione" th:field="*{password}" required>
-
-                </div>
-
-                <div class = "actionDiv">
-
-                    <label for="RipetiPasswordRegistrazione">Ripeti Password</label>
-                    <input type="text" class="inputForm" id="RipetiPasswordRegistrazione" required>
-
-                </div>
-
-                <div class = "actionDiv">
-
-                    <button class = "bottone">Sign-up</button>
-
-                </div>
-
-            </form>
-
-        </div>
+        <button id="auth" class = "tools breakBar" onclick="creaLogin()">
+            <img src="https://i.postimg.cc/xdwxc1w6/user.png">
+        </button>
 
     </div>
 
+    <div id="login" class="divBreak"></div>
+
 </div>
+
 
 </body>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:src = "@{/js/signupsignin.js}"></script>
 
 </html>
