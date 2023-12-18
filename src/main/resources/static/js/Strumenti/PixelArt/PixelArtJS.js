@@ -592,6 +592,7 @@ function creaDiv(hex, palette){
 function combinePixel(repeat){
 
     document.getElementById("result").innerHTML = "";
+    document.getElementById("griglia").style.visibility = "visible";
 
     let stile = document.createElement("style");
 

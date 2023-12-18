@@ -134,6 +134,7 @@ function disegnaTileSelezione(){
     document.getElementsByClassName("matita")[0].style.backgroundColor = "#333333";
 
     flagTile = 0;
+    selectorGriglia = [];
 
 }
 
@@ -182,7 +183,7 @@ function cancellaTileSelezione(){
     document.getElementsByClassName("elimina")[0].style.backgroundColor = "#333333";
 
     flagTile = 1;
-
+    selectorGriglia = [];
 
 }
 
