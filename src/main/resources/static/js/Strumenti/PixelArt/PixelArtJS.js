@@ -425,12 +425,27 @@ function callCombine(){
 
     let flag = document.getElementById("numero").value;
 
-    switch (parseInt(flag)){
+    if (document.getElementById("griglia").children.length === 0){
 
-        case 1: combinePixel(3); break;
-        case 2: combinePixel(5); break;
-        case 3: combinePixel(7); break;
-        default: alert("inserisci un valore tra: 1 2 3");
+        alert("assicurati prima di disegnare!")
+
+    } else {
+
+        switch (parseInt(flag)) {
+
+            case 1:
+                combinePixel(3);
+                break;
+            case 2:
+                combinePixel(5);
+                break;
+            case 3:
+                combinePixel(7);
+                break;
+            default:
+                alert("inserisci un valore tra: 1 2 3");
+
+        }
 
     }
 
@@ -537,6 +552,13 @@ function creaDiv(hex, palette){
     color.style.backgroundColor = hex;
 
     let lock = document.createElement("button");
+    let img = document.createElement("img");
+    img.src = "https://i.postimg.cc/vZkCkKm8/lock-2.png";
+    lock.classList.add("blocca");
+    lock.style.backgroundColor = "transparent";
+    lock.style.border = "none";
+    lock.style.padding = "20%";
+    lock.append(img)
 
     lock.addEventListener("click", function lockPalette(){
 
@@ -546,14 +568,16 @@ function creaDiv(hex, palette){
             color.classList.remove("unlocked");
 
             lock.classList.add("bloccato");
+            lock.children[0].src = "https://i.postimg.cc/HkVfSmdP/lock-1.png";
             lock.classList.remove("blocca");
 
-        } else if(lock.classList.contains("blocca")){
+        } else if(lock.classList.contains("bloccato")){
 
             color.classList.add("unlocked");
             color.classList.remove("locked");
 
             lock.classList.add("blocca");
+            lock.children[0].src = "https://i.postimg.cc/vZkCkKm8/lock-2.png";
             lock.classList.remove("bloccato");
 
         }
@@ -566,6 +590,8 @@ function creaDiv(hex, palette){
 }
 
 function combinePixel(repeat){
+
+    document.getElementById("result").innerHTML = "";
 
     let stile = document.createElement("style");
 
@@ -606,6 +632,13 @@ function combinePixel(repeat){
     document.getElementById("result").style.gridTemplateColumns = "repeat(" + repeat +", 64px)";
     document.getElementById("result").style.margin = "18.5% 26%";
     document.getElementById("result").style.position = "absolute";
+
+    document.getElementById("result").addEventListener("click", function test(){
+
+        document.getElementById("result").innerHTML = "";
+        document.getElementById("griglia").style.visibility = "visible";
+
+    });
 
     document.head.removeChild(stile);
 
