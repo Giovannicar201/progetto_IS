@@ -1,0 +1,145 @@
+function creaGestore(){
+
+    let div = document.getElementById("info");
+
+    document.getElementsByClassName("break")[0].style.height = "100%";
+    div.innerHTML = "";
+
+    if (document.getElementById("creaGestore").classList.contains("pressed") === false) {
+
+        if(div.children.length === 0) {
+
+            for (let child of document.getElementById("strumenti").children) {
+
+                child.classList.remove("pressed");
+
+            }
+
+            document.getElementsByClassName("break")[0].style.height = "150%";
+
+        }
+
+        $(div).append('<div class = "titleBar" id="titleBar">'+
+            '            <img class="iconTitle" src="https://i.postimg.cc/PxkLPt7x/event.png" id="title">' +
+            '            <label for="title">Gestore entità</label>'+
+            '</div>'+
+            ' <div class="breakDivAction">'+
+            '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+            '       Creazione' +
+            '   </div>' +
+            '<div class="actionDiv">'+
+            '                  <label for="nome">Nome immagine:</label>' +
+            '                  <input type="text" id="nome" class="inputForm">' +
+            '              </div>' +
+            '<div class="actionDiv">'+
+            '                  <label>Nome entità:</label>' +
+            '                  <input type="text" class="inputForm">' +
+            '              </div>' +
+            '<div class="actionDiv">' +
+            '                  <label>Collisioni:</label>' +
+            '                   <button onclick="" class="bottone" style="width: 170px; background-color: #1A1A1A; grid-column: 1;">SI</button>' +
+            '                   <button onclick="" class="bottone" style="width: 170px; background-color: #1A1A1A; grid-column: 2;">NO</button>' +
+            '              </div>' +
+            '<div class="actionDiv">'+
+            '                  <label>Nome cartella:</label>' +
+            '                  <input type="text" class="inputForm">' +
+            '              </div>' +
+            '<div class="actionDiv">' +
+            '                  <button class="bottone" onclick="">Aggiungi Proprietà</button>' +
+            '              </div>' +
+            '<div class="actionDiv">' +
+            '                  <button class="bottone" onclick="">Crea Entità</button>' +
+            '              </div>' +
+            '</div>' +
+            '<div class="breakDivAction">' +
+            '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+            '       Modifica </div>' +
+            '<div class="actionDiv">'+
+            '                  <label>Nome entità:</label>' +
+            '                  <input type="text" class="inputForm">' +
+            '              </div>' +
+            '<div class="actionDiv">' +
+            '                  <label>Collisioni:</label>' +
+            '                   <button onclick="" class="bottone" style="width: 170px; background-color: #1A1A1A; grid-column: 1;">SI</button>' +
+            '                   <button onclick="" class="bottone" style="width: 170px; background-color: #1A1A1A; grid-column: 2;">NO</button>' +
+            '              </div>' +
+            '<div class="actionDiv">' +
+            '                  <button class="bottone" onclick="">Modifica Entità</button>' +
+            '              </div>' +
+            '</div>' +
+            '<div class="breakDivAction">' +
+            '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+            '       Eliminazione </div>' +
+            '<div class="actionDiv">'+
+            '                  <label>Nome entità:</label>' +
+            '                  <input type="text" class="inputForm">' +
+            '              </div>' +
+            '<div class="actionDiv">' +
+            '                  <button class="bottone" onclick="">Elimina Entità</button>' +
+            '              </div>' +
+            '</div>' +
+            '<div class="breakDivAction">' +
+            '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+            '       Entità </div>' +
+            '</div>');
+
+        document.getElementById("creaGestore").classList.add("pressed");
+
+    } else {
+
+        document.getElementById("creaGestore").classList.remove("pressed");
+
+    }
+
+}
+
+function creaImmagini(){
+
+    let div = document.getElementById("info");
+
+    document.getElementsByClassName("break")[0].style.height = "100%";
+    div.innerHTML = "";
+
+    if (document.getElementById("creaImmagini").classList.contains("pressed") === false) {
+
+        if(div.children.length === 0) {
+
+            for (let child of document.getElementById("strumenti").children) {
+
+                child.classList.remove("pressed");
+
+            }
+
+            document.getElementsByClassName("break")[0].style.height = "150%";
+
+        }
+
+        $(div).append('<div class = "titleBar" id="titleBar">'+
+            '            <img class="iconTitle" src="https://i.postimg.cc/PxkLPt7x/event.png" id="title">' +
+            '            <label for="title">Gestore entità</label>'+
+            '</div>'+
+            ' <div class="breakDivAction">'+
+            '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+            '       Caricamento' +
+            '   </div>' +
+            '<div class="actionDiv">'+
+            '                  <label>Caricamento:</label>' +
+            '              </div>' +
+            '<div class="actionDiv">' +
+            '                  <button class="bottone" onclick="">Carica immagine</button>' +
+            '              </div>' +
+            '</div>' +
+            '<div class="breakDivAction">' +
+            '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+            '       Immagini </div>' +
+            '</div>');
+
+        document.getElementById("creaImmagini").classList.add("pressed");
+
+    } else {
+
+        document.getElementById("creaImmagini").classList.remove("pressed");
+
+    }
+
+}

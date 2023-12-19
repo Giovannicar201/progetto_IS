@@ -43,6 +43,22 @@ public class HTMLMapping {
 
     }
 
+    @GetMapping("/eventi")
+
+    public String eventi () {
+
+        return "eventmanager";
+
+    }
+
+    @GetMapping("/entità")
+
+    public String entità() {
+
+        return "gestoreentità";
+
+    }
+
     @GetMapping("/")
 
     public String index(){
