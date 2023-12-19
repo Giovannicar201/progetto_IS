@@ -1,6 +1,7 @@
 package it.unisa.IS_Project.Controller.FormDataController;
 
-import it.unisa.IS_Project.Model.Model.UtenteModel;
+import it.unisa.IS_Project.Model.Entity.UtenteEntity;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ public class FormDataController {
 
     @RequestMapping(value = "/registrazione", method = RequestMethod.POST)
 
-    public String createUser(@ModelAttribute UtenteModel infoUtente){
+    public String createUser(@ModelAttribute UtenteEntity infoUtente){
 
         log.info("utente creato");
 
@@ -26,7 +27,7 @@ public class FormDataController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
 
-    public String loginUser(@ModelAttribute UtenteModel infoUtente){
+    public String loginUser(@ModelAttribute UtenteEntity infoUtente){
 
         log.info("accesso eseguito");
 

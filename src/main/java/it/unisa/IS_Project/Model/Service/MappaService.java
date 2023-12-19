@@ -1,7 +1,6 @@
 package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.MappaEntity;
-import it.unisa.IS_Project.Model.Model.MappaModel;
 
 public interface MappaService {
     MappaEntity add(String nome,int lunghezza,int larghezza,String email);

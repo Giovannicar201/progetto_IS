@@ -1,13 +1,10 @@
 package it.unisa.IS_Project.Model.Service;
 
-
 import it.unisa.IS_Project.Model.Entity.EntitaEntity;
 import it.unisa.IS_Project.Model.Entity.ProprietaEntity;
-import it.unisa.IS_Project.Model.Model.ProprietaModel;
 import it.unisa.IS_Project.Model.Repository.EntitaRepository;
 import it.unisa.IS_Project.Model.Repository.ProprietaRepository;
 import jakarta.transaction.Transactional;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

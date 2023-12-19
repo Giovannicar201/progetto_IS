@@ -2,11 +2,10 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.EventoEntity;
 import it.unisa.IS_Project.Model.Entity.IstruzioneEntity;
-import it.unisa.IS_Project.Model.Model.IstruzioneModel;
+import it.unisa.IS_Project.Model.Entity.PrimaryKeyIstruzione;
 import it.unisa.IS_Project.Model.Repository.EventoRepository;
 import it.unisa.IS_Project.Model.Repository.IstruzioneRepository;
 import jakarta.transaction.Transactional;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +19,9 @@ public class IstruzioneServiceImpl implements IstruzioneService{
     @Override
     @Transactional
     public IstruzioneEntity add(int idIstruzione,String nomeIstruzione,String valore,int idEvento) {
-        IstruzioneEntity.PrimaryKey primaryKey=new IstruzioneEntity.PrimaryKey(idIstruzione,idEvento);
         IstruzioneEntity istruzioneEntity=new IstruzioneEntity();
-        istruzioneEntity.setPrimaryKey(primaryKey);
+        istruzioneEntity.setIdIstruzione(idIstruzione);
+        istruzioneEntity.setIdEvento(idEvento);
 
         istruzioneEntity.setNome(nomeIstruzione);
         istruzioneEntity.setValore(valore);
@@ -36,21 +35,35 @@ public class IstruzioneServiceImpl implements IstruzioneService{
     }
 
     @Override
+    public IstruzioneEntity get(int idIstruzione, int idEvento) {
+        return null;
+    }
+
+    @Override
+    public IstruzioneEntity update(IstruzioneEntity newIstruzioneEntity, int idIstruzione, int idEvento) {
+        return null;
+    }
+
+    @Override
+    public void delete(int idIstruzione, int idEvento) {
+
+    }
+
+    /*@Override
     @Transactional
     public IstruzioneEntity get(int idIstruzione, int idEvento) {
-        IstruzioneEntity.PrimaryKey primaryKey=new IstruzioneEntity.PrimaryKey(idIstruzione,idEvento);
-        IstruzioneEntity istruzioneEntity=istruzioneRepository.findById(primaryKey).get();
+        IstruzioneEntity istruzioneEntity=istruzioneRepository.findById(idIstruzione,idEvento).get();
         return istruzioneEntity;
     }
 
     @Override
     @Transactional
     public IstruzioneEntity update(IstruzioneEntity newIstruzioneEntity, int idIstruzione, int idEvento) {
-        IstruzioneEntity.PrimaryKey primaryKey=new IstruzioneEntity.PrimaryKey(idIstruzione,idEvento);
+        PrimaryKeyIstruzione primaryKey=new PrimaryKeyIstruzione(idIstruzione,idEvento);
         IstruzioneEntity istruzioneEntity=istruzioneRepository.findById(primaryKey).get();
 
-        newIstruzioneEntity.getPrimaryKey().setIdIstruzione(idIstruzione);
-        newIstruzioneEntity.getPrimaryKey().setIdEvento(idEvento);
+        newIstruzioneEntity.setIdIstruzione(idIstruzione);
+        newIstruzioneEntity.setIdEvento(idEvento);
 
         istruzioneEntity.setNome(newIstruzioneEntity.getNome());
         istruzioneEntity.setValore(newIstruzioneEntity.getValore());
@@ -62,7 +75,7 @@ public class IstruzioneServiceImpl implements IstruzioneService{
     @Override
     @Transactional
     public void delete(int idIstruzione, int idEvento) {
-        IstruzioneEntity.PrimaryKey primaryKey=new IstruzioneEntity.PrimaryKey(idIstruzione,idEvento);
+        PrimaryKeyIstruzione primaryKey=new PrimaryKeyIstruzione(idIstruzione,idEvento);
         istruzioneRepository.deleteById(primaryKey);
-    }
+    }*/
 }

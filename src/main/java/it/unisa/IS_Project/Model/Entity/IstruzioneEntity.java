@@ -13,21 +13,18 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@IdClass(PrimaryKeyIstruzione.class)
 @Entity
 @Table(name = "istruzione")
 public class IstruzioneEntity {
-    @Embeddable
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class PrimaryKey implements Serializable{
-        @Column(name = "idIstruzione")
-        private int idIstruzione;
-        @Column(name = "idEvento")
-        private int idEvento;
-    }
-    @EmbeddedId
-    private PrimaryKey primaryKey;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idIstruzione")
+    private int idIstruzione;
+
+    @Id
+    @Column(name = "idEvento")
+    private int idEvento;
 
     private String nome;
 

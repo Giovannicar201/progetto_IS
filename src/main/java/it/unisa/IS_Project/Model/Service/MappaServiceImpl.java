@@ -2,11 +2,9 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.MappaEntity;
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
-import it.unisa.IS_Project.Model.Model.MappaModel;
 import it.unisa.IS_Project.Model.Repository.MappaRepository;
 import it.unisa.IS_Project.Model.Repository.UtenteRepository;
 import jakarta.transaction.Transactional;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

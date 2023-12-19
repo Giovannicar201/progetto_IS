@@ -1,7 +1,8 @@
 package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.EventoEntity;
-import it.unisa.IS_Project.Model.Model.EventoModel;
+
+import java.util.List;
 
 public interface EventoService {
     EventoEntity add(String nomeEvento,String email);
@@ -11,4 +12,6 @@ public interface EventoService {
     EventoEntity update(EventoEntity newEventoEntity, String nomeEvento);
 
     void delete(String nomeEvento);
+
+    List<EventoEntity> getAllEvento(String email);
 }

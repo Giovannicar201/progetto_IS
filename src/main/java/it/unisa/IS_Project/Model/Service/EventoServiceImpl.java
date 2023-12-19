@@ -3,15 +3,14 @@ package it.unisa.IS_Project.Model.Service;
 import it.unisa.IS_Project.Model.Entity.EventoEntity;
 import it.unisa.IS_Project.Model.Entity.MappaEntity;
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
-import it.unisa.IS_Project.Model.Model.EventoModel;
-import it.unisa.IS_Project.Model.Model.MappaModel;
 import it.unisa.IS_Project.Model.Repository.EventoRepository;
 import it.unisa.IS_Project.Model.Repository.MappaRepository;
 import it.unisa.IS_Project.Model.Repository.UtenteRepository;
 import jakarta.transaction.Transactional;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EventoServiceImpl implements EventoService{
@@ -64,5 +63,11 @@ public class EventoServiceImpl implements EventoService{
     @Transactional
     public void delete(String nomeEvento) {
         eventoRepository.deleteByNome(nomeEvento);
+    }
+
+    @Override
+    @Transactional
+    public List<EventoEntity> getAllEvento(String email){
+        return eventoRepository.findAllByEmail(email);
     }
 }

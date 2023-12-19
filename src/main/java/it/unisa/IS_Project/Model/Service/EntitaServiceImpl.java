@@ -1,17 +1,12 @@
 package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.*;
-import it.unisa.IS_Project.Model.Model.EntitaModel;
-import it.unisa.IS_Project.Model.Model.ImmagineModel;
 import it.unisa.IS_Project.Model.Repository.*;
 import jakarta.transaction.Transactional;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class EntitaServiceImpl implements EntitaService{
@@ -83,7 +78,7 @@ public class EntitaServiceImpl implements EntitaService{
 
     @Override
     @Transactional
-    public List<EntitaEntity> findAllEntity(String nomeCartella){
-        return entitaRepository.findAllByCartellaEntity(nomeCartella);
+    public List<EntitaEntity> findAllEntity(String nomeCartella,String email){
+        return entitaRepository.findAllByCartellaEntity(nomeCartella,email);
     }
 }

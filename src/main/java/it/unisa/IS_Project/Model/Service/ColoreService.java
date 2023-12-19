@@ -1,7 +1,6 @@
 package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.ColoreEntity;
-import it.unisa.IS_Project.Model.Model.ColoreModel;
 
 public interface ColoreService {
     ColoreEntity add(String esadecimale,int idPalette);

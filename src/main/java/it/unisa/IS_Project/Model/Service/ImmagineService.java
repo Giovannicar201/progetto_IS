@@ -1,7 +1,6 @@
 package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.ImmagineEntity;
-import it.unisa.IS_Project.Model.Model.ImmagineModel;
 
 import java.sql.Blob;
 

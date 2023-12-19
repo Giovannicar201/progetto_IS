@@ -2,16 +2,13 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.CartellaEntity;
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
-import it.unisa.IS_Project.Model.Model.CartellaModel;
-import it.unisa.IS_Project.Model.Model.UtenteModel;
 import it.unisa.IS_Project.Model.Repository.CartellaRepository;
 import it.unisa.IS_Project.Model.Repository.UtenteRepository;
 import jakarta.transaction.Transactional;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class CartellaServiceImpl implements CartellaService{
@@ -57,5 +54,11 @@ public class CartellaServiceImpl implements CartellaService{
     @Transactional
     public void delete(String nomeCartella) {
         cartellaRepository.deleteByNome(nomeCartella);
+    }
+
+    @Override
+    @Transactional
+    public List<CartellaEntity> getAllCartelle(String email){
+        return cartellaRepository.findAllByEmail(email);
     }
 }

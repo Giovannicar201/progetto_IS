@@ -1,7 +1,6 @@
 package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.EntitaEntity;
-import it.unisa.IS_Project.Model.Model.EntitaModel;
 
 import java.util.List;
 
@@ -14,5 +13,5 @@ public interface EntitaService {
 
     void delete(String nomeEntita);
 
-    List<EntitaEntity> findAllEntity(String nomeCartella);
+    List<EntitaEntity> findAllEntity(String nomeCartella,String email);
 }

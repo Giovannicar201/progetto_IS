@@ -2,12 +2,9 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.ColoreEntity;
 import it.unisa.IS_Project.Model.Entity.PaletteEntity;
-import it.unisa.IS_Project.Model.Model.ColoreModel;
-import it.unisa.IS_Project.Model.Model.PaletteModel;
 import it.unisa.IS_Project.Model.Repository.ColoreRepository;
 import it.unisa.IS_Project.Model.Repository.PaletteRepository;
 import jakarta.transaction.Transactional;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

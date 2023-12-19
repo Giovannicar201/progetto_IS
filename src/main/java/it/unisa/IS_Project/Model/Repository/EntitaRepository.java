@@ -20,6 +20,6 @@ public interface EntitaRepository extends JpaRepository<EntitaEntity,Integer> {
     @Query
     void deleteByNome(String nomeEntita);
 
-    @Query("SELECT e FROM EntitaEntity e WHERE e.cartellaEntity.nome = :nomeCartella")
-    List<EntitaEntity> findAllByCartellaEntity(@Param("nomeCartella")String nomeCartella);
+    @Query("SELECT e FROM EntitaEntity e WHERE e.cartellaEntity.nome = :nomeCartella AND e.email.email = :email")
+    List<EntitaEntity> findAllByCartellaEntity(@Param("nomeCartella")String nomeCartella,@Param("email")String email);
 }
