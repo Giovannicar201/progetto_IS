@@ -1,6 +1,6 @@
 package it.unisa.IS_Project.Controller;
 
-import it.unisa.IS_Project.Model.Model.UtenteModel;
+//import it.unisa.IS_Project.Model.Model.UtenteModel;
 import it.unisa.IS_Project.Utility.UtilityClass;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,9 +20,7 @@ public class HTMLMapping {
 
     @GetMapping("/login")
 
-    public String loginRegistrazione(ModelMap model){
-
-        model.addAttribute("infoUtente", new UtenteModel());
+    public String loginRegistrazione(){
 
         return "LogInRegistrazione";
 
