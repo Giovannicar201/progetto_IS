@@ -1,4 +1,4 @@
-package it.unisa.IS_Project.Controller;
+package it.unisa.IS_Project.Model.Controller;
 
 //import it.unisa.IS_Project.Model.Model.UtenteModel;
 import it.unisa.IS_Project.Utility.UtilityClass;

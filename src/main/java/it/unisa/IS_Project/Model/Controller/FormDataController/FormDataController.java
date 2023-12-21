@@ -1,10 +1,8 @@
-package it.unisa.IS_Project.Controller.FormDataController;
+package it.unisa.IS_Project.Model.Controller.FormDataController;
 
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
