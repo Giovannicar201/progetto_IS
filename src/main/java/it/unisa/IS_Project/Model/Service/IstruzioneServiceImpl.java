@@ -9,6 +9,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class IstruzioneServiceImpl implements IstruzioneService{
     @Autowired
@@ -18,16 +20,16 @@ public class IstruzioneServiceImpl implements IstruzioneService{
 
     @Override
     @Transactional
-    public IstruzioneEntity add(int idIstruzione,String nomeIstruzione,String valore,int idEvento) {
+    public IstruzioneEntity add(String nomeIstruzione,String valore,String nomeEvento) {
         IstruzioneEntity istruzioneEntity=new IstruzioneEntity();
-        istruzioneEntity.setIdIstruzione(idIstruzione);
-        istruzioneEntity.setIdEvento(idEvento);
 
         istruzioneEntity.setNome(nomeIstruzione);
         istruzioneEntity.setValore(valore);
 
-        EventoEntity eventoEntity=eventoRepository.findById(idEvento).get();
-        eventoEntity.setIdEvento(idEvento);
+        EventoEntity eventoEntity=eventoRepository.findByNome(nomeEvento).get();
+        eventoEntity.setIdEvento(eventoEntity.getIdEvento());
+        eventoEntity.setNome(nomeEvento);
+        istruzioneEntity.setIdEvento(eventoEntity.getIdEvento());
         istruzioneEntity.setEventoEntity(eventoEntity);
 
         istruzioneRepository.save(istruzioneEntity);
@@ -35,35 +37,19 @@ public class IstruzioneServiceImpl implements IstruzioneService{
     }
 
     @Override
-    public IstruzioneEntity get(int idIstruzione, int idEvento) {
-        return null;
-    }
-
-    @Override
-    public IstruzioneEntity update(IstruzioneEntity newIstruzioneEntity, int idIstruzione, int idEvento) {
-        return null;
-    }
-
-    @Override
-    public void delete(int idIstruzione, int idEvento) {
-
-    }
-
-    /*@Override
     @Transactional
-    public IstruzioneEntity get(int idIstruzione, int idEvento) {
-        IstruzioneEntity istruzioneEntity=istruzioneRepository.findById(idIstruzione,idEvento).get();
+    public IstruzioneEntity get(String nomeIstruzione) {
+        IstruzioneEntity istruzioneEntity=istruzioneRepository.findByNome(nomeIstruzione).get();
         return istruzioneEntity;
     }
 
     @Override
     @Transactional
-    public IstruzioneEntity update(IstruzioneEntity newIstruzioneEntity, int idIstruzione, int idEvento) {
-        PrimaryKeyIstruzione primaryKey=new PrimaryKeyIstruzione(idIstruzione,idEvento);
-        IstruzioneEntity istruzioneEntity=istruzioneRepository.findById(primaryKey).get();
+    public IstruzioneEntity update(IstruzioneEntity newIstruzioneEntity,String nomeIstruzione) {
+        IstruzioneEntity istruzioneEntity=istruzioneRepository.findByNome(nomeIstruzione).get();
 
-        newIstruzioneEntity.setIdIstruzione(idIstruzione);
-        newIstruzioneEntity.setIdEvento(idEvento);
+        newIstruzioneEntity.setIdIstruzione(istruzioneEntity.getIdIstruzione());
+        newIstruzioneEntity.setIdEvento(istruzioneEntity.getIdEvento());
 
         istruzioneEntity.setNome(newIstruzioneEntity.getNome());
         istruzioneEntity.setValore(newIstruzioneEntity.getValore());
@@ -74,8 +60,16 @@ public class IstruzioneServiceImpl implements IstruzioneService{
 
     @Override
     @Transactional
-    public void delete(int idIstruzione, int idEvento) {
-        PrimaryKeyIstruzione primaryKey=new PrimaryKeyIstruzione(idIstruzione,idEvento);
-        istruzioneRepository.deleteById(primaryKey);
-    }*/
+    public void delete(String nomeIstruzione, String nomeEvento) {
+        EventoEntity eventoEntity=eventoRepository.findByNome(nomeEvento).get();
+
+        istruzioneRepository.deleteByNomeAndIdEvento(nomeIstruzione,eventoEntity.getIdEvento());
+    }
+
+    @Override
+    @Transactional
+    public List<IstruzioneEntity> getAllEntityFromNomeEvento(String nomeEvento){
+        return istruzioneRepository.getAllByNomeEvento(nomeEvento);
+    }
+
 }

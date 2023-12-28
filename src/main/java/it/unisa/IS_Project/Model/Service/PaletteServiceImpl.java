@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PaletteServiceImpl implements PaletteService{
     @Autowired
@@ -51,5 +53,11 @@ public class PaletteServiceImpl implements PaletteService{
     @Transactional
     public void delete(String nomePalette) {
         paletteRepository.deleteByNomePalette(nomePalette);
+    }
+
+    @Override
+    @Transactional
+    public List<PaletteEntity> getAllPalette(String email){
+        return paletteRepository.getAllByEmail(email);
     }
 }

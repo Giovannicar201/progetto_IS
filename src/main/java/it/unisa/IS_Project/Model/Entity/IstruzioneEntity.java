@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Reference;
 
 import java.io.Serializable;
 
@@ -13,13 +14,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@IdClass(PrimaryKeyIstruzione.class)
 @Entity
 @Table(name = "istruzione")
+@IdClass(PrimaryKeyIstruzione.class)
 public class IstruzioneEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idIstruzione")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int idIstruzione;
 
     @Id

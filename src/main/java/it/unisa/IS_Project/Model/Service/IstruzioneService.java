@@ -2,12 +2,16 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.IstruzioneEntity;
 
+import java.util.List;
+
 public interface IstruzioneService {
-    IstruzioneEntity add(int idIstruzione,String nomeIstruzione,String valore,int idEvento);
+    IstruzioneEntity add(String nomeIstruzione,String valore,String nomeEvento);
 
-    IstruzioneEntity get(int idIstruzione, int idEvento);
+    IstruzioneEntity get(String nomeIstruzione);
 
-    IstruzioneEntity update(IstruzioneEntity newIstruzioneEntity, int idIstruzione, int idEvento);
+    IstruzioneEntity update(IstruzioneEntity newIstruzioneEntity,String nomeIstruzione);
 
-    void delete(int idIstruzione,int idEvento);
+    void delete(String nomeIstruzione,String nomeEvento);
+
+    List<IstruzioneEntity> getAllEntityFromNomeEvento(String nomeEvento);
 }
