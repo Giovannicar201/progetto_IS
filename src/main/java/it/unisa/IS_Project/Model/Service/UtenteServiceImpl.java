@@ -13,11 +13,10 @@ public class UtenteServiceImpl implements UtenteService{
 
     @Override
     @Transactional
-    public UtenteEntity add(String email,String password,String nome,String cognome){
+    public UtenteEntity add(String email,String password,String nome){
         UtenteEntity utenteEntity=new UtenteEntity();
         utenteEntity.setEmail(email);
         utenteEntity.setPassword(password);
-        utenteEntity.setCognome(cognome);
         utenteEntity.setNome(nome);
         utenteRepository.save(utenteEntity);
         return utenteEntity;

@@ -3,7 +3,7 @@ package it.unisa.IS_Project.Model.Service;
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
 
 public interface UtenteService {
-    UtenteEntity add(String email, String password, String nome, String cognome);
+    UtenteEntity add(String email, String password, String nome);
 
     UtenteEntity get(String email);
 

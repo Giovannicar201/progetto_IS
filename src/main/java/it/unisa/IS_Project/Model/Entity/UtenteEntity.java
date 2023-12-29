@@ -20,7 +20,6 @@ public class UtenteEntity {
     private String email;
     private String password;
     private String nome;
-    private String cognome;
 
     @OneToOne(mappedBy = "idMappaUtente",cascade = CascadeType.ALL)
     private MappaEntity idMappa;
