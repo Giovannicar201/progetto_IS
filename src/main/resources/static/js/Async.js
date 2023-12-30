@@ -102,7 +102,7 @@ function getIstruzioni(){
 
         let objIstruzione = gestisciIstruzione(istruzioniDivElement);
 
-        istruzioniText.push(objIstruzione);
+        istruzioniText.push({"istruzioni" : objIstruzione});
 
     }
 

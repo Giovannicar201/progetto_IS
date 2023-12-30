@@ -5,7 +5,7 @@ import it.unisa.IS_Project.Model.Entity.IstruzioneEntity;
 import java.util.List;
 
 public interface IstruzioneService {
-    IstruzioneEntity add(String nomeIstruzione,String valore,String nomeEvento);
+    IstruzioneEntity add(String nomeIstruzione, String valore, String nomeEvento);
 
     IstruzioneEntity get(String nomeIstruzione);
 
