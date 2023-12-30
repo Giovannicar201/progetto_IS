@@ -171,12 +171,12 @@ function creaEntità() {
 
 function getEntità(){
 
-    let entitàText = [];
+    let entitàText = {};
 
-    entitàText.push({"nome": document.getElementById("nome").value});
-    entitàText.push({"nomeEntità": document.getElementById("entità").value});
-    entitàText.push({"collisioni": document.getElementsByClassName("selezionato")[0].value});
-    entitàText.push({"nomeCartella": document.getElementById("nomeCartella").value});
+    entitàText.nome =  document.getElementById("nome").value;
+    entitàText.nomeEntità = document.getElementById("entità").value;
+    entitàText.collisioni =  document.getElementsByClassName("selezionato")[0].value;
+    entitàText.nomeCartella = document.getElementById("nomeCartella").value;
 
     return JSON.stringify(entitàText);
 

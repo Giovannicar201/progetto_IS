@@ -8,6 +8,7 @@ import it.unisa.IS_Project.Model.Service.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,9 +20,9 @@ public class EntitaControl {
 
     @RequestMapping(value = "/entità/creaEntità", method = RequestMethod.POST)
 
-    public String creaEntita(@ModelAttribute EntitaEntity entitaEntity){
+    public String creaEntita(@RequestBody String entity){
 
-        System.out.println("test 1");
+        System.out.println(entity);
 
         return "gestoreentità";
 
