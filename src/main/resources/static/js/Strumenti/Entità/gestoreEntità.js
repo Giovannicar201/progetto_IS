@@ -48,7 +48,7 @@ function creaGestore(){
             '                  <button class="bottone" onclick="">Aggiungi Proprietà</button>' +
             '              </div>' +
             '<div class="actionDiv">' +
-            '                  <button class="bottone" onclick="">Crea Entità</button>' +
+            '                  <button class="bottone" onclick="creaEntità()">Crea Entità</button>' +
             '              </div>' +
             '</div>' +
             '<div class="breakDivAction">' +

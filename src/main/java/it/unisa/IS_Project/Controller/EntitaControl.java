@@ -21,7 +21,9 @@ public class EntitaControl {
 
     public String creaEntita(@ModelAttribute EntitaEntity entitaEntity){
 
-        return "redirect:/login";
+        System.out.println("test 1");
+
+        return "gestoreentità";
 
     }
 
