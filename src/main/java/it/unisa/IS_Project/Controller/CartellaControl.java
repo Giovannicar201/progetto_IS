@@ -1,6 +1,5 @@
 package it.unisa.IS_Project.Controller;
 
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
