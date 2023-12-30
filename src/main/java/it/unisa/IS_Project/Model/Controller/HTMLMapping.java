@@ -38,6 +38,7 @@ public class HTMLMapping {
         return "Griglia";
 
     }
+
     @GetMapping("/pixelArt")
 
     public String pixelArt () {

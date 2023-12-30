@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UtenteController {
+
     @Autowired
     public UtenteService utenteService;
 
@@ -16,7 +17,7 @@ public class UtenteController {
 
     public String loginUser(@ModelAttribute UtenteEntity infoUtente){
 
-        return "/login";
+        return "redirect:/login";
 
     }
 

@@ -161,7 +161,7 @@ function creaCartella(){
                 '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Creazione' +
                 '   </div>' +
-                '<div class="actionDiv"'+
+                '<div class="actionDiv">' +
                 '                  <label for="nome">Nome:</label>' +
                 '                  <input type="text" id="nome" class="inputForm">' +
                 '              </div>'+
@@ -215,7 +215,7 @@ function creaMatita(){
                 '       Entità selezionata' +
                 '   </div>' +
                 '<div class="actionDiv">'+
-                '                  <label for="nome">Nome entità:</label>' +
+                '                  <label for="nome">Nome cartella:</label>' +
                 '                  <input type="text" id="nome" class="inputForm" disabled>' +
                 '              </div>'+
                 '<div class="actionDiv">' +
@@ -498,7 +498,7 @@ function creaStrumentoGenerativa(){
 
 function creaCartellaJs(){
 
-
+    creaLaCartella();
 
 }
 
