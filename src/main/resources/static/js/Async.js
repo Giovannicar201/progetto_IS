@@ -139,3 +139,45 @@ function gestisciIstruzione(istruzioneElement){
     return obj;
 
 }
+
+function creaEntità() {
+
+    let xhr = new XMLHttpRequest();
+
+    let entità = getEntità();
+
+    xhr.open('POST', '/entità/creaEntità', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status === 200) {
+
+            alert("entità creato con successo");
+
+        }
+
+    };
+
+    xhr.onerror = function() {
+
+        console.log('Si è verificato un errore durante la richiesta.');
+
+    };
+
+    xhr.send(entità);
+    xhr.close;
+
+}
+
+function getEntità(){
+
+    let istruzioniText = [];
+
+    istruzioniText.push({"nome": document.getElementById("nome").value});
+    istruzioniText.push({"nomeEntità": document.getElementById("entità").value});
+    istruzioniText.push({"collisioni": document.getElementsByClassName("selezionato")[0].value});
+    istruzioniText.push({"nomeCartella": document.getElementById("nomeCartella").value});
+
+    return JSON.stringify(istruzioniText);
+
+}

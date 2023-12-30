@@ -33,16 +33,16 @@ function creaGestore(){
             '              </div>' +
             '<div class="actionDiv">'+
             '                  <label>Nome entità:</label>' +
-            '                  <input type="text" class="inputForm">' +
+            '                  <input type="text" id="entità" class="inputForm">' +
             '              </div>' +
             '<div class="actionDiv">' +
             '                  <label>Collisioni:</label>' +
-            '                   <button onclick="" class="bottone" style="width: 170px; background-color: #1A1A1A; grid-column: 1;">SI</button>' +
-            '                   <button onclick="" class="bottone" style="width: 170px; background-color: #1A1A1A; grid-column: 2;">NO</button>' +
+            '                   <button onclick="selectButton(\'si\')" value = "si" class="bottone collisioni" style="width: 170px; background-color: #1A1A1A; grid-column: 1;">SI</button>' +
+            '                   <button onclick="selectButton(\'no\')" value = "no" class="bottone collisioni" style="width: 170px; background-color: #1A1A1A; grid-column: 2;">NO</button>' +
             '              </div>' +
             '<div class="actionDiv">'+
             '                  <label>Nome cartella:</label>' +
-            '                  <input type="text" class="inputForm">' +
+            '                  <input type="text" id="nomeCartella" class="inputForm">' +
             '              </div>' +
             '<div class="actionDiv">' +
             '                  <button class="bottone" onclick="">Aggiungi Proprietà</button>' +
@@ -139,6 +139,26 @@ function creaImmagini(){
     } else {
 
         document.getElementById("creaImmagini").classList.remove("pressed");
+
+    }
+
+}
+
+function selectButton(scelta){
+
+    for (let elementsByClassNameElement of document.getElementsByClassName("collisioni")) {
+
+        if (elementsByClassNameElement.value === scelta){
+
+            elementsByClassNameElement.style.backgroundColor = "#516f96";
+            elementsByClassNameElement.classList.add("selezionato");
+
+        } else{
+
+            elementsByClassNameElement.style.backgroundColor = "#1A1A1A";
+            elementsByClassNameElement.classList.remove("selezionato");
+
+        }
 
     }
 
