@@ -1,6 +1,9 @@
 package it.unisa.IS_Project.Controller;
 
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
+import it.unisa.IS_Project.Model.Exception.NotValidEmailException;
+import it.unisa.IS_Project.Model.Exception.NotValidNameException;
+import it.unisa.IS_Project.Model.Exception.NotValidPasswordException;
 import it.unisa.IS_Project.Model.Service.UtenteService;
 import it.unisa.IS_Project.Utility.UtilityClass;
 import it.unisa.IS_Project.Utility.ValidatorClass;
@@ -40,18 +43,15 @@ public class UtenteControl {
     public String registUser(@ModelAttribute UtenteEntity infoUtente, HttpServletRequest request){
 
         if(!ValidatorClass.emailValidator(infoUtente.getEmail())) {
-            System.out.println("Utente non creato");
-            return "redirect:/login";
+            throw new NotValidEmailException("Email non valida!");
         }
 
         if(infoUtente.getNome().length()<2 || infoUtente.getNome().length()>32){
-            System.out.println("Nome troppo corto");
-            return "redirect:/login";
+            throw new NotValidNameException("Nome troppo piccolo");
         }
 
         if(!ValidatorClass.passwordValidator(infoUtente.getPassword())){
-            System.out.println("Non rispetta");
-            return "redirect:/login";
+            throw new NotValidPasswordException("Password non valida!");
         }
 
         UtenteEntity utente = null;
