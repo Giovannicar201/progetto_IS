@@ -107,7 +107,7 @@ function addEvento(flag){
             case "Inizia": $("#istruzioni").append('' +
             '<div class="actionDiv">'+
             '                  <label>Istruzione Inizia Ciclo (Ripetizioni)</label>' +
-            '                   <input type="text" class="inputForm">' +
+            '                   <input type="number" class="inputForm">' +
             '</div>'); break;
 
             case "Fine": $("#istruzioni").append('' +

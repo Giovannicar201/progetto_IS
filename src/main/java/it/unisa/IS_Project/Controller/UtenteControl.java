@@ -4,11 +4,10 @@ import it.unisa.IS_Project.Model.Entity.UtenteEntity;
 import it.unisa.IS_Project.Model.Service.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class UtenteController {
+public class UtenteControl {
 
     @Autowired
     public UtenteService utenteService;
