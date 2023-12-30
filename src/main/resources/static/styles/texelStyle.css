@@ -277,9 +277,9 @@ label{
 .demoEvent{
 
     background-color: #262727;
-    height: 500px;
-    width: 720px;
-    margin-top: 5%;
+    height: 300px;
+    width: 600px;
+    margin: 10%;
     border-radius: 1%;
     display: grid;
 
@@ -325,7 +325,7 @@ label{
 
 .col{
 
-    flex-basis: 40%;
+    flex-basis: 35%;
     animation: fade-up 0.5s;
     margin-left: 5%;
 
@@ -344,39 +344,18 @@ label{
 
 }
 
-.home button{
-
-    width: 180px;
-    color: #B7B7B7;
-    background-color: rgba(255,255,255,0.1);
-    text-decoration: none;
-    text-align: center;
-    font-size: 12px;
-    padding: 12px 0;
-    border: 0;
-    border-radius: 20px;
-    outline: none;
-    margin-top: 10px;
-
-}
-
-.home button:hover{
-
-    background-color: #516f96;
-
-}
-
 .card{
 
-    width: 200px;
-    height: 230px;
-    display: inline-block;
+    font-size: 15px;
+    width: 700px;
+    height: 150px;
+    display: block;
     border-radius: 10px;
     padding: 15px 25px;
     box-sizing: border-box;
     cursor: pointer;
     margin: 20px 30px;
-    background-color: rgba(255,255,255,0.1);
+    background-color: #262727;
 
 }
 
@@ -397,13 +376,6 @@ label{
 
     transform: translateY(-10px);
     
-}
-
-.card p{
-
-    text-shadow: 0 0 5px #000;
-    font-size: 13px;
-
 }
 
 .card.show{

@@ -101,24 +101,25 @@ function addEvento(flag){
         case "Dialogo": $("#istruzioni").append('' +
             '<div class="actionDiv">'+
             '                  <label>Istruzione Mostra Dialogo (Testo)</label>' +
-            '                   <input type="text" class="inputForm">' +
+            '                   <input type="text" class="inputForm istruzione">' +
             '</div>'); break;
 
             case "Inizia": $("#istruzioni").append('' +
             '<div class="actionDiv">'+
             '                  <label>Istruzione Inizia Ciclo (Ripetizioni)</label>' +
-            '                   <input type="number" class="inputForm">' +
+            '                   <input type="text" class="inputForm istruzione">' +
             '</div>'); break;
 
             case "Fine": $("#istruzioni").append('' +
             '<div class="actionDiv">'+
             '                  <label>Istruzione "Fine Ciclo"</label>' +
+            '                   <input hidden type="text" class="inputForm istruzione">' +
             '</div>'); break;
 
             case "Mostra": $("#istruzioni").append('' +
             '<div class="actionDiv">'+
                 '                  <label>Istruzione Mostra Testo (Testo)</label>' +
-                '                   <input type="text" class="inputForm">' +
+                '                   <input type="text" class="inputForm istruzione">' +
             '</div>'); break;
 
     }

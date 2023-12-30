@@ -59,3 +59,7 @@ function creaLaCartella(){
     xhr.close;
 
 }
+
+function creaEvento() {
+    
+}

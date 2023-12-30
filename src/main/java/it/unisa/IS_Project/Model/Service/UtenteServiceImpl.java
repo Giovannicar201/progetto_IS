@@ -14,7 +14,7 @@ public class UtenteServiceImpl implements UtenteService{
     @Override
     @Transactional
     public UtenteEntity add(String email,String password,String nome){
-        UtenteEntity utenteEntity=new UtenteEntity();
+        UtenteEntity utenteEntity = new UtenteEntity();
         utenteEntity.setEmail(email);
         utenteEntity.setPassword(password);
         utenteEntity.setNome(nome);

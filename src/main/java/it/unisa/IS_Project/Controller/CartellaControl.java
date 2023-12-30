@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class CartellaControl {
 
-    @RequestMapping(value = "/griglia/creacartella", method = RequestMethod.POST)
+    @RequestMapping(value = "/griglia/creaCartella", method = RequestMethod.POST)
 
     public String creaCartella() {
 
@@ -20,19 +20,9 @@ public class CartellaControl {
 
     }
 
-    @RequestMapping(value = "/griglia/trovacartelle", method = RequestMethod.GET)
+    @RequestMapping(value = "/griglia/trovaCartelle", method = RequestMethod.GET)
 
     public String trovaCartelle() {
-
-        System.out.println("ciao");
-
-        return "griglia";
-
-    }
-
-    @RequestMapping(value = "/griglia/trovacartella/{nome}", method = RequestMethod.GET)
-
-    public String trovaCartella(@PathVariable("nome") String nome) {
 
         System.out.println("ciao");
 
