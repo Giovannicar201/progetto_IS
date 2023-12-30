@@ -28,7 +28,7 @@ function creaLogin(){
                 '                        </div>' +
                 '                        <div class="actionDiv">' +
                 '                            <label for="PasswordLogin">Password</label>' +
-                '                            <input type="text" class="inputForm" id="PasswordLogin" th:field="*{Password}" required>' +
+                '                            <input type="password" class="inputForm" id="PasswordLogin" th:field="*{Password}" required>' +
                 '                        </div>' +
                 '                        <div class="actionDiv">' +
                 '                            <button class="bottone" type="submit">Log-in</button>' +
@@ -49,12 +49,12 @@ function creaLogin(){
                 '                        </div>' +
                 '                        <div class="actionDiv">' +
                 '                            <label for="PasswordRegistrazione">Password</label>' +
-                '                            <input type="text" class="inputForm" id="PasswordRegistrazione" name="password" th:field="*{password}"' +
+                '                            <input type="password" class="inputForm" id="PasswordRegistrazione" name="password" th:field="*{password}"' +
                 '                                   required>' +
                 '                        </div>' +
                 '                        <div class="actionDiv">' +
                 '                            <label for="RipetiPasswordRegistrazione">Ripeti Password</label>' +
-                '                            <input type="text" class="inputForm" id="RipetiPasswordRegistrazione" required>' +
+                '                            <input type="password" class="inputForm" id="RipetiPasswordRegistrazione" required>' +
                 '                        </div>' +
                 '                        <div class="actionDiv">' +
                 '                            <button class="bottone" type="submit">Sign-up</button>' +

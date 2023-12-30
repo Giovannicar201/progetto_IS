@@ -100,7 +100,8 @@ function addEvento(flag){
 
         case "Dialogo": $("#istruzioni").append('' +
             '<div class="actionDiv">'+
-
+            '                  <label>Istruzione Mostra Dialogo (Testo)</label>' +
+            '                   <input type="text" class="inputForm">' +
             '</div>'); break;
 
             case "Inizia": $("#istruzioni").append('' +
