@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class CartellaControl {
 
-    @RequestMapping(value = "/griglia/creaCartella", method = RequestMethod.POST)
+    @RequestMapping(value = "/griglia/creacartella", method = RequestMethod.POST)
 
     public String creaCartella() {
 

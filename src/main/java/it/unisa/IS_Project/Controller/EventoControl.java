@@ -5,6 +5,7 @@ import it.unisa.IS_Project.Model.Service.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,9 +17,11 @@ public class EventoControl {
 
     @RequestMapping(value = "/eventi/creaEvento", method = RequestMethod.POST)
 
-    public String creaEvento(@ModelAttribute EventoEntity eventoEntity){
+    public String creaEvento(@RequestBody String evento){
 
-        return "redirect:/login";
+        System.out.println(evento);
+
+        return "eventmanager";
 
     }
 

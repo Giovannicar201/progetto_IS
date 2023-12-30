@@ -51,7 +51,7 @@ function creaEventi(){
             '                  <button class="bottone" onclick="addEvento('+  '\'Mostra\'' + ')">Aggiungi istruzione "Mostra Dialogo"</button>' +
             '              </div>' +
             '<div class="actionDiv">' +
-            '                  <button class="bottone" onclick="">Crea Evento</button>' +
+            '                  <button class="bottone" onclick="creaEvento()">Crea Evento</button>' +
             '              </div>' +
             '</div>' +
             '<div class="breakDivAction">'+
@@ -101,25 +101,25 @@ function addEvento(flag){
         case "Dialogo": $("#istruzioni").append('' +
             '<div class="actionDiv">'+
             '                  <label>Istruzione Mostra Dialogo (Testo)</label>' +
-            '                   <input type="text" class="inputForm istruzione">' +
+            '                   <input type="text" class="inputForm istruzione dialogo">' +
             '</div>'); break;
 
             case "Inizia": $("#istruzioni").append('' +
             '<div class="actionDiv">'+
             '                  <label>Istruzione Inizia Ciclo (Ripetizioni)</label>' +
-            '                   <input type="text" class="inputForm istruzione">' +
+            '                   <input type="number" class="inputForm istruzione inizio">' +
             '</div>'); break;
 
             case "Fine": $("#istruzioni").append('' +
             '<div class="actionDiv">'+
             '                  <label>Istruzione "Fine Ciclo"</label>' +
-            '                   <input hidden type="text" class="inputForm istruzione">' +
+            '                   <input type="hidden" class="inputForm istruzione fine" value="fine-ciclo">' +
             '</div>'); break;
 
             case "Mostra": $("#istruzioni").append('' +
             '<div class="actionDiv">'+
                 '                  <label>Istruzione Mostra Testo (Testo)</label>' +
-                '                   <input type="text" class="inputForm istruzione">' +
+                '                   <input type="text" class="inputForm istruzione testo">' +
             '</div>'); break;
 
     }

@@ -61,5 +61,81 @@ function creaLaCartella(){
 }
 
 function creaEvento() {
+
+    let xhr = new XMLHttpRequest();
+
+    let istruzioni = getIstruzioni();
+
+    xhr.open('POST', '/eventi/creaEvento', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status === 200) {
+
+            alert("evento creato con successo");
+
+        }
+
+    };
+
+    xhr.onerror = function() {
+
+        console.log('Si è verificato un errore durante la richiesta.');
+
+    };
+
+    xhr.send(istruzioni);
+    xhr.close;
     
+}
+
+function getIstruzioni(){
+
+    let istruzioniDiv = document.getElementsByClassName("istruzione");
+    let istruzioniText = [];
+
+    istruzioniText.push({"nome": document.getElementById("evento").value});
+    istruzioniText.push({"coordinata y": document.getElementById("righe").value});
+    istruzioniText.push({"coordinata x": document.getElementById("colonne").value});
+
+    for (let istruzioniDivElement of istruzioniDiv) {
+
+        let objIstruzione = gestisciIstruzione(istruzioniDivElement);
+
+        istruzioniText.push(objIstruzione);
+
+    }
+
+    return JSON.stringify(istruzioniText);
+
+}
+
+function gestisciIstruzione(istruzioneElement){
+
+    let obj = {};
+
+    if(istruzioneElement.classList.contains("dialogo")){
+
+        obj.nome = "dialogo";
+        obj.valore = istruzioneElement.value;
+
+    } else if(istruzioneElement.classList.contains("inizio")){
+
+        obj.nome = "inizio";
+        obj.valore = istruzioneElement.value;
+
+    }else if(istruzioneElement.classList.contains("fine")){
+
+        obj.nome = "fine";
+        obj.valore = istruzioneElement.value;
+
+    }else if(istruzioneElement.classList.contains("testo")){
+
+        obj.nome = "testo";
+        obj.valore = istruzioneElement.value;
+
+    }
+
+    return obj;
+
 }
