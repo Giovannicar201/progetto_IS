@@ -36,7 +36,7 @@ public class EntitaEntity {
 
     @ManyToOne(cascade = CascadeType.ALL,optional = true)
     @JoinColumn(name = "email",referencedColumnName = "email")
-    private UtenteEntity utenteEntity;
+    private UtenteEntity email;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idFoto",referencedColumnName = "idFoto")

@@ -22,7 +22,7 @@ public class EntitaControl {
     public String creaEntita(@RequestBody String entity, HttpServletRequest request){
         String email = UtilityClass.emailSessione(request);
 
-        entitaService.add()
+        //entitaService.add()
         //System.out.println(entity);
 
         return "gestoreentità";

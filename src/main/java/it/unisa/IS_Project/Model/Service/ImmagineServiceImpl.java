@@ -22,7 +22,6 @@ public class ImmagineServiceImpl implements ImmagineService{
     private ImmagineRepository immagineRepository;
     @Autowired
     private UtenteRepository utenteRepository;
-    private static final String CARTELLA_UPLOAD = "upload";
 
     @Override
     @Transactional
@@ -39,8 +38,8 @@ public class ImmagineServiceImpl implements ImmagineService{
 
         ImmagineEntity immagineEntity = new ImmagineEntity();
         immagineEntity.setFoto(fotoBlob);
-        immagineEntity.setNome(nomeFoto);
-        immagineEntity.setUtenteEntity(utenteEntity);
+        immagineEntity.setNome(this.getFileName(foto));
+        immagineEntity.setEmail(utenteEntity);
 
         return immagineEntity;
     }
@@ -62,6 +61,17 @@ public class ImmagineServiceImpl implements ImmagineService{
         }
 
         return outputStream.toByteArray();
+    }
+
+    private String getFileName(Part part) {
+        String contentDisposition = part.getHeader("content-disposition");
+        String[] tokens = contentDisposition.split(";");
+        for (String token : tokens) {
+            if (token.trim().startsWith("filename")) {
+                return token.substring(token.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+        return "unknown";
     }
 
     @Override
@@ -88,9 +98,4 @@ public class ImmagineServiceImpl implements ImmagineService{
         immagineRepository.deleteByNome(nomeFoto);
     }
 
-    @Override
-    @Transactional
-    public List<ImmagineEntity> getAllImmagini(String email){
-        return immagineRepository.findAllByEmail(email);
-    }
 }
