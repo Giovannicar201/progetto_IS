@@ -30,7 +30,7 @@ public class UtenteControl {
 
         UtilityClass.salvaEmail(request.getSession(), infoUtente.getEmail());
 
-        if(email==infoUtente.getEmail() && password==infoUtente.getPassword()){
+        if(email.equals(infoUtente.getEmail()) && password.equals(infoUtente.getPassword())){
             request.getSession().setAttribute("email",email);
         }
 

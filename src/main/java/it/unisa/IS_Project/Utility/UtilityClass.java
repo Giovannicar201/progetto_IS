@@ -1,5 +1,7 @@
 package it.unisa.IS_Project.Utility;
 
+import it.unisa.IS_Project.Model.Exception.InexistentSessionException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.FileInputStream;
@@ -28,6 +30,14 @@ public class UtilityClass {
 
         return (String) sessione.getAttribute("email");
 
+    }
+    public static String emailSessione(HttpServletRequest request) {
+        String email = (String) request.getSession().getAttribute("email");
+
+        if(email == null)
+            throw new InexistentSessionException("Email not in session.");
+
+        return email;
     }
 
     public static void salvaJsonMappa(HttpSession sessione, String json){

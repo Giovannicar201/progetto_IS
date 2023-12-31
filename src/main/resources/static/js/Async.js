@@ -60,11 +60,22 @@ function creaLaCartella(){
 
 }
 
+/*
+*
+* FUNZIONI ASINCRONE EVENTO
+*
+* */
+
 function creaEvento() {
 
     let xhr = new XMLHttpRequest();
 
-    let istruzioni = getIstruzioni();
+    let eventoJSON = {
+        "nome": document.getElementById("evento").value,
+        "riga": document.getElementById("riga").value,
+        "colonna": document.getElementById("colonna").value,
+        "istruzioni" : getIstruzioni()
+    };
 
     xhr.open('POST', '/eventi/creaEvento', true);
 
@@ -84,7 +95,8 @@ function creaEvento() {
 
     };
 
-    xhr.send(istruzioni);
+    console.log(eventoJSON);
+    xhr.send(JSON.stringify(eventoJSON));
     xhr.close;
     
 }
@@ -92,21 +104,17 @@ function creaEvento() {
 function getIstruzioni(){
 
     let istruzioniDiv = document.getElementsByClassName("istruzione");
-    let istruzioniText = [];
-
-    istruzioniText.push({"nome": document.getElementById("evento").value});
-    istruzioniText.push({"coordinata y": document.getElementById("righe").value});
-    istruzioniText.push({"coordinata x": document.getElementById("colonne").value});
+    let istruzioni = [];
 
     for (let istruzioniDivElement of istruzioniDiv) {
 
         let objIstruzione = gestisciIstruzione(istruzioniDivElement);
 
-        istruzioniText.push({"istruzioni" : objIstruzione});
+        istruzioni.push({"istruzione" : objIstruzione});
 
     }
 
-    return JSON.stringify(istruzioniText);
+    return istruzioni;
 
 }
 
@@ -139,6 +147,12 @@ function gestisciIstruzione(istruzioneElement){
     return obj;
 
 }
+
+/*
+*
+* FUNZIONI ASINCRONE ENTITÀ
+*
+* */
 
 function creaEntità() {
 

@@ -28,5 +28,5 @@ public class ImmagineEntity {
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "email",referencedColumnName = "email")
-    private UtenteEntity email;
+    private UtenteEntity utenteEntity;
 }
