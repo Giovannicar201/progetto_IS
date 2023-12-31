@@ -98,4 +98,8 @@ public class ImmagineServiceImpl implements ImmagineService{
         immagineRepository.deleteByNome(nomeFoto);
     }
 
+    @Override
+    public List<ImmagineEntity> getAllImmagini(String email) {
+        return immagineRepository.findAllByEmail(email);
+    }
 }

@@ -16,7 +16,7 @@ public interface ImmagineRepository extends JpaRepository<ImmagineEntity,Integer
     Optional<ImmagineEntity> findAllByIdFoto(int idFoto);
 
     @Query("SELECT i FROM ImmagineEntity i WHERE i.email.email = :email")
-    ImmagineEntity findAllByEmail(@Param("email")String email);
+    List<ImmagineEntity> findAllByEmail(@Param("email")String email);
 
     @Query("SELECT i FROM ImmagineEntity i WHERE i.nome = :nome")
     Optional<ImmagineEntity> findByNome(@Param("nome") String nome);

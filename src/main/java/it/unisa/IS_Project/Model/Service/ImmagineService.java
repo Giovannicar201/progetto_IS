@@ -16,4 +16,6 @@ public interface ImmagineService {
     ImmagineEntity update(ImmagineEntity newImmagineEntity, String nomeFoto);
 
     void delete(String nomeFoto);
+
+    List<ImmagineEntity> getAllImmagini(String email);
 }
