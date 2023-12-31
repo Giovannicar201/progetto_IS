@@ -43,19 +43,19 @@ function creaLaCartella(){
 
         if (xhr.readyState === 4 && xhr.status === 200) {
 
-            console.log("ciao");
+            alert("Cartella creata con successo!");
+
+        }
+
+        if (xhr.readyState === 4 && xhr.status === 500) {
+
+
 
         }
 
     };
 
-    xhr.onerror = function() {
-
-        console.log('Si è verificato un errore durante la richiesta.');
-
-    };
-
-    xhr.send();
+    xhr.send(document.getElementById("nome").value);
     xhr.close;
 
 }
@@ -170,16 +170,18 @@ function creaEntità() {
 
         }
 
-    };
+        if (xhr.readyState === 4 && xhr.status === 500) {
 
-    xhr.onerror = function() {
+            erroreCreaEntità();
 
-        console.log('Si è verificato un errore durante la richiesta.');
+        }
 
     };
 
     xhr.send(entità);
     xhr.close;
+
+    saveImages();
 
 }
 
@@ -193,5 +195,28 @@ function getEntità(){
     entitàText.nomeCartella = document.getElementById("nomeCartella").value;
 
     return JSON.stringify(entitàText);
+
+}
+
+function saveImages(){
+
+    let xhr = new XMLHttpRequest();
+
+    let formDataImmagine = new FormData(document.getElementById("file"));
+
+    xhr.open('POST', '/caricaImmagine', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status === 500) {
+
+            alert("immagine caricata");
+
+        }
+
+    };
+
+    xhr.send(formDataImmagine);
+    xhr.close;
 
 }

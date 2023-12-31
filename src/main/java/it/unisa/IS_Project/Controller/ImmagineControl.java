@@ -22,6 +22,8 @@ public class ImmagineControl {
     public String caricaImmagine(@RequestBody Part immagine, HttpServletRequest request) throws ServletException, IOException {
         String email = UtilityClass.emailSessione(request);
 
+        System.out.println(immagine);
+
         immagineService.add(immagine,null,email);
 
         return "griglia";

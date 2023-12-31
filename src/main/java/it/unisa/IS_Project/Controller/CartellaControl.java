@@ -18,12 +18,11 @@ import java.util.List;
 
 @Controller
 public class CartellaControl {
-    @Autowired
-    public CartellaService cartellaService;
 
     @RequestMapping(value = "/griglia/creacartella", method = RequestMethod.POST)
 
     public String creaCartella(@RequestBody String nomeCartella, HttpServletRequest request) {
+
         String email = UtilityClass.emailSessione(request);
 
         cartellaService.add(nomeCartella, email);
@@ -41,4 +40,8 @@ public class CartellaControl {
         return "griglia";
 
     }
+
+    @Autowired
+    public CartellaService cartellaService;
+
 }

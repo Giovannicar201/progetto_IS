@@ -22,8 +22,11 @@ public class ValidatorClass {
     }
 
     public static boolean passwordValidator(String passwordVal){
-        Matcher passwordMatcher=password.matcher(passwordVal);
+
+        Matcher passwordMatcher = password.matcher(passwordVal);
+
         return passwordMatcher.matches();
+
     }
 
 }
