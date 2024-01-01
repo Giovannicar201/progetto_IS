@@ -43,28 +43,39 @@ function creaLaCartella(){
 
         if (xhr.readyState === 4 && xhr.status === 200) {
 
-            console.log("ciao");
+            alert("Cartella creata con successo!");
+
+        }
+
+        if (xhr.readyState === 4 && xhr.status === 500) {
+
+
 
         }
 
     };
 
-    xhr.onerror = function() {
-
-        console.log('Si è verificato un errore durante la richiesta.');
-
-    };
-
-    xhr.send();
+    xhr.send(document.getElementById("nome").value);
     xhr.close;
 
 }
+
+/*
+*
+* FUNZIONI ASINCRONE EVENTO
+*
+* */
 
 function creaEvento() {
 
     let xhr = new XMLHttpRequest();
 
-    let istruzioni = getIstruzioni();
+    let eventoJSON = {
+        "nome": document.getElementById("evento").value,
+        "riga": document.getElementById("riga").value,
+        "colonna": document.getElementById("colonna").value,
+        "istruzioni" : getIstruzioni()
+    };
 
     xhr.open('POST', '/eventi/creaEvento', true);
 
@@ -84,7 +95,8 @@ function creaEvento() {
 
     };
 
-    xhr.send(istruzioni);
+    console.log(eventoJSON);
+    xhr.send(JSON.stringify(eventoJSON));
     xhr.close;
     
 }
@@ -92,21 +104,17 @@ function creaEvento() {
 function getIstruzioni(){
 
     let istruzioniDiv = document.getElementsByClassName("istruzione");
-    let istruzioniText = [];
-
-    istruzioniText.push({"nome": document.getElementById("evento").value});
-    istruzioniText.push({"coordinata y": document.getElementById("righe").value});
-    istruzioniText.push({"coordinata x": document.getElementById("colonne").value});
+    let istruzioni = [];
 
     for (let istruzioniDivElement of istruzioniDiv) {
 
         let objIstruzione = gestisciIstruzione(istruzioniDivElement);
 
-        istruzioniText.push(objIstruzione);
+        istruzioni.push({"istruzione" : objIstruzione});
 
     }
 
-    return JSON.stringify(istruzioniText);
+    return istruzioni;
 
 }
 
@@ -137,5 +145,78 @@ function gestisciIstruzione(istruzioneElement){
     }
 
     return obj;
+
+}
+
+/*
+*
+* FUNZIONI ASINCRONE ENTITÀ
+*
+* */
+
+function creaEntità() {
+
+    let xhr = new XMLHttpRequest();
+
+    let entità = getEntità();
+
+    xhr.open('POST', '/entità/creaEntità', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status === 200) {
+
+            alert("entità creato con successo");
+
+        }
+
+        if (xhr.readyState === 4 && xhr.status === 500) {
+
+            erroreCreaEntità();
+
+        }
+
+    };
+
+    xhr.send(entità);
+    xhr.close;
+
+    saveImages();
+
+}
+
+function getEntità(){
+
+    let entitàText = {};
+
+    entitàText.nome =  document.getElementById("nome").value;
+    entitàText.nomeEntità = document.getElementById("entità").value;
+    entitàText.collisioni =  document.getElementsByClassName("selezionato")[0].value;
+    entitàText.nomeCartella = document.getElementById("nomeCartella").value;
+
+    return JSON.stringify(entitàText);
+
+}
+
+function saveImages(){
+
+    let xhr = new XMLHttpRequest();
+
+    let formDataImmagine = new FormData(document.getElementById("file"));
+
+    xhr.open('POST', '/caricaImmagine', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status === 500) {
+
+            alert("immagine caricata");
+
+        }
+
+    };
+
+    xhr.send(formDataImmagine);
+    xhr.close;
 
 }

@@ -19,6 +19,8 @@ function creaGestore(){
 
         }
 
+        document.getElementById("creaGestore").classList.add("pressed");
+
         $(div).append('<div class = "titleBar" id="titleBar">'+
             '            <img class="iconTitle" src="https://i.postimg.cc/PxkLPt7x/event.png" id="title">' +
             '            <label for="title">Gestore entità</label>'+
@@ -29,27 +31,31 @@ function creaGestore(){
             '   </div>' +
             '<div class="actionDiv">'+
             '                  <label for="nome">Nome immagine:</label>' +
-            '                  <input type="text" id="nome" class="inputForm">' +
-            '              </div>' +
+            '                  <input type="text" id="nome" class="inputForm" disabled>' +
+            '              </div>'+
             '<div class="actionDiv">'+
             '                  <label>Nome entità:</label>' +
-            '                  <input type="text" class="inputForm">' +
+            '                  <input type="text" id="entità" class="inputForm">' +
             '              </div>' +
             '<div class="actionDiv">' +
             '                  <label>Collisioni:</label>' +
-            '                   <button onclick="" class="bottone" style="width: 170px; background-color: #1A1A1A; grid-column: 1;">SI</button>' +
-            '                   <button onclick="" class="bottone" style="width: 170px; background-color: #1A1A1A; grid-column: 2;">NO</button>' +
+            '                   <button onclick="selectButton(\'si\')" value = "si" class="bottone collisioni" style="width: 170px; background-color: #1A1A1A; grid-column: 1;">SI</button>' +
+            '                   <button onclick="selectButton(\'no\')" value = "no" class="bottone collisioni" style="width: 170px; background-color: #1A1A1A; grid-column: 2;">NO</button>' +
             '              </div>' +
             '<div class="actionDiv">'+
             '                  <label>Nome cartella:</label>' +
-            '                  <input type="text" class="inputForm">' +
+            '                  <input type="text" id="nomeCartella" class="inputForm">' +
+            '              </div>' +
+            '<div id="proprietà">' +
+            '</div>' +
+            '<div class="actionDiv">' +
+            '                  <button class="bottone" onclick="creaProprietà()">Aggiungi Proprietà</button>' +
             '              </div>' +
             '<div class="actionDiv">' +
-            '                  <button class="bottone" onclick="">Aggiungi Proprietà</button>' +
+            '                  <button class="bottone" onclick="creaEntità()">Crea Entità</button>' +
             '              </div>' +
-            '<div class="actionDiv">' +
-            '                  <button class="bottone" onclick="">Crea Entità</button>' +
-            '              </div>' +
+            '<div id="creazione">' +
+            '</div>' +
             '</div>' +
             '<div class="breakDivAction">' +
             '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
@@ -82,8 +88,6 @@ function creaGestore(){
             '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
             '       Entità </div>' +
             '</div>');
-
-        document.getElementById("creaGestore").classList.add("pressed");
 
     } else {
 
@@ -126,7 +130,10 @@ function creaImmagini(){
             '                  <label>Caricamento:</label>' +
             '              </div>' +
             '<div class="actionDiv">' +
-            '                  <button class="bottone" onclick="">Carica immagine</button>' +
+            '                  <button class="bottone" onclick="selectFile()">Carica immagine</button>' +
+            '                   <form id="file" enctype="multipart/form-data">' +
+            '                       <input type="file" accept="image/*" hidden onchange="saveImages()"/>' +
+            '                   </form>' +
             '              </div>' +
             '</div>' +
             '<div class="breakDivAction">' +
@@ -141,5 +148,65 @@ function creaImmagini(){
         document.getElementById("creaImmagini").classList.remove("pressed");
 
     }
+
+}
+
+function selectButton(scelta){
+
+    for (let elementsByClassNameElement of document.getElementsByClassName("collisioni")) {
+
+        if (elementsByClassNameElement.value === scelta){
+
+            elementsByClassNameElement.style.backgroundColor = "#516f96";
+            elementsByClassNameElement.classList.add("selezionato");
+
+        } else{
+
+            elementsByClassNameElement.style.backgroundColor = "#1A1A1A";
+            elementsByClassNameElement.classList.remove("selezionato");
+
+        }
+
+    }
+
+}
+
+function creaProprietà(){
+
+    $("#proprietà").append('' +
+        '<div class="actionDiv">'+
+        '                  <label>Nome Proprietà</label>' +
+        '                   <input type="text" class="inputForm NomeProprietà">' +
+        '</div>' +
+        '<div class="actionDiv">' +
+        '                  <label>Valore Proprietà</label>' +
+        '                   <input type="text" class="inputForm ValoreProprietà">' +
+        '</div>');
+
+}
+
+function erroreCreaEntità(){
+
+    if ($("#creazione").children().length > 0){
+
+        $("#creazione").empty();
+
+    }
+
+    $("#creazione").append(
+
+        '<div class="actionDiv">'+
+        "                  <label style='color:rgb(175,80,92);'>Errore Nella Creazione Dell'entità</label>" +
+        '</div>'
+
+    );
+
+}
+
+function selectFile() {
+
+    const fileInput = document.querySelector('input[type="file"]');
+
+    fileInput.click();
 
 }

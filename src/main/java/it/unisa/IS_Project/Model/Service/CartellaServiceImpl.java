@@ -2,6 +2,7 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.CartellaEntity;
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
+import it.unisa.IS_Project.Model.Exception.InvalidFolderNameException;
 import it.unisa.IS_Project.Model.Repository.CartellaRepository;
 import it.unisa.IS_Project.Model.Repository.UtenteRepository;
 import jakarta.transaction.Transactional;
@@ -21,6 +22,9 @@ public class CartellaServiceImpl implements CartellaService{
     @Override
     @Transactional
     public CartellaEntity add(String nomeCartella,String email) {
+        if(nomeCartella.length() == 0 || nomeCartella.length() >= 32)
+            throw new InvalidFolderNameException("Invalid folder name length.");
+
         CartellaEntity cartellaEntity=new CartellaEntity();
         cartellaEntity.setNome(nomeCartella);
 

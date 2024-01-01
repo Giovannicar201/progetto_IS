@@ -1,13 +1,13 @@
 package it.unisa.IS_Project.Controller;
 
 import it.unisa.IS_Project.Model.Entity.EntitaEntity;
-import it.unisa.IS_Project.Model.Entity.EventoEntity;
-import it.unisa.IS_Project.Model.Entity.UtenteEntity;
 import it.unisa.IS_Project.Model.Service.EntitaService;
-import it.unisa.IS_Project.Model.Service.EventoService;
+import it.unisa.IS_Project.Utility.UtilityClass;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,9 +19,13 @@ public class EntitaControl {
 
     @RequestMapping(value = "/entità/creaEntità", method = RequestMethod.POST)
 
-    public String creaEntita(@ModelAttribute EntitaEntity entitaEntity){
+    public String creaEntita(@RequestBody String entity, HttpServletRequest request){
+        String email = UtilityClass.emailSessione(request);
 
-        return "redirect:/login";
+        //entitaService.add()
+        //System.out.println(entity);
+
+        return "gestoreentità";
 
     }
 
@@ -31,10 +35,10 @@ public class EntitaControl {
 
     }
 
-    public String eliminaEntita(@ModelAttribute EntitaEntity entitaEntity){
+    public String eliminaEntita(@RequestBody String nomeEntita){
+        entitaService.delete(nomeEntita);
 
-        return "redirect:/login";
-
+        return "gestoreentità";
     }
 
     public String getListaEntita(@ModelAttribute EntitaEntity entitaEntity){

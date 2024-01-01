@@ -24,14 +24,14 @@ public class EntitaServiceImpl implements EntitaService{
     @Override
     @Transactional
     public EntitaEntity add(String nome,String collisione,String coordinate,String email,String nomeFoto,String nomeCartella){
-        EntitaEntity entitaEntity=new EntitaEntity();
+       /* EntitaEntity entitaEntity=new EntitaEntity();
         entitaEntity.setNome(nome);
         entitaEntity.setCollisione(collisione);
         entitaEntity.setCoordinate(coordinate);
 
         UtenteEntity utenteEntity=utenteRepository.findByEmail(email);
         utenteEntity.setEmail(email);
-        entitaEntity.setEmail(utenteEntity);
+        entitaEntity.setUtenteEntity(utenteEntity);
 
         MappaEntity mappaEntity=mappaRepository.findAllByEmail(email);
         mappaEntity.setId(mappaEntity.getId());
@@ -47,9 +47,9 @@ public class EntitaServiceImpl implements EntitaService{
         cartellaEntity.setNome(nomeCartella);
         entitaEntity.setCartellaEntity(cartellaEntity);
 
-        entitaRepository.save(entitaEntity);
+        entitaRepository.save(entitaEntity);*/
 
-        return entitaEntity;
+        return null;
     }
 
     @Override
