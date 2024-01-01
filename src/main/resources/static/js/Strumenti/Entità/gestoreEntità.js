@@ -31,7 +31,7 @@ function creaGestore(){
             '   </div>' +
             '<div class="actionDiv">'+
             '                  <label for="nome">Nome immagine:</label>' +
-            '                  <input type="text" id="nome" class="inputForm" disabled>' +
+            '                  <input type="text" id="nome" class="inputForm">' +
             '              </div>'+
             '<div class="actionDiv">'+
             '                  <label>Nome entità:</label>' +
@@ -173,15 +173,42 @@ function selectButton(scelta){
 
 function creaProprietà(){
 
-    $("#proprietà").append('' +
-        '<div class="actionDiv">'+
-        '                  <label>Nome Proprietà</label>' +
-        '                   <input type="text" class="inputForm NomeProprietà">' +
-        '</div>' +
-        '<div class="actionDiv">' +
-        '                  <label>Valore Proprietà</label>' +
-        '                   <input type="text" class="inputForm ValoreProprietà">' +
-        '</div>');
+    if(document.getElementById("proprietà").children.length <= 6) {
+
+        if(document.getElementById("proprietà").children.length === 0) {
+
+            document.getElementsByClassName("break")[0].style.height = "250%";
+
+        }
+
+        $("#proprietà").append('' +
+            '<div class="actionDiv">' +
+            '                  <label>Nome Proprietà</label>' +
+            '                   <input type="text" class="inputForm NomeProprietà">' +
+            '</div>' +
+            '<div class="actionDiv">' +
+            '                  <label>Valore Proprietà</label>' +
+            '                   <input type="text" class="inputForm ValoreProprietà">' +
+            '</div>');
+
+
+    } else {
+
+        if ($("#creazione").children().length > 0){
+
+            $("#creazione").empty();
+
+        }
+
+        $("#creazione").append(
+
+            '<div class="actionDiv">'+
+            "                  <label style='color:rgb(175,80,92);'>Non puoi aggiungere più di 4 proprietà!</label>" +
+            '</div>'
+
+        );
+
+    }
 
 }
 

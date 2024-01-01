@@ -148,7 +148,7 @@ function gestisciIstruzione(istruzioneElement){
 
 }
 
-/*
+/**
 *
 * FUNZIONI ASINCRONE ENTITÀ
 *
@@ -216,4 +216,36 @@ function saveImages() {
 
     xhr.send(formDataImmagine);
     xhr.close();
+}
+
+function login() {
+
+    let xhr = new XMLHttpRequest();
+    let email = document.getElementById("emailLogin").value;
+    let password = document.getElementById("passwordLogin").value;
+
+    let loginForm = {};
+
+    loginForm.email = email;
+    loginForm.password = password;
+
+    xhr.open('POST', '/auth/login', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4) {
+
+            if (xhr.status === 500) {
+
+                erroreLogin();
+
+            }
+
+        }
+
+    };
+
+    xhr.send(JSON.stringify(loginForm));
+    xhr.close();
+
 }

@@ -20,7 +20,7 @@ public class NoCacheFilter extends GenericFilterBean {
 
         try{
 
-            log.debug("eseguo il filtro!");
+            log.debug("ciao dal filtro");
 
             ((HttpServletResponse)servletResponse).setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             ((HttpServletResponse)servletResponse).setHeader("Pragma", "no-cache");

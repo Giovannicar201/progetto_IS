@@ -21,10 +21,15 @@ public class EntitaControl {
     @RequestMapping(value = "/entità/creaEntità", method = RequestMethod.POST)
 
     public String creaEntita(@RequestBody String entity, HttpServletRequest request){
+
         try {
+
             String email = UtilityClass.emailSessione(request);
+
         } catch (EmptySessionException e) {
+
             throw new RuntimeException(e);
+
         }
 
         //entitaService.add()

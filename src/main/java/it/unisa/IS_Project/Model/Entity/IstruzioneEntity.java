@@ -17,7 +17,9 @@ import java.io.Serializable;
 @Entity
 @Table(name = "istruzione")
 @IdClass(PrimaryKeyIstruzione.class)
+
 public class IstruzioneEntity {
+
     @Id
     @Column(name = "idIstruzione")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,4 +37,5 @@ public class IstruzioneEntity {
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "idEvento",referencedColumnName = "idEvento",insertable=false, updatable=false)
     private EventoEntity eventoEntity;
+
 }

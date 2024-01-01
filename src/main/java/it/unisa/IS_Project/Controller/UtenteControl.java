@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
@@ -52,22 +53,46 @@ public class UtenteControl {
 
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 
-    public String login(@RequestParam String email,
-                            @RequestParam String password, HttpServletRequest request){
+    public String login(@RequestBody String string, HttpServletRequest request, Model model){
+        /*
+
+
+        ANGELO E GIOVANNI SE LEGGETE QUESTO COMMENTO ORA IO VI PASSO UN JSON TRAMITE ASYNC
+        GESTITEVELO VOI
+        BACIONI
+
+
 
         try {
+
             utenteService.login(email,password);
+
         } catch (NoSuchAlgorithmException e) {
+
             // TO DO
+
         } catch (UserNotFound e) {
-            // TO DO
+
+            model.addAttribute("errore", "utente non trovato!");
+
+            return "LogInRegistrazione";
+
         } catch (LoginPasswordsMismatchException e) {
-            // TO DO
+
+            model.addAttribute("errore", "password errata!");
+
+            return "LogInRegistrazione";
+
         }
 
         UtilityClass.salvaEmail(request,email);
 
+        return "redirect:/auth";*/
+
+        System.out.println(string);
+
         return "redirect:/auth";
+
     }
 
     @RequestMapping(value = "/auth/logout", method = RequestMethod.POST)
