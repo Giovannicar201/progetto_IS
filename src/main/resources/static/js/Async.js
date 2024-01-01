@@ -198,25 +198,22 @@ function getEntità(){
 
 }
 
-function saveImages(){
-
+function saveImages() {
     let xhr = new XMLHttpRequest();
-
     let formDataImmagine = new FormData(document.getElementById("file"));
 
     xhr.open('POST', '/caricaImmagine', true);
 
     xhr.onreadystatechange = function() {
-
-        if (xhr.readyState === 4 && xhr.status === 500) {
-
-            alert("immagine caricata");
-
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                alert("Immagine caricata con successo!");
+            } else {
+                alert("Errore durante il caricamento dell'immagine.");
+            }
         }
-
     };
 
     xhr.send(formDataImmagine);
-    xhr.close;
-
+    xhr.close();
 }

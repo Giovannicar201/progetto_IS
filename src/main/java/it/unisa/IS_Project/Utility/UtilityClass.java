@@ -1,12 +1,8 @@
 package it.unisa.IS_Project.Utility;
 
-import it.unisa.IS_Project.Model.Exception.InexistentSessionException;
+import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmptySessionException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.OutputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -19,23 +15,17 @@ public class UtilityClass {
 
     }
 
-    public static void salvaEmail(HttpSession sessione, String email){
+    public static void salvaEmail(HttpServletRequest request, String email){
 
-        sessione.setAttribute("email", email);
-
-    }
-
-
-    public static String emailSessione(HttpSession sessione){
-
-        return (String) sessione.getAttribute("email");
+        request.getSession().setAttribute("email", email);
 
     }
-    public static String emailSessione(HttpServletRequest request) {
+
+    public static String emailSessione(HttpServletRequest request) throws EmptySessionException {
         String email = (String) request.getSession().getAttribute("email");
 
         if(email == null)
-            throw new InexistentSessionException("Email not in session.");
+            throw new EmptySessionException("Nessun utente in sessione");
 
         return email;
     }

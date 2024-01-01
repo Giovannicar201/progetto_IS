@@ -1,11 +1,12 @@
 package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.CartellaEntity;
+import it.unisa.IS_Project.Model.Exception.InvalidFolderNameException;
 
 import java.util.List;
 
 public interface CartellaService {
-    CartellaEntity add(String nomeCartella,String email);
+    CartellaEntity creaCartella(String nomeCartella, String email) throws InvalidFolderNameException;
     
     CartellaEntity get(String nomeCartella);
     

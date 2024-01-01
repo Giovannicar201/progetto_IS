@@ -2,6 +2,7 @@ package it.unisa.IS_Project.Controller;
 
 import it.unisa.IS_Project.Model.Entity.EventoEntity;
 import it.unisa.IS_Project.Model.Entity.IstruzioneEntity;
+import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmptySessionException;
 import it.unisa.IS_Project.Model.Service.EventoService;
 import it.unisa.IS_Project.Model.Service.UtenteService;
 import it.unisa.IS_Project.Utility.UtilityClass;
@@ -43,7 +44,12 @@ public class EventoControl {
             return "redirect:/error";
         }
 
-        String email = UtilityClass.emailSessione(request.getSession());
+        String email = null;
+        try {
+            email = UtilityClass.emailSessione(request);
+        } catch (EmptySessionException e) {
+            throw new RuntimeException(e);
+        }
         String nome = (String) eventoJSON.get("nome");
 
         eventoService.add(nome,email);
@@ -65,17 +71,23 @@ public class EventoControl {
 
     }
 
+    @RequestMapping(value = "/eventi/visualizzaAnteprima", method = RequestMethod.POST)
+
     public String visualizzaAnteprima(@RequestBody String evento, HttpServletRequest request){
 
         return "redirect:/login";
 
     }
 
+    @RequestMapping(value = "/eventi/eliminaEvento", method = RequestMethod.POST)
+
     public String eliminaEvento(@ModelAttribute EventoEntity eventoEntity){
 
         return "redirect:/login";
 
     }
+
+    @RequestMapping(value = "/eventi/getEventi", method = RequestMethod.POST)
 
     public String getListaEventi(@ModelAttribute EventoEntity eventoEntity){
 

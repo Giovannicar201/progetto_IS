@@ -1,6 +1,7 @@
 package it.unisa.IS_Project.Controller;
 
 import it.unisa.IS_Project.Model.Entity.EntitaEntity;
+import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmptySessionException;
 import it.unisa.IS_Project.Model.Service.EntitaService;
 import it.unisa.IS_Project.Utility.UtilityClass;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,14 +21,20 @@ public class EntitaControl {
     @RequestMapping(value = "/entità/creaEntità", method = RequestMethod.POST)
 
     public String creaEntita(@RequestBody String entity, HttpServletRequest request){
-        String email = UtilityClass.emailSessione(request);
+        try {
+            String email = UtilityClass.emailSessione(request);
+        } catch (EmptySessionException e) {
+            throw new RuntimeException(e);
+        }
 
         //entitaService.add()
-        //System.out.println(entity);
+        System.out.println(entity);
 
         return "gestoreentità";
 
     }
+
+    @RequestMapping(value = "/entità/modificaEntità", method = RequestMethod.POST)
 
     public String modificaEntita(@ModelAttribute EntitaEntity entitaEntity){
 
@@ -35,11 +42,16 @@ public class EntitaControl {
 
     }
 
+    @RequestMapping(value = "/entità/eliminaEntità", method = RequestMethod.POST)
+
     public String eliminaEntita(@RequestBody String nomeEntita){
         entitaService.delete(nomeEntita);
 
         return "gestoreentità";
     }
+
+    //STESSO DISCORSO DI GET LISTA IMMAGINI
+    @RequestMapping(value = "/entità/getEntità", method = RequestMethod.POST)
 
     public String getListaEntita(@ModelAttribute EntitaEntity entitaEntity){
 

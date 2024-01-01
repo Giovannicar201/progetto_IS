@@ -1,10 +1,16 @@
 package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
+import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginPasswordsMismatchException;
+import it.unisa.IS_Project.Model.Exception.GAC.Login.UserNotFound;
+import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidEmailException;
+import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidNameException;
+import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidPasswordException;
+import it.unisa.IS_Project.Model.Exception.GAC.Signup.SignupPasswordsMismatchException;
 import it.unisa.IS_Project.Model.Repository.UtenteRepository;
 import it.unisa.IS_Project.Utility.UtilityClass;
+import it.unisa.IS_Project.Utility.ValidatorClass;
 import jakarta.transaction.Transactional;
-import org.aspectj.apache.bcel.classfile.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,41 +20,52 @@ import java.security.NoSuchAlgorithmException;
 public class UtenteServiceImpl implements UtenteService{
     @Autowired
     private UtenteRepository utenteRepository;
+    @Override
+    @Transactional
+    public void signup(String email, String nome, String password, String passwordRipetuta) throws NoSuchAlgorithmException, InvalidEmailException, InvalidNameException, InvalidPasswordException, SignupPasswordsMismatchException {
+        UtenteEntity utenteEntity = new UtenteEntity();
+
+        if(email == null || !ValidatorClass.emailValidator(email))
+            throw new InvalidEmailException("Email non valida");
+
+        if(nome == null || nome.length() == 0 || nome.length() > 32)
+            throw new InvalidNameException("Nome non valido");
+
+        if(password == null || !ValidatorClass.passwordValidator(password))
+            throw new InvalidPasswordException("Password non valida");
+
+        if(passwordRipetuta == null || !ValidatorClass.passwordValidator(passwordRipetuta))
+            throw new InvalidPasswordException("Password ripetuta non valida");
+
+        if(!password.equals(passwordRipetuta))
+            throw new SignupPasswordsMismatchException("Le password non coincidono");
+
+        String passwordCriptata = UtilityClass.cryptAlg(password);
+
+        utenteEntity.setEmail(email);
+        utenteEntity.setNome(nome);
+        utenteEntity.setPassword(passwordCriptata);
+
+        utenteRepository.save(utenteEntity);
+    }
 
     @Override
     @Transactional
-    public UtenteEntity add(String email,String password,String nome) throws NoSuchAlgorithmException {
-        UtenteEntity utenteEntity = new UtenteEntity();
-        utenteEntity.setEmail(email);
-        utenteEntity.setNome(nome);
-        String passwordCrip=UtilityClass.cryptAlg(password);
+    public void login(String email, String password) throws NoSuchAlgorithmException, UserNotFound, LoginPasswordsMismatchException {
+        UtenteEntity utente = utenteRepository.findByEmail(email);
 
-        utenteEntity.setPassword(passwordCrip);
+        if(utente == null)
+            throw new UserNotFound("Utente non registrato");
 
-        utenteRepository.save(utenteEntity);
-        return utenteEntity;
+        String passwordCriptata = UtilityClass.cryptAlg(password);
+
+        if(!passwordCriptata.equals(utente.getPassword()))
+            throw new LoginPasswordsMismatchException("Le password non coincidono");
     }
 
     @Override
     @Transactional
     public UtenteEntity get(String email) {
-        UtenteEntity utenteEntity=utenteRepository.findByEmail(email);
-        return utenteEntity;
-    }
-
-    @Override
-    @Transactional
-    public UtenteEntity update(UtenteEntity newUtenteEntity, String email) {
-        UtenteEntity utenteEntity=utenteRepository.findByEmail(email);
-        newUtenteEntity.setEmail(email);
-        utenteEntity.setPassword(newUtenteEntity.getPassword());
-        UtenteEntity saved=utenteRepository.save(utenteEntity);
-        return saved;
-    }
-
-    @Override
-    @Transactional
-    public void delete(String email) {
-        utenteRepository.deleteById(email);
+        return utenteRepository.findByEmail(email);
     }
 }

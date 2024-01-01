@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 public class HTMLMapping {
 
-    @GetMapping("/login")
+    @GetMapping("/auth")
 
     public String loginRegistrazione(Model model){
 

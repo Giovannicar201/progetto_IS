@@ -21,14 +21,14 @@ public class CartellaServiceImpl implements CartellaService{
 
     @Override
     @Transactional
-    public CartellaEntity add(String nomeCartella,String email) {
-        if(nomeCartella.length() == 0 || nomeCartella.length() >= 32)
-            throw new InvalidFolderNameException("Invalid folder name length.");
-
+    public CartellaEntity creaCartella(String nomeCartella,String email) throws InvalidFolderNameException {
         CartellaEntity cartellaEntity=new CartellaEntity();
-        cartellaEntity.setNome(nomeCartella);
+        UtenteEntity utenteEntity = utenteRepository.findByEmail(email);
 
-        UtenteEntity utenteEntity=utenteRepository.findByEmail(email);
+        if(nomeCartella == null || nomeCartella.length() == 0 || nomeCartella.length() > 32)
+            throw new InvalidFolderNameException("Nome cartella non valido");
+
+        cartellaEntity.setNome(nomeCartella);
         utenteEntity.setEmail(email);
         cartellaEntity.setUtenteEntity(utenteEntity);
 

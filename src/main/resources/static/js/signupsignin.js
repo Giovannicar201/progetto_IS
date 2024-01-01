@@ -21,14 +21,14 @@ function creaLogin(){
                 '                </div>' +
                 '                <div class="breakDivAction" id="login">' +
                 '                    <label for="formLogin" style="margin-left: 8px; margin-top: 8px">Log-in</label>' +
-                '                    <form action="/login/login" th:action="@{/login/login}" th:object="${infoUtente}" id="formLogin" method="post">' +
+                '                    <form action="/auth/login" id="loginForm" method="post">' +
                 '                        <div class="topActionDiv">' +
                 '                            <label for="emailLogin">Email</label>' +
-                '                            <input type="text" class="inputForm" id="emailLogin" th:field="*{email}" required>' +
+                '                            <input type="text" name="email" class="inputForm" required>' +
                 '                        </div>' +
                 '                        <div class="actionDiv">' +
-                '                            <label for="PasswordLogin">Password</label>' +
-                '                            <input type="password" class="inputForm" id="PasswordLogin" th:field="*{Password}" required>' +
+                '                            <label for="passwordLogin">Password</label>' +
+                '                            <input type="password" name="password" class="inputForm" required>' +
                 '                        </div>' +
                 '                        <div class="actionDiv">' +
                 '                            <button class="bottone" type="submit">Log-in</button>' +
@@ -37,24 +37,24 @@ function creaLogin(){
                 '                </div>' +
                 '                <div class="breakDivAction" id="registrazioneDiv">' +
                 '                    <label for="registrazione" style="margin-left: 8px; margin-top: 8px">Sign-up</label>' +
-                '                    <form action="/login/registrazione" th:action="@{/login/registrazione}" th:object="${infoUtente}" id="registrazione" method="post">' +
+                '                    <form action="/auth/signup" id="signupForm" method="post">' +
                 '                        <div class="topActionDiv">' +
                 '                            <label for="emailRegistrazione">Email</label>' +
-                '                            <input type="text" class="inputForm" id="emailRegistrazione" name="email" th:field="*{email}"' +
+                '                            <input type="text" class="inputForm" id="emailRegistrazione" name="email"' +
                 '                                   required>' +
                 '                        </div>' +
                 '                        <div class="actionDiv">' +
                 '                            <label for="nomeRegistrazione">Nome</label>' +
-                '                            <input type="text" class="inputForm" id="nomeRegistrazione" name="nome" th:field="*{nome}" required>' +
+                '                            <input type="text" class="inputForm" id="nomeRegistrazione" name="nome" required>' +
                 '                        </div>' +
                 '                        <div class="actionDiv">' +
                 '                            <label for="PasswordRegistrazione">Password</label>' +
-                '                            <input type="password" class="inputForm" id="PasswordRegistrazione" name="password" th:field="*{password}"' +
+                '                            <input type="password" class="inputForm" id="PasswordRegistrazione" name="password"' +
                 '                                   required>' +
                 '                        </div>' +
                 '                        <div class="actionDiv">' +
                 '                            <label for="RipetiPasswordRegistrazione">Ripeti Password</label>' +
-                '                            <input type="password" class="inputForm" id="RipetiPasswordRegistrazione" required>' +
+                '                            <input type="password" class="inputForm" id="RipetiPasswordRegistrazione" name="passwordRipetuta" required>' +
                 '                        </div>' +
                 '                        <div class="actionDiv">' +
                 '                            <button class="bottone" type="submit">Sign-up</button>' +

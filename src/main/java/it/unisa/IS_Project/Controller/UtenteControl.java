@@ -1,14 +1,17 @@
 package it.unisa.IS_Project.Controller;
 
-import it.unisa.IS_Project.Model.Entity.UtenteEntity;
-import it.unisa.IS_Project.Model.Exception.NotValidEmailException;
-import it.unisa.IS_Project.Model.Exception.NotValidNameException;
-import it.unisa.IS_Project.Model.Exception.NotValidPasswordException;
+import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginPasswordsMismatchException;
+import it.unisa.IS_Project.Model.Exception.GAC.Login.UserNotFound;
+import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmptySessionException;
+import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidEmailException;
+import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidNameException;
+import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidPasswordException;
+import it.unisa.IS_Project.Model.Exception.GAC.Signup.SignupPasswordsMismatchException;
 import it.unisa.IS_Project.Model.Service.UtenteService;
 import it.unisa.IS_Project.Utility.UtilityClass;
-import it.unisa.IS_Project.Utility.ValidatorClass;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,59 +24,66 @@ public class UtenteControl {
     @Autowired
     public UtenteService utenteService;
 
-    @RequestMapping(value = "/login/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/auth/signup", method = RequestMethod.POST)
 
-    public String loginUser(@ModelAttribute UtenteEntity infoUtente, HttpServletRequest request){
+    public String signup(@RequestParam String email,
+                             @RequestParam String nome,
+                             @RequestParam String password,
+                             @RequestParam String passwordRipetuta, HttpServletRequest request){
 
-        String email=request.getParameter("email");
-        String password=request.getParameter("password");
-
-        UtilityClass.salvaEmail(request.getSession(), infoUtente.getEmail());
-
-        if(email.equals(infoUtente.getEmail()) && password.equals(infoUtente.getPassword())){
-            request.getSession().setAttribute("email",email);
+        try {
+            utenteService.signup(email,nome,password,passwordRipetuta);
+        } catch (NoSuchAlgorithmException e) {
+            // TO DO
+        } catch (SignupPasswordsMismatchException e) {
+            // TO DO
+        } catch (InvalidNameException e) {
+            // TO DO
+        } catch (InvalidPasswordException e) {
+            // TO DO
+        } catch (InvalidEmailException e) {
+            // TO DO
         }
 
-        return "redirect:/login";
+        UtilityClass.salvaEmail(request,email);
 
+        return "redirect:/auth";
     }
 
-    @RequestMapping(value = "/login/registrazione", method = RequestMethod.POST)
+    @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 
-    public String registUser(@ModelAttribute UtenteEntity infoUtente, HttpServletRequest request){
+    public String login(@RequestParam String email,
+                            @RequestParam String password, HttpServletRequest request){
 
-        if(!ValidatorClass.emailValidator(infoUtente.getEmail())) {
-            throw new NotValidEmailException("Email non valida!");
+        try {
+            utenteService.login(email,password);
+        } catch (NoSuchAlgorithmException e) {
+            // TO DO
+        } catch (UserNotFound e) {
+            // TO DO
+        } catch (LoginPasswordsMismatchException e) {
+            // TO DO
         }
 
-        if(infoUtente.getNome().length()<2 || infoUtente.getNome().length()>32){
-            throw new NotValidNameException("Nome troppo piccolo");
-        }
+        UtilityClass.salvaEmail(request,email);
 
-        if(!ValidatorClass.passwordValidator(infoUtente.getPassword())){
-            throw new NotValidPasswordException("Password non valida!");
-        }
+        return "redirect:/auth";
+    }
 
-        UtenteEntity utente = null;
+    @RequestMapping(value = "/auth/logout", method = RequestMethod.POST)
 
-        try{
-             utente = utenteService.add(infoUtente.getEmail(), infoUtente.getPassword(), infoUtente.getNome());
-        }catch (NoSuchAlgorithmException e){
+    public String logout(HttpServletRequest request){
+
+        try {
+            UtilityClass.emailSessione(request);
+        } catch (EmptySessionException e) {
             return "redirect:/error";
         }
 
-        UtilityClass.salvaEmail(request.getSession(), infoUtente.getEmail());
+        if (request.getSession() != null)
+            request.getSession().setMaxInactiveInterval(1);
 
-        request.getSession().setAttribute("email",utente.getEmail());
-
-        if(request.getSession()!=null && request.getSession().getAttribute("email")!=null){
-            System.out.println("Sei in sessione");
-        }else {
-            System.out.println("Non sei in sessione");
-        }
-
-        return "redirect:/login";
-
+        return "redirect:/auth";
     }
 
 }

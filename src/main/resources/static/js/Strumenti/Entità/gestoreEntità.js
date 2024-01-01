@@ -130,9 +130,9 @@ function creaImmagini(){
             '                  <label>Caricamento:</label>' +
             '              </div>' +
             '<div class="actionDiv">' +
-            '                  <button class="bottone" onclick="selectFile()">Carica immagine</button>' +
-            '                   <form id="file" enctype="multipart/form-data">' +
-            '                       <input type="file" accept="image/*" hidden onchange="saveImages()"/>' +
+            '                   <form action="/caricaImmagine" method="post" id="fileForm" enctype="multipart/form-data">' +
+            '                       <input name="file" id="fileInput" type="file" accept="image/*"/>' +
+            '                       <button type="submit" value="Submit">Submit</button>' +
             '                   </form>' +
             '              </div>' +
             '</div>' +
@@ -200,13 +200,5 @@ function erroreCreaEntità(){
         '</div>'
 
     );
-
-}
-
-function selectFile() {
-
-    const fileInput = document.querySelector('input[type="file"]');
-
-    fileInput.click();
 
 }

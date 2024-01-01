@@ -2,13 +2,17 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.ImmagineEntity;
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
+import it.unisa.IS_Project.Model.Exception.GIM.CaricaImmagineException.InvalidFileSizeException;
 import it.unisa.IS_Project.Model.Repository.ImmagineRepository;
 import it.unisa.IS_Project.Model.Repository.UtenteRepository;
-import jakarta.servlet.http.Part;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.imageio.ImageIO;
 import javax.sql.rowset.serial.SerialBlob;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,77 +29,57 @@ public class ImmagineServiceImpl implements ImmagineService{
 
     @Override
     @Transactional
-    public ImmagineEntity add(Part foto, String nomeFoto, String email) {
-
-        UtenteEntity utenteEntity = utenteRepository.findByEmail(email);
-        Blob fotoBlob;
-
-        try {
-            fotoBlob = convertPartToBlob(foto);
-        } catch (IOException | SQLException e) {
-            throw new RuntimeException("Errore durante la conversione di Part in Blob");
-        }
-
+    public void caricaImmagine(MultipartFile foto, String email) throws SQLException, IOException, InvalidFileSizeException {
         ImmagineEntity immagineEntity = new ImmagineEntity();
+        UtenteEntity utenteEntity = utenteRepository.findByEmail(email);
+
+        if(!isImageSizeValid(foto))
+            throw new InvalidFileSizeException("Dimensione dell'immagine non valida");
+
+        Blob fotoBlob = convertMultipartFileToBlob(foto);
+
+        String nomeFoto = foto.getOriginalFilename();
         immagineEntity.setFoto(fotoBlob);
-        immagineEntity.setNome(this.getFileName(foto));
+        immagineEntity.setNome(nomeFoto);
         immagineEntity.setEmail(utenteEntity);
 
-        return immagineEntity;
+        immagineRepository.save(immagineEntity);
     }
 
-    private Blob convertPartToBlob(Part part) throws SQLException, IOException {
-        try (InputStream inputStream = part.getInputStream()) {
-            byte[] data = readAllBytes(inputStream);
-            return new SerialBlob(data);
-        }
-    }
+    private static Blob convertMultipartFileToBlob(MultipartFile multipartFile) throws SQLException {
+        try (InputStream inputStream = multipartFile.getInputStream()) {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-    private byte[] readAllBytes(InputStream inputStream) throws IOException {
-        byte[] buffer = new byte[1024];
-        int bytesRead;
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[4096];
+            int bytesRead;
 
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, bytesRead);
-        }
-
-        return outputStream.toByteArray();
-    }
-
-    private String getFileName(Part part) {
-        String contentDisposition = part.getHeader("content-disposition");
-        String[] tokens = contentDisposition.split(";");
-        for (String token : tokens) {
-            if (token.trim().startsWith("filename")) {
-                return token.substring(token.indexOf('=') + 1).trim().replace("\"", "");
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                byteArrayOutputStream.write(buffer, 0, bytesRead);
             }
+
+            byte[] bytes = byteArrayOutputStream.toByteArray();
+
+            return new SerialBlob(bytes);
+        } catch (Exception e) {
+            throw new SQLException("Errore durante la conversione di MultipartFile in Blob");
         }
-        return "unknown";
+    }
+
+    private static boolean isImageSizeValid(MultipartFile file) throws IOException {
+            BufferedImage image = ImageIO.read(file.getInputStream());
+
+            return image.getWidth() == 32 && image.getHeight() == 32;
+    }
+    @Override
+    @Transactional
+    public void integraPixelArt(MultipartFile foto, String nomeFoto, String email) {
+        /*TO-DO*/ //integrazione immagine
     }
 
     @Override
     @Transactional
     public ImmagineEntity get(String nomeFoto){
-        ImmagineEntity immagineEntity=immagineRepository.findByNome(nomeFoto).get();
-        return immagineEntity;
-    }
-
-    @Override
-    @Transactional
-    public ImmagineEntity update(ImmagineEntity newImmagineEntity,String nomeFoto) {
-        ImmagineEntity immagineEntity=immagineRepository.findByNome(nomeFoto).get();
-        newImmagineEntity.setNome(nomeFoto);
-        immagineEntity.setFoto(newImmagineEntity.getFoto());
-        immagineEntity.setNome(newImmagineEntity.getNome());
-        ImmagineEntity saved=immagineRepository.save(immagineEntity);
-        return saved;
-    }
-
-    @Override
-    @Transactional
-    public void delete(String nomeFoto) {
-        immagineRepository.deleteByNome(nomeFoto);
+        return immagineRepository.findByNome(nomeFoto).get();
     }
 
     @Override
