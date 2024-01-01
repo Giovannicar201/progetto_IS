@@ -81,6 +81,8 @@ public class HTMLMapping {
 
     @GetMapping("/error")
     public String error(){
+
         return "error";
+
     }
 }
