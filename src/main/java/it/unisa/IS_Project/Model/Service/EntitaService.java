@@ -14,4 +14,6 @@ public interface EntitaService {
     void delete(String nomeEntita);
 
     List<EntitaEntity> findAllEntity(String nomeCartella,String email);
+
+    List<EntitaEntity> findAllEntityByEmail(String email);
 }

@@ -22,4 +22,7 @@ public interface EntitaRepository extends JpaRepository<EntitaEntity,Integer> {
 
     @Query("SELECT e FROM EntitaEntity e WHERE e.cartellaEntity.nome = :nomeCartella AND e.email.email = :email")
     List<EntitaEntity> findAllByCartellaEntity(@Param("nomeCartella")String nomeCartella,@Param("email")String email);
+
+    @Query("SELECT e FROM EventoEntity e WHERE e.utenteEntity.email = :email")
+    List<EntitaEntity> findAllByEmail(String email);
 }

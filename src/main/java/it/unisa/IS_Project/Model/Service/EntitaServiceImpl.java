@@ -81,4 +81,10 @@ public class EntitaServiceImpl implements EntitaService{
     public List<EntitaEntity> findAllEntity(String nomeCartella,String email){
         return entitaRepository.findAllByCartellaEntity(nomeCartella,email);
     }
+
+    @Override
+    @Transactional
+    public List<EntitaEntity> findAllEntityByEmail(String email){
+        return entitaRepository.findAllByEmail(email);
+    }
 }
