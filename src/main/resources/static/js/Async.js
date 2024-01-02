@@ -75,9 +75,11 @@ function showCartelle(){
 
                 let x = JSON.parse(xhr.responseText);
 
-                x.nomiCartelle.forEach(function test(){
+                x.nomiCartelle.forEach(function (nome){
 
-                    $("show").append("")
+                    $("#show").append(
+
+                        '<label>' + nome +'</label>');
 
                 });
 
