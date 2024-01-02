@@ -13,9 +13,6 @@ import java.util.Optional;
 
 @Repository
 public interface UtenteRepository extends JpaRepository<UtenteEntity,String> {
-    @Query
-    Optional<UtenteEntity> findAllByEmail(String email);
-
     @Query("SELECT u FROM UtenteEntity u WHERE u.email = :email")
     UtenteEntity findByEmail(String email);
 }

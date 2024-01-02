@@ -3,13 +3,10 @@ package it.unisa.IS_Project.Model.Service;
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
 import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginPasswordsMismatchException;
 import it.unisa.IS_Project.Model.Exception.GAC.Login.UserNotFoundException;
-import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidEmailException;
-import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidNameException;
-import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidPasswordException;
-import it.unisa.IS_Project.Model.Exception.GAC.Signup.SignupPasswordsMismatchException;
+import it.unisa.IS_Project.Model.Exception.GAC.Signup.*;
 import it.unisa.IS_Project.Model.Repository.UtenteRepository;
-import it.unisa.IS_Project.Utility.UtilityClass;
-import it.unisa.IS_Project.Utility.ValidatorClass;
+import it.unisa.IS_Project.Utility.Utility;
+import it.unisa.IS_Project.Utility.Validator;
 import jakarta.transaction.Transactional;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,31 +18,34 @@ import java.security.NoSuchAlgorithmException;
 public class UtenteServiceImpl implements UtenteService{
     @Autowired
     private UtenteRepository utenteRepository;
+
     @Override
     @Transactional
-    public void signup(String email, String nome, String password, String passwordRipetuta) throws NoSuchAlgorithmException, InvalidEmailException, InvalidNameException, InvalidPasswordException, SignupPasswordsMismatchException {
+    public void signup(String email, String nome, String password, String passwordRipetuta) throws NoSuchAlgorithmException, InvalidEmailException, InvalidNameException, InvalidPasswordException, SignupPasswordsMismatchException, NotUniqueUserException {
         UtenteEntity utenteEntity = new UtenteEntity();
+        UtenteEntity utenteEntityQuery = utenteRepository.findByEmail(email);
 
-        if(email == null || !ValidatorClass.emailValidator(email))
-            throw new InvalidEmailException("Email non valida");
+        if(utenteEntityQuery != null)
+            throw new NotUniqueUserException("ERRORE - UTENTE GIÀ REGISTRATO.");
 
-        if(nome == null || nome.length() == 0 || nome.length() > 32)
-            throw new InvalidNameException("Nome non valido");
+        if(!Validator.isEmailValid(email))
+            throw new InvalidEmailException("ERRORE - EMAIL NON VALIDA.");
 
-        if(password == null || !ValidatorClass.passwordValidator(password))
-            throw new InvalidPasswordException("Password non valida");
+        if(!Validator.isUserNameValid(nome))
+            throw new InvalidNameException("ERRORE - NOME NON VALIDO.");
 
-        if(passwordRipetuta == null || !ValidatorClass.passwordValidator(passwordRipetuta))
-            throw new InvalidPasswordException("Password ripetuta non valida");
+        if(!Validator.isPasswordValid(password))
+            throw new InvalidPasswordException("ERRORE - PASSWORD NON VALIDA.");
+
+        if(!Validator.isPasswordValid(passwordRipetuta))
+            throw new InvalidPasswordException("ERRORE - PASSWORD RIPETUTA NON VALIDA.");
 
         if(!password.equals(passwordRipetuta))
-            throw new SignupPasswordsMismatchException("Le password non coincidono");
-
-        String passwordCriptata = UtilityClass.cryptAlg(password);
+            throw new SignupPasswordsMismatchException("ERRORE - LE PASSWORD NON COINCIDONO.");
 
         utenteEntity.setEmail(email);
         utenteEntity.setNome(nome);
-        utenteEntity.setPassword(passwordCriptata);
+        utenteEntity.setPassword(Utility.encrypt(password));
 
         utenteRepository.save(utenteEntity);
     }
@@ -53,15 +53,13 @@ public class UtenteServiceImpl implements UtenteService{
     @Override
     @Transactional
     public void login(String email, String password) throws NoSuchAlgorithmException, UserNotFoundException, LoginPasswordsMismatchException, ParseException {
-        UtenteEntity utente = utenteRepository.findByEmail(email);
+        UtenteEntity utenteEntityQuery = utenteRepository.findByEmail(email);
 
-        if(utente == null)
-            throw new UserNotFoundException("Utente non registrato");
+        if(utenteEntityQuery == null)
+            throw new UserNotFoundException("ERRORE - UTENTE NON REGISTRATO.");
 
-        String passwordCriptata = UtilityClass.cryptAlg(password);
-
-        if(!passwordCriptata.equals(utente.getPassword()))
-            throw new LoginPasswordsMismatchException("Le password non coincidono");
+        if(!Utility.encrypt(password).equals(utenteEntityQuery.getPassword()))
+            throw new LoginPasswordsMismatchException("ERRORE - LE PASSWORD NON COINCIDONO.");
     }
 
     @Override

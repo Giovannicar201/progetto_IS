@@ -2,12 +2,9 @@ package it.unisa.IS_Project.Model.Controller;
 
 //import it.unisa.IS_Project.Model.Model.UtenteModel;
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
-import it.unisa.IS_Project.Utility.UtilityClass;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
  * Questa classe viene utilizzata per fornire il mapping delle pagine html

@@ -37,7 +37,7 @@ function creaLaCartella(){
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open('POST', '/griglia/creacartella', true);
+    xhr.open('POST', '/gestoreCartelle/creaCartella', true);
 
     xhr.onreadystatechange = function() {
 
@@ -65,7 +65,7 @@ function showCartelle(){
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET', '/griglia/trovaCartelle', true);
+    xhr.open('GET', '/gestoreCartelle/visualizzaListaCartelle', true);
 
     xhr.onreadystatechange = function() {
 
@@ -296,6 +296,8 @@ function login() {
         }
 
     };
+
+    alert(loginForm);
 
     xhr.send(JSON.stringify(loginForm));
     xhr.close;

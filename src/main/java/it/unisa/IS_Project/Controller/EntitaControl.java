@@ -1,9 +1,9 @@
 package it.unisa.IS_Project.Controller;
 
 import it.unisa.IS_Project.Model.Entity.EntitaEntity;
-import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmailNotInSessionException;
+import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.EntitaService;
-import it.unisa.IS_Project.Utility.UtilityClass;
+import it.unisa.IS_Project.Utility.Utility;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,15 +18,15 @@ public class EntitaControl {
     @Autowired
     public EntitaService entitaService;
 
-    @RequestMapping(value = "/entità/creaEntità", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/entità/creaEntità", method = RequestMethod.POST)
 
     public String creaEntita(@RequestBody String entity, HttpServletRequest request){
 
         try {
 
-            String email = UtilityClass.emailSessione(request);
+            String email = Utility.emailSessione(request);
 
-        } catch (EmailNotInSessionException e) {
+        } catch (MissingSessionEmailException e) {
 
             throw new RuntimeException(e);
 
@@ -62,6 +62,6 @@ public class EntitaControl {
 
         return "redirect:/login";
 
-    }
+    }*/
 }
 

@@ -1,10 +1,16 @@
 package it.unisa.IS_Project.Controller;
 
 import it.unisa.IS_Project.Model.Entity.CartellaEntity;
-import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmailNotInSessionException;
-import it.unisa.IS_Project.Model.Exception.InvalidFolderNameException;
+import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginException;
+import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.FolderCreationException;
+import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
+import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.InvalidFolderNameException;
+import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.NotUniqueFolderException;
 import it.unisa.IS_Project.Model.Service.CartellaService;
-import it.unisa.IS_Project.Utility.UtilityClass;
+import it.unisa.IS_Project.Utility.SessionManager;
+import it.unisa.IS_Project.Utility.Utility;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
@@ -26,62 +32,61 @@ public class CartellaControl {
     @Autowired
     public CartellaService cartellaService;
 
-    @RequestMapping(value = "/griglia/creacartella", method = RequestMethod.POST)
+    @RequestMapping(value = "/gestoreCartelle/creaCartella", method = RequestMethod.POST)
 
-    public String creaCartella(@RequestBody String nomeCartella, HttpServletRequest request, Model model) {
+    public void creaCartella(@RequestBody String nomeCartella, HttpServletRequest request, HttpServletResponse response) throws FolderCreationException {
 
         try {
 
-            String email = UtilityClass.emailSessione(request);
+            String email = SessionManager.getEmail(request);
+
             cartellaService.creaCartella(nomeCartella, email);
-        } catch (EmailNotInSessionException e) {
 
-            model.addAttribute("error", "ERROR - YOU ARE NOT LOGGED.");
+        } catch (MissingSessionEmailException e) {
 
-            return "LogInRegistrazione";
+            try {
+                response.sendError(302, "MSEE");
+            } catch (IOException ex) {
+                throw new FolderCreationException("ERRORE - CREA CARTELLA IOEXCEPTION.");
+            }
 
         } catch (InvalidFolderNameException e) {
 
-            model.addAttribute("error", "ERROR - INVALID FOLDER NAME.");
+            try {
+                response.sendError(500, "IFNE");
+            } catch (IOException ex) {
+                throw new FolderCreationException("ERRORE - CREA CARTELLA IOEXCEPTION.");
+            }
 
-            return "griglia";
+        } catch (NotUniqueFolderException e) {
+
+            try {
+                response.sendError(500, "NUFE");
+            } catch (IOException ex) {
+                throw new FolderCreationException("ERRORE - CREA CARTELLA IOEXCEPTION.");
+            }
 
         }
-
-        return "griglia";
-
     }
 
-    @RequestMapping(value = "/griglia/trovaCartelle", method = RequestMethod.GET)
+    @RequestMapping(value = "/gestoreCartelle/visualizzaListaCartelle", method = RequestMethod.GET)
     @ResponseBody
-    public String trovaCartelle(HttpServletRequest request, HttpServletResponse response, Model model) {
 
-        JSONObject cartelleJSON = new JSONObject();
-        JSONArray nomiCartelle = new JSONArray();
-        List<CartellaEntity> cartelle;
+    public String visualizzaListaCartelle(HttpServletRequest request, HttpServletResponse response) {
+        String nomiCartelle = new JSONObject().toString();
 
         try {
 
-            cartelle = cartellaService.getAllCartelle(UtilityClass.emailSessione(request));
+            nomiCartelle = cartellaService.visualizzaListaCartelle(SessionManager.getEmail(request));
 
-        } catch (EmailNotInSessionException e) {
+        } catch (MissingSessionEmailException e) {
 
-            model.addAttribute("error", "ERROR - YOU ARE NOT LOGGED.");
-
-            return "LogInRegistrazione";
+            response.setHeader("Location", "/auth");
+            response.setStatus(302);
         }
-
-        for(CartellaEntity cartellaEntity : cartelle) {
-
-            nomiCartelle.add(cartellaEntity.getNome());
-
-        }
-
-        cartelleJSON.put("nomiCartelle", nomiCartelle);
 
         response.setContentType("text/plain");
 
-        return cartelleJSON.toString();
-
+        return nomiCartelle;
     }
 }
