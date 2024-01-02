@@ -73,6 +73,8 @@ function showCartelle(){
 
             if (xhr.status === 200){
 
+                $("#show").empty();
+
                 let x = JSON.parse(xhr.responseText);
 
                 x.nomiCartelle.forEach(function (nome){
