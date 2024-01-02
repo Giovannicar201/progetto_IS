@@ -10,6 +10,7 @@ import it.unisa.IS_Project.Model.Exception.GAC.Signup.SignupPasswordsMismatchExc
 import it.unisa.IS_Project.Model.Service.UtenteService;
 import it.unisa.IS_Project.Utility.UtilityClass;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -86,10 +87,11 @@ public class UtenteControl {
 
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 
-    public String login(@RequestBody String login, HttpServletRequest request, Model model) {
+    public String login(@RequestBody String login, HttpServletRequest request,
+                        HttpServletResponse response, Model model) throws Exception {
 
-        JSONParser parser = new JSONParser();
-        String email, password;
+      JSONParser parser = new JSONParser();
+      String email, password;
 
         try {
 
@@ -100,27 +102,26 @@ public class UtenteControl {
 
             utenteService.login(email,password);
 
+            UtilityClass.salvaEmail(request, email);
+
         } catch (NoSuchAlgorithmException | ParseException e) {
 
             return "redirect:/error";
 
         } catch (UserNotFoundException e) {
 
-            model.addAttribute("error", "ERROR - INCORRECT CREDENTIALS.");
-
-            return "LogInRegistrazione";
+            response.sendError( 500,
+                    "nf");
 
         } catch (LoginPasswordsMismatchException e) {
 
-            model.addAttribute("error", "ERROR - PASSWORDS DO NOT MATCH.");
-
-            return "LogInRegistrazione";
+            response.sendError( 500,
+                    "pe");
 
         }
 
-        UtilityClass.salvaEmail(request,email);
-
         return "redirect:/auth";
+
     }
 
     @RequestMapping(value = "/auth/logout", method = RequestMethod.POST)

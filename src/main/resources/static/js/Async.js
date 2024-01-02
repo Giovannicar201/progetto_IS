@@ -237,7 +237,9 @@ function login() {
 
             if (xhr.status === 500) {
 
-                erroreLogin();
+                let messaggio = JSON.parse(xhr.responseText);
+
+                erroreLogin(messaggio.message);
 
             }
 
@@ -246,7 +248,7 @@ function login() {
     };
 
     xhr.send(JSON.stringify(loginForm));
-    xhr.close();
+    xhr.close;
 
 }
 
@@ -265,7 +267,7 @@ function signup() {
     signupForm.password = password;
     signupForm.passwordRipetuta = passwordRipetuta;
 
-    xhr.open('POST', '/auth/login', true);
+    xhr.open('POST', '/auth/signup', true);
 
     xhr.onreadystatechange = function() {
 

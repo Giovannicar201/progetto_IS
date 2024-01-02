@@ -74,7 +74,7 @@ function creaLogin(){
 
 }
 
-function erroreLogin(){
+function erroreLogin(messaggio){
 
     if ($("#errori").children().length > 0){
 
@@ -82,14 +82,27 @@ function erroreLogin(){
 
     }
 
-    $("#errori").append(
+    switch (messaggio){
 
-        '<div class="actionDiv">'+
-        "                  <label style='color:rgb(175,80,92);'>Errore durante il login! <br>" +
-        "                                                       Controlla che email e/o password siano corretti!</label>" +
-        '</div>'
+        case "nf": $("#errori").append(
 
-    );
+                                        '<div class="actionDiv">'+
+                                        "                  <label style='color:rgb(175,80,92);'>Errore durante il login! <br>" +
+                                        "                                                       L'utente non è stato trovato!</label>" +
+                                        '</div>'
+
+                                    );   break;
+
+        case "pe": $("#errori").append(
+
+                                        '<div class="actionDiv">'+
+                                        "                  <label style='color:rgb(175,80,92);'>Errore durante il login! <br>" +
+                                        "                                                       Password Errata!</label>" +
+                                        '</div>'
+
+                                    );   break;
+
+    }
 
 }
 function erroreSignup(){
