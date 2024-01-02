@@ -57,7 +57,35 @@ function creaLaCartella(){
 
     xhr.send(document.getElementById("nome").value);
     xhr.close;
+    showCartelle();
+}
 
+document.addEventListener('DOMContentLoaded', function() {
+    showCartelle();
+});
+
+function showCartelle(){
+    $.ajax({
+        url:
+            '/griglia/trovaCartelle',
+        type:
+            'GET',
+        contentType:
+            "application/json; charset=utf-8",
+
+        success:function(data){
+            var x=JSON.parse(data);
+            x.cartellaJson.forEach(function (cartella){
+                var li= document.createElement('li');
+                li.innerHTML += cartella.nome;
+            })
+        },
+
+        error: function (error) {
+            console.log(`Error ${error}`);
+            alert("errore");
+        }
+    })
 }
 
 /*
