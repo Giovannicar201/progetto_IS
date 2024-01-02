@@ -272,6 +272,7 @@ function getEntità(){
 }
 
 function saveImages() {
+
     let xhr = new XMLHttpRequest();
     let formDataImmagine = new FormData(document.getElementById("file"));
 
@@ -288,7 +289,7 @@ function saveImages() {
     };
 
     xhr.send(formDataImmagine);
-    xhr.close();
+    xhr.close;
 }
 
 function login() {

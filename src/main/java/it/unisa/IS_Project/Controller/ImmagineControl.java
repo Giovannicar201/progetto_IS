@@ -8,6 +8,7 @@ import it.unisa.IS_Project.Utility.Utility;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -22,6 +23,7 @@ public class ImmagineControl {
     @RequestMapping(value = "/caricaImmagine", method = RequestMethod.POST)
 
     public String caricaImmagine(@RequestPart("file") MultipartFile immagine, HttpServletRequest request) {
+
         String email = "";
 
         //AL MOMENTO ANCHE SE NON STA NESSUNO IN SESSIONE SALVA LO STESSO
@@ -33,7 +35,7 @@ public class ImmagineControl {
         }
 
         try {
-            immagineService.caricaImmagine(immagine,email);
+            immagineService.caricaImmagine(immagine, email);
         } catch (SQLException e) {
             // TO DO
         } catch (IOException e) {

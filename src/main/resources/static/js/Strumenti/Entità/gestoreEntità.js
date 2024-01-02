@@ -130,10 +130,10 @@ function creaImmagini(){
             '                  <label>Caricamento:</label>' +
             '              </div>' +
             '<div class="actionDiv">' +
-            '                   <form action="/caricaImmagine" method="post" id="fileForm" enctype="multipart/form-data">' +
+            '                   <form id="file" enctype="multipart/form-data">' +
             '                       <input name="file" id="fileInput" type="file" accept="image/*"/>' +
-            '                       <button type="submit" value="Submit">Submit</button>' +
             '                   </form>' +
+            '                    <button onclick="saveImages()">Submit</button>' +
             '              </div>' +
             '</div>' +
             '<div class="breakDivAction">' +

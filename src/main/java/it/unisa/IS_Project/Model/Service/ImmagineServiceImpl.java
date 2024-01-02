@@ -30,6 +30,7 @@ public class ImmagineServiceImpl implements ImmagineService{
     @Override
     @Transactional
     public void caricaImmagine(MultipartFile foto, String email) throws SQLException, IOException, InvalidFileSizeException {
+
         ImmagineEntity immagineEntity = new ImmagineEntity();
         UtenteEntity utenteEntity = utenteRepository.findByEmail(email);
 
@@ -65,11 +66,14 @@ public class ImmagineServiceImpl implements ImmagineService{
         }
     }
 
-    private static boolean isImageSizeValid(MultipartFile file) throws IOException {
+    private static boolean isImageSizeValid(MultipartFile file)
+            throws IOException {
+
             BufferedImage image = ImageIO.read(file.getInputStream());
 
             return image.getWidth() == 32 && image.getHeight() == 32;
     }
+
     @Override
     @Transactional
     public void integraPixelArt(MultipartFile foto, String nomeFoto, String email) {
