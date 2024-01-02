@@ -219,10 +219,10 @@ function creaMatita(){
                 '   </div>' +
                 '<div class="actionDiv">'+
                 '                  <label for="nome">Nome cartella:</label>' +
-                '                  <input type="text" id="nome" class="inputForm" disabled>' +
+                '                  <input type="text" id="nome" class="inputForm">' +
                 '              </div>'+
                 '<div class="actionDiv">' +
-                '                  <button class="bottone">Visualizza entità</button>' +
+                '                  <button class="bottone" onclick="getCartellaContent()">Visualizza entità</button>' +
                 '</div>' +
                 '</div>' +
                 '<div class="breakDivAction">'+

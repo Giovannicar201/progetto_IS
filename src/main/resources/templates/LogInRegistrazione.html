@@ -29,7 +29,22 @@
 
     </div>
 
-    <div id="login" class="divBreak"></div>
+    <div th:if="${#ctx.session.isEmpty()}" id="login" class="divBreak"></div>
+
+    <div th:unless="${#ctx.session.isEmpty()}" id="logout" class="divBreak">
+
+        <div class="breakDivAction" id="logoutDiv">
+
+            <label style="margin-left: 8px; margin-top: 8px">Sign-up</label>
+
+            <div class="topActionDiv">
+
+                <button class="bottone" onclick="logout()">Log-Out</button>
+
+            </div>
+
+
+        </div>
 
 </div>
 

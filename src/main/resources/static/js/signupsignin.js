@@ -57,7 +57,7 @@ function creaLogin(){
                 '                        <div class="actionDiv">' +
                 '                            <button class="bottone" onclick="signup()">Sign-up</button>' +
                 '                        </div>' +
-                '                   <div id = "errori"></div>' +
+                '                   <div id = "erroriSignUp"></div>' +
                 '                </div>');
 
             document.getElementsByClassName("break")[0].style.height = "150%";
@@ -84,7 +84,7 @@ function erroreLogin(messaggio){
 
     switch (messaggio){
 
-        case "nf": $("#errori").append(
+        case "UNFE": $("#errori").append(
 
                                         '<div class="actionDiv">'+
                                         "                  <label style='color:rgb(175,80,92);'>Errore durante il login! <br>" +
@@ -93,7 +93,7 @@ function erroreLogin(messaggio){
 
                                     );   break;
 
-        case "pe": $("#errori").append(
+        case "LPME": $("#errori").append(
 
                                         '<div class="actionDiv">'+
                                         "                  <label style='color:rgb(175,80,92);'>Errore durante il login! <br>" +
@@ -105,21 +105,61 @@ function erroreLogin(messaggio){
     }
 
 }
-function erroreSignup(){
+function erroreSignup(messaggio){
 
-    if ($("#errori").children().length > 0){
+    if ($("#erroriSignUp").children().length > 0){
 
-        $("#errori").empty();
+        $("#erroriSignUp").empty();
 
     }
 
-    $("#errori").append(
+    switch (messaggio){
 
-        '<div class="actionDiv">'+
-        "                  <label style='color:rgb(175,80,92);'>Errore durante la registrazione! <br>" +
-        "                                                       Controlla che email e/o password siano corretti!</label>" +
-        '</div>'
+        case "SPME": $("#erroriSignUp").append(
 
-    );
+            '<div class="actionDiv">'+
+            "                  <label style='color:rgb(175,80,92);'>Errore durante la registrazione!<br>" +
+            "                                                       Le password non coincidono!</label>" +
+            '</div>'
 
+        );   break;
+
+        case "INE": $("#erroriSignUp").append(
+
+            '<div class="actionDiv">'+
+            "                  <label style='color:rgb(175,80,92);'>Errore durante la registrazione!<br>" +
+            "                                                       Nome non valido (MIN 1/MAX 32 caratteri)!</label>" +
+            '</div>'
+
+        );   break;
+
+        case "IPE": $("#erroriSignUp").append(
+
+            '<div class="actionDiv">'+
+            "                  <label style='color:rgb(175,80,92);'>Errore durante la registrazione!<br>" +
+            "                                                       La password deve contenere almeno una maiuscola,<br>" +
+            "                                                       almeno una maiuscola e almeno un carattere speciale!</label>" +
+            '</div>'
+
+        );   break;
+
+        case "IEE": $("#erroriSignUp").append(
+
+            '<div class="actionDiv">'+
+            "                  <label style='color:rgb(175,80,92);'>Errore durante la registrazione!<br>" +
+            "                                                       Email non valida!</label>" +
+            '</div>'
+
+        );   break;
+
+        case "NUUE": $("#erroriSignUp").append(
+
+            '<div class="actionDiv">'+
+            "                  <label style='color:rgb(175,80,92);'>Errore durante la registrazione!<br>" +
+            "                                                       Email già registrata!</label>" +
+            '</div>'
+
+        );   break;
+
+    }
 }

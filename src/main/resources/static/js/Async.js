@@ -102,6 +102,37 @@ function showCartelle(){
 
 }
 
+function getCartellaContent(){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET', '/griglia/trovaCartelle', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4) {
+
+            if (xhr.status === 200){
+
+
+
+            }
+
+            if (xhr.status === 500) {
+
+
+
+            }
+
+        }
+
+    };
+
+    xhr.send();
+    xhr.close;
+
+}
+
 /*
 *
 * FUNZIONI ASINCRONE EVENTO
@@ -297,8 +328,6 @@ function login() {
 
     };
 
-    alert(loginForm);
-
     xhr.send(JSON.stringify(loginForm));
     xhr.close;
 
@@ -327,7 +356,7 @@ function signup() {
 
             if (xhr.status === 200) {
 
-                alert("login effettuato con successo!");
+                alert("sign-up effettuato con successo!");
 
                 window.location.reload();
 
@@ -335,7 +364,9 @@ function signup() {
 
             if (xhr.status === 500) {
 
-                erroreSignup();
+                let messaggio = JSON.parse(xhr.responseText);
+
+                erroreSignup(messaggio.message);
 
             }
 
@@ -344,6 +375,33 @@ function signup() {
     };
 
     xhr.send(JSON.stringify(signupForm));
+    xhr.close;
+
+}
+
+function logout(){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/auth/logout', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4) {
+
+            if (xhr.status === 200) {
+
+               alert("logout effettuato con successo!");
+
+                window.location.reload();
+
+            }
+
+        }
+
+    };
+
+    xhr.send();
     xhr.close;
 
 }

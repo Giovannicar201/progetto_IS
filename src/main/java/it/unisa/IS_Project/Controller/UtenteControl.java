@@ -27,7 +27,8 @@ public class UtenteControl {
 
     @RequestMapping(value = "/auth/signup", method = RequestMethod.POST)
 
-    public String signup(@RequestBody String signup, HttpServletRequest request, HttpServletResponse response) throws SignupException {
+    public String signup(@RequestBody String signup, HttpServletRequest request, HttpServletResponse response)
+            throws SignupException {
 
         JSONParser parser = new JSONParser();
         String email = null, nome, password, passwordRipetuta;
@@ -106,7 +107,8 @@ public class UtenteControl {
 
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 
-    public String login(@RequestBody String login, HttpServletRequest request, HttpServletResponse response) throws LoginException {
+    public String login(@RequestBody String login, HttpServletRequest request, HttpServletResponse response)
+            throws LoginException {
 
         JSONParser parser = new JSONParser();
         String email, password;
@@ -151,18 +153,7 @@ public class UtenteControl {
 
     public String logout(HttpServletRequest request) {
 
-        try {
-
-            SessionManager.getEmail(request);
-
-        } catch (MissingSessionEmailException e) {
-
-            return "redirect:/error";
-
-        }
-
-        if (request.getSession() != null)
-            request.getSession().setMaxInactiveInterval(1);
+        request.getSession().invalidate();
 
         return "redirect:/auth";
     }
