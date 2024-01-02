@@ -44,6 +44,7 @@ function creaLaCartella(){
         if (xhr.readyState === 4 && xhr.status === 200) {
 
             alert("Cartella creata con successo!");
+            showCartelle();
 
         }
 
@@ -57,35 +58,44 @@ function creaLaCartella(){
 
     xhr.send(document.getElementById("nome").value);
     xhr.close;
-    showCartelle();
+
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    showCartelle();
-});
-
 function showCartelle(){
-    $.ajax({
-        url:
-            '/griglia/trovaCartelle',
-        type:
-            'GET',
-        contentType:
-            "application/json; charset=utf-8",
 
-        success:function(data){
-            var x=JSON.parse(data);
-            x.cartellaJson.forEach(function (cartella){
-                var li= document.createElement('li');
-                li.innerHTML += cartella.nome;
-            })
-        },
+    let xhr = new XMLHttpRequest();
 
-        error: function (error) {
-            console.log(`Error ${error}`);
-            alert("errore");
+    xhr.open('GET', '/griglia/trovaCartelle', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4) {
+
+            if (xhr.status === 200){
+
+                let x = JSON.parse(xhr.responseText);
+
+                x.nomiCartelle.forEach(function test(){
+
+                    $("show").append("")
+
+                });
+
+            }
+
+            if (xhr.status === 500) {
+
+                alert("errore");
+
+            }
+
         }
-    })
+
+    };
+
+    xhr.send();
+    xhr.close;
+
 }
 
 /*
@@ -263,6 +273,14 @@ function login() {
 
         if (xhr.readyState === 4) {
 
+            if (xhr.status === 200) {
+
+                alert("login effettuato con successo!");
+
+                window.location.reload();
+
+            }
+
             if (xhr.status === 500) {
 
                 let messaggio = JSON.parse(xhr.responseText);
@@ -301,6 +319,14 @@ function signup() {
 
         if (xhr.readyState === 4) {
 
+            if (xhr.status === 200) {
+
+                alert("login effettuato con successo!");
+
+                window.location.reload();
+
+            }
+
             if (xhr.status === 500) {
 
                 erroreSignup();
@@ -312,6 +338,6 @@ function signup() {
     };
 
     xhr.send(JSON.stringify(signupForm));
-    xhr.close();
+    xhr.close;
 
 }

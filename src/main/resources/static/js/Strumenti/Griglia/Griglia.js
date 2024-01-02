@@ -173,6 +173,8 @@ function creaCartella(){
                 '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Cartelle Entità' +
                 '   </div>' +
+                '   <div class="actionDiv" id="show">' +
+                '   </div> ' +
                 '</div>');
 
             document.getElementsByClassName("break")[0].style.height = "150%";
@@ -180,6 +182,7 @@ function creaCartella(){
         }
 
         document.getElementById("cartelle").classList.add("pressed");
+        showCartelle();
 
     } else {
 

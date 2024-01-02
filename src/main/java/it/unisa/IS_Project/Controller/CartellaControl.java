@@ -53,8 +53,9 @@ public class CartellaControl {
     }
 
     @RequestMapping(value = "/griglia/trovaCartelle", method = RequestMethod.GET)
-
+    @ResponseBody
     public String trovaCartelle(HttpServletRequest request, HttpServletResponse response, Model model) {
+
         JSONObject cartelleJSON = new JSONObject();
         JSONArray nomiCartelle = new JSONArray();
         List<CartellaEntity> cartelle;
@@ -71,25 +72,16 @@ public class CartellaControl {
         }
 
         for(CartellaEntity cartellaEntity : cartelle) {
-            JSONObject nomeCartella = new JSONObject();
-            nomeCartella.put("nomeCartella",cartellaEntity.getNome());
-        }
 
-        cartelleJSON.put("nomiCartelle",nomiCartelle);
-
-        response.setContentType("application/json");
-
-        try {
-
-            response.getWriter().append(cartelleJSON.toString());
-
-        } catch (IOException e) {
-
-            return "redirect:/error";
+            nomiCartelle.add(cartellaEntity.getNome());
 
         }
 
-        return "griglia";
+        cartelleJSON.put("nomiCartelle", nomiCartelle);
+
+        response.setContentType("text/plain");
+
+        return cartelleJSON.toString();
 
     }
 }
