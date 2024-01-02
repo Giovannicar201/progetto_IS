@@ -66,12 +66,10 @@ public class ImmagineServiceImpl implements ImmagineService{
         }
     }
 
-    private static boolean isImageSizeValid(MultipartFile file)
-            throws IOException {
+    private static boolean isImageSizeValid(MultipartFile file) throws IOException {
+        BufferedImage image = ImageIO.read(file.getInputStream());
 
-            BufferedImage image = ImageIO.read(file.getInputStream());
-
-            return image.getWidth() == 32 && image.getHeight() == 32;
+        return image.getWidth() == 32 && image.getHeight() == 32;
     }
 
     @Override

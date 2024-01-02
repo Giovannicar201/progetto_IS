@@ -1,11 +1,14 @@
 package it.unisa.IS_Project.Controller;
 
+import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagineException.UploadImageException;
+import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.FolderCreationException;
 import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagineException.InvalidFileSizeException;
 import it.unisa.IS_Project.Model.Service.ImmagineService;
 import it.unisa.IS_Project.Utility.SessionManager;
 import it.unisa.IS_Project.Utility.Utility;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,31 +25,37 @@ public class ImmagineControl {
     public ImmagineService immagineService;
     @RequestMapping(value = "/caricaImmagine", method = RequestMethod.POST)
 
-    public String caricaImmagine(@RequestPart("file") MultipartFile immagine, HttpServletRequest request) {
-
-        String email = "";
-
-        //AL MOMENTO ANCHE SE NON STA NESSUNO IN SESSIONE SALVA LO STESSO
+    public void caricaImmagine(@RequestPart("file") MultipartFile immagine, HttpServletRequest request, HttpServletResponse response) throws UploadImageException {
 
         try {
-            email = SessionManager.getEmail(request);
-        } catch (MissingSessionEmailException e) {
-            // TO DO
-        }
 
-        try {
+            String email = SessionManager.getEmail(request);
+
             immagineService.caricaImmagine(immagine, email);
-        } catch (SQLException e) {
-            // TO DO
-        } catch (IOException e) {
-            // TO DO
+
+        } catch (IOException | SQLException e) {
+
+            throw new UploadImageException("ERRORE - CARICA IMMAGINE IOEXCEPTION || SQLEXCEPTION.");
+
+        } catch (MissingSessionEmailException e) {
+
+            try {
+                response.sendError(302, "MSEE");
+            } catch (IOException ex) {
+                throw new UploadImageException("ERRORE - CARICA IMMAGINE IOEXCEPTION.");
+            }
+
         } catch (InvalidFileSizeException e) {
-            // TO DO
+
+            System.out.println("ENTRATO");
+
+            try {
+                response.sendError(500, "IFSE");
+            } catch (IOException ex) {
+                throw new UploadImageException("ERRORE - DIMENSIONE DELL'IMMAGINE NON VALIDA.");
+            }
+
         }
-
-        //chiami il metodo che prende tutte le immagini e le restituisci lato js
-
-        return "gestoreentità";
     }
 
     /*@RequestMapping(value = "/integraImmagine", method = RequestMethod.POST)
