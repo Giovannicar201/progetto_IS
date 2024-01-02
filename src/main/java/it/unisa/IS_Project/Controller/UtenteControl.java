@@ -29,10 +29,12 @@ public class UtenteControl {
     @RequestMapping(value = "/auth/signup", method = RequestMethod.POST)
 
     public String signup(@RequestBody String signup, HttpServletRequest request, Model model) {
+
         JSONParser parser = new JSONParser();
         String email, nome, password, passwordRipetuta;
 
         try {
+
             JSONObject signupJSON = (JSONObject) parser.parse(signup);
 
             email = (String) signupJSON.get("email");
@@ -85,10 +87,12 @@ public class UtenteControl {
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 
     public String login(@RequestBody String login, HttpServletRequest request, Model model) {
+
         JSONParser parser = new JSONParser();
         String email, password;
 
         try {
+
             JSONObject loginJSON = (JSONObject) parser.parse(login);
 
             email = (String) loginJSON.get("email");

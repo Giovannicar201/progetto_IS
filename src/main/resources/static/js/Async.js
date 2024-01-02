@@ -249,3 +249,39 @@ function login() {
     xhr.close();
 
 }
+
+function signup() {
+
+    let xhr = new XMLHttpRequest();
+    let email = document.getElementById("emailRegistrazione").value;
+    let nome = document.getElementById("nomeRegistrazione").value;
+    let password = document.getElementById("PasswordRegistrazione").value;
+    let passwordRipetuta = document.getElementById("RipetiPasswordRegistrazione").value;
+
+    let signupForm = {};
+
+    signupForm.email = email;
+    signupForm.nome = nome;
+    signupForm.password = password;
+    signupForm.passwordRipetuta = passwordRipetuta;
+
+    xhr.open('POST', '/auth/login', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4) {
+
+            if (xhr.status === 500) {
+
+                erroreSignup();
+
+            }
+
+        }
+
+    };
+
+    xhr.send(JSON.stringify(signupForm));
+    xhr.close();
+
+}

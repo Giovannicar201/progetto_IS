@@ -36,7 +36,6 @@ function creaLogin(){
                 '                </div>' +
                 '                <div class="breakDivAction" id="registrazioneDiv">' +
                 '                    <label for="registrazione" style="margin-left: 8px; margin-top: 8px">Sign-up</label>' +
-                '                    <form action="/auth/signup" id="signupForm" method="post">' +
                 '                        <div class="topActionDiv">' +
                 '                            <label for="emailRegistrazione">Email</label>' +
                 '                            <input type="text" class="inputForm" id="emailRegistrazione" name="email"' +
@@ -56,9 +55,8 @@ function creaLogin(){
                 '                            <input type="password" class="inputForm" id="RipetiPasswordRegistrazione" name="passwordRipetuta" required>' +
                 '                        </div>' +
                 '                        <div class="actionDiv">' +
-                '                            <button class="bottone" type="submit">Sign-up</button>' +
+                '                            <button class="bottone" onclick="signup()">Sign-up</button>' +
                 '                        </div>' +
-                '                    </form>' +
                 '                   <div id = "errori"></div>' +
                 '                </div>');
 
@@ -88,6 +86,24 @@ function erroreLogin(){
 
         '<div class="actionDiv">'+
         "                  <label style='color:rgb(175,80,92);'>Errore durante il login! <br>" +
+        "                                                       Controlla che email e/o password siano corretti!</label>" +
+        '</div>'
+
+    );
+
+}
+function erroreSignup(){
+
+    if ($("#errori").children().length > 0){
+
+        $("#errori").empty();
+
+    }
+
+    $("#errori").append(
+
+        '<div class="actionDiv">'+
+        "                  <label style='color:rgb(175,80,92);'>Errore durante la registrazione! <br>" +
         "                                                       Controlla che email e/o password siano corretti!</label>" +
         '</div>'
 
