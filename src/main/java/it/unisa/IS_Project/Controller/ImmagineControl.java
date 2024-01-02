@@ -1,7 +1,7 @@
 package it.unisa.IS_Project.Controller;
 
-import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmptySessionException;
-import it.unisa.IS_Project.Model.Exception.GIM.CaricaImmagineException.InvalidFileSizeException;
+import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmailNotInSessionException;
+import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagineException.InvalidFileSizeException;
 import it.unisa.IS_Project.Model.Service.ImmagineService;
 import it.unisa.IS_Project.Utility.UtilityClass;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +27,7 @@ public class ImmagineControl {
 
         try {
             email = UtilityClass.emailSessione(request);
-        } catch (EmptySessionException e) {
+        } catch (EmailNotInSessionException e) {
             // TO DO
         }
 

@@ -1,4 +1,4 @@
-package it.unisa.IS_Project.Model.Exception.GEN;
+package it.unisa.IS_Project.Model.Exception.GEN.GEN;
 
 public class GENException extends Exception{
     public GENException(String message) {

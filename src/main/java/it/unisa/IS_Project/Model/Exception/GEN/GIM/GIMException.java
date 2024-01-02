@@ -1,4 +1,4 @@
-package it.unisa.IS_Project.Model.Exception.GIM;
+package it.unisa.IS_Project.Model.Exception.GEN.GIM;
 
 public class GIMException extends Exception{
     public GIMException(String message) {

@@ -1,8 +1,8 @@
 package it.unisa.IS_Project.Controller;
 
 import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginPasswordsMismatchException;
-import it.unisa.IS_Project.Model.Exception.GAC.Login.UserNotFound;
-import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmptySessionException;
+import it.unisa.IS_Project.Model.Exception.GAC.Login.UserNotFoundException;
+import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmailNotInSessionException;
 import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidEmailException;
 import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidNameException;
 import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidPasswordException;
@@ -10,8 +10,9 @@ import it.unisa.IS_Project.Model.Exception.GAC.Signup.SignupPasswordsMismatchExc
 import it.unisa.IS_Project.Model.Service.UtenteService;
 import it.unisa.IS_Project.Utility.UtilityClass;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-import lombok.SneakyThrows;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,59 +28,87 @@ public class UtenteControl {
 
     @RequestMapping(value = "/auth/signup", method = RequestMethod.POST)
 
-    public String signup(@RequestParam String email,
-                             @RequestParam String nome,
-                             @RequestParam String password,
-                             @RequestParam String passwordRipetuta, HttpServletRequest request){
+    public String signup(@RequestBody String signup, HttpServletRequest request, Model model) {
+        JSONParser parser = new JSONParser();
+        String email, nome, password, passwordRipetuta;
 
         try {
+            JSONObject signupJSON = (JSONObject) parser.parse(signup);
+
+            email = (String) signupJSON.get("email");
+            nome = (String) signupJSON.get("nome");
+            password = (String) signupJSON.get("password");
+            passwordRipetuta = (String) signupJSON.get("passwordRipetuta");
+
             utenteService.signup(email,nome,password,passwordRipetuta);
-        } catch (NoSuchAlgorithmException e) {
-            // TO DO
+
+        } catch (NoSuchAlgorithmException | ParseException e) {
+
+            return "redirect:/error";
+
         } catch (SignupPasswordsMismatchException e) {
-            // TO DO
+
+            model.addAttribute("error", "ERROR - PASSWORDS DO NOT MATCH.");
+
+            return "LogInRegistrazione";
+
         } catch (InvalidNameException e) {
-            // TO DO
+
+            model.addAttribute("error", "ERROR - INVALID NAME FORMAT.");
+
+            return "LogInRegistrazione";
+
         } catch (InvalidPasswordException e) {
-            // TO DO
+
+            model.addAttribute("error", "ERROR - INVALID PASSWORD FORMAT.");
+
+            return "LogInRegistrazione";
+
         } catch (InvalidEmailException e) {
-            // TO DO
+
+            model.addAttribute("error", "ERROR - INVALID EMAIL FORMAT.");
+
+            return "LogInRegistrazione";
         }
 
         UtilityClass.salvaEmail(request,email);
+
+        try {
+            UtilityClass.emailSessione(request);
+        } catch (EmailNotInSessionException e) {
+            return "redirect:/error";
+        }
 
         return "redirect:/auth";
     }
 
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 
-    public String login(@RequestBody String string, HttpServletRequest request, Model model){
-        /*
-
-
-        ANGELO E GIOVANNI SE LEGGETE QUESTO COMMENTO ORA IO VI PASSO UN JSON TRAMITE ASYNC
-        GESTITEVELO VOI
-        BACIONI
-
-
+    public String login(@RequestBody String login, HttpServletRequest request, Model model) {
+        JSONParser parser = new JSONParser();
+        String email, password;
 
         try {
+            JSONObject loginJSON = (JSONObject) parser.parse(login);
+
+            email = (String) loginJSON.get("email");
+            password = (String) loginJSON.get("password");
 
             utenteService.login(email,password);
 
-        } catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException | ParseException e) {
 
-            // TO DO
+            return "redirect:/error";
 
-        } catch (UserNotFound e) {
+        } catch (UserNotFoundException e) {
 
-            model.addAttribute("errore", "utente non trovato!");
+            model.addAttribute("error", "ERROR - INCORRECT CREDENTIALS.");
 
             return "LogInRegistrazione";
 
         } catch (LoginPasswordsMismatchException e) {
 
-            model.addAttribute("errore", "password errata!");
+            model.addAttribute("error", "ERROR - PASSWORDS DO NOT MATCH.");
 
             return "LogInRegistrazione";
 
@@ -87,21 +116,16 @@ public class UtenteControl {
 
         UtilityClass.salvaEmail(request,email);
 
-        return "redirect:/auth";*/
-
-        System.out.println(string);
-
         return "redirect:/auth";
-
     }
 
     @RequestMapping(value = "/auth/logout", method = RequestMethod.POST)
 
-    public String logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request) {
 
         try {
             UtilityClass.emailSessione(request);
-        } catch (EmptySessionException e) {
+        } catch (EmailNotInSessionException e) {
             return "redirect:/error";
         }
 

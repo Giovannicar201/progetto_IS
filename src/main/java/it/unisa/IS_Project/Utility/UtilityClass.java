@@ -1,6 +1,6 @@
 package it.unisa.IS_Project.Utility;
 
-import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmptySessionException;
+import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmailNotInSessionException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import java.math.BigInteger;
@@ -21,11 +21,11 @@ public class UtilityClass {
 
     }
 
-    public static String emailSessione(HttpServletRequest request) throws EmptySessionException {
+    public static String emailSessione(HttpServletRequest request) throws EmailNotInSessionException {
         String email = (String) request.getSession().getAttribute("email");
 
         if(email == null)
-            throw new EmptySessionException("Nessun utente in sessione");
+            throw new EmailNotInSessionException("Nessun utente in sessione");
 
         return email;
     }

@@ -2,7 +2,7 @@ package it.unisa.IS_Project.Controller;
 
 import it.unisa.IS_Project.Model.Entity.EventoEntity;
 import it.unisa.IS_Project.Model.Entity.IstruzioneEntity;
-import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmptySessionException;
+import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmailNotInSessionException;
 import it.unisa.IS_Project.Model.Service.EventoService;
 import it.unisa.IS_Project.Model.Service.UtenteService;
 import it.unisa.IS_Project.Utility.UtilityClass;
@@ -47,7 +47,7 @@ public class EventoControl {
         String email = null;
         try {
             email = UtilityClass.emailSessione(request);
-        } catch (EmptySessionException e) {
+        } catch (EmailNotInSessionException e) {
             throw new RuntimeException(e);
         }
         String nome = (String) eventoJSON.get("nome");

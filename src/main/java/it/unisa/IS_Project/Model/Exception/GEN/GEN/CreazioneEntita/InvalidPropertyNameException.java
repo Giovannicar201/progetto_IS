@@ -1,4 +1,4 @@
-package it.unisa.IS_Project.Model.Exception.GEN.CreazioneEntita;
+package it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita;
 
 public class InvalidPropertyNameException extends CreazioneEntitaException{
     public InvalidPropertyNameException(String message) {

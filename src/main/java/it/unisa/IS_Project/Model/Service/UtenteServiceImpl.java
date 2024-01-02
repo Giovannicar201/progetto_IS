@@ -2,7 +2,7 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
 import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginPasswordsMismatchException;
-import it.unisa.IS_Project.Model.Exception.GAC.Login.UserNotFound;
+import it.unisa.IS_Project.Model.Exception.GAC.Login.UserNotFoundException;
 import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidEmailException;
 import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidNameException;
 import it.unisa.IS_Project.Model.Exception.GAC.Signup.InvalidPasswordException;
@@ -11,6 +11,7 @@ import it.unisa.IS_Project.Model.Repository.UtenteRepository;
 import it.unisa.IS_Project.Utility.UtilityClass;
 import it.unisa.IS_Project.Utility.ValidatorClass;
 import jakarta.transaction.Transactional;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,11 +52,11 @@ public class UtenteServiceImpl implements UtenteService{
 
     @Override
     @Transactional
-    public void login(String email, String password) throws NoSuchAlgorithmException, UserNotFound, LoginPasswordsMismatchException {
+    public void login(String email, String password) throws NoSuchAlgorithmException, UserNotFoundException, LoginPasswordsMismatchException, ParseException {
         UtenteEntity utente = utenteRepository.findByEmail(email);
 
         if(utente == null)
-            throw new UserNotFound("Utente non registrato");
+            throw new UserNotFoundException("Utente non registrato");
 
         String passwordCriptata = UtilityClass.cryptAlg(password);
 

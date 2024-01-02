@@ -1,7 +1,7 @@
 package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.ImmagineEntity;
-import it.unisa.IS_Project.Model.Exception.GIM.CaricaImmagineException.InvalidFileSizeException;
+import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagineException.InvalidFileSizeException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

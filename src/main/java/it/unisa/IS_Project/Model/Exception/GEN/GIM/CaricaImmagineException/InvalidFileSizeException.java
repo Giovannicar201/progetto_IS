@@ -1,6 +1,6 @@
-package it.unisa.IS_Project.Model.Exception.GIM.CaricaImmagineException;
+package it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagineException;
 
-import it.unisa.IS_Project.Model.Exception.GIM.GIMException;
+import it.unisa.IS_Project.Model.Exception.GEN.GIM.GIMException;
 
 public class InvalidFileSizeException extends GIMException {
     public InvalidFileSizeException(String message) {

@@ -1,7 +1,7 @@
 package it.unisa.IS_Project.Controller;
 
 import it.unisa.IS_Project.Model.Entity.EntitaEntity;
-import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmptySessionException;
+import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmailNotInSessionException;
 import it.unisa.IS_Project.Model.Service.EntitaService;
 import it.unisa.IS_Project.Utility.UtilityClass;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,7 +26,7 @@ public class EntitaControl {
 
             String email = UtilityClass.emailSessione(request);
 
-        } catch (EmptySessionException e) {
+        } catch (EmailNotInSessionException e) {
 
             throw new RuntimeException(e);
 

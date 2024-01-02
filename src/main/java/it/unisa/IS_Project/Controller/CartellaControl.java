@@ -1,7 +1,7 @@
 package it.unisa.IS_Project.Controller;
 
 import it.unisa.IS_Project.Model.Entity.CartellaEntity;
-import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmptySessionException;
+import it.unisa.IS_Project.Model.Exception.GAC.Logout.EmailNotInSessionException;
 import it.unisa.IS_Project.Model.Exception.InvalidFolderNameException;
 import it.unisa.IS_Project.Model.Service.CartellaService;
 import it.unisa.IS_Project.Utility.UtilityClass;
@@ -28,7 +28,7 @@ public class CartellaControl {
 
         try {
             email = UtilityClass.emailSessione(request);
-        } catch (EmptySessionException e) {
+        } catch (EmailNotInSessionException e) {
             // TO DO
         }
 
@@ -48,7 +48,7 @@ public class CartellaControl {
 
         try {
             List<CartellaEntity> cartelle = cartellaService.getAllCartelle(UtilityClass.emailSessione(request));
-        } catch (EmptySessionException e) {
+        } catch (EmailNotInSessionException e) {
             throw new RuntimeException(e);
         }
 
