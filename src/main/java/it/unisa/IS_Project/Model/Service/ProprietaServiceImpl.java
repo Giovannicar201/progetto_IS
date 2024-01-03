@@ -12,6 +12,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProprietaServiceImpl implements ProprietaService{
     @Autowired
@@ -50,5 +52,11 @@ public class ProprietaServiceImpl implements ProprietaService{
         proprietaRepository.delete(proprietaEntityQuery);
 
         creaProprieta(nomeProprieta,valoreProprieta,entita);
+    }
+
+    @Override
+    @Transactional
+    public List<ProprietaEntity> getLista(EntitaEntity entita) {
+        return proprietaRepository.findAllByEntita(entita);
     }
 }

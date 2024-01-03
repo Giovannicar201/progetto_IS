@@ -5,6 +5,7 @@ import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.*;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.EliminazioneEntita.DeleteEntityException;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.EntityNotFoundException;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.ModificaEntita.ModifyEntityException;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.VisualizzaEntita.ViewEntityException;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.VisualizzaListaEntita.ViewEntityListException;
 import it.unisa.IS_Project.Model.Exception.GEN.GIM.VisualizzaListaImmagini.ViewImagesListException;
 import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
@@ -273,9 +274,9 @@ public class EntitaControl {
 
     }
 
-    @RequestMapping(value = "/entità/getEntità", method = RequestMethod.POST)
+    @RequestMapping(value = "/entità/visualizzaListaEntità", method = RequestMethod.POST)
 
-    public String getListaEntita(@ModelAttribute EntitaEntity entitaEntity, HttpServletRequest request, HttpServletResponse response ) throws ViewEntityListException {
+    public String visualizzaListaEntita(HttpServletRequest request, HttpServletResponse response ) throws ViewEntityListException {
         String immagini = new JSONObject().toString();
 
         try {
@@ -301,9 +302,41 @@ public class EntitaControl {
 
         response.setContentType("text/plain");
 
-        System.out.println(immagini);
-
         return immagini;
+    }
+
+    @RequestMapping(value = "/entità/getEntità", method = RequestMethod.POST)
+
+    public String visualizzaEntita(@RequestBody String nome, HttpServletRequest request, HttpServletResponse response ) throws ViewEntityException {
+        String entita = new JSONObject().toString();
+
+        try {
+
+            SessionManager.getEmail(request);
+
+            entita = entitaService.visualizzaEntita(nome);
+
+        } catch (MissingSessionEmailException e) {
+
+            try {
+                response.sendError(302, "MSEE");
+            } catch (IOException ex) {
+                throw new ViewEntityException("ERRORE - VISUALIZZA IMMAGINE IOEXCEPTION.");
+            }
+
+        } catch (EntityNotFoundException e) {
+
+            try {
+                response.sendError(500, "ENFE");
+            } catch (IOException ex) {
+                throw new ViewEntityException("ERRORE - VISUALIZZA IMMAGINE SQLEXCEPTION.");
+            }
+
+        }
+
+        response.setContentType("text/plain");
+
+        return entita;
     }
 }
 

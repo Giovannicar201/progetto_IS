@@ -20,7 +20,7 @@ public class CartellaServiceImpl implements CartellaService{
     @Autowired
     private CartellaRepository cartellaRepository;
     @Autowired
-    private UtenteRepository utenteRepository;
+    private UtenteService utenteService;
 
 
     @Override
@@ -28,7 +28,7 @@ public class CartellaServiceImpl implements CartellaService{
     public void creaCartella(String nomeCartella,String email) throws InvalidFolderNameException, NotUniqueFolderException {
         CartellaEntity cartellaEntity = new CartellaEntity();
         CartellaEntity cartellaEntityQuery = cartellaRepository.findByNome(nomeCartella);
-        UtenteEntity utenteEntity = utenteRepository.findByEmail(email);
+        UtenteEntity utenteEntity = utenteService.get(email);
 
         if(Validator.isFolderNameValid(nomeCartella))
             throw new InvalidFolderNameException("ERRORE - NOME CARTELLA NON VALIDO.");

@@ -27,14 +27,14 @@ public class ImmagineServiceImpl implements ImmagineService{
     @Autowired
     private ImmagineRepository immagineRepository;
     @Autowired
-    private UtenteRepository utenteRepository;
+    private UtenteService utenteService;
 
     @Override
     @Transactional
     public void caricaImmagine(MultipartFile foto, String email) throws SQLException, IOException, InvalidFileSizeException {
 
         ImmagineEntity immagineEntity = new ImmagineEntity();
-        UtenteEntity utenteEntity = utenteRepository.findByEmail(email);
+        UtenteEntity utenteEntity = utenteService.get(email);
 
         if(!isImageSizeValid(foto))
             throw new InvalidFileSizeException("Dimensione dell'immagine non valida");

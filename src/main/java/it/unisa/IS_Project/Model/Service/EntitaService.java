@@ -14,7 +14,7 @@ public interface EntitaService {
 
     void eliminaEntita(String nome) throws EntityNotFoundException;
 
-    EntitaEntity get(String nome);
+    String visualizzaEntita(String nome) throws EntityNotFoundException;
 
     String visualizzaListaEntitaInCartella(String email, String nomeCartella) throws SQLException;
 

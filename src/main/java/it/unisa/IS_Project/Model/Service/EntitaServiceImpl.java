@@ -21,22 +21,22 @@ public class EntitaServiceImpl implements EntitaService{
     @Autowired
     private EntitaRepository entitaRepository;
     @Autowired
-    private MappaRepository mappaRepository;
+    private UtenteService utenteService;
     @Autowired
-    private UtenteRepository utenteRepository;
+    private ImmagineService immagineService;
     @Autowired
-    private ImmagineRepository immagineRepository;
+    private CartellaService cartellaService;
     @Autowired
-    private CartellaRepository cartellaRepository;
+    private ProprietaService proprietaService;
 
     @Override
     @Transactional
     public void creaEntita(String email, String nomeImmagine, String nome, String collisioni, String nomeCartella, List<String> nomiProprieta, List<String> valoriProprieta) throws InvalidCollisionException, FolderNotFoundException, InvalidNumberOfPropertyException, NotUniqueEntityException, InvalidEntityNameException, ImageNotFoundException {
         EntitaEntity entitaEntity = new EntitaEntity();
         EntitaEntity entitaEntityQuery = entitaRepository.findByNome(nome);
-        ImmagineEntity immagineEntityQuery = immagineRepository.findByNome(nomeImmagine);
-        CartellaEntity cartellaEntityQuery = cartellaRepository.findByNome(nomeCartella);
-        UtenteEntity utenteEntity = utenteRepository.findByEmail(email);
+        ImmagineEntity immagineEntityQuery = immagineService.get(nomeImmagine);
+        CartellaEntity cartellaEntityQuery = cartellaService.get(nomeCartella);
+        UtenteEntity utenteEntity = utenteService.get(email);
 
         if(immagineEntityQuery == null)
             throw new ImageNotFoundException("ERRORE - IMMAGINE NON ESISTENTE.");
@@ -111,8 +111,27 @@ public class EntitaServiceImpl implements EntitaService{
 
     @Override
     @Transactional
-    public EntitaEntity get(String nome) {
-        return entitaRepository.findByNome(nome);
+    public String visualizzaEntita(String nome) throws EntityNotFoundException {
+        JSONObject entitaJSON = new JSONObject();
+        JSONArray proprieta = new JSONArray();
+        EntitaEntity entitaEntityQuery = entitaRepository.findByNome(nome);
+
+        if(entitaEntityQuery == null)
+            throw new EntityNotFoundException("ERRORE - ENTITÀ NON ESISTENTE.");
+
+        for(ProprietaEntity proprietaEntity : proprietaService.getLista(entitaEntityQuery)) {
+            JSONObject proprietaJSON = new JSONObject();
+
+            proprietaJSON.put(proprietaEntity.getNome(),proprietaEntity.getValore());
+
+            proprieta.add(proprietaJSON);
+        }
+
+        entitaJSON.put("nome",entitaEntityQuery.getNome());
+        entitaJSON.put("collisioni",entitaEntityQuery.getCollisione());
+        entitaJSON.put("proprieta",proprieta);
+
+        return entitaJSON.toString();
     }
 
     @Override
