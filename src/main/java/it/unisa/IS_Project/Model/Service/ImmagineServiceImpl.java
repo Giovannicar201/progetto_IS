@@ -1,9 +1,8 @@
 package it.unisa.IS_Project.Model.Service;
 
-import it.unisa.IS_Project.Model.Entity.CartellaEntity;
 import it.unisa.IS_Project.Model.Entity.ImmagineEntity;
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
-import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagineException.InvalidFileSizeException;
+import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagine.InvalidFileSizeException;
 import it.unisa.IS_Project.Model.Repository.ImmagineRepository;
 import it.unisa.IS_Project.Model.Repository.UtenteRepository;
 import jakarta.transaction.Transactional;
@@ -97,11 +96,10 @@ public class ImmagineServiceImpl implements ImmagineService{
         List<ImmagineEntity> immagini = immagineRepository.findAllByEmail(email);;
 
         for(ImmagineEntity immagineEntity : immagini) {
+            JSONObject immagineJSON = new JSONObject();
             Blob immagine = immagineEntity.getFoto();
-            System.out.println("IMMAGINE :" + immagine);
             byte[] bytes = immagine.getBytes(1, (int) immagine.length());
-            System.out.println("BYTES :" + immagine);
-            System.out.println("ENC BYTES :" + Base64.getEncoder().encodeToString(bytes));
+            immagineJSON.put(immagineEntity.getNome(),)
             blobImmagini.add(Base64.getEncoder().encodeToString(bytes));
         }
 

@@ -2,7 +2,9 @@ package it.unisa.IS_Project.Controller;
 
 import it.unisa.IS_Project.Model.Entity.CartellaEntity;
 import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginException;
+import it.unisa.IS_Project.Model.Exception.GEN.GIM.VisualizzaListaImmagini.VisualizzaListaImmaginiException;
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.FolderCreationException;
+import it.unisa.IS_Project.Model.Exception.GMP.GCR.VisualizzaListaCartelle.VisualizzaListaCartelleException;
 import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.InvalidFolderNameException;
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.NotUniqueFolderException;
@@ -72,7 +74,7 @@ public class CartellaControl {
     @RequestMapping(value = "/gestoreCartelle/visualizzaListaCartelle", method = RequestMethod.GET)
     @ResponseBody
 
-    public String visualizzaListaCartelle(HttpServletRequest request, HttpServletResponse response) {
+    public String visualizzaListaCartelle(HttpServletRequest request, HttpServletResponse response) throws VisualizzaListaCartelleException {
         String nomiCartelle = new JSONObject().toString();
 
         try {
@@ -81,8 +83,11 @@ public class CartellaControl {
 
         } catch (MissingSessionEmailException e) {
 
-            response.setHeader("Location", "/auth");
-            response.setStatus(302);
+            try {
+                response.sendError(302, "MSEE");
+            } catch (IOException ex) {
+                throw new VisualizzaListaCartelleException("ERRORE - NESSUN UTENTE IN SESSIONE.");
+            };
         }
 
         response.setContentType("text/plain");

@@ -1,12 +1,12 @@
 package it.unisa.IS_Project.Controller;
 
-import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagineException.UploadImageException;
+import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagine.UploadImageException;
+import it.unisa.IS_Project.Model.Exception.GEN.GIM.VisualizzaListaImmagini.VisualizzaListaImmaginiException;
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.FolderCreationException;
 import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
-import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagineException.InvalidFileSizeException;
+import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagine.InvalidFileSizeException;
 import it.unisa.IS_Project.Model.Service.ImmagineService;
 import it.unisa.IS_Project.Utility.SessionManager;
-import it.unisa.IS_Project.Utility.Utility;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 @Controller
 public class ImmagineControl {
@@ -71,7 +70,7 @@ public class ImmagineControl {
     @RequestMapping(value = "/gestoreImmagini/visualizzaListaImmagini", method = RequestMethod.GET)
     @ResponseBody
 
-    public String visualizzaListaImmagini(HttpServletRequest request, HttpServletResponse response) {
+    public String visualizzaListaImmagini(HttpServletRequest request, HttpServletResponse response) throws VisualizzaListaImmaginiException {
         String immagini = new JSONObject().toString();
 
         try {
@@ -80,16 +79,22 @@ public class ImmagineControl {
 
         }catch (SQLException e) {
 
-            System.out.println("SQL");
+            try {
+                response.sendError(302, "MSEE");
+            } catch (IOException ex) {
+                throw new VisualizzaListaImmaginiException("ERRORE - VISUALIZZA LISTA IMMAGINI SQLEXCEPTION.");
+            }
 
         } catch (MissingSessionEmailException e) {
 
-            System.out.println("NO EMAIL");
+            try {
+                response.sendError(302, "MSEE");
+            } catch (IOException ex) {
+                throw new VisualizzaListaImmaginiException("ERRORE - NESSUN UTENTE IN SESSIONE.");
+            }
         }
 
         response.setContentType("text/plain");
-
-        System.out.println(immagini);
 
         return immagini;
     }

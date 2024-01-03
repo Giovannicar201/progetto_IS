@@ -1,4 +1,4 @@
-package it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagineException;
+package it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagine;
 
 import it.unisa.IS_Project.Model.Exception.GEN.GIM.GIMException;
 
