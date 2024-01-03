@@ -137,8 +137,10 @@ function creaImmagini(){
             '              </div>' +
             '</div>' +
             '<div class="breakDivAction">' +
-            '<div id="show" class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+            '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
             '       Immagini </div>' +
+            '   <div class="actionDiv" id="show">' +
+            '   </div> ' +
             '</div>');
 
         document.getElementById("creaImmagini").classList.add("pressed");

@@ -2,8 +2,12 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.EntitaEntity;
 import it.unisa.IS_Project.Model.Entity.ProprietaEntity;
-import it.unisa.IS_Project.Model.Repository.EntitaRepository;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.InvalidPropertyNameException;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.InvalidPropertyValueException;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.NotUniquePropertyException;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.PropertyNotFoundException;
 import it.unisa.IS_Project.Model.Repository.ProprietaRepository;
+import it.unisa.IS_Project.Utility.Validator;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,45 +16,39 @@ import org.springframework.stereotype.Service;
 public class ProprietaServiceImpl implements ProprietaService{
     @Autowired
     private ProprietaRepository proprietaRepository;
-    @Autowired
-    private EntitaRepository entitaRepository;
 
     @Override
     @Transactional
-    public ProprietaEntity add(String nomeProprieta,String valore,int idEntita) {
-        ProprietaEntity proprietaEntity=new ProprietaEntity();
+    public void creaProprieta(String nomeProprieta, String valoreProprieta, EntitaEntity entita) throws InvalidPropertyNameException, InvalidPropertyValueException, NotUniquePropertyException {
+        ProprietaEntity proprietaEntity = new ProprietaEntity();
+        ProprietaEntity proprietaEntityQuery = proprietaRepository.findByNome(nomeProprieta);
+
+        if(!Validator.isPropertyNameValid(nomeProprieta))
+            throw new InvalidPropertyNameException("ERRORE - NOME PROPRIETÀ NON VALIDO.");
+
+        if(proprietaEntityQuery != null)
+            throw new NotUniquePropertyException("ERRORE - PROPRIETÀ GIÀ ESISTENTE.");
+
+        if(!Validator.isPropertyValueValid(valoreProprieta))
+            throw new InvalidPropertyValueException("ERRORE - VALORE PROPRIETÀ NON VALIDO.");
+
         proprietaEntity.setNome(nomeProprieta);
-        proprietaEntity.setValore(valore);
-
-        EntitaEntity entitaEntity=entitaRepository.findAllById(idEntita).get();
-        entitaEntity.setId(idEntita);
-
-        proprietaEntity.setEntita(entitaEntity);
+        proprietaEntity.setValore(valoreProprieta);
+        proprietaEntity.setEntita(entita);
 
         proprietaRepository.save(proprietaEntity);
-        return proprietaEntity;
     }
 
     @Override
     @Transactional
-    public ProprietaEntity get(String nomeProprieta) {
-        ProprietaEntity proprietaEntity=proprietaRepository.findByNome(nomeProprieta).get();
-        return proprietaEntity;
-    }
+    public void modificaProprieta(String nomeProprieta, String valoreProprieta, EntitaEntity entita) throws PropertyNotFoundException, InvalidPropertyNameException, InvalidPropertyValueException, NotUniquePropertyException {
+        ProprietaEntity proprietaEntityQuery = proprietaRepository.findByNome(nomeProprieta);
 
-    @Override
-    @Transactional
-    public ProprietaEntity update(ProprietaEntity newProprietaEntity,String nomeProprieta) {
-        ProprietaEntity proprietaEntity=proprietaRepository.findByNome(nomeProprieta).orElse(null);
-        newProprietaEntity.setNome(nomeProprieta);
-        proprietaEntity.setNome(newProprietaEntity.getNome());
-        ProprietaEntity saved=proprietaRepository.save(proprietaEntity);
-        return saved;
-    }
+        if(proprietaEntityQuery == null)
+            throw new PropertyNotFoundException("ERRORE - PROPRIETÀ NON ESISTENTE.");
 
-    @Override
-    @Transactional
-    public void delete(String nomeProprieta) {
-        proprietaRepository.deleteByNome(nomeProprieta);
+        proprietaRepository.delete(proprietaEntityQuery);
+
+        creaProprieta(nomeProprieta,valoreProprieta,entita);
     }
 }

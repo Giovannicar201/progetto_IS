@@ -15,7 +15,7 @@ public interface EntitaRepository extends JpaRepository<EntitaEntity,Integer> {
     Optional<EntitaEntity> findAllById(int idEntita);
 
     @Query
-    Optional<EntitaEntity> findByNome(String nomeEntita);
+    EntitaEntity findByNome(String nomeEntita);
 
     @Query
     void deleteByNome(String nomeEntita);

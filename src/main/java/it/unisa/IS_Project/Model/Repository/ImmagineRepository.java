@@ -19,7 +19,7 @@ public interface ImmagineRepository extends JpaRepository<ImmagineEntity,Integer
     List<ImmagineEntity> findAllByEmail(@Param("email")String email);
 
     @Query("SELECT i FROM ImmagineEntity i WHERE i.nome = :nome")
-    Optional<ImmagineEntity> findByNome(@Param("nome") String nome);
+    ImmagineEntity findByNome(@Param("nome") String nome);
 
     @Query("SELECT i FROM ImmagineEntity i,UtenteEntity u WHERE i.email.email=u.email AND i.email.email = :email AND i.nome = :nome")
     Optional<ImmagineEntity> findByNomeAndEmail(@Param("nome")String nome,@Param("email")String email);

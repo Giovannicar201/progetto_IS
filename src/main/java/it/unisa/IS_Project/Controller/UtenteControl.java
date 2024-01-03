@@ -3,8 +3,9 @@ package it.unisa.IS_Project.Controller;
 import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginException;
 import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginPasswordsMismatchException;
 import it.unisa.IS_Project.Model.Exception.GAC.Login.UserNotFoundException;
-import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
+import it.unisa.IS_Project.Model.Exception.GAC.Logout.LogoutException;
 import it.unisa.IS_Project.Model.Exception.GAC.Signup.*;
+import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.UtenteService;
 import it.unisa.IS_Project.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,8 +28,7 @@ public class UtenteControl {
 
     @RequestMapping(value = "/auth/signup", method = RequestMethod.POST)
 
-    public String signup(@RequestBody String signup, HttpServletRequest request, HttpServletResponse response)
-            throws SignupException {
+    public void signup(@RequestBody String signup, HttpServletRequest request, HttpServletResponse response) throws SignupException {
 
         JSONParser parser = new JSONParser();
         String email = null, nome, password, passwordRipetuta;
@@ -46,7 +46,11 @@ public class UtenteControl {
 
         } catch (NoSuchAlgorithmException | ParseException e) {
 
-            return "redirect:/error";
+            try {
+                response.sendError(302, "NQTE");
+            } catch (IOException ex) {
+                throw new SignupException("ERRORE - NOSUCHALGORITHEXCEPTION || PARSEEXCEPTION.");
+            }
 
         } catch (SignupPasswordsMismatchException e) {
 
@@ -91,24 +95,11 @@ public class UtenteControl {
         }
 
         SessionManager.setEmail(request,email);
-
-        try {
-
-            SessionManager.getEmail(request);
-
-        } catch (MissingSessionEmailException e) {
-
-            return "redirect:/error";
-
-        }
-
-        return "redirect:/auth";
     }
 
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 
-    public String login(@RequestBody String login, HttpServletRequest request, HttpServletResponse response)
-            throws LoginException {
+    public void login(@RequestBody String login, HttpServletRequest request, HttpServletResponse response) throws LoginException {
 
         JSONParser parser = new JSONParser();
         String email, password;
@@ -126,7 +117,11 @@ public class UtenteControl {
 
         } catch (NoSuchAlgorithmException | ParseException e) {
 
-            return "redirect:/error";
+            try {
+                response.sendError(302, "NQTE");
+            } catch (IOException ex) {
+                throw new LoginException("ERRORE - NOSUCHALGORITHEXCEPTION || PARSEEXCEPTION.");
+            }
 
         } catch (UserNotFoundException e) {
 
@@ -145,17 +140,27 @@ public class UtenteControl {
             }
 
         }
-
-        return "redirect:/auth";
     }
 
     @RequestMapping(value = "/auth/logout", method = RequestMethod.POST)
 
-    public String logout(HttpServletRequest request) {
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws LogoutException {
 
-        request.getSession().invalidate();
+        try {
 
-        return "redirect:/auth";
+            SessionManager.getEmail(request);
+
+            request.getSession().invalidate();
+
+        } catch (MissingSessionEmailException e) {
+
+            try {
+                response.sendError(302, "MSEE");
+            } catch (IOException ex) {
+                throw new LogoutException("ERRORE - CARICA IMMAGINE IOEXCEPTION.");
+            }
+
+        }
     }
 
 }

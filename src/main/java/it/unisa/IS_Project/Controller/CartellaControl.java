@@ -1,8 +1,5 @@
 package it.unisa.IS_Project.Controller;
 
-import it.unisa.IS_Project.Model.Entity.CartellaEntity;
-import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginException;
-import it.unisa.IS_Project.Model.Exception.GEN.GIM.VisualizzaListaImmagini.VisualizzaListaImmaginiException;
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.FolderCreationException;
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.VisualizzaListaCartelle.VisualizzaListaCartelleException;
 import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
@@ -10,16 +7,11 @@ import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.InvalidFolderNam
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.NotUniqueFolderException;
 import it.unisa.IS_Project.Model.Service.CartellaService;
 import it.unisa.IS_Project.Utility.SessionManager;
-import it.unisa.IS_Project.Utility.Utility;
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

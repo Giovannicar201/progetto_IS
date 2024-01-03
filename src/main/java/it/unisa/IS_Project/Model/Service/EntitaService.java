@@ -1,11 +1,12 @@
 package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.EntitaEntity;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.*;
 
 import java.util.List;
 
 public interface EntitaService {
-    EntitaEntity add(String nome,String collisione,String coordinate,String email,String nomeFoto,String nomeCartella);
+    void creaEntita(String email, String nomeImmagine, String nome, String collisioni, String nomeCartella, List<String> nomiProprieta, List<String> valoriProprieta) throws InvalidCollisionException, FolderNotFoundException, InvalidNumberOfPropertyException, NotUniqueEntityException, InvalidEntityNameException, ImageNotFoundException;
 
     EntitaEntity get(String nomeEntita);
 

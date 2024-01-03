@@ -281,10 +281,9 @@ function saveImages() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                alert("Immagine caricata con successo!");
                 showImmagini();
             } else {
-                alert("Errore durante il caricamento dell'immagine.");
+
             }
         }
     };
@@ -418,7 +417,7 @@ function showImmagini(){
 
                 let x = JSON.parse(xhr.responseText);
 
-                console.log(x);
+                let breakCounter = 0;
 
                 x.blobImmagini.forEach(function (immagine) {
 
@@ -426,8 +425,10 @@ function showImmagini(){
                     let src = "data:image;base64," + immagine[id];
 
                     $("#show").append(
-                        '<img id="' + id + '" src="' + src + '" style="display: block">');
+                        '<img id="' + id + '" src="' + src + '">');
                 });
+
+
             }
 
             if (xhr.status === 500) {
@@ -442,5 +443,8 @@ function showImmagini(){
 
     xhr.send();
     xhr.close;
+}
+
+function getImageName() {
 
 }

@@ -1,13 +1,13 @@
 package it.unisa.IS_Project.Model.Service;
 
-import it.unisa.IS_Project.Model.Entity.ProprietaEntity;
+import it.unisa.IS_Project.Model.Entity.EntitaEntity;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.InvalidPropertyNameException;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.InvalidPropertyValueException;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.NotUniquePropertyException;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.PropertyNotFoundException;
 
 public interface ProprietaService {
-    ProprietaEntity add(String nomeProprieta,String valore,int idEntita);
+    void creaProprieta(String nomeProprieta, String valoreProprieta, EntitaEntity entita) throws InvalidPropertyNameException, InvalidPropertyValueException, NotUniquePropertyException;
 
-    ProprietaEntity get(String nomeProprieta);
-
-    ProprietaEntity update(ProprietaEntity newProprietaEntity,String nomeProprieta);
-
-    void delete(String nomeProprieta);
+    void modificaProprieta(String nomeProprieta, String valoreProprieta, EntitaEntity entita) throws PropertyNotFoundException, InvalidPropertyNameException, InvalidPropertyValueException, NotUniquePropertyException;
 }

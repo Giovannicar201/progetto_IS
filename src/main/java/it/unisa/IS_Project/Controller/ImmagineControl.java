@@ -54,18 +54,41 @@ public class ImmagineControl {
         }
     }
 
-    /*@RequestMapping(value = "/integraImmagine", method = RequestMethod.POST)
+    @RequestMapping(value = "/gestoreImmagini/integraImmagine", method = RequestMethod.POST)
 
-    public String integraPixelArt(@RequestPart("file") MultipartFile immagine, HttpServletRequest request) {
-        byte byteArray[] = ImmDAO.doGetImm(request.getParameter("img"),
-                request.getParameter("tipo"));
-        response.setContentType("image/gif");
-        OutputStream os = response.getOutputStream();
-        os.write(byteArray);
-        os.flush();
-        os.close();
-        return "gestoreentità";
-    }*/
+    public void integraPixelArt(@RequestPart("file") MultipartFile immagine, HttpServletRequest request, HttpServletResponse response) throws UploadImageException {
+
+        //SE LATO JS SI SETTA IL NOME DELL'IMMAGINE POSSIAMO FARE UN UNICO METODO
+        //NEL CASO VA RIPORTATO QUESTO CAMBIAMENTO NELL'ODD
+
+        try {
+
+            String email = SessionManager.getEmail(request);
+
+            immagineService.caricaImmagine(immagine, email);
+
+        } catch (IOException | SQLException e) {
+
+            throw new UploadImageException("ERRORE - CARICA IMMAGINE IOEXCEPTION || SQLEXCEPTION.");
+
+        } catch (MissingSessionEmailException e) {
+
+            try {
+                response.sendError(302, "MSEE");
+            } catch (IOException ex) {
+                throw new UploadImageException("ERRORE - CARICA IMMAGINE IOEXCEPTION.");
+            }
+
+        } catch (InvalidFileSizeException e) {
+
+            try {
+                response.sendError(500, "IFSE");
+            } catch (IOException ex) {
+                throw new UploadImageException("ERRORE - DIMENSIONE DELL'IMMAGINE NON VALIDA.");
+            }
+
+        }
+    }
 
     @RequestMapping(value = "/gestoreImmagini/visualizzaListaImmagini", method = RequestMethod.GET)
     @ResponseBody
