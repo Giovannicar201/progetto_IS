@@ -11,7 +11,6 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.imageio.ImageIO;
 import javax.sql.rowset.serial.SerialBlob;
 import java.awt.image.BufferedImage;
@@ -97,10 +96,13 @@ public class ImmagineServiceImpl implements ImmagineService{
 
         for(ImmagineEntity immagineEntity : immagini) {
             JSONObject immagineJSON = new JSONObject();
+
             Blob immagine = immagineEntity.getFoto();
             byte[] bytes = immagine.getBytes(1, (int) immagine.length());
-            immagineJSON.put(immagineEntity.getNome(),)
-            blobImmagini.add(Base64.getEncoder().encodeToString(bytes));
+
+            immagineJSON.put(immagineEntity.getNome(),Base64.getEncoder().encodeToString(bytes));
+
+            blobImmagini.add(immagineJSON);
         }
 
         immaginiJSON.put("blobImmagini", blobImmagini);

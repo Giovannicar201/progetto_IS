@@ -96,6 +96,8 @@ public class ImmagineControl {
 
         response.setContentType("text/plain");
 
+        System.out.println(immagini);
+
         return immagini;
     }
 }

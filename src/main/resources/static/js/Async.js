@@ -420,13 +420,13 @@ function showImmagini(){
 
                 console.log(x);
 
-                x.blobImmagini.forEach(function (blob) {
+                x.blobImmagini.forEach(function (immagine) {
 
-                    //let decodedBlobData = atob(blob);
-                    let src = "data:image;base64," + blob;
+                    let id = Object.keys(immagine)[0];
+                    let src = "data:image;base64," + immagine[id];
 
                     $("#show").append(
-                        '<img src="' + src + '" style="display: block">');
+                        '<img id="' + id + '" src="' + src + '" style="display: block">');
                 });
             }
 
