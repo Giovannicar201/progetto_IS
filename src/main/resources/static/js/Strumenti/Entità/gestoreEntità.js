@@ -142,7 +142,14 @@ function creaImmagini(){
             '<div class="breakDivAction">' +
             '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
             '       Immagini </div>' +
-            '   <div class="actionDiv" id="show">' +
+            '   <div class="actionDiv">' +
+            '       <div class="entityDiv" style="padding: 8px; border-radius: 2px;" id="show">' +
+            '           ' +
+            '       </div>' +
+            '       <div class="actionDiv">' +
+            '           <label>Nome Immagine</label>' +
+            '           <input type="text" class="inputForm" id="nomeImmagine" disabled/>' +
+            '       </div>' +
             '   </div> ' +
             '</div>');
 
@@ -251,4 +258,10 @@ function showFile(){
         label.classList.remove("file");
 
     }
+}
+
+function showInfo(id){
+
+    $("#nomeImmagine").val(id);
+
 }

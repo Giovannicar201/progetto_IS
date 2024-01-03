@@ -417,15 +417,14 @@ function showImmagini(){
 
                 let x = JSON.parse(xhr.responseText);
 
-                let breakCounter = 0;
-
                 x.blobImmagini.forEach(function (immagine) {
 
                     let id = Object.keys(immagine)[0];
                     let src = "data:image;base64," + immagine[id];
 
                     $("#show").append(
-                        '<img id="' + id + '" src="' + src + '">');
+                        '<img id="' + id + '" src="' + src + '" style ="width: 64px; height: 64px;" onclick="showInfo(id)">');
+
                 });
 
 
