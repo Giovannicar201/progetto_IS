@@ -22,7 +22,8 @@ public class ImmagineControl {
     public ImmagineService immagineService;
     @RequestMapping(value = "/gestoreImmagini/caricaImmagine", method = RequestMethod.POST)
 
-    public void caricaImmagine(@RequestPart("file") MultipartFile immagine, HttpServletRequest request, HttpServletResponse response) throws UploadImageException {
+    public void caricaImmagine(@RequestPart("file") MultipartFile immagine, HttpServletRequest request,
+                               HttpServletResponse response) throws UploadImageException {
 
         try {
 

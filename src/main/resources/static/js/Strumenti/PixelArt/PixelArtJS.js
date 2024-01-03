@@ -126,7 +126,7 @@ function creaMatitaPA(){
                 '' +
                 '<div class="actionDiv">'+
                 '                  <label>Colori</label>' +
-                '                   <div class="coloriDiv" id="coloriPalette">' +
+                '                   <div class="entityDiv" id="coloriPalette">' +
                 '                  </div>' +
                 '              </div>'  +
                 '</div>' +

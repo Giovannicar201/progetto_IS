@@ -131,15 +131,25 @@ function creaImmagini(){
             '              </div>' +
             '<div class="actionDiv">' +
             '                   <form id="file" enctype="multipart/form-data">' +
-            '                       <input name="file" id="fileInput" type="file" accept="image/*"/>' +
+            '                       <label for="fileInput" id="label" style="cursor: pointer; width: 352px; height: 24px; margin-bottom: 8px;" class="inputForm">Carica File</label>' +
+            '                       <input name="file" id="fileInput" style="opacity: 0; position: absolute;" type="file" onchange="showFile()" accept="image/*" hidden="hidden"/>' +
             '                   </form>' +
-            '                    <button onclick="saveImages()">Submit</button>' +
             '              </div>' +
+            '<div class="actionDiv" style="margin-top: 0px;">' +
+            '                   <button class="bottone" onclick="saveImages()">Carica Immagine</button>' +
+            '</div>' +
             '</div>' +
             '<div class="breakDivAction">' +
             '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
             '       Immagini </div>' +
-            '   <div class="actionDiv" id="show">' +
+            '   <div class="actionDiv">' +
+            '       <div class="entityDiv" style="padding: 8px; border-radius: 2px;" id="show">' +
+            '           ' +
+            '       </div>' +
+            '       <div class="actionDiv">' +
+            '           <label>Nome Immagine</label>' +
+            '           <input type="text" class="inputForm" id="nomeImmagine" disabled/>' +
+            '       </div>' +
             '   </div> ' +
             '</div>');
 
@@ -230,5 +240,28 @@ function erroreCreaEntità(){
         '</div>'
 
     );
+
+}
+
+function showFile(){
+
+    let label = document.getElementById("label");
+
+    if(!label.classList.contains("file")) {
+
+        label.innerHTML = document.getElementById("fileInput").files[0].name;
+        label.classList.add("file");
+
+    } else{
+
+        label.innerHTML = "Carica File";
+        label.classList.remove("file");
+
+    }
+}
+
+function showInfo(id){
+
+    $("#nomeImmagine").val(id);
 
 }

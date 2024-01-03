@@ -15,6 +15,17 @@ label{
 
 }
 
+.entityDiv {
+
+    width: 352px;
+    height: 150px;
+    display: grid;
+    background-color: #1A1A1A;
+    grid-template-columns: repeat(4, 64px);
+    grid-gap: 8px;
+
+}
+
 .break{
 
     background-color: #1A1A1A;
