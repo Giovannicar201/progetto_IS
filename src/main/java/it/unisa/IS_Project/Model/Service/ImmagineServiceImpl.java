@@ -1,11 +1,14 @@
 package it.unisa.IS_Project.Model.Service;
 
+import it.unisa.IS_Project.Model.Entity.CartellaEntity;
 import it.unisa.IS_Project.Model.Entity.ImmagineEntity;
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
 import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagineException.InvalidFileSizeException;
 import it.unisa.IS_Project.Model.Repository.ImmagineRepository;
 import it.unisa.IS_Project.Model.Repository.UtenteRepository;
 import jakarta.transaction.Transactional;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -48,7 +52,8 @@ public class ImmagineServiceImpl implements ImmagineService{
     }
 
     private static Blob convertMultipartFileToBlob(MultipartFile multipartFile) throws SQLException {
-        try (InputStream inputStream = multipartFile.getInputStream()) {
+        try {
+            InputStream inputStream = multipartFile.getInputStream();
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
             byte[] buffer = new byte[4096];
@@ -85,7 +90,23 @@ public class ImmagineServiceImpl implements ImmagineService{
     }
 
     @Override
-    public List<ImmagineEntity> getAllImmagini(String email) {
-        return immagineRepository.findAllByEmail(email);
+    public String visualizzaListaImmagini(String email) throws SQLException {
+        JSONObject immaginiJSON = new JSONObject();
+        JSONArray blobImmagini = new JSONArray();
+
+        List<ImmagineEntity> immagini = immagineRepository.findAllByEmail(email);;
+
+        for(ImmagineEntity immagineEntity : immagini) {
+            Blob immagine = immagineEntity.getFoto();
+            System.out.println("IMMAGINE :" + immagine);
+            byte[] bytes = immagine.getBytes(1, (int) immagine.length());
+            System.out.println("BYTES :" + immagine);
+            System.out.println("ENC BYTES :" + Base64.getEncoder().encodeToString(bytes));
+            blobImmagini.add(Base64.getEncoder().encodeToString(bytes));
+        }
+
+        immaginiJSON.put("blobImmagini", blobImmagini);
+
+        return immaginiJSON.toString();
     }
 }

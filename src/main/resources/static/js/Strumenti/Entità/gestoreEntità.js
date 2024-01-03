@@ -137,11 +137,12 @@ function creaImmagini(){
             '              </div>' +
             '</div>' +
             '<div class="breakDivAction">' +
-            '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+            '<div id="show" class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
             '       Immagini </div>' +
             '</div>');
 
         document.getElementById("creaImmagini").classList.add("pressed");
+        showImmagini();
 
     } else {
 

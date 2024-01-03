@@ -276,12 +276,13 @@ function saveImages() {
     let xhr = new XMLHttpRequest();
     let formDataImmagine = new FormData(document.getElementById("file"));
 
-    xhr.open('POST', '/caricaImmagine', true);
+    xhr.open('POST', '/gestoreImmagini/caricaImmagine', true);
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 alert("Immagine caricata con successo!");
+                showImmagini();
             } else {
                 alert("Errore durante il caricamento dell'immagine.");
             }
@@ -310,8 +311,6 @@ function login() {
         if (xhr.readyState === 4) {
 
             if (xhr.status === 200) {
-
-                alert("login effettuato con successo!");
 
                 window.location.reload();
 
@@ -357,8 +356,6 @@ function signup() {
 
             if (xhr.status === 200) {
 
-                alert("sign-up effettuato con successo!");
-
                 window.location.reload();
 
             }
@@ -392,9 +389,50 @@ function logout(){
 
             if (xhr.status === 200) {
 
-               alert("logout effettuato con successo!");
-
                 window.location.reload();
+
+            }
+
+        }
+
+    };
+
+    xhr.send();
+    xhr.close;
+
+}
+
+function showImmagini(){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET', '/gestoreImmagini/visualizzaListaImmagini', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4) {
+
+            if (xhr.status === 200) {
+
+                $("#show").empty();
+
+                let x = JSON.parse(xhr.responseText);
+
+                console.log(x);
+
+                x.blobImmagini.forEach(function (blob) {
+
+                    //let decodedBlobData = atob(blob);
+                    let src = "data:image;base64," + blob;
+
+                    $("#show").append(
+                        '<img src="' + src + '" style="display: block">');
+                });
+            }
+
+            if (xhr.status === 500) {
+
+                alert("errore");
 
             }
 

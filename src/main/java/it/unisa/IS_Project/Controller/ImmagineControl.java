@@ -9,21 +9,20 @@ import it.unisa.IS_Project.Utility.SessionManager;
 import it.unisa.IS_Project.Utility.Utility;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class ImmagineControl {
     @Autowired
     public ImmagineService immagineService;
-    @RequestMapping(value = "/caricaImmagine", method = RequestMethod.POST)
+    @RequestMapping(value = "/gestoreImmagini/caricaImmagine", method = RequestMethod.POST)
 
     public void caricaImmagine(@RequestPart("file") MultipartFile immagine, HttpServletRequest request, HttpServletResponse response) throws UploadImageException {
 
@@ -47,8 +46,6 @@ public class ImmagineControl {
 
         } catch (InvalidFileSizeException e) {
 
-            System.out.println("ENTRATO");
-
             try {
                 response.sendError(500, "IFSE");
             } catch (IOException ex) {
@@ -69,18 +66,31 @@ public class ImmagineControl {
         os.flush();
         os.close();
         return "gestoreentità";
-    }
-
-    @RequestMapping(value = "/visualizzaListaImmagini", method = RequestMethod.POST)
-
-    public String visualizzaListaImmagini(HttpServletRequest request) {
-        byte byteArray[] = ImmDAO.doGetImm(request.getParameter("img"),
-                request.getParameter("tipo"));
-        response.setContentType("image/gif");
-        OutputStream os = response.getOutputStream();
-        os.write(byteArray);
-        os.flush();
-        os.close();
-        return "gestoreentità";
     }*/
+
+    @RequestMapping(value = "/gestoreImmagini/visualizzaListaImmagini", method = RequestMethod.GET)
+    @ResponseBody
+
+    public String visualizzaListaImmagini(HttpServletRequest request, HttpServletResponse response) {
+        String immagini = new JSONObject().toString();
+
+        try {
+
+            immagini = immagineService.visualizzaListaImmagini(SessionManager.getEmail(request));
+
+        }catch (SQLException e) {
+
+            System.out.println("SQL");
+
+        } catch (MissingSessionEmailException e) {
+
+            System.out.println("NO EMAIL");
+        }
+
+        response.setContentType("text/plain");
+
+        System.out.println(immagini);
+
+        return immagini;
+    }
 }
