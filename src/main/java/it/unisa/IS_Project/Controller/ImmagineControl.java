@@ -1,8 +1,7 @@
 package it.unisa.IS_Project.Controller;
 
 import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagine.UploadImageException;
-import it.unisa.IS_Project.Model.Exception.GEN.GIM.VisualizzaListaImmagini.VisualizzaListaImmaginiException;
-import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.FolderCreationException;
+import it.unisa.IS_Project.Model.Exception.GEN.GIM.VisualizzaListaImmagini.ViewImagesListException;
 import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagine.InvalidFileSizeException;
 import it.unisa.IS_Project.Model.Service.ImmagineService;
@@ -93,7 +92,7 @@ public class ImmagineControl {
     @RequestMapping(value = "/gestoreImmagini/visualizzaListaImmagini", method = RequestMethod.GET)
     @ResponseBody
 
-    public String visualizzaListaImmagini(HttpServletRequest request, HttpServletResponse response) throws VisualizzaListaImmaginiException {
+    public String visualizzaListaImmagini(HttpServletRequest request, HttpServletResponse response) throws ViewImagesListException {
         String immagini = new JSONObject().toString();
 
         try {
@@ -105,7 +104,7 @@ public class ImmagineControl {
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new VisualizzaListaImmaginiException("ERRORE - VISUALIZZA LISTA IMMAGINI SQLEXCEPTION.");
+                throw new ViewImagesListException("ERRORE - VISUALIZZA LISTA IMMAGINI SQLEXCEPTION.");
             }
 
         } catch (MissingSessionEmailException e) {
@@ -113,7 +112,7 @@ public class ImmagineControl {
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new VisualizzaListaImmaginiException("ERRORE - NESSUN UTENTE IN SESSIONE.");
+                throw new ViewImagesListException("ERRORE - NESSUN UTENTE IN SESSIONE.");
             }
         }
 

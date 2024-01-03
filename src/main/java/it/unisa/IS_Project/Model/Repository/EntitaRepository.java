@@ -17,11 +17,8 @@ public interface EntitaRepository extends JpaRepository<EntitaEntity,Integer> {
     @Query
     EntitaEntity findByNome(String nomeEntita);
 
-    @Query
-    void deleteByNome(String nomeEntita);
-
     @Query("SELECT e FROM EntitaEntity e WHERE e.cartellaEntity.nome = :nomeCartella AND e.email.email = :email")
-    List<EntitaEntity> findAllByCartellaEntity(@Param("nomeCartella")String nomeCartella,@Param("email")String email);
+    List<EntitaEntity> findAllByCartellaEntity(@Param("email")String email, @Param("nomeCartella")String nomeCartella);
 
     @Query("SELECT e FROM EventoEntity e WHERE e.utenteEntity.email = :email")
     List<EntitaEntity> findAllByEmail(String email);

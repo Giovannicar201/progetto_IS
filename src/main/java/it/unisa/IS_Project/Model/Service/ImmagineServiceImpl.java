@@ -84,7 +84,7 @@ public class ImmagineServiceImpl implements ImmagineService{
     @Override
     @Transactional
     public ImmagineEntity get(String nomeFoto){
-        return immagineRepository.findByNome(nomeFoto).get();
+        return immagineRepository.findByNome(nomeFoto);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class ImmagineServiceImpl implements ImmagineService{
         JSONObject immaginiJSON = new JSONObject();
         JSONArray blobImmagini = new JSONArray();
 
-        List<ImmagineEntity> immagini = immagineRepository.findAllByEmail(email);;
+        List<ImmagineEntity> immagini = immagineRepository.findAllByEmail(email);
 
         for(ImmagineEntity immagineEntity : immagini) {
             JSONObject immagineJSON = new JSONObject();
