@@ -19,10 +19,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -275,6 +272,7 @@ public class EntitaControl {
     }
 
     @RequestMapping(value = "/entità/visualizzaListaEntità", method = RequestMethod.POST)
+    @ResponseBody
 
     public String visualizzaListaEntita(HttpServletRequest request, HttpServletResponse response ) throws ViewEntityListException {
         String immagini = new JSONObject().toString();
@@ -305,7 +303,8 @@ public class EntitaControl {
         return immagini;
     }
 
-    @RequestMapping(value = "/entità/getEntità", method = RequestMethod.POST)
+    @RequestMapping(value = "/entità/visualizzaEntità", method = RequestMethod.POST)
+    @ResponseBody
 
     public String visualizzaEntita(@RequestBody String nome, HttpServletRequest request, HttpServletResponse response ) throws ViewEntityException {
         String entita = new JSONObject().toString();
