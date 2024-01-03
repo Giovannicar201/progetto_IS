@@ -84,7 +84,8 @@ public class ImmagineServiceImpl implements ImmagineService{
     @Override
     @Transactional
     public ImmagineEntity get(String nomeFoto){
-        return immagineRepository.findByNome(nomeFoto).get();
+        //return immagineRepository.findByNome(nomeFoto).get();
+        return null;
     }
 
     @Override

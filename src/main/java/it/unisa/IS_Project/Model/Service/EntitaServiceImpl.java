@@ -6,8 +6,6 @@ import it.unisa.IS_Project.Model.Exception.GEN.GEN.EntityNotFoundException;
 import it.unisa.IS_Project.Model.Repository.*;
 import it.unisa.IS_Project.Utility.Validator;
 import jakarta.transaction.Transactional;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,6 +76,11 @@ public class EntitaServiceImpl implements EntitaService{
     }
 
     @Override
+    public EntitaEntity get(String nomeEntita) {
+        return null;
+    }
+
+    @Override
     @Transactional
     public void modificaEntita(String email, String nomeImmagine, String nome, String collisioni, String nomeCartella, List<String> nomiProprieta, List<String> valoriProprieta) throws EntityNotFoundException, FolderNotFoundException, InvalidEntityNameException, InvalidNumberOfPropertyException, NotUniqueEntityException, ImageNotFoundException, InvalidCollisionException {
         EntitaEntity entitaEntityQuery = entitaRepository.findByNome(nome);
@@ -91,7 +94,7 @@ public class EntitaServiceImpl implements EntitaService{
 
         creaEntita(email,nomeImmagine,nome,collisioni,nomeCartella,nomiProprieta,valoriProprieta);
         entitaEntityQuery = entitaRepository.findByNome(nome);
-        entitaEntityQuery.setIdMappaEntity(entitaEntityQuery);
+        entitaEntityQuery.setIdMappaEntity(entitaEntityQuery.getIdMappaEntity());
     }
 
     @Override

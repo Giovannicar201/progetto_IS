@@ -2,6 +2,7 @@ package it.unisa.IS_Project.Controller;
 
 import it.unisa.IS_Project.Model.Entity.EntitaEntity;
 import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginException;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.*;
 import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagine.InvalidFileSizeException;
 import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagine.UploadImageException;
 import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
@@ -35,7 +36,8 @@ public class EntitaControl {
 
     @RequestMapping(value = "/entità/creaEntità", method = RequestMethod.POST)
 
-    public void creaEntita(@RequestBody String entita, HttpServletRequest request, HttpServletResponse response){
+    public void creaEntita(@RequestBody String entita, HttpServletRequest request, HttpServletResponse response)
+            throws LoginException, UploadImageException {
 
         JSONParser parser = new JSONParser();
         List<String> nomiProprieta = new ArrayList<>();
@@ -66,7 +68,7 @@ public class EntitaControl {
 
             entitaService.creaEntita(email,nomeImmagine,nome,collisioni,nomeCartella,nomiProprieta,valoriProprieta);
 
-        } catch (NoSuchAlgorithmException | ParseException e) {
+        } catch (ParseException e) {
 
             try {
                 response.sendError(302, "NQTE");
@@ -82,17 +84,19 @@ public class EntitaControl {
                 throw new UploadImageException("ERRORE - CARICA IMMAGINE IOEXCEPTION.");
             }
 
-        } catch (InvalidFileSizeException e) {
-
-            try {
-                response.sendError(500, "IFSE");
-            } catch (IOException ex) {
-                throw new UploadImageException("ERRORE - DIMENSIONE DELL'IMMAGINE NON VALIDA.");
-            }
-
+        } catch (FolderNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidEntityNameException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidNumberOfPropertyException e) {
+            throw new RuntimeException(e);
+        } catch (NotUniqueEntityException e) {
+            throw new RuntimeException(e);
+        } catch (ImageNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidCollisionException e) {
+            throw new RuntimeException(e);
         }
-    }
-
     }
 
     /*
@@ -121,5 +125,5 @@ public class EntitaControl {
         return "redirect:/login";
 
     }*/
-}
 
+}
