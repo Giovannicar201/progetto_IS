@@ -92,7 +92,9 @@ public class EntitaServiceImpl implements EntitaService{
         MappaEntity mappaEntity = entitaEntityQuery.getIdMappaEntity();
 
         creaEntita(email,nomeImmagine,nome,collisioni,nomeCartella,nomiProprieta,valoriProprieta);
+
         entitaEntityQuery = entitaRepository.findByNome(nome);
+
         entitaEntityQuery.setIdMappaEntity(mappaEntity);
     }
 
