@@ -9,8 +9,8 @@ function initDrawingTools(cella, flag) {
 
             if(flag === 1) {
 
-                cella.children[0].src = "/images/tile1.png";
-                drawTheTile("tile1.png", cella);
+                cella.children[0].src = document.getElementsByClassName("selected")[0].src;
+                drawTheTile(document.getElementsByClassName("selected")[0].id, cella);
 
             } else{
 
@@ -120,7 +120,7 @@ function disegnaTileSelezione(){
 
         if(cella.className === "square") {
 
-            cella.children[0].src = "/images/tile1.png";
+            cella.children[0].src = document.getElementsByClassName("selected")[0].src;
             cella.removeAttribute("style");
 
             drawTheTileSelection("tile1.png", selectorGriglia[0], selectorGriglia[selectorGriglia.length - 1]);

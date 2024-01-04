@@ -126,6 +126,41 @@ function drawTheTileSelection(nome, coordinata1, coordinata2){
 
 }
 
+function getMapFromTheDataBase(){
+
+
+
+}
+
+/**
+ *
+ *  Questa parte contiene le funzioni associate a GMP e all'AI
+ *
+ **/
+
+function generativeFillCalls(){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/IA/genera', true);
+
+    //TO-DO
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status === 200) {
+
+
+
+        }
+
+    };
+
+    xhr.send();
+    xhr.close;
+
+}
+
 /**
  *
  *  Questa sezione contiene le funzioni inerenti al GMP.GCR
@@ -229,6 +264,16 @@ function getCartellaContent(){
 
                     $("#show").append(
                         '<img id="' + id + '" src="' + src + '" style ="width: 64px; height: 64px;" class="imgEntity">');
+
+                });
+
+                $(".imgEntity").click(function (){
+
+                    $(".imgEntity").removeClass("selected")
+
+                    $(this).addClass("selected");
+
+                    $(this).css("border", "solid 1px #516f96");
 
                 });
 
