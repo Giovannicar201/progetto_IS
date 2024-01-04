@@ -106,6 +106,8 @@ public class EntitaServiceImpl implements EntitaService{
         if(entitaEntityQuery == null)
             throw new EntityNotFoundException("ERRORE - ENTITÀ NON ESISTENTE.");
 
+        //va anche rimosso dal json e dal mappaEntity
+
         entitaRepository.delete(entitaEntityQuery);
     }
 

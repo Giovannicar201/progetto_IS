@@ -1,7 +1,6 @@
 package it.unisa.IS_Project.Utility;
 
-import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
-import it.unisa.IS_Project.Model.Exception.Session.MissingSessionMapException;
+import it.unisa.IS_Project.Model.Exception.Sessione.*;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class SessionManager {
@@ -33,5 +32,50 @@ public class SessionManager {
             throw new MissingSessionMapException("ERRORE - NESSUNA MAPPA IN SESSIONE.");
 
         return mappa;
+    }
+
+    public static void setPixelArt(HttpServletRequest request, String pixelArt) {
+
+        request.getSession().setAttribute("pixelArt", pixelArt);
+
+    }
+
+    public static String getPixelArt(HttpServletRequest request) throws MissingSessionPixelArtException {
+        String pixelArt = (String) request.getSession().getAttribute("pixelArt");
+
+        if(pixelArt == null)
+            throw new MissingSessionPixelArtException("ERRORE - NESSUNA PIXEL ART IN SESSIONE.");
+
+        return pixelArt;
+    }
+
+    public static void setSelezioneMappa(HttpServletRequest request, String selezioneMappa) {
+
+        request.getSession().setAttribute("selezioneMappa", selezioneMappa);
+
+    }
+
+    public static String getSelezioneMappa(HttpServletRequest request) throws MissingSessionMapSelectionException {
+        String selezioneMappa = (String) request.getSession().getAttribute("selezioneMappa");
+
+        if(selezioneMappa == null)
+            throw new MissingSessionMapSelectionException("ERRORE - NESSUNA SELEZIONE MAPPA IN SESSIONE.");
+
+        return selezioneMappa;
+    }
+
+    public static void setSelezionePixelArt(HttpServletRequest request, String selezionePixelArt) {
+
+        request.getSession().setAttribute("selezionePixelArt", selezionePixelArt);
+
+    }
+
+    public static String getSelezionePixelArt(HttpServletRequest request) throws MissingSessionPixelArtSelectionException {
+        String selezionePixelArt = (String) request.getSession().getAttribute("selezionePixelArt");
+
+        if(selezionePixelArt == null)
+            throw new MissingSessionPixelArtSelectionException("ERRORE - NESSUNA SELEZIONE PIXEL ART IN SESSIONE.");
+
+        return selezionePixelArt;
     }
 }

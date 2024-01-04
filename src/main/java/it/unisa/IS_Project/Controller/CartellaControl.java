@@ -2,7 +2,7 @@ package it.unisa.IS_Project.Controller;
 
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.FolderCreationException;
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.VisualizzaListaCartelle.VisualizzaListaCartelleException;
-import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
+import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.InvalidFolderNameException;
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.NotUniqueFolderException;
 import it.unisa.IS_Project.Model.Service.CartellaService;

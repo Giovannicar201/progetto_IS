@@ -6,7 +6,7 @@ import it.unisa.IS_Project.Model.Exception.GEN.GEN.EntityNotFoundException;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.ModificaEntita.ModifyEntityException;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.VisualizzaEntita.ViewEntityException;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.VisualizzaListaEntita.ViewEntityListException;
-import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
+import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.EntitaService;
 import it.unisa.IS_Project.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -272,6 +272,7 @@ public class EntitaControl {
     @ResponseBody
 
     public String visualizzaListaEntita(HttpServletRequest request, HttpServletResponse response ) throws ViewEntityListException {
+
         String immagini = new JSONObject().toString();
 
         try {
@@ -325,7 +326,7 @@ public class EntitaControl {
             try {
                 response.sendError(500, "ENFE");
             } catch (IOException ex) {
-                throw new ViewEntityException("ERRORE - VISUALIZZA IMMAGINE SQLEXCEPTION.");
+                throw new ViewEntityException("ERRORE - VISUALIZZA IMMAGINE IOEXCEPTION.");
             }
 
         }

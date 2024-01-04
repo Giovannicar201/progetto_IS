@@ -5,7 +5,7 @@ import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginPasswordsMismatchExcep
 import it.unisa.IS_Project.Model.Exception.GAC.Login.UserNotFoundException;
 import it.unisa.IS_Project.Model.Exception.GAC.Logout.LogoutException;
 import it.unisa.IS_Project.Model.Exception.GAC.Signup.*;
-import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
+import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.UtenteService;
 import it.unisa.IS_Project.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;

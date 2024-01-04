@@ -1,13 +1,15 @@
 package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.MappaEntity;
+import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapHeightException;
+import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapNameException;
+import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapWidthException;
+import org.json.simple.parser.ParseException;
 
 public interface MappaService {
-    String creaMappa(String email, String nome, int lunghezza, int larghezza);
+    String creaMappa(String email, String nome, int lunghezza, int larghezza) throws InvalidMapNameException, InvalidMapWidthException, InvalidMapHeightException;
 
-    String visualizzaStatisticheMappa(String email);
-
-    MappaEntity get(String nome);
+    String visualizzaStatisticheMappa(String mappa) throws ParseException;
 
     MappaEntity update(MappaEntity newMappaEntity, String nomeMappa);
 }

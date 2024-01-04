@@ -24,9 +24,8 @@ public class Validator {
     private static final Pattern NOME_PROPRIETA_PATTERN = Pattern.compile(NOME_PROPRIETA_REGEX);
     private static final String VALORE_PROPRIETA_REGEX = "^[a-zA-Z]{1,64}$";
     private static final Pattern VALORE_PROPRIETA_PATTERN = Pattern.compile(VALORE_PROPRIETA_REGEX);
-
-
-
+    private static final String NOME_MAPPA_REGEX = "^[a-zA-Z]{1,32}$";
+    private static final Pattern NOME_MAPPA_PATTERN = Pattern.compile(NOME_MAPPA_REGEX);
 
     public static boolean isEmailValid(String email) {
         if(email == null)
@@ -92,6 +91,20 @@ public class Validator {
         return numeroDiProprieta >= 0 && numeroDiProprieta <= 4;
     }
 
+    public static boolean isMapNameValid(String nomeMappa) {
+        if(nomeMappa == null)
+            return false;
+
+        return NOME_MAPPA_PATTERN.matcher(nomeMappa).matches();
+    }
+
+    public static boolean isMapWidthValid(int larghezza) {
+        return larghezza >= 0 && larghezza <= 32;
+    }
+
+    public static boolean isMapHeightValid(int altezza) {
+        return altezza >= 0 && altezza <= 32;
+    }
 
 
 }
