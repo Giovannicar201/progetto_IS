@@ -35,7 +35,7 @@ public class MappaServiceImpl implements MappaService{
 
     @Override
     @Transactional
-    public String creaMappa(String email, String nome, int altezza, int larghezza) throws InvalidMapNameException, InvalidMapWidthException, InvalidMapHeightException {
+    public String creaMappa(String email, String nome, String altezza, String larghezza) throws InvalidMapNameException, InvalidMapWidthException, InvalidMapHeightException {
         MappaEntity mappaEntity = new MappaEntity();
         MappaEntity mappaEntityQuery = mappaRepository.findByNome(nome);
         UtenteEntity utenteEntity = utenteService.get(email);
@@ -46,15 +46,15 @@ public class MappaServiceImpl implements MappaService{
         if(!Validator.isMapNameValid(nome))
             throw new InvalidMapNameException("ERRORE - NOME NON VALIDO.");
 
-        if(!Validator.isMapWidthValid(larghezza))
+        if(!Validator.isMapWidthValid(Integer.parseInt(larghezza)))
             throw new InvalidMapWidthException("ERRORE - LARGHEZZA NON VALIDA.");
 
-        if(!Validator.isMapHeightValid(altezza))
+        if(!Validator.isMapHeightValid(Integer.parseInt(altezza)))
             throw new InvalidMapHeightException("ERRORE - ALTEZZA NON VALIDA.");
 
         mappaEntity.setNome(nome);
-        mappaEntity.setLarghezza(larghezza);
-        mappaEntity.setLunghezza(altezza);
+        mappaEntity.setLarghezza(Integer.parseInt(larghezza));
+        mappaEntity.setLunghezza(Integer.parseInt(altezza));
         mappaEntity.setUtenteEntity(utenteEntity);
 
         mappaRepository.save(mappaEntity);
@@ -62,8 +62,8 @@ public class MappaServiceImpl implements MappaService{
         JSONObject mappaJSON = new JSONObject();
         JSONArray entita = new JSONArray();
 
-        for(int riga = 0; riga < larghezza; riga++)
-            for(int colonna = 0; colonna < altezza; colonna++) {
+        for(int riga = 0; riga < Integer.parseInt(larghezza); riga++)
+            for(int colonna = 0; colonna < Integer.parseInt(altezza); colonna++) {
                 JSONObject entitaJSON = new JSONObject();
 
                 entitaJSON.put("id",0);

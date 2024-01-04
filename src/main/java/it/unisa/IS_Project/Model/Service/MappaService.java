@@ -13,7 +13,5 @@ public interface MappaService {
 
     String visualizzaStatisticheMappa(String mappa) throws ParseException;
 
-    String recuperaMappa(String mappa) throws ParseException, SQLException;
-
     MappaEntity update(MappaEntity newMappaEntity, String nomeMappa);
 }
