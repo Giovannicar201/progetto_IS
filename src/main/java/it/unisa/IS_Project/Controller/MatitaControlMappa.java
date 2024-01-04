@@ -43,7 +43,9 @@ public class MatitaControlMappa extends MatitaControl {
 
             MatitaServiceMappaImpl matitaServiceMappa = (MatitaServiceMappaImpl) matitaService;
 
-            matitaServiceMappa.piazza(SessionManager.getMappa(request),nome,riga,colonna);
+            String mappa = matitaServiceMappa.piazza(SessionManager.getMappa(request),nome,riga,colonna);
+
+            SessionManager.setMappa(request,mappa);
 
         } catch (ParseException e) {
             //TO DO

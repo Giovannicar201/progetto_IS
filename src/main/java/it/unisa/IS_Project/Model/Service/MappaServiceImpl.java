@@ -1,5 +1,7 @@
 package it.unisa.IS_Project.Model.Service;
 
+import it.unisa.IS_Project.Model.Entity.EntitaEntity;
+import it.unisa.IS_Project.Model.Entity.ImmagineEntity;
 import it.unisa.IS_Project.Model.Entity.MappaEntity;
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
 import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapHeightException;
@@ -17,10 +19,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.Base64;
+import java.util.List;
+
 @Service
 public class MappaServiceImpl implements MappaService{
     @Autowired
     private UtenteService utenteService;
+    @Autowired
+    private EntitaService entitaService;
     @Autowired
     private MappaRepository mappaRepository;
 
@@ -60,11 +69,14 @@ public class MappaServiceImpl implements MappaService{
                 entitaJSON.put("id",0);
                 entitaJSON.put("riga",riga);
                 entitaJSON.put("colonna",colonna);
+                entitaJSON.put("immagine","");
 
                 entita.add(entitaJSON);
             }
 
         mappaJSON.put("mappa",entita);
+
+        System.out.println(mappaJSON);
 
         return mappaJSON.toString();
     }

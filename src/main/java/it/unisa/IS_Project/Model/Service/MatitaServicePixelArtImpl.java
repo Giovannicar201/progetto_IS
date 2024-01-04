@@ -17,9 +17,10 @@ public class MatitaServicePixelArtImpl implements MatitaService {
 
     @Override
     @Transactional
-    public void piazza(String pixelArt, String esadecimale, String riga, String colonna) throws ParseException {
+    public String piazza(String pixelArt, String esadecimale, String riga, String colonna) throws ParseException {
 
         JSONParser parser = new JSONParser();
+        return null;
     }
 
     @Override

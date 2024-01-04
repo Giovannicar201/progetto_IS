@@ -1,9 +1,11 @@
 package it.unisa.IS_Project.Controller;
 
+import it.unisa.IS_Project.Model.Exception.GEN.GIM.VisualizzaListaImmagini.ViewImagesListException;
 import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.CreateMapException;
 import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapHeightException;
 import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapNameException;
 import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapWidthException;
+import it.unisa.IS_Project.Model.Exception.GMP.GMP.RecuperaMappa.RecoveryMapException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionMapException;
 import it.unisa.IS_Project.Model.Service.MappaService;
@@ -158,5 +160,41 @@ public class MappaControl {
         } catch (MissingSessionMapException e) {
             throw new RuntimeException(e);
         }*/
+    }
+
+    @RequestMapping(value = "/gestoreMappa/recuperaMappa", method = RequestMethod.POST)
+    @ResponseBody
+
+    public String recuperaMappa(HttpServletRequest request, HttpServletResponse response) throws RecoveryMapException {
+
+        String mappa = new JSONObject().toString();
+
+        try {
+
+            SessionManager.getEmail(request);
+
+            mappa = SessionManager.getMappa(request);
+
+        } catch (MissingSessionEmailException e) {
+
+            try {
+                response.sendError(302, "MSEE");
+            } catch (IOException ex) {
+                throw new RecoveryMapException("ERRORE - RECUPERA MAPPA IOEXCEPTION.");
+            }
+
+        } catch (MissingSessionMapException e) {
+
+            try {
+                response.sendError(302, "MSME");
+            } catch (IOException ex) {
+                throw new RecoveryMapException("ERRORE - RECUPERA MAPPA IOEXCEPTION.");
+            }
+
+        }
+
+        response.setContentType("text/plain");
+
+        return mappa;
     }
 }

@@ -15,6 +15,9 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -24,7 +27,7 @@ public class MatitaServiceMappaImpl implements MatitaService{
 
     @Override
     @Transactional
-    public void piazza(String mappa, String nome, String riga, String colonna) throws ParseException, EntityNotFoundException, InvalidColumnException, InvalidRowException {
+    public String piazza(String mappa, String nome, String riga, String colonna) throws ParseException, EntityNotFoundException, InvalidColumnException, InvalidRowException, SQLException {
         EntitaEntity entitaEntityQuery = entitaService.get(nome);
 
         JSONParser parser = new JSONParser();
@@ -45,8 +48,14 @@ public class MatitaServiceMappaImpl implements MatitaService{
         for (Object entitaOBJ : entita) {
             JSONObject entitaJSON = (JSONObject) entitaOBJ;
 
-            if(entitaJSON.get("riga") == riga && entitaJSON.get("colonna") == colonna)
-                entitaJSON.put("nome",nome);
+            if(entitaJSON.get("riga") == riga && entitaJSON.get("colonna") == colonna) {
+                entitaJSON.put("id",entitaEntityQuery.getId());
+
+                Blob immagine = entitaEntityQuery.getImmagineEntity().getFoto();
+                byte[] bytes = immagine.getBytes(1, (int) immagine.length());
+
+                entitaJSON.put("immagine", Base64.getEncoder().encodeToString(bytes));
+            }
         }
 
         System.out.println(mappaJSON);
@@ -54,6 +63,8 @@ public class MatitaServiceMappaImpl implements MatitaService{
         CoordinateEntity coordinateEntity = new CoordinateEntity();
 
         coordinateEntity.setPrimaryKeyCoordinate(new CoordinateEntity.PrimaryKeyCoordinate(riga,colonna,entitaEntityQuery.getId()));
+
+        return mappaJSON.toString();
     }
 
     @Override
