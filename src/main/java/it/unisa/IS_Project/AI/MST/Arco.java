@@ -1,16 +1,16 @@
 package it.unisa.IS_Project.AI.MST;
 
-import it.unisa.IS_Project.AI.EntitaFIA;
+import it.unisa.IS_Project.AI.Entita.Entita;
 
 public class Arco {
     private final String v;
     private final String w;
     private final double peso;
 
-    public Arco(EntitaFIA v, EntitaFIA w) {
+    public Arco(Entita v, Entita w) {
         this.v = v.toString();
         this.w = w.toString();
-        this.peso = Math.sqrt(Math.pow((v.getRow() - w.getRow()),2) + Math.pow((v.getCol() - w.getCol()),2));
+        this.peso = Math.sqrt(Math.pow((v.getRiga() - w.getRiga()),2) + Math.pow((v.getColonna() - w.getColonna()),2));
     }
 
     public String getV() {

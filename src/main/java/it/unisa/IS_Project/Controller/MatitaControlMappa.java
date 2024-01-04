@@ -5,6 +5,7 @@ import it.unisa.IS_Project.Model.Exception.GMP.GST.InvalidRowException;
 import it.unisa.IS_Project.Model.Exception.GMP.GST.Selezione.InvalidColumnException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionMapException;
+import it.unisa.IS_Project.Model.Service.MatitaService;
 import it.unisa.IS_Project.Model.Service.MatitaServiceMappaImpl;
 import it.unisa.IS_Project.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +13,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +27,9 @@ import java.util.List;
 
 @Controller
 public class MatitaControlMappa extends MatitaControl {
+    @Qualifier("matitaServiceMappaImpl")
+    @Autowired
+    protected MatitaService matitaService;
 
     @RequestMapping(value = "/matita/piazzaEntita", method = RequestMethod.POST)
 
@@ -79,8 +85,8 @@ public class MatitaControlMappa extends MatitaControl {
     @RequestMapping(value = "/matita/visualizzaListaEntitaInCartella", method = RequestMethod.POST)
     @ResponseBody
 
-    public String visualizzaListaEntitaInCartella(@RequestBody String nome, HttpServletRequest request,
-                                                  HttpServletResponse response) {
+    public String visualizzaListaEntitaInCartella(@RequestBody String nome, HttpServletRequest request, HttpServletResponse response) {
+
 
         JSONParser parser = new JSONParser();
 
@@ -93,8 +99,6 @@ public class MatitaControlMappa extends MatitaControl {
             JSONObject nomeJSON = (JSONObject) parser.parse(nome);
 
             nomeCartella = (String) nomeJSON.get("nome");
-
-            matitaService = new MatitaServiceMappaImpl();
 
             return matitaService.visualizzaLista(email,nomeCartella);
 

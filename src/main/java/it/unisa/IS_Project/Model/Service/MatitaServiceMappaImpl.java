@@ -5,7 +5,6 @@ import it.unisa.IS_Project.Model.Entity.EntitaEntity;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.EntityNotFoundException;
 import it.unisa.IS_Project.Model.Exception.GMP.GST.InvalidRowException;
 import it.unisa.IS_Project.Model.Exception.GMP.GST.Selezione.InvalidColumnException;
-import it.unisa.IS_Project.Utility.SessionManager;
 import it.unisa.IS_Project.Utility.Validator;
 import jakarta.transaction.Transactional;
 import org.json.simple.JSONArray;
@@ -14,7 +13,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Base64;
