@@ -183,4 +183,10 @@ public class EntitaServiceImpl implements EntitaService{
 
         return immaginiJSON.toString();
     }
+
+    @Override
+    @Transactional
+    public EntitaEntity get(String nome) {
+        return entitaRepository.findByNome(nome);
+    }
 }

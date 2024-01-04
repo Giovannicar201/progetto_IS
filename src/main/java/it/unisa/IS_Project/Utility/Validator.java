@@ -1,5 +1,7 @@
 package it.unisa.IS_Project.Utility;
 
+import org.json.simple.JSONObject;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -104,6 +106,14 @@ public class Validator {
 
     public static boolean isMapHeightValid(int altezza) {
         return altezza >= 0 && altezza <= 32;
+    }
+
+    public static boolean isRowValidMOCK(String riga) {
+        return true;
+    }
+
+    public static boolean isColumnValidMOCK(String colonna) {
+        return true;
     }
 
 

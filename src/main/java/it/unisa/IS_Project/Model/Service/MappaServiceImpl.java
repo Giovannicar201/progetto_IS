@@ -46,7 +46,7 @@ public class MappaServiceImpl implements MappaService{
         mappaEntity.setNome(nome);
         mappaEntity.setLarghezza(larghezza);
         mappaEntity.setLunghezza(altezza);
-        //mappaEntity.setUtenteEntity(utenteEntity);
+        mappaEntity.setUtenteEntity(utenteEntity);
 
         mappaRepository.save(mappaEntity);
 

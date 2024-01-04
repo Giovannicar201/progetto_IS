@@ -27,7 +27,7 @@ public class CoordinateEntity {
         @Column(name = "coordinataY")
         private String coordinataY;
         @Column(name = "idEntita")
-        private int idEvento;
+        private int idEntita;
     }
 
     @EmbeddedId

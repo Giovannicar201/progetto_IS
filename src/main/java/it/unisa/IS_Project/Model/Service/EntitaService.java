@@ -19,4 +19,6 @@ public interface EntitaService {
     String visualizzaListaEntitaInCartella(String email, String nomeCartella) throws SQLException;
 
     String visualizzaListaEntita(String email) throws SQLException;
+
+    EntitaEntity get(String nome);
 }

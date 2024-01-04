@@ -95,7 +95,7 @@ public class MappaControl {
 
     public String visualizzaStatisticheMappa(HttpServletRequest request, HttpServletResponse response) throws CreateMapException {
 
-        String statistiche = new JSONObject().toString();
+        /*String statistiche = new JSONObject().toString();
 
         try {
 
@@ -127,18 +127,21 @@ public class MappaControl {
                 throw new ViewMapStatsException("ERRORE - VISUALIZZA STATISTICHE MAPPA IOEXCEPTION.");
             }
 
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
 
         response.setContentType("text/plain");
 
-        return statistiche;
+        return statistiche;*/
+        return null;
     }
 
     @RequestMapping(value = "/gestoreMappa/salvaMappa", method = RequestMethod.POST)
 
     public void salvaMappa(HttpServletRequest request, HttpServletResponse response) {
 
-        JSONParser parser = new JSONParser();
+        /*JSONParser parser = new JSONParser();
         String email, mappa;
 
         try {
@@ -154,6 +157,6 @@ public class MappaControl {
             throw new RuntimeException(e);
         } catch (MissingSessionMapException e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 }

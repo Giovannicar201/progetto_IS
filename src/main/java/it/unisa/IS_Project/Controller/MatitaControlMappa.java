@@ -1,5 +1,8 @@
 package it.unisa.IS_Project.Controller;
 
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.EntityNotFoundException;
+import it.unisa.IS_Project.Model.Exception.GMP.GST.InvalidRowException;
+import it.unisa.IS_Project.Model.Exception.GMP.GST.Selezione.InvalidColumnException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionMapException;
 import it.unisa.IS_Project.Model.Service.MatitaServiceMappaImpl;
@@ -48,6 +51,12 @@ public class MatitaControlMappa extends MatitaControl {
             throw new RuntimeException(e);
         } catch (MissingSessionEmailException e) {
             throw new RuntimeException(e);
+        } catch (InvalidColumnException e) {
+            throw new RuntimeException(e);
+        } catch (EntityNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidRowException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -57,7 +66,7 @@ public class MatitaControlMappa extends MatitaControl {
     @Override
     public void riempi(@RequestBody String nomi, HttpServletRequest request, HttpServletResponse response) {
 
-        try {
+        /*try {
 
             MatitaServiceMappaImpl matitaServiceMappa = (MatitaServiceMappaImpl) matitaService;
 
@@ -65,7 +74,7 @@ public class MatitaControlMappa extends MatitaControl {
 
         } catch (MissingSessionMapException e) {
             throw new RuntimeException(e);
-        }
+        }*/
 
     }
 }
