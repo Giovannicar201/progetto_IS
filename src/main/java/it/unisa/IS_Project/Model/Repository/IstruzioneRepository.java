@@ -1,7 +1,6 @@
 package it.unisa.IS_Project.Model.Repository;
 
 import it.unisa.IS_Project.Model.Entity.IstruzioneEntity;
-import it.unisa.IS_Project.Model.Entity.PrimaryKeyIstruzione;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

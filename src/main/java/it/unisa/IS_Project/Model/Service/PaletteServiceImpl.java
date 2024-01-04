@@ -26,7 +26,7 @@ public class PaletteServiceImpl implements PaletteService{
         UtenteEntity utenteEntity=utenteRepository.findByEmail(email);
         utenteEntity.setEmail(email);
 
-        paletteEntity.setEmailUtente(utenteEntity);
+        paletteEntity.setUtenteEntity(utenteEntity);
 
         paletteRepository.save(paletteEntity);
         return paletteEntity;

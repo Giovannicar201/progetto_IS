@@ -36,7 +36,7 @@ public class ProprietaServiceImpl implements ProprietaService{
 
         proprietaEntity.setNome(nomeProprieta);
         proprietaEntity.setValore(valoreProprieta);
-        proprietaEntity.setEntita(entita);
+        proprietaEntity.setEntitaEntity(entita);
 
         proprietaRepository.save(proprietaEntity);
     }

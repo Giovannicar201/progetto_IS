@@ -22,25 +22,25 @@ public class EntitaEntity {
     private String nome;
     private String collisione;
 
-    @OneToMany(mappedBy = "entita")
-    private List<ProprietaEntity> idEntitaEntityProprieta;
+    @OneToMany(mappedBy = "entitaEntity",cascade = CascadeType.REMOVE)
+    private List<ProprietaEntity> proprietaEntityList;
 
-    @OneToMany(mappedBy = "entitaEntity")
+    @OneToMany(mappedBy = "entitaEntity",cascade = CascadeType.REMOVE)
     private List<CoordinateEntity> coordinateEntityList;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idMappa",referencedColumnName = "idMappa")
-    private MappaEntity idMappaEntity;
+    private MappaEntity mappaEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCartella",referencedColumnName = "idCartella")
     private CartellaEntity cartellaEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL,optional = true)
+    @ManyToOne(fetch = FetchType.LAZY,optional = true)
     @JoinColumn(name = "email",referencedColumnName = "email")
-    private UtenteEntity email;
+    private UtenteEntity utenteEntity;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idFoto",referencedColumnName = "idFoto")
-    private ImmagineEntity immagineEntita;
+    private ImmagineEntity immagineEntity;
 }

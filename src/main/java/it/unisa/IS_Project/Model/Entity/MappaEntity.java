@@ -23,13 +23,13 @@ public class MappaEntity {
     private int lunghezza;
     private int larghezza;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "email",referencedColumnName = "email")
-    private UtenteEntity idMappaUtente;
+    private UtenteEntity utenteEntity;
 
-    @OneToMany(mappedBy = "idMappaEvento")
-    private List<EventoEntity> idMappaEvento;
+    @OneToMany(mappedBy = "mappaEntity",cascade = CascadeType.REMOVE)
+    private List<EventoEntity> eventoEntityList;
 
-    @OneToMany(mappedBy = "idMappaEntity")
-    private List<EntitaEntity> entitaEntity;
+    @OneToMany(mappedBy = "mappaEntity",cascade = CascadeType.REMOVE)
+    private List<EntitaEntity> entitaEntityList;
 }

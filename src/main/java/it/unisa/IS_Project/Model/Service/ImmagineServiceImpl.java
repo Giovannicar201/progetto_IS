@@ -44,7 +44,7 @@ public class ImmagineServiceImpl implements ImmagineService{
         String nomeFoto = foto.getOriginalFilename();
         immagineEntity.setFoto(fotoBlob);
         immagineEntity.setNome(nomeFoto);
-        immagineEntity.setEmail(utenteEntity);
+        immagineEntity.setUtenteEntity(utenteEntity);
 
         immagineRepository.save(immagineEntity);
     }

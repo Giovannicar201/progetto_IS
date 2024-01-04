@@ -21,21 +21,21 @@ public class UtenteEntity {
     private String password;
     private String nome;
 
-    @OneToOne(mappedBy = "idMappaUtente",cascade = CascadeType.ALL)
-    private MappaEntity idMappa;
+    @OneToOne(mappedBy = "utenteEntity",cascade = CascadeType.REMOVE)
+    private MappaEntity mappaEntity;
 
-    @OneToMany(mappedBy = "emailUtente", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "utenteEntity", cascade = CascadeType.REMOVE)
     private List<PaletteEntity> paletteEntity;
 
-    @OneToMany(mappedBy = "utenteEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "utenteEntity", cascade = CascadeType.REMOVE)
     private List<CartellaEntity> cartellaEntity;
 
-    @OneToMany(mappedBy = "utenteEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "utenteEntity", cascade = CascadeType.REMOVE)
     private List<EventoEntity> eventoEntity;
 
-    @OneToMany(mappedBy = "email", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "utenteEntity", cascade = CascadeType.REMOVE)
     private List<ImmagineEntity> immagineEntity;
 
-    @OneToMany(mappedBy = "email",cascade = CascadeType.ALL)
-    private List<EntitaEntity> entitaEntities;
+    @OneToMany(mappedBy = "utenteEntity",cascade = CascadeType.REMOVE)
+    private List<EntitaEntity> entitaEntityList;
 }

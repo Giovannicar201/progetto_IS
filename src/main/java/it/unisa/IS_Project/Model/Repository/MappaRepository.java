@@ -13,7 +13,7 @@ public interface MappaRepository extends JpaRepository<MappaEntity,Integer> {
     @Query
     Optional<MappaEntity> findById(int idMappa);
 
-    @Query("SELECT m FROM MappaEntity m WHERE m.idMappaUtente.email = :email")
+    @Query("SELECT m FROM MappaEntity m WHERE m.utenteEntity.email = :email")
     MappaEntity findAllByEmail(@Param("email") String email);
 
     @Query

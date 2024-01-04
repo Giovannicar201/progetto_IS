@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 
@@ -15,21 +17,15 @@ import java.io.Serializable;
 @Entity
 @Table(name = "colore")
 public class ColoreEntity {
-    @Embeddable
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class PrimaryKey implements Serializable{
-        @Column(name = "esadecimale")
-        private String esadecimale;
-        @Column(name = "idPalette")
-        private int idPalette;
-    }
+    @Id
+    @Column(name = "idColore")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idColore;
 
-    @EmbeddedId
-    private PrimaryKey primaryKey;
+    private String esadecimale;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "idPalette",referencedColumnName = "idPalette",insertable=false, updatable=false)
-    private PaletteEntity nomePaletteEntity;
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private PaletteEntity paletteEntity;
 }

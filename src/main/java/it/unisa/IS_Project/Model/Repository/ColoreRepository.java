@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ColoreRepository extends JpaRepository<ColoreEntity,ColoreEntity.PrimaryKey> {
+public interface ColoreRepository extends JpaRepository<ColoreEntity,Integer> {
 }

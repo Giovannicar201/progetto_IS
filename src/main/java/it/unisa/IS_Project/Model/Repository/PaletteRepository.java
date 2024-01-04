@@ -19,6 +19,6 @@ public interface PaletteRepository extends JpaRepository<PaletteEntity,Integer> 
     @Query
     void deleteByNomePalette(String nomePalette);
 
-    @Query("SELECT p FROM PaletteEntity p WHERE p.emailUtente.email = :email")
+    @Query("SELECT p FROM PaletteEntity p WHERE p.utenteEntity.email = :email")
     List<PaletteEntity> getAllByEmail(String email);
 }

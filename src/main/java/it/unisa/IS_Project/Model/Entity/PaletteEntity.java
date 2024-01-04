@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -21,10 +23,11 @@ public class PaletteEntity {
     private int idPalette;
     private String nomePalette;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "email",referencedColumnName = "email")
-    private UtenteEntity emailUtente;
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private UtenteEntity utenteEntity;
 
-    @OneToMany(mappedBy = "nomePaletteEntity")
+    @OneToMany(mappedBy = "paletteEntity",cascade = CascadeType.REMOVE)
     private List<ColoreEntity> coloreEntityList;
 }

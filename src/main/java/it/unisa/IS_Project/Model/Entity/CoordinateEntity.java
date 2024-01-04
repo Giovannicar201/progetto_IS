@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 
@@ -31,7 +33,8 @@ public class CoordinateEntity {
     @EmbeddedId
     private PrimaryKeyCoordinate primaryKeyCoordinate;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idEntita",referencedColumnName = "idEntita",insertable=false, updatable=false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private EntitaEntity entitaEntity;
 }

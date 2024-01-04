@@ -56,8 +56,8 @@ public class EntitaServiceImpl implements EntitaService{
         if(!Validator.isNumberOfPropertyValid(nomiProprieta.size()))
             throw new InvalidNumberOfPropertyException("ERRORE - NUMERO DI PROPRIETÀ NON VALIDO.");
 
-        entitaEntity.setEmail(utenteEntity);
-        entitaEntity.setImmagineEntita(immagineEntityQuery);
+        entitaEntity.setUtenteEntity(utenteEntity);
+        entitaEntity.setImmagineEntity(immagineEntityQuery);
         entitaEntity.setNome(nome);
         entitaEntity.setCollisione(collisioni);
         entitaEntity.setCartellaEntity(cartellaEntityQuery);
@@ -73,7 +73,7 @@ public class EntitaServiceImpl implements EntitaService{
 
             proprietaEntity.setNome(nomeProprieta);
             proprietaEntity.setValore(valoreProprieta);
-            proprietaEntity.setEntita(entitaEntity);
+            proprietaEntity.setEntitaEntity(entitaEntity);
         }
 
         entitaRepository.save(entitaEntity);
@@ -89,13 +89,13 @@ public class EntitaServiceImpl implements EntitaService{
 
         entitaRepository.delete(entitaEntityQuery);
 
-        MappaEntity mappaEntity = entitaEntityQuery.getIdMappaEntity();
+        MappaEntity mappaEntity = entitaEntityQuery.getMappaEntity();
 
         creaEntita(email,nomeImmagine,nome,collisioni,nomeCartella,nomiProprieta,valoriProprieta);
 
         entitaEntityQuery = entitaRepository.findByNome(nome);
 
-        entitaEntityQuery.setIdMappaEntity(mappaEntity);
+        entitaEntityQuery.setMappaEntity(mappaEntity);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class EntitaServiceImpl implements EntitaService{
         for(EntitaEntity entitaEntity : entita) {
             JSONObject immagineJSON = new JSONObject();
 
-            Blob immagine = entitaEntity.getImmagineEntita().getFoto();
+            Blob immagine = entitaEntity.getImmagineEntity().getFoto();
             byte[] bytes = immagine.getBytes(1, (int) immagine.length());
 
             immagineJSON.put(entitaEntity.getNome(), Base64.getEncoder().encodeToString(bytes));
@@ -169,7 +169,7 @@ public class EntitaServiceImpl implements EntitaService{
         for(EntitaEntity entitaEntity : entita) {
             JSONObject immagineJSON = new JSONObject();
 
-            Blob immagine = entitaEntity.getImmagineEntita().getFoto();
+            Blob immagine = entitaEntity.getImmagineEntity().getFoto();
             byte[] bytes = immagine.getBytes(1, (int) immagine.length());
 
             immagineJSON.put(entitaEntity.getNome(), Base64.getEncoder().encodeToString(bytes));

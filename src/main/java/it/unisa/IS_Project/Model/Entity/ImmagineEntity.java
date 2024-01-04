@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.sql.Blob;
 
@@ -23,10 +25,11 @@ public class ImmagineEntity {
     @Lob
     private Blob foto;
 
-    @OneToOne(mappedBy = "immagineEntita")
-    private EntitaEntity entity;
+    @OneToOne(mappedBy = "immagineEntity",cascade = CascadeType.REMOVE)
+    private EntitaEntity entitaEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "email",referencedColumnName = "email")
-    private UtenteEntity email;
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private UtenteEntity utenteEntity;
 }

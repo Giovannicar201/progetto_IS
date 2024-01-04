@@ -2,7 +2,6 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.EventoEntity;
 import it.unisa.IS_Project.Model.Entity.IstruzioneEntity;
-import it.unisa.IS_Project.Model.Entity.PrimaryKeyIstruzione;
 import it.unisa.IS_Project.Model.Repository.EventoRepository;
 import it.unisa.IS_Project.Model.Repository.IstruzioneRepository;
 import jakarta.transaction.Transactional;

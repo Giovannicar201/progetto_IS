@@ -14,6 +14,6 @@ public interface ProprietaRepository extends JpaRepository<ProprietaEntity,Integ
     @Query
     ProprietaEntity findByNome(String nomeProprieta);
 
-    @Query
+    @Query("SELECT p FROM ProprietaEntity p WHERE p.entitaEntity = :entita")
     List<ProprietaEntity> findAllByEntita(EntitaEntity entita);
 }

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +22,8 @@ public class ProprietaEntity {
     private String nome;
     private String valore;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idEntita",referencedColumnName = "idEntita")
-    private EntitaEntity entita;
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private EntitaEntity entitaEntity;
 }

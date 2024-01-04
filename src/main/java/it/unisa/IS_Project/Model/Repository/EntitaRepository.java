@@ -17,7 +17,7 @@ public interface EntitaRepository extends JpaRepository<EntitaEntity,Integer> {
     @Query
     EntitaEntity findByNome(String nomeEntita);
 
-    @Query("SELECT e FROM EntitaEntity e WHERE e.cartellaEntity.nome = :nomeCartella AND e.email.email = :email")
+    @Query("SELECT e FROM EntitaEntity e WHERE e.cartellaEntity.nome = :nomeCartella AND e.utenteEntity.email = :email")
     List<EntitaEntity> findAllByCartellaEntity(@Param("email")String email, @Param("nomeCartella")String nomeCartella);
 
     @Query("SELECT e FROM EventoEntity e WHERE e.utenteEntity.email = :email")

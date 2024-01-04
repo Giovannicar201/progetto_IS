@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -23,14 +25,16 @@ public class EventoEntity {
     private String riga;
     private String colonna;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idMappa",referencedColumnName = "idMappa")
-    private MappaEntity idMappaEvento;
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private MappaEntity mappaEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "email", referencedColumnName = "email")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private UtenteEntity utenteEntity;
 
-    @OneToMany(mappedBy = "eventoEntity")
-    private List<IstruzioneEntity> istruzioneEntities;
+    @OneToMany(mappedBy = "eventoEntity",cascade = CascadeType.REMOVE)
+    private List<IstruzioneEntity> istruzioneEntityList;
 }

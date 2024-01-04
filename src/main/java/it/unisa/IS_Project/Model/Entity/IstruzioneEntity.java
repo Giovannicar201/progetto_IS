@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.Reference;
 
 import java.io.Serializable;
@@ -27,7 +29,8 @@ public class IstruzioneEntity {
     @Nullable
     private String valore;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idEvento",referencedColumnName = "idEvento",insertable=false, updatable=false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private EventoEntity eventoEntity;
 }
