@@ -9,7 +9,7 @@ import org.json.simple.parser.ParseException;
 import java.sql.SQLException;
 
 public interface MappaService {
-    String creaMappa(String email, String nome, int lunghezza, int larghezza) throws InvalidMapNameException, InvalidMapWidthException, InvalidMapHeightException;
+    String creaMappa(String email, String nome, String lunghezza, String larghezza) throws InvalidMapNameException, InvalidMapWidthException, InvalidMapHeightException;
 
     String visualizzaStatisticheMappa(String mappa) throws ParseException;
 

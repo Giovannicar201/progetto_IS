@@ -35,8 +35,7 @@ public class MappaControl {
     public void creaMappa(@RequestBody String mappa, HttpServletRequest request, HttpServletResponse response) throws CreateMapException {
 
         JSONParser parser = new JSONParser();
-        String email, nome;
-        Integer altezza, larghezza;
+        String email, nome, altezza, larghezza;
 
         try {
 
@@ -44,8 +43,8 @@ public class MappaControl {
 
             email = SessionManager.getEmail(request);
             nome = (String) mappaJSON.get("nome");
-            altezza = (Integer) mappaJSON.get("lunghezza");
-            larghezza = (Integer) mappaJSON.get("larghezza");
+            altezza = (String) mappaJSON.get("lunghezza");
+            larghezza = (String) mappaJSON.get("larghezza");
 
             SessionManager.setMappa(request,mappaService.creaMappa(email,nome,altezza,larghezza));
 
