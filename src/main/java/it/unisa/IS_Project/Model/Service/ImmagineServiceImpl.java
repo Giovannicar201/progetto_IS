@@ -36,12 +36,19 @@ public class ImmagineServiceImpl implements ImmagineService{
         ImmagineEntity immagineEntity = new ImmagineEntity();
         UtenteEntity utenteEntity = utenteService.get(email);
 
+
+
         if(!isImageSizeValid(foto))
-            throw new InvalidFileSizeException("Dimensione dell'immagine non valida");
+            throw new InvalidFileSizeException("ERRORE - DIMENSIONE NON VALIDA.");
 
         Blob fotoBlob = convertMultipartFileToBlob(foto);
 
         String nomeFoto = foto.getOriginalFilename();
+        ImmagineEntity immagineEntityQuery = immagineRepository.findByNomeAndEmail(nomeFoto,email);
+
+        if(immagineEntityQuery != null)
+            throw new InvalidFileSizeException("ERRORE - IMMAGINE GIA ESISTENTE.");
+
         immagineEntity.setFoto(fotoBlob);
         immagineEntity.setNome(nomeFoto);
         immagineEntity.setUtenteEntity(utenteEntity);

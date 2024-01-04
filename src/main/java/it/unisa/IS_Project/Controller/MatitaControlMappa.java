@@ -16,7 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,13 +45,21 @@ public class MatitaControlMappa extends MatitaControl {
 
             MatitaServiceMappaImpl matitaServiceMappa = (MatitaServiceMappaImpl) matitaService;
 
-            String mappa = null;//matitaServiceMappa.piazza(SessionManager.getMappa(request),nome,riga,colonna);
+            String mappa = matitaServiceMappa.piazza(SessionManager.getMappa(request),nome,riga,colonna);
 
             SessionManager.setMappa(request,mappa);
 
-        } catch (ParseException e) {
+        } catch (ParseException | SQLException e) {
             //TO DO
+        } catch (MissingSessionMapException e) {
+            throw new RuntimeException(e);
         } catch (MissingSessionEmailException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidColumnException e) {
+            throw new RuntimeException(e);
+        } catch (EntityNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidRowException e) {
             throw new RuntimeException(e);
         }
 
@@ -60,15 +70,39 @@ public class MatitaControlMappa extends MatitaControl {
     @Override
     public void riempi(@RequestBody String nomi, HttpServletRequest request, HttpServletResponse response) {
 
-        /*try {
+        MatitaServiceMappaImpl matitaServiceMappa = (MatitaServiceMappaImpl) matitaService;
+
+        //matitaServiceMappa.piazza(SessionManager.getMappa(request),nomi);
+
+    }
+
+    @RequestMapping(value = "/matita/visualizzaListaEntitaInCartella", method = RequestMethod.POST)
+    @ResponseBody
+
+    public String visualizzaListaEntitaInCartella(@RequestBody String nome, HttpServletRequest request, HttpServletResponse response) {
+
+        JSONParser parser = new JSONParser();
+
+        String email = null, nomeCartella;
+
+        try {
+
+            email = SessionManager.getEmail(request);
+
+            JSONObject nomeJSON = (JSONObject) parser.parse(nome);
+
+            nomeCartella = (String) nomeJSON.get("nome");
 
             MatitaServiceMappaImpl matitaServiceMappa = (MatitaServiceMappaImpl) matitaService;
 
-            matitaServiceMappa.piazza(SessionManager.getMappa(request),nomi);
+            return matitaServiceMappa.visualizzaLista(email,nomeCartella);
 
-        } catch (MissingSessionMapException e) {
+        } catch (MissingSessionEmailException e) {
             throw new RuntimeException(e);
-        }*/
-
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

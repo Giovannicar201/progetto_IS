@@ -72,4 +72,10 @@ public class MatitaServiceMappaImpl implements MatitaService{
     public void riempi(String mappa, List<String> nomi) {
 
     }
+
+    @Override
+    @Transactional
+    public String visualizzaLista(String email, String nome) throws SQLException {
+        return entitaService.visualizzaListaEntitaInCartella(email,nome);
+    }
 }

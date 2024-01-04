@@ -1,4 +1,6 @@
-package it.unisa.IS_Project.AI;
+package it.unisa.IS_Project.AI.MST;
+
+import it.unisa.IS_Project.AI.EntitaFIA;
 
 public class Arco {
     private final String v;

@@ -14,4 +14,6 @@ public interface MatitaService {
     String piazza(String string, String obj, String riga, String colonna) throws ParseException, EntityNotFoundException, InvalidColumnException, InvalidRowException, SQLException;
 
     void riempi(String string, List<String> objs);
+
+    String visualizzaLista(String email, String string) throws SQLException;
 }
