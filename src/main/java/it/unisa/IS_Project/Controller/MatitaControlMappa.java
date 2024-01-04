@@ -93,9 +93,9 @@ public class MatitaControlMappa extends MatitaControl {
 
             nomeCartella = (String) nomeJSON.get("nome");
 
-            MatitaServiceMappaImpl matitaServiceMappa = (MatitaServiceMappaImpl) matitaService;
+            matitaService = new MatitaServiceMappaImpl();
 
-            return matitaServiceMappa.visualizzaLista(email,nomeCartella);
+            return matitaService.visualizzaLista(email,nomeCartella);
 
         } catch (MissingSessionEmailException e) {
             throw new RuntimeException(e);
