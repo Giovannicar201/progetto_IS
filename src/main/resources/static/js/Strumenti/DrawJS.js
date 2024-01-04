@@ -10,6 +10,7 @@ function initDrawingTools(cella, flag) {
             if(flag === 1) {
 
                 cella.children[0].src = "/images/tile1.png";
+                drawTheTile("tile1.png", cella);
 
             } else{
 
@@ -121,6 +122,8 @@ function disegnaTileSelezione(){
 
             cella.children[0].src = "/images/tile1.png";
             cella.removeAttribute("style");
+
+            drawTheTileSelection("tile1.png", selectorGriglia[0], selectorGriglia[selectorGriglia.length - 1]);
 
         } else {
 

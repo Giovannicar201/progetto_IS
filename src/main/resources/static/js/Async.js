@@ -72,6 +72,60 @@ function createMapFunction(altezza, larghezza, nome){
 
 }
 
+function drawTheTile(nome, div){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/matita/piazzaEntita', true);
+
+    let entita = {};
+
+    entita.nome = nome;
+    entita.riga = div.id.split(",")[0];
+    entita.colonna = div.id.split(",")[1];
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status === 200) {
+
+
+
+        }
+
+    };
+
+    xhr.send(JSON.stringify(entita));
+    xhr.close;
+
+}
+
+function drawTheTileSelection(nome, coordinata1, coordinata2){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/matita/riempiConEntita', true);
+
+    let entita = {};
+
+    entita.nome = nome;
+    entita.coord1 = coordinata1;
+    entita.coord2 = coordinata2;
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status === 200) {
+
+
+
+        }
+
+    };
+
+    xhr.send(JSON.stringify(entita));
+    xhr.close;
+
+}
+
 /**
  *
  *  Questa sezione contiene le funzioni inerenti al GMP.GCR
@@ -151,7 +205,12 @@ function getCartellaContent(){
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET', '/griglia/trovaCartelle', true);
+    xhr.open('POST', '/matita/visualizzaListaEntitaInCartella', true);
+
+    let richiesta = {};
+    let nome = document.getElementById("nome");
+
+    richiesta.nome = nome.value;
 
     xhr.onreadystatechange = function() {
 
@@ -159,13 +218,19 @@ function getCartellaContent(){
 
             if (xhr.status === 200){
 
+                $("#show").empty();
 
+                let x = JSON.parse(xhr.responseText);
 
-            }
+                x.blobImmagini.forEach(function (immagine) {
 
-            if (xhr.status === 500) {
+                    let id = Object.keys(immagine)[0];
+                    let src = "data:image;base64," + immagine[id];
 
+                    $("#show").append(
+                        '<img id="' + id + '" src="' + src + '" style ="width: 64px; height: 64px;" class="imgEntity">');
 
+                });
 
             }
 
@@ -173,7 +238,7 @@ function getCartellaContent(){
 
     };
 
-    xhr.send();
+    xhr.send(JSON.stringify(richiesta));
     xhr.close;
 
 }
@@ -285,6 +350,7 @@ function creaEntità() {
         if (xhr.readyState === 4 && xhr.status === 200) {
 
             alert("entità creato con successo");
+            //saveImages();
 
         }
 
@@ -299,18 +365,34 @@ function creaEntità() {
     xhr.send(entità);
     xhr.close;
 
-    saveImages();
-
 }
 
 function getEntità(){
 
     let entitàText = {};
 
-    entitàText.nome =  document.getElementById("nome").value;
-    entitàText.nomeEntità = document.getElementById("entità").value;
+    entitàText.nomeImmagine =  document.getElementById("nomeImmagine").value;
+    entitàText.nome = document.getElementById("nome").value;
     entitàText.collisioni =  document.getElementsByClassName("selezionato")[0].value;
     entitàText.nomeCartella = document.getElementById("nomeCartella").value;
+
+    let proprietà = [];
+
+    let nomi = document.getElementsByClassName("NomeProprietà");
+    let valori = document.getElementsByClassName("ValoreProprietà");
+
+    for (let i = 0; i < nomi.length; i++){
+
+        let elemento = {};
+
+        elemento.nomeProprieta = nomi[i].value;
+        elemento.valoreProprieta = valori[i].value;
+
+        proprietà.push(elemento);
+
+    }
+
+    entitàText.proprieta = proprietà;
 
     return JSON.stringify(entitàText);
 

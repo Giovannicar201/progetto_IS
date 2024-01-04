@@ -27,7 +27,8 @@ public class CartellaControl {
 
     @RequestMapping(value = "/gestoreCartelle/creaCartella", method = RequestMethod.POST)
 
-    public void creaCartella(@RequestBody String nomeCartella, HttpServletRequest request, HttpServletResponse response) throws FolderCreationException {
+    public void creaCartella(@RequestBody String nomeCartella, HttpServletRequest request, HttpServletResponse response)
+            throws FolderCreationException {
 
         try {
 

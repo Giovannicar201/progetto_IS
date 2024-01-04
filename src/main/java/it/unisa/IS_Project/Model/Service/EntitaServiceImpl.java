@@ -138,7 +138,9 @@ public class EntitaServiceImpl implements EntitaService{
 
     @Override
     @Transactional
-    public String visualizzaListaEntitaInCartella(String email, String nomeCartella) throws SQLException {
+    public String visualizzaListaEntitaInCartella(String email, String nomeCartella)
+            throws SQLException {
+
         JSONObject immaginiJSON = new JSONObject();
         JSONArray blobImmagini = new JSONArray();
 

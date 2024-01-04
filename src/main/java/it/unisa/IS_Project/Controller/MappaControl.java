@@ -93,7 +93,8 @@ public class MappaControl {
     @RequestMapping(value = "/gestoreMappa/visualizzaStatisticheMappa", method = RequestMethod.POST)
     @ResponseBody
 
-    public String visualizzaStatisticheMappa(HttpServletRequest request, HttpServletResponse response) throws CreateMapException {
+    public String visualizzaStatisticheMappa(HttpServletRequest request, HttpServletResponse response)
+            throws CreateMapException {
 
         /*String statistiche = new JSONObject().toString();
 

@@ -31,11 +31,11 @@ function creaGestore(){
             '   </div>' +
             '<div class="actionDiv">'+
             '                  <label for="nome">Nome immagine:</label>' +
-            '                  <input type="text" id="nome" class="inputForm">' +
+            '                  <input type="text" id="nomeImmagine" class="inputForm">' +
             '              </div>'+
             '<div class="actionDiv">'+
             '                  <label>Nome entità:</label>' +
-            '                  <input type="text" id="entità" class="inputForm">' +
+            '                  <input type="text" id="nome" class="inputForm">' +
             '              </div>' +
             '<div class="actionDiv">' +
             '                  <label>Collisioni:</label>' +

@@ -25,7 +25,9 @@ public class SessionManager {
 
     }
 
-    public static String getMappa(HttpServletRequest request) throws MissingSessionMapException {
+    public static String getMappa(HttpServletRequest request)
+            throws MissingSessionMapException {
+
         String mappa = (String) request.getSession().getAttribute("mappa");
 
         if(mappa == null)

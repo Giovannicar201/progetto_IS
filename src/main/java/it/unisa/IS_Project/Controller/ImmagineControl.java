@@ -92,7 +92,9 @@ public class ImmagineControl {
     @RequestMapping(value = "/gestoreImmagini/visualizzaListaImmagini", method = RequestMethod.GET)
     @ResponseBody
 
-    public String visualizzaListaImmagini(HttpServletRequest request, HttpServletResponse response) throws ViewImagesListException {
+    public String visualizzaListaImmagini(HttpServletRequest request, HttpServletResponse response)
+            throws ViewImagesListException {
+
         String immagini = new JSONObject().toString();
 
         try {

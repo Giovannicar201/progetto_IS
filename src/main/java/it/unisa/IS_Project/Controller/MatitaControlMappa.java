@@ -79,7 +79,8 @@ public class MatitaControlMappa extends MatitaControl {
     @RequestMapping(value = "/matita/visualizzaListaEntitaInCartella", method = RequestMethod.POST)
     @ResponseBody
 
-    public String visualizzaListaEntitaInCartella(@RequestBody String nome, HttpServletRequest request, HttpServletResponse response) {
+    public String visualizzaListaEntitaInCartella(@RequestBody String nome, HttpServletRequest request,
+                                                  HttpServletResponse response) {
 
         JSONParser parser = new JSONParser();
 

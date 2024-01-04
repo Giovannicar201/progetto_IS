@@ -31,7 +31,8 @@ public class EntitaControl {
 
     @RequestMapping(value = "/entità/creaEntità", method = RequestMethod.POST)
 
-    public void creaEntita(@RequestBody String entita, HttpServletRequest request, HttpServletResponse response) throws CreateEntityException {
+    public void creaEntita(@RequestBody String entita, HttpServletRequest request, HttpServletResponse response)
+            throws CreateEntityException {
 
         JSONParser parser = new JSONParser();
         List<String> nomiProprieta = new ArrayList<>();
@@ -271,7 +272,8 @@ public class EntitaControl {
     @RequestMapping(value = "/entità/visualizzaListaEntità", method = RequestMethod.POST)
     @ResponseBody
 
-    public String visualizzaListaEntita(HttpServletRequest request, HttpServletResponse response ) throws ViewEntityListException {
+    public String visualizzaListaEntita(HttpServletRequest request, HttpServletResponse response )
+            throws ViewEntityListException {
 
         String immagini = new JSONObject().toString();
 
