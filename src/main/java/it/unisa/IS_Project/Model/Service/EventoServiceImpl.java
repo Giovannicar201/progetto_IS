@@ -1,10 +1,7 @@
 package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.*;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.*;
 import it.unisa.IS_Project.Model.Repository.EventoRepository;
-import it.unisa.IS_Project.Model.Repository.MappaRepository;
-import it.unisa.IS_Project.Model.Repository.UtenteRepository;
 import it.unisa.IS_Project.Utility.Validator;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +20,15 @@ public class EventoServiceImpl implements EventoService{
     private MappaService mappaService;
 
     @Override
+    public void creaEvento(String email, String nome, String riga, String colonna, List<String> nomiIstruzioni, List<String> valoriIstruzioni) {
+
+    }
+
+    @Override
     @Transactional
-    public void creaEvento(String mappa, String email, String nome, String riga, String colonna, List<String> nomiIstruzioni, List<String> valoriIstruzioni) {
-        EventoEntity eventoEntity = new EventoEntity();
+    public void creaEvento(String mappa, String email, String nome, String riga, String colonna,
+                           List<String> nomiIstruzioni, List<String> valoriIstruzioni) {
+       /* EventoEntity eventoEntity = new EventoEntity();
         EventoEntity eventoEntityQuery = eventoRepository.findByNome(nome);
         EventoEntity entitaEntitySecondQuery = eventoRepository.findByRigaAndColonna(riga,colonna);
         UtenteEntity utenteEntity = utenteService.get(email);
@@ -57,30 +60,30 @@ public class EventoServiceImpl implements EventoService{
             istruzioneEntity.setNome(nomeIstruzione);
             istruzioneEntity.setValore(valoreIstruzione);
             istruzioneEntity.setEventoEntity(eventoEntity);
-        }
+        }*/
 
-        eventoRepository.save(eventoEntity);
+        eventoRepository.save(null);
     }
 
     @Override
     @Transactional
     public EventoEntity get(String nomeEvento) {
-        EventoEntity eventoEntity=eventoRepository.findByNome(nomeEvento).orElse(null);
-        return eventoEntity;
+       // EventoEntity eventoEntity=eventoRepository.findByNome(nomeEvento).orElse(null);
+        return null;
     }
 
     @Override
     @Transactional
     public EventoEntity update(EventoEntity newEventoEntity,String nomeEvento) {
-        EventoEntity eventoEntity=eventoRepository.findByNome(nomeEvento).orElse(null);
+       // EventoEntity eventoEntity=eventoRepository.findByNome(nomeEvento).orElse(null);
 
         newEventoEntity.setNome(nomeEvento);
 
 
-        eventoEntity.setNome(newEventoEntity.getNome());
-        EventoEntity saved=eventoRepository.save(eventoEntity);
+       // eventoEntity.setNome(newEventoEntity.getNome());
+        //EventoEntity saved=eventoRepository.save(eventoEntity);
 
-        return saved;
+        return null;
     }
 
     @Override

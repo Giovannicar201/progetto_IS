@@ -143,7 +143,7 @@ function creaImmagini(){
             '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
             '       Immagini </div>' +
             '   <div class="actionDiv">' +
-            '       <div class="entityDiv" style="padding: 8px; border-radius: 2px;" id="show">' +
+            '       <div class="entityDiv" style="padding: 8px; border-radius: 2px; height: fit-content;" id="show">' +
             '           ' +
             '       </div>' +
             '       <div class="actionDiv">' +
@@ -258,10 +258,4 @@ function showFile(){
         label.classList.remove("file");
 
     }
-}
-
-function showInfo(id){
-
-    $("#nomeImmagine").val(id);
-
 }

@@ -26,8 +26,8 @@ public class MappaServiceImpl implements MappaService{
         MappaEntity mappaEntityQuery = mappaRepository.findByNome(nome);
         UtenteEntity utenteEntity = utenteService.get(email);
 
-        if(mappaEntityQuery != null)
-            mappaRepository. //non posso cancellarla altrimenti mi cancella tutte le entity ecc
+        /*if(mappaEntityQuery != null)
+          //  mappaRepository. //non posso cancellarla altrimenti mi cancella tutte le entity ecc
 
         if(!Validator.isMapNameValid())
             throw new InvalidMapNameException("ERRORE - NOME NON VALIDO.");
@@ -50,7 +50,20 @@ public class MappaServiceImpl implements MappaService{
 
         mappaJSON.put("mappa",entita);
 
-        return mappaJSON.toString();
+        return mappaJSON.toString();*/
+
+        return null;
+
+    }
+
+    @Override
+    public String visualizzaStatisticheMappa(String email) {
+        return null;
+    }
+
+    @Override
+    public MappaEntity get(String nome) {
+        return null;
     }
 
     @Override

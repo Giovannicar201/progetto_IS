@@ -36,8 +36,9 @@ public class EventoControl {
 
     @RequestMapping(value = "/gestoreEventi/creaEvento", method = RequestMethod.POST)
 
-    public String creaEvento(@RequestBody String evento, HttpServletRequest request){
-        JSONParser parser = new JSONParser();
+    public String creaEvento(@RequestBody String evento,
+                             HttpServletRequest request, HttpServletResponse response) throws CreateEntityException{
+       /* JSONParser parser = new JSONParser();
         List<String> nomiIstruzioni = new ArrayList<>();
         List<String> valoriIstruzioni = new ArrayList<>();
         String email, nome, riga, colonna;
@@ -129,7 +130,7 @@ public class EventoControl {
                 throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
             }
 
-        }
+        }*/
 
         return evento;
     }

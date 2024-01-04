@@ -423,10 +423,19 @@ function showImmagini(){
                     let src = "data:image;base64," + immagine[id];
 
                     $("#show").append(
-                        '<img id="' + id + '" src="' + src + '" style ="width: 64px; height: 64px;" onclick="showInfo(id)">');
+                        '<img id="' + id + '" src="' + src + '" style ="width: 64px; height: 64px;" class="imgEntity">');
 
                 });
 
+                $(".imgEntity").click(function (){
+
+                    $("#nomeImmagine").val($(this).attr("id"));
+
+                    $(".imgEntity").css("border", "none");
+
+                    $(this).css("border", "solid 1px #516f96");
+
+                });
 
             }
 
