@@ -81,8 +81,8 @@ function drawTheTile(nome, div){
     let entita = {};
 
     entita.nome = nome;
-    entita.riga = div.id.split(",")[0];
-    entita.colonna = div.id.split(",")[1];
+    entita.riga = div.id.split(",")[0].toString();
+    entita.colonna = div.id.split(",")[1].toString();
 
     xhr.onreadystatechange = function() {
 
@@ -126,9 +126,34 @@ function drawTheTileSelection(nome, coordinata1, coordinata2){
 
 }
 
-function getMapFromTheDataBase(){
+function getMapFromTheSession(){
 
+    let xhr = new XMLHttpRequest();
 
+    xhr.open('POST', '/gestoreMappa/recuperaMappa', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status === 200) {
+
+            let map = JSON.parse(xhr.responseText);
+
+            console.log(map);
+
+            map.mappa.forEach(function (mapDiv){
+
+                drawFromAsyncCall(mapDiv);
+
+            });
+
+            createStyle(parseInt(map.mappa[map.mappa.length - 1].colonna) + 1, "32px");
+
+        }
+
+    };
+
+    xhr.send();
+    xhr.close;
 
 }
 

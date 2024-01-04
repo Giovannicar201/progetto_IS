@@ -1,27 +1,5 @@
-let divMappa = document.getElementById("tileset");
 let x;
 let y;
-
-function tileset() {
-
-    for (let i = 0; i < 2; i++) {
-
-        let img = document.createElement("img");
-
-        img.className = "cellaTile";
-        img.src = "/images/tileset/tile" + i +".png";
-
-        img.onclick = function test() {
-
-            document.getElementById("tileScelto").children[0].src = img.src;
-
-        };
-
-        divMappa.append(img);
-
-    }
-
-}
 
 function crea(){
 
@@ -627,6 +605,45 @@ function disegna(div, righe, colonne) {
         }
 
     }
+
+    createStyle(colonne, px);
+
+}
+
+function drawFromAsyncCall(mapDiv){
+
+   let div = document.getElementById("griglia");
+
+    let cella = document.createElement("div");
+
+    let img = document.createElement("img");
+    img.className = "cella";
+
+    if (mapDiv.immagine !== '') {
+
+        img.src = "data:image;base64," + mapDiv.immagine;
+
+    }
+
+    cella.id = mapDiv.riga + "," + mapDiv.colonna;
+    cella.className = "square";
+
+    cella.append(img);
+
+    cella.onmouseover = function test() {
+
+        document.getElementById("ascissa").innerHTML = cella.id.split(",")[1];
+        document.getElementById("ordinata").innerHTML = cella.id.split(",")[0];
+
+    };
+
+    initDrawingTools(cella, 1);
+
+    div.append(cella);
+
+}
+
+function createStyle(colonne, px){
 
     if (document.head.children.length > 3) {
 

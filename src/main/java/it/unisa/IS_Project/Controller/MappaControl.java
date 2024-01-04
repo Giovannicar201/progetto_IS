@@ -164,7 +164,8 @@ public class MappaControl {
     @RequestMapping(value = "/gestoreMappa/recuperaMappa", method = RequestMethod.POST)
     @ResponseBody
 
-    public String recuperaMappa(HttpServletRequest request, HttpServletResponse response) throws RecoveryMapException {
+    public String recuperaMappa(HttpServletRequest request, HttpServletResponse response)
+            throws RecoveryMapException {
 
         String mappa = new JSONObject().toString();
 

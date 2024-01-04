@@ -25,7 +25,9 @@ public class MatitaServiceMappaImpl implements MatitaService{
 
     @Override
     @Transactional
-    public String piazza(String mappa, String nome, String riga, String colonna) throws ParseException, EntityNotFoundException, InvalidColumnException, InvalidRowException, SQLException {
+    public String piazza(String mappa, String nome, String riga, String colonna)
+            throws ParseException, EntityNotFoundException, InvalidColumnException, InvalidRowException, SQLException {
+
         EntitaEntity entitaEntityQuery = entitaService.get(nome);
 
         JSONParser parser = new JSONParser();
@@ -46,7 +48,9 @@ public class MatitaServiceMappaImpl implements MatitaService{
         for (Object entitaOBJ : entita) {
             JSONObject entitaJSON = (JSONObject) entitaOBJ;
 
-            if(entitaJSON.get("riga") == riga && entitaJSON.get("colonna") == colonna) {
+            if(((String)entitaJSON.get("riga")).compareTo(riga) == 0 &&
+                    ((String)entitaJSON.get("colonna")).compareTo(colonna) == 0) {
+
                 entitaJSON.put("id",entitaEntityQuery.getId());
 
                 Blob immagine = entitaEntityQuery.getImmagineEntity().getFoto();
@@ -56,6 +60,8 @@ public class MatitaServiceMappaImpl implements MatitaService{
             }
         }
 
+        mappaJSON.put("mappa",entita);
+
         System.out.println(mappaJSON);
 
         CoordinateEntity coordinateEntity = new CoordinateEntity();
@@ -63,6 +69,7 @@ public class MatitaServiceMappaImpl implements MatitaService{
         coordinateEntity.setPrimaryKeyCoordinate(new CoordinateEntity.PrimaryKeyCoordinate(riga,colonna,entitaEntityQuery.getId()));
 
         return mappaJSON.toString();
+
     }
 
     @Override

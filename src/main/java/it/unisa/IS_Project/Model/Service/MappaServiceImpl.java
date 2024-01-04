@@ -60,8 +60,8 @@ public class MappaServiceImpl implements MappaService{
                 JSONObject entitaJSON = new JSONObject();
 
                 entitaJSON.put("id",0);
-                entitaJSON.put("riga",riga);
-                entitaJSON.put("colonna",colonna);
+                entitaJSON.put("riga", "" + riga + "");
+                entitaJSON.put("colonna","" + colonna + "");
                 entitaJSON.put("immagine","");
 
                 entita.add(entitaJSON);
