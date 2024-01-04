@@ -16,18 +16,11 @@ import java.io.Serializable;
 @Builder
 @Entity
 @Table(name = "istruzione")
-@IdClass(PrimaryKeyIstruzione.class)
-
 public class IstruzioneEntity {
-
     @Id
     @Column(name = "idIstruzione")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idIstruzione;
-
-    @Id
-    @Column(name = "idEvento")
-    private int idEvento; //ma perchè ha un id evento se poi dopo prende un evento entity?
 
     private String nome;
 
@@ -37,5 +30,4 @@ public class IstruzioneEntity {
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "idEvento",referencedColumnName = "idEvento",insertable=false, updatable=false)
     private EventoEntity eventoEntity;
-
 }

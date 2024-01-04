@@ -26,10 +26,9 @@ public class IstruzioneServiceImpl implements IstruzioneService{
         istruzioneEntity.setNome(nomeIstruzione);
         istruzioneEntity.setValore(valore);
 
-        EventoEntity eventoEntity=eventoRepository.findByNome(nomeEvento).get();
+        EventoEntity eventoEntity=eventoRepository.findByNome(nomeEvento);
         eventoEntity.setIdEvento(eventoEntity.getIdEvento());
         eventoEntity.setNome(nomeEvento);
-        istruzioneEntity.setIdEvento(eventoEntity.getIdEvento());
         istruzioneEntity.setEventoEntity(eventoEntity);
 
         istruzioneRepository.save(istruzioneEntity);
@@ -49,7 +48,6 @@ public class IstruzioneServiceImpl implements IstruzioneService{
         IstruzioneEntity istruzioneEntity=istruzioneRepository.findByNome(nomeIstruzione).get();
 
         newIstruzioneEntity.setIdIstruzione(istruzioneEntity.getIdIstruzione());
-        newIstruzioneEntity.setIdEvento(istruzioneEntity.getIdEvento());
 
         istruzioneEntity.setNome(newIstruzioneEntity.getNome());
         istruzioneEntity.setValore(newIstruzioneEntity.getValore());
@@ -61,7 +59,7 @@ public class IstruzioneServiceImpl implements IstruzioneService{
     @Override
     @Transactional
     public void delete(String nomeIstruzione, String nomeEvento) {
-        EventoEntity eventoEntity=eventoRepository.findByNome(nomeEvento).get();
+        EventoEntity eventoEntity=eventoRepository.findByNome(nomeEvento);
 
         istruzioneRepository.deleteByNomeAndIdEvento(nomeIstruzione,eventoEntity.getIdEvento());
     }

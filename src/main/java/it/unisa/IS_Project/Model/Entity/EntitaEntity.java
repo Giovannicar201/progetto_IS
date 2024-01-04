@@ -21,12 +21,14 @@ public class EntitaEntity {
     private int id;
     private String nome;
     private String collisione;
-    //private List<String> posizioni;
 
     @OneToMany(mappedBy = "entita")
     private List<ProprietaEntity> idEntitaEntityProprieta;
 
-    @ManyToOne(cascade = CascadeType.ALL,optional = true)
+    @OneToMany(mappedBy = "entitaEntity")
+    private List<CoordinateEntity> coordinateEntityList;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idMappa",referencedColumnName = "idMappa")
     private MappaEntity idMappaEntity;
 
