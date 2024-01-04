@@ -35,7 +35,9 @@ public class MappaServiceImpl implements MappaService{
 
     @Override
     @Transactional
-    public String creaMappa(String email, String nome, String altezza, String larghezza) throws InvalidMapNameException, InvalidMapWidthException, InvalidMapHeightException {
+    public String creaMappa(String email, String nome, String altezza, String larghezza)
+            throws InvalidMapNameException, InvalidMapWidthException, InvalidMapHeightException {
+
         MappaEntity mappaEntity = new MappaEntity();
         MappaEntity mappaEntityQuery = mappaRepository.findByNome(nome);
         UtenteEntity utenteEntity = utenteService.get(email);

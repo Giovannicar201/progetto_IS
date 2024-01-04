@@ -48,13 +48,17 @@ function crea(){
                 '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Creazione' +
                 '   </div>' +
+                    '  <div class="actionDiv">'+
+                    '                  <label for="nomeMappa">Nome:</label>' +
+                    '                  <input type="text" id="nomeMappa" class="inputForm" required>' +
+                    '              </div>' +
                     '<div class="actionDiv">'+
                     '                  <label for="larghezza">Larghezza:</label>' +
-                    '                  <input type="number" id="larghezza" class="inputForm">' +
+                    '                  <input type="number" id="larghezza" class="inputForm" required>' +
                     '              </div>' +
                     '<div class="actionDiv">' +
                     '                  <label for="altezza">Altezza:</label>' +
-                    '                  <input type="number" id="altezza" class="inputForm">' +
+                    '                  <input type="number" id="altezza" class="inputForm" required>' +
                     '              </div>' +
                     '<div class="actionDiv">' +
                     '                  <button class="bottone" onclick="creaGriglia()">Crea Mappa</button>' +
@@ -580,6 +584,7 @@ function creaGriglia(){
     }
 
     disegna(contenitoreGriglia, righe, colonne);
+    createMapFunction(righe, colonne, document.getElementById("nomeMappa").value);
 
 }
 

@@ -1,3 +1,9 @@
+/**
+ *
+ *  Questa parte contiene le funzioni associate a GMP
+ *
+ **/
+
 function getimg(formato) {
 
     combine(formato);
@@ -32,6 +38,45 @@ function combine(formato){
     });
 
 }
+
+function createMapFunction(altezza, larghezza, nome){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/gestoreMappa/creaMappa', true);
+
+    let map = {};
+
+    map.nome = nome;
+    map.altezza = altezza.toString();
+    map.larghezza = larghezza.toString();
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status === 200) {
+
+            alert("Creazione avvenuta con successo!");
+
+        }
+
+        if (xhr.readyState === 4 && xhr.status === 302) {
+
+
+
+        }
+
+    };
+
+    xhr.send(JSON.stringify(map));
+    xhr.close;
+
+}
+
+/**
+ *
+ *  Questa sezione contiene le funzioni inerenti al GMP.GCR
+ *
+ **/
 
 function creaLaCartella(){
 

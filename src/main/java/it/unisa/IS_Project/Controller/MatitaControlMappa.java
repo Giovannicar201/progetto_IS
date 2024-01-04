@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,21 +43,13 @@ public class MatitaControlMappa extends MatitaControl {
 
             MatitaServiceMappaImpl matitaServiceMappa = (MatitaServiceMappaImpl) matitaService;
 
-            String mappa = matitaServiceMappa.piazza(SessionManager.getMappa(request),nome,riga,colonna);
+            String mappa = null;//matitaServiceMappa.piazza(SessionManager.getMappa(request),nome,riga,colonna);
 
             SessionManager.setMappa(request,mappa);
 
-        } catch (ParseException | SQLException e) {
+        } catch (ParseException e) {
             //TO DO
-        } catch (MissingSessionMapException e) {
-            throw new RuntimeException(e);
         } catch (MissingSessionEmailException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidColumnException e) {
-            throw new RuntimeException(e);
-        } catch (EntityNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidRowException e) {
             throw new RuntimeException(e);
         }
 
