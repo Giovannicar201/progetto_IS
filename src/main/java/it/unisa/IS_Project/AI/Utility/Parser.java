@@ -4,9 +4,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class Parser {
 
@@ -18,35 +15,21 @@ public class Parser {
 
         JSONObject entitaJSON = (JSONObject) entita.get(entita.size() - 1);
 
-        int altezza = Math.toIntExact((Long) entitaJSON.get("row")) + 1;
-        int larghezza = Math.toIntExact((Long) entitaJSON.get("col")) + 1;
+        int altezza = Math.toIntExact((Long) entitaJSON.get("riga")) + 1;
+        int larghezza = Math.toIntExact((Long) entitaJSON.get("colonna")) + 1;
 
-        int[][] map = new int[altezza][larghezza];
+        int[][] matriceMappa = new int[altezza][larghezza];
 
         for (Object obj : entita) {
-            JSONObject entityJSON = (JSONObject) entitaJSON;
+            entitaJSON = (JSONObject) obj;
 
-            int row = Math.toIntExact((Long) entityJSON.get("row"));
-            int col = Math.toIntExact((Long) entityJSON.get("col"));
-            int id = Math.toIntExact((Long) entityJSON.get("id"));
+            int riga = Math.toIntExact((Long) entitaJSON.get("riga"));
+            int colonna = Math.toIntExact((Long) entitaJSON.get("colonna"));
+            int id = Math.toIntExact((Long) entitaJSON.get("id"));
 
-            map[row][col] = id;
+            matriceMappa[riga][colonna] = id;
         }
 
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\main\\java\\it\\unisa\\files\\map.txt"));
-            for (int[] row : map) {
-                for (int id : row) {
-                    writer.write(id + "\t");
-                }
-                writer.write("\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        return map;
+        return matriceMappa;
     }
-
 }
