@@ -1,6 +1,5 @@
 package it.unisa.IS_Project.Controller;
 
-import it.unisa.IS_Project.Model.Exception.GEN.GIM.VisualizzaListaImmagini.ViewImagesListException;
 import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.CreateMapException;
 import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapHeightException;
 import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapNameException;
@@ -21,9 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import java.io.IOException;
-import java.sql.SQLException;
+
 
 @Controller
 public class MappaControl {
