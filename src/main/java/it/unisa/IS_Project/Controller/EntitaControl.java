@@ -1,13 +1,11 @@
 package it.unisa.IS_Project.Controller;
 
-import it.unisa.IS_Project.Model.Entity.EntitaEntity;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.*;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.EliminazioneEntita.DeleteEntityException;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.EntityNotFoundException;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.ModificaEntita.ModifyEntityException;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.VisualizzaEntita.ViewEntityException;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.VisualizzaListaEntita.ViewEntityListException;
-import it.unisa.IS_Project.Model.Exception.GEN.GIM.VisualizzaListaImmagini.ViewImagesListException;
 import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.EntitaService;
 import it.unisa.IS_Project.Utility.SessionManager;
@@ -20,7 +18,6 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;

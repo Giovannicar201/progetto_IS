@@ -20,8 +20,9 @@ public class EventoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEvento")
     private int idEvento;
-
     private String nome;
+    private String riga;
+    private String colonna;
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "idMappa",referencedColumnName = "idMappa")

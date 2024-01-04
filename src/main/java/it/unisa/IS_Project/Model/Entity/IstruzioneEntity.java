@@ -27,7 +27,7 @@ public class IstruzioneEntity {
 
     @Id
     @Column(name = "idEvento")
-    private int idEvento;
+    private int idEvento; //ma perchè ha un id evento se poi dopo prende un evento entity?
 
     private String nome;
 

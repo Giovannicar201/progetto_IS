@@ -12,7 +12,10 @@ import java.util.Optional;
 @Repository
 public interface EventoRepository extends JpaRepository<EventoEntity,Integer> {
     @Query
-    Optional<EventoEntity> findByNome(String nomeEvento);
+    EventoEntity findByNome(String nomeEvento);
+
+    @Query
+    EventoEntity findByRigaAndColonna(String riga, String colonna);
 
     @Query
     void deleteByNome(String nomeEvento);

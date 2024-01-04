@@ -21,6 +21,7 @@ public class EntitaEntity {
     private int id;
     private String nome;
     private String collisione;
+    //private List<String> posizioni;
 
     @OneToMany(mappedBy = "entita")
     private List<ProprietaEntity> idEntitaEntityProprieta;

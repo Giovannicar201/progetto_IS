@@ -5,7 +5,7 @@ import it.unisa.IS_Project.Model.Entity.EventoEntity;
 import java.util.List;
 
 public interface EventoService {
-    EventoEntity add(String nomeEvento, String email);
+    void creaEvento(String email, String nome, String riga, String colonna, List<String> nomiIstruzioni, List<String> valoriIstruzioni);
 
     EventoEntity get(String nomeEvento);
 

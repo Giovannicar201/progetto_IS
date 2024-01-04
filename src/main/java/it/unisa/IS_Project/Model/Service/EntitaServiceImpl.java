@@ -54,7 +54,7 @@ public class EntitaServiceImpl implements EntitaService{
             throw new FolderNotFoundException("ERRORE - CARTELLA NON ESISTENTE.");
 
         if(!Validator.isNumberOfPropertyValid(nomiProprieta.size()))
-            throw new InvalidNumberOfPropertyException("ERRORE - NUMERO DI PROPRIETÀ NON VALIO.");
+            throw new InvalidNumberOfPropertyException("ERRORE - NUMERO DI PROPRIETÀ NON VALIDO.");
 
         entitaEntity.setEmail(utenteEntity);
         entitaEntity.setImmagineEntita(immagineEntityQuery);

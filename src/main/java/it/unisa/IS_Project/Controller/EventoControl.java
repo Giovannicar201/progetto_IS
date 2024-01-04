@@ -1,10 +1,13 @@
 package it.unisa.IS_Project.Controller;
 
+import it.unisa.IS_Project.Model.Entity.EntitaEntity;
 import it.unisa.IS_Project.Model.Entity.EventoEntity;
 import it.unisa.IS_Project.Model.Entity.IstruzioneEntity;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.*;
 import it.unisa.IS_Project.Model.Exception.Session.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.EventoService;
 import it.unisa.IS_Project.Model.Service.UtenteService;
+import it.unisa.IS_Project.Utility.SessionManager;
 import it.unisa.IS_Project.Utility.Utility;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,6 +20,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Controller
@@ -27,70 +34,125 @@ public class EventoControl {
     @Autowired
     public UtenteService utenteService;
 
-    /*@RequestMapping(value = "/eventi/creaEvento", method = RequestMethod.POST)
+    @RequestMapping(value = "/gestoreEventi/creaEvento", method = RequestMethod.POST)
 
     public String creaEvento(@RequestBody String evento, HttpServletRequest request){
-
-        System.out.println(evento);
-
         JSONParser parser = new JSONParser();
-        JSONObject eventoJSON;
-        JSONArray istruzioni;
-
-        System.out.println("ARRIVATO");
+        List<String> nomiIstruzioni = new ArrayList<>();
+        List<String> valoriIstruzioni = new ArrayList<>();
+        String email, nome, riga, colonna;
 
         try {
-            eventoJSON = (JSONObject) parser.parse(evento);
+
+            JSONObject entitaJSON = (JSONObject) parser.parse(evento);
+
+            email = SessionManager.getEmail(request);
+            nome = (String) entitaJSON.get("nome");
+            riga = (String) entitaJSON.get("riga");
+            colonna = (String) entitaJSON.get("colonna");
+
+            JSONArray istruzioni = (JSONArray) entitaJSON.get("istruzioni");
+
+            for(Object obj : istruzioni) {
+                JSONObject istruzioneJSON = (JSONObject) obj;
+
+                String nomeIstruzione = (String) istruzioneJSON.get("nomeIstruzione");
+                String valoreIstruzione = (String) istruzioneJSON.get("valoreIstruzione");
+
+                nomiIstruzioni.add(nomeIstruzione);
+                valoriIstruzioni.add(valoreIstruzione);
+            }
+
+            eventoService.creaEvento(email,nome,riga,colonna,nomiIstruzioni,valoriIstruzioni);
+
         } catch (ParseException e) {
-            return "redirect:/error";
-        }
 
-        String email = null;
-        try {
-            email = Utility.emailSessione(request);
+            try {
+                response.sendError(302, "NQTE");
+            } catch (IOException ex) {
+                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ PARSEEXCEPTION.");
+            }
+
         } catch (MissingSessionEmailException e) {
-            throw new RuntimeException(e);
+
+            try {
+                response.sendError(302, "MSEE");
+            } catch (IOException ex) {
+                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+            }
+
+        } catch (FolderNotFoundException e) {
+
+            try {
+                response.sendError(500, "MSEE");
+            } catch (IOException ex) {
+                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+            }
+
+        } catch (InvalidEntityNameException e) {
+
+            try {
+                response.sendError(500, "IENE");
+            } catch (IOException ex) {
+                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+            }
+
+        } catch (InvalidNumberOfPropertyException e) {
+
+            try {
+                response.sendError(500, "INPE");
+            } catch (IOException ex) {
+                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+            }
+
+        } catch (NotUniqueEntityException e) {
+
+            try {
+                response.sendError(500, "NUEE");
+            } catch (IOException ex) {
+                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+            }
+
+        } catch (ImageNotFoundException e) {
+
+            try {
+                response.sendError(500, "INFE");
+            } catch (IOException ex) {
+                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+            }
+
+        } catch (InvalidCollisionException e) {
+
+            try {
+                response.sendError(500, "ICE");
+            } catch (IOException ex) {
+                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+            }
+
         }
-        String nome = (String) eventoJSON.get("nome");
 
-        eventoService.add(nome,email);
-
-        istruzioni = (JSONArray) eventoJSON.get("istruzioni");
-
-       for(Object obj : istruzioni) {
-           JSONObject objJSON = (JSONObject) obj;
-           String nomeIstruzione = (String) objJSON.get("nome");
-           String valoreIstruzione = (String) objJSON.get("valore");
-           IstruzioneEntity istruzione = new IstruzioneEntity();
-           istruzione.setNome(nomeIstruzione);
-           istruzione.setValore(valoreIstruzione);
-           istruzione.setEventoEntity(eventoService.get(nome));
-           istruzione.setIdEvento(eventoService.get(nome).getIdEvento());
-       }
-
-        return "eventmanager";
-
+        return evento;
     }
 
-    @RequestMapping(value = "/eventi/visualizzaAnteprima", method = RequestMethod.POST)
+    @RequestMapping(value = "/gestoreEventi/visualizzaAnteprima", method = RequestMethod.POST)
 
-    public String visualizzaAnteprima(@RequestBody String evento, HttpServletRequest request){
+    public String visualizzaAnteprimaEvento(@RequestBody String evento, HttpServletRequest request){
 
         return "redirect:/login";
 
     }
 
-    @RequestMapping(value = "/eventi/eliminaEvento", method = RequestMethod.POST)
+    @RequestMapping(value = "/gestoreEventi/eliminaEvento", method = RequestMethod.POST)
 
     public String eliminaEvento(@ModelAttribute EventoEntity eventoEntity){
 
         return "redirect:/login";
 
-    }*/
+    }
 
-    /*@RequestMapping(value = "/griglia/trovaEventi", method = RequestMethod.GET)
+    @RequestMapping(value = "/gestoreEventi/trovaEventi", method = RequestMethod.GET)
     @ResponseBody
-    public String trovaEventi(HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String visualizzaListaEventi(HttpServletRequest request, HttpServletResponse response, Model model) {
 
         JSONObject eventiJSON = new JSONObject();
         JSONArray nomiEventi = new JSONArray();
@@ -98,7 +160,7 @@ public class EventoControl {
 
         try {
 
-            eventi = eventoService.getAllEvento(Utility.emailSessione(request));
+            eventi = eventoService.getAllEvento(SessionManager.getEmail(request));
 
         } catch (MissingSessionEmailException e) {
 
@@ -116,5 +178,5 @@ public class EventoControl {
         response.setContentType("text/plain");
 
         return eventiJSON.toString();
-    }*/
+    }
 }
