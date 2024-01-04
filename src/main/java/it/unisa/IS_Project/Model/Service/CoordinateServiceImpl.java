@@ -16,16 +16,17 @@ public class CoordinateServiceImpl implements CoordinateService{
 
     @Override
     public CoordinateEntity aggiuntaCoordinate(String coordinataX, String coordinataY, String nomeEntita) {
-        EntitaEntity entitaEntity=entitaRepository.findByNome(nomeEntita);
+        /*EntitaEntity entitaEntity=entitaRepository.findByNome(nomeEntita);
         CoordinateEntity.PrimaryKeyCoordinate primaryKeyCoordinate=new CoordinateEntity.PrimaryKeyCoordinate(coordinataX,coordinataY,entitaEntity.getId());
         CoordinateEntity coordinateEntity=new CoordinateEntity();
 
         primaryKeyCoordinate.setCoordinataX(coordinataX);
         primaryKeyCoordinate.setCoordinataY(coordinataY);
-        primaryKeyCoordinate.setIdEvento(entitaEntity.getId());
+        primaryKeyCoordinate.se(entitaEntity.getId());
         coordinateEntity.setPrimaryKeyCoordinate(primaryKeyCoordinate);
 
         coordinateRepository.save(coordinateEntity);
-        return coordinateEntity;
+        return coordinateEntity;*/
+        return null;
     }
 }

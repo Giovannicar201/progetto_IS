@@ -20,8 +20,8 @@ public class MappaEntity {
     @Column(name = "idMappa")
     private int id;
     private String nome;
-    private int lunghezza;
-    private int larghezza;
+    private long lunghezza;
+    private long larghezza;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "email",referencedColumnName = "email")

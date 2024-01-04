@@ -46,15 +46,15 @@ public class MappaServiceImpl implements MappaService{
         if(!Validator.isMapNameValid(nome))
             throw new InvalidMapNameException("ERRORE - NOME NON VALIDO.");
 
-        if(!Validator.isMapWidthValid(Integer.parseInt(larghezza)))
+        if(!Validator.isMapWidthValid(Long.parseLong(larghezza)))
             throw new InvalidMapWidthException("ERRORE - LARGHEZZA NON VALIDA.");
 
-        if(!Validator.isMapHeightValid(Integer.parseInt(altezza)))
+        if(!Validator.isMapHeightValid(Long.parseLong(altezza)))
             throw new InvalidMapHeightException("ERRORE - ALTEZZA NON VALIDA.");
 
         mappaEntity.setNome(nome);
-        mappaEntity.setLarghezza(Integer.parseInt(larghezza));
-        mappaEntity.setLunghezza(Integer.parseInt(altezza));
+        mappaEntity.setLarghezza(Long.parseLong(larghezza));
+        mappaEntity.setLunghezza(Long.parseLong(altezza));
         mappaEntity.setUtenteEntity(utenteEntity);
 
         mappaRepository.save(mappaEntity);
@@ -62,8 +62,8 @@ public class MappaServiceImpl implements MappaService{
         JSONObject mappaJSON = new JSONObject();
         JSONArray entita = new JSONArray();
 
-        for(int riga = 0; riga < Integer.parseInt(larghezza); riga++)
-            for(int colonna = 0; colonna < Integer.parseInt(altezza); colonna++) {
+        for(int riga = 0; riga < Long.parseLong(larghezza); riga++)
+            for(int colonna = 0; colonna < Long.parseLong(altezza); colonna++) {
                 JSONObject entitaJSON = new JSONObject();
 
                 entitaJSON.put("id",0);

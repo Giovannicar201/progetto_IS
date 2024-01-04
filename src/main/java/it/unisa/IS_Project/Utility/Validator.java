@@ -1,8 +1,5 @@
 package it.unisa.IS_Project.Utility;
 
-import org.json.simple.JSONObject;
-
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validator {
@@ -100,11 +97,11 @@ public class Validator {
         return NOME_MAPPA_PATTERN.matcher(nomeMappa).matches();
     }
 
-    public static boolean isMapWidthValid(int larghezza) {
+    public static boolean isMapWidthValid(long larghezza) {
         return larghezza >= 0 && larghezza <= 32;
     }
 
-    public static boolean isMapHeightValid(int altezza) {
+    public static boolean isMapHeightValid(long altezza) {
         return altezza >= 0 && altezza <= 32;
     }
 
