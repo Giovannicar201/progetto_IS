@@ -1,6 +1,6 @@
-package it.unisa.IS_Project.AI.Entita;
+package it.unisa.IS_Project.AI.Manager;
 
-import it.unisa.IS_Project.AI.Configuration.MappaManager;
+import it.unisa.IS_Project.AI.Entity.EntitaPiazzataEntity;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class EntitaPiazzataManager {
     private static final EntitaPiazzataManager em = new EntitaPiazzataManager();
-    private static final List<EntitaPiazzata> entitaPiazzate = new ArrayList<>();
+    private static final List<EntitaPiazzataEntity> entitaPiazzate = new ArrayList<>();
     private static boolean configurato;
 
     private EntitaPiazzataManager() {
@@ -48,7 +48,7 @@ public class EntitaPiazzataManager {
 
         for (int riga = 0; riga < map.length; riga++)
             for (int colonna = 0; colonna < map[riga].length; colonna++) {
-                EntitaPiazzata entity = new EntitaPiazzata(map[riga][colonna], riga, colonna);
+                EntitaPiazzataEntity entity = new EntitaPiazzataEntity(map[riga][colonna], riga, colonna);
                 entitaPiazzate.add(entity);
             }
     }
@@ -57,7 +57,7 @@ public class EntitaPiazzataManager {
     public String toString() {
         StringBuilder risultato = new StringBuilder("@log\n\n");
 
-        for(EntitaPiazzata entitaPiazzata : entitaPiazzate)
+        for(EntitaPiazzataEntity entitaPiazzata : entitaPiazzate)
             risultato.append(entitaPiazzata.toString()).append("\n");
 
         return risultato.toString();

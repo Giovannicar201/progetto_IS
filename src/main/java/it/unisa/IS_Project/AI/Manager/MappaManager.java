@@ -1,8 +1,7 @@
-package it.unisa.IS_Project.AI.Configuration;
+package it.unisa.IS_Project.AI.Manager;
 
 import it.unisa.IS_Project.AI.Utility.Parser;
 import org.json.simple.parser.ParseException;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,7 +24,19 @@ public class MappaManager {
         return mm;
     }
 
-    public static void configura(int rigaPrimoPuntoDiSelezione, int colonnaPrimoPuntoDiSelezione, int rigaSecondoPuntoDiSelezione, int colonnaSecondoPuntoDiSelezione, String mappa) throws ParseException {
+    /**
+     * Configura il manager.
+     *
+     * @param mappa Stringa JSON contenente le informazioni relative agli identificativi e alle posizioni delle entità presenti sulla mappa.
+     * @param rigaPrimoPuntoDiSelezione Valore della riga del primo punto di selezione.
+     * @param colonnaPrimoPuntoDiSelezione Valore della colonna del primo punto di selezione.
+     * @param rigaSecondoPuntoDiSelezione Valore della riga del secondo punto di selezione.
+     * @param colonnaSecondoPuntoDiSelezione Valore della colonna del secondo punto di selezione.
+     * @throws ParseException se il parse della mappa da stringa JSON a JSONObject non va a buon fine.
+     * @author Giovanni Carbone
+     */
+    public static void configura(String mappa, int rigaPrimoPuntoDiSelezione, int colonnaPrimoPuntoDiSelezione, int rigaSecondoPuntoDiSelezione, int colonnaSecondoPuntoDiSelezione) throws ParseException {
+
         mm.setRigaPrimoPuntoDiSelezione(rigaPrimoPuntoDiSelezione);
         mm.setColonnaPrimoPuntoDiSelezione(colonnaPrimoPuntoDiSelezione);
         mm.setRigaSecondoPuntoDiSelezione(rigaSecondoPuntoDiSelezione);
@@ -38,13 +49,21 @@ public class MappaManager {
         mm.generaLog();
     }
 
+    /**
+     * Genera un log all'interno del quale viene riportato il risultato della configurazione.
+     *
+     * @author Giovanni Carbone
+     */
     private void generaLog() {
+
         String filePath = "src\\main\\java\\it\\unisa\\IS_Project\\AI\\Logs\\mappaLog.txt";
 
         try {
+
             BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
             bw.write(this.toString());
             bw.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,6 +94,7 @@ public class MappaManager {
     }
 
     private void setTotaleEntitaPiazzate() {
+
         for (int[] riga : mappa)
             for (int id : riga)
                 if (id > 0)
@@ -111,6 +131,7 @@ public class MappaManager {
 
     @Override
     public String toString() {
+
         return "@log\n\n" +
                 "@primoPuntoDiSelezione::(" + rigaPrimoPuntoDiSelezione + "," + colonnaPrimoPuntoDiSelezione + ")" +
                 " @secondPuntoDiSelezione::(" + rigaSecondoPuntoDiSelezione + "," + colonnaSecondoPuntoDiSelezione + ")" +

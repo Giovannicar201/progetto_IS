@@ -1,26 +1,23 @@
-package it.unisa.IS_Project.AI.GA;
+package it.unisa.IS_Project.AI.Manager;
 
-import it.unisa.IS_Project.AI.Entita.Entita;
-import it.unisa.IS_Project.AI.Entita.EntitaManager;
-import it.unisa.IS_Project.AI.Entita.LOD;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import it.unisa.IS_Project.AI.Entity.EntitaEntity;
+import it.unisa.IS_Project.AI.Entity.IndividuoEntity;
+import it.unisa.IS_Project.AI.Entity.PopolazioneEntity;
+import it.unisa.IS_Project.AI.Enum.LOD;
 import java.util.*;
 
 public class SteadyStateGAManager {
     private static final SteadyStateGAManager ssm = new SteadyStateGAManager();
     private int dimensionePopolazione;
     private int budgetDiRicerca;
-    private final Popolazione popolazione = new Popolazione();
+    private final PopolazioneEntity popolazione = new PopolazioneEntity();
     private static boolean configurato;
-    private Individuo individuoMigliore;
+    private IndividuoEntity individuoMigliore;
 
-    private SteadyStateGAManager() {
-    }
+    private SteadyStateGAManager() {}
 
     public static SteadyStateGAManager getInstance(int dimensionePopolazione, int budgetDiRicerca) {
+
         if(!configurato) {
             ssm.configura(dimensionePopolazione,budgetDiRicerca);
             configurato = true;
@@ -29,45 +26,71 @@ public class SteadyStateGAManager {
         return ssm;
     }
 
+    /**
+     * Configura il manager.
+     *
+     * @param dimensionePopolazione Dimensione della popolazione iniziale.
+     * @param budgetDiRicerca Numero d'iterazioni.
+     * @author Giovanni Carbone
+     */
     private void configura(int dimensionePopolazione, int budgetDiRicerca) {
+
         this.dimensionePopolazione = dimensionePopolazione;
         this.budgetDiRicerca = budgetDiRicerca;
     }
 
+    /**
+     * Definisce la popolazione iniziale.
+     *
+     * @author Giovanni Carbone
+     */
     public void definisciPopolazioneIniziale() {
+
         for(int i = 0; i < dimensionePopolazione; i++) {
-            Individuo individuo = generaIndividuoPopolazioneIniziale();
+            IndividuoEntity individuo = generaIndividuoPopolazioneIniziale();
+
             individuo.getValutazione();
+
             popolazione.aggiungiIndividuo(individuo);
         }
     }
 
-    private Individuo generaIndividuoPopolazioneIniziale() {
-        Individuo individuo = new Individuo();
+    /**
+     * Genera un individuo della popolazione iniziale.
+     *
+     * @return Individuo della popolazione iniziale.
+     * @author Giovanni Carbone
+     */
+    private IndividuoEntity generaIndividuoPopolazioneIniziale() {
+
+        IndividuoEntity individuo = new IndividuoEntity();
 
         EntitaManager em = EntitaManager.getInstance();
 
-        List<Entita> entitaHIGH_LOD = em.getEntitaByLOD(LOD.HIGH_LOD);
-        System.out.println(entitaHIGH_LOD);
-        List<Entita> entitaMEDIUM_LOD = em.getEntitaByLOD(LOD.MEDIUM_LOD);
-        System.out.println(entitaMEDIUM_LOD);
-        List<Entita> entitaLOW_LOD = em.getEntitaByLOD(LOD.LOW_LOD);
-        System.out.println(entitaLOW_LOD);
+        List<EntitaEntity> entitaHIGH_LOD = em.getEntitaByLOD(LOD.HIGH_LOD);
+        List<EntitaEntity> entitaMEDIUM_LOD = em.getEntitaByLOD(LOD.MEDIUM_LOD);
+        List<EntitaEntity> entitaLOW_LOD = em.getEntitaByLOD(LOD.LOW_LOD);
 
         individuo.piazzaEntitaHIGH_LOD(entitaHIGH_LOD);
         individuo.piazzaEntitaMEDIUM_LOD(entitaMEDIUM_LOD);
         individuo.piazzaEntitaLOW_LOD(entitaLOW_LOD);
 
-        System.out.println(individuo);
-
         return individuo;
     }
 
-    public void esegui() {
+    /**
+     * Esegue uno steady state GA.
+     *
+     * @return Individuo migliore generato.
+     * @author Angelo Antonio Prisco
+     */
+    public IndividuoEntity esegui() {
+
         individuoMigliore = popolazione.getPopolazione().get(0);
 
         for(int i = 0; i < budgetDiRicerca; i++) {
-            List<Individuo> individui = this.mutazione(this.crossover(this.selezione()));
+
+            List<IndividuoEntity> individui = this.mutazione(this.crossover(this.selezione()));
 
             popolazione.getPopolazione().sort((primoIndividuo, secondoIndividuo) -> {
                 float primaValutazione = primoIndividuo.getValutazione();
@@ -75,10 +98,10 @@ public class SteadyStateGAManager {
                 return Float.compare(secondaValutazione, primaValutazione);
             });
 
-            Individuo primoIndividuoPeggiore = popolazione.getPopolazione().get(popolazione.getPopolazione().size() - 1);
-            Individuo secondoIndividuoPeggiore = popolazione.getPopolazione().get(popolazione.getPopolazione().size() - 2);
+            IndividuoEntity primoIndividuoPeggiore = popolazione.getPopolazione().get(popolazione.getPopolazione().size() - 1);
+            IndividuoEntity secondoIndividuoPeggiore = popolazione.getPopolazione().get(popolazione.getPopolazione().size() - 2);
 
-            for(Individuo individuo : individui) {
+            for(IndividuoEntity individuo : individui) {
                 if(individuo.getValutazione() >= primoIndividuoPeggiore.getValutazione()) {
                     popolazione.getPopolazione().remove(primoIndividuoPeggiore);
                     popolazione.getPopolazione().add(individuo);
@@ -88,22 +111,29 @@ public class SteadyStateGAManager {
                 }
             }
 
-            for(Individuo individuo : popolazione.getPopolazione())
+            for(IndividuoEntity individuo : popolazione.getPopolazione())
                 if(individuo.getValutazione() >= individuoMigliore.getValutazione())
                     individuoMigliore = individuo;
         }
 
-        System.out.println("MIGLIORE : " + individuoMigliore);
+        return individuoMigliore;
     }
 
-    private List<Individuo> selezione() {
-        List<Individuo> genitori = new ArrayList<>();
+    /**
+     * Esegua la selezione su una lista d'individui, determinando i genitori ammessi al crossover. Il metodo di selezione usato è quella della truncation.
+     *
+     * @return Individui ammessi al crossover.
+     * @author Giovanni Carbone
+     */
+    private List<IndividuoEntity> selezione() {
 
-        List<Individuo> popolazioneOrdinata = new ArrayList<>(popolazione.getPopolazione());
-        popolazioneOrdinata.sort(Comparator.comparing(Individuo::getValutazione).reversed());
+        List<IndividuoEntity> genitori = new ArrayList<>();
 
-        Individuo primoGenitore = popolazioneOrdinata.get(0);
-        Individuo secondoGenitore = popolazioneOrdinata.get(1);
+        List<IndividuoEntity> popolazioneOrdinata = new ArrayList<>(popolazione.getPopolazione());
+        popolazioneOrdinata.sort(Comparator.comparing(IndividuoEntity::getValutazione).reversed());
+
+        IndividuoEntity primoGenitore = popolazioneOrdinata.get(0);
+        IndividuoEntity secondoGenitore = popolazioneOrdinata.get(1);
 
         genitori.add(primoGenitore);
         genitori.add(secondoGenitore);
@@ -111,8 +141,16 @@ public class SteadyStateGAManager {
         return genitori;
     }
 
-    private List<Individuo> crossover(List<Individuo> genitori) {
-        List<Individuo> figli = new ArrayList<>();
+    /**
+     * Esegue il crossover tra due individui. Il metodo di crossover usato è detto uniform.
+     *
+     * @param  genitori Coppia d'individui ammessi al crossover.
+     * @return Coppia d'individui figli.
+     * @author Angelo Antonio Prisco
+     */
+    private List<IndividuoEntity> crossover(List<IndividuoEntity> genitori) {
+
+        List<IndividuoEntity> figli = new ArrayList<>();
         Random random = new Random();
 
         int[][] primoGenitore = genitori.get(0).getAreaSelezionata();
@@ -127,24 +165,23 @@ public class SteadyStateGAManager {
         Map<Integer, Integer> primaMappaDelleOccorrenze = new HashMap<>();
         Map<Integer, Integer> secondaMappaDelleOccorrenze = new HashMap<>();
 
-        for (int[] riga : primoGenitore) {
-            for (int id : riga) {
+        for (int[] riga : primoGenitore)
+            for (int id : riga)
                 primaMappaDelleOccorrenze.put(id, primaMappaDelleOccorrenze.getOrDefault(id, 0) + 1);
-            }
-        }
 
-        for (int[] riga : secondoGenitore) {
-            for (int id : riga) {
+        for (int[] riga : secondoGenitore)
+            for (int id : riga)
                 secondaMappaDelleOccorrenze.put(id, secondaMappaDelleOccorrenze.getOrDefault(id, 0) + 1);
-            }
-        }
 
         for(int riga = 0; riga < altezza; riga++) {
             for(int colonna = 0; colonna < larghezza; colonna++) {
+
                 boolean numeroMassimoPrimoGene = false;
                 boolean numeroMassimoSecondoGene = false;
+
                 int primoGene = primoGenitore[riga][colonna];
                 int secondoGene = secondoGenitore[riga][colonna];
+
                 double rand = random.nextDouble();
 
                 if (primaMappaDelleOccorrenze.get(primoGene) == 0)
@@ -153,35 +190,46 @@ public class SteadyStateGAManager {
                     numeroMassimoSecondoGene = true;
 
                 if(rand > 0.5) {
+
                     if(numeroMassimoPrimoGene) {
+
                         primoFiglio[riga][colonna] = secondoGene;
                         secondoFiglio[riga][colonna] = primoGene;
                         primaMappaDelleOccorrenze.replace(secondoGene,primaMappaDelleOccorrenze.get(secondoGene) - 1);
                         secondaMappaDelleOccorrenze.replace(primoGene,secondaMappaDelleOccorrenze.get(primoGene) - 1);
+
                     } else {
+
                         primoFiglio[riga][colonna] = primoGene;
                         secondoFiglio[riga][colonna] = secondoGene;
                         primaMappaDelleOccorrenze.replace(primoGene,primaMappaDelleOccorrenze.get(primoGene) - 1);
                         secondaMappaDelleOccorrenze.replace(secondoGene,secondaMappaDelleOccorrenze.get(secondoGene) - 1);
+
                     }
+
                 } else {
+
                     if(numeroMassimoSecondoGene) {
+
                         primoFiglio[riga][colonna] = primoGene;
                         secondoFiglio[riga][colonna] = secondoGene;
                         primaMappaDelleOccorrenze.replace(primoGene,primaMappaDelleOccorrenze.get(primoGene) - 1);
                         secondaMappaDelleOccorrenze.replace(secondoGene,secondaMappaDelleOccorrenze.get(secondoGene) - 1);
+
                     } else {
+
                         primoFiglio[riga][colonna] = secondoGene;
                         secondoFiglio[riga][colonna] = primoGene;
                         primaMappaDelleOccorrenze.replace(secondoGene,primaMappaDelleOccorrenze.get(secondoGene) - 1);
                         secondaMappaDelleOccorrenze.replace(primoGene,secondaMappaDelleOccorrenze.get(primoGene) - 1);
+
                     }
                 }
             }
         }
 
-        Individuo primoFiglioIndividuo = new Individuo();
-        Individuo secondoFiglioIndividuo = new Individuo();
+        IndividuoEntity primoFiglioIndividuo = new IndividuoEntity();
+        IndividuoEntity secondoFiglioIndividuo = new IndividuoEntity();
 
         primoFiglioIndividuo.setAreaSelezionata(primoFiglio);
         secondoFiglioIndividuo.setAreaSelezionata(secondoFiglio);
@@ -198,18 +246,30 @@ public class SteadyStateGAManager {
         return figli;
     }
 
-    private List<Individuo> mutazione(List<Individuo> figli) {
+    /**
+     * Esegua la mutazione sui i figli ottenuti da un precedente crossover.
+     * La mutazione consiste nello scambio di due entità casuali piazzate sulla selezione, tale metodo è definito swap.
+     *
+     * @param figli Figli ottenuti da un precedente crossover.
+     * @return Figli mutati.
+     * @author Giovanni Carbone
+     */
+    private List<IndividuoEntity> mutazione(List<IndividuoEntity> figli) {
+
         Random random = new Random();
+
         int rigaMassima = figli.get(0).getAreaSelezionata().length;
         int colonnaMassima = figli.get(0).getAreaSelezionata()[0].length;
 
-        for(Individuo individuo : figli) {
+        for(IndividuoEntity individuo : figli) {
+
             int primaRiga = random.nextInt(rigaMassima);
             int primaColonna = random.nextInt(colonnaMassima);
             int primoId = individuo.getAreaSelezionata()[primaRiga][primaColonna];
             int secondaRiga = random.nextInt(rigaMassima);
             int secondaColonna = random.nextInt(colonnaMassima);
             int secondoId = individuo.getAreaSelezionata()[secondaRiga][secondaColonna];
+
             individuo.getAreaSelezionata()[secondaRiga][secondaColonna] = primoId;
             individuo.getAreaSelezionata()[primaRiga][primaColonna] = secondoId;
         }
