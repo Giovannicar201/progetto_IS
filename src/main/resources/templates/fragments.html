@@ -7,17 +7,17 @@
     <link rel="stylesheet" th:href="@{/styles/topmenu.css}">
     <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
 
-    <a href="/"><img src="https://i.postimg.cc/wv5tLwGS/logo.png" style="animation: fade-card 1s" class="logo" id="logo"></a>
+    <a href="/"><img src="https://i.postimg.cc/wv5tLwGS/logo.png" class="logo" id="logo"></a>
 
-    <ul style="animation: fade-card 1s">
+    <ul>
 
         <li><a href="griglia">Mappa</a></li>
         <li><a href="entità">Entità</a></li>
         <li><a href="eventi">Eventi</a></li>
         <li><a href="pixelArt">Pixel Art</a></li>
         <li><a href="#">Help</a></li>
-        <li><a href="auth">Sign-up & Log-in</a></li>
-
+        <li th:if="${session.email == null}"><a href="auth">Sign-up & Log-in</a></li>
+        <li th:if="${session.email != null}"><a href="auth">Log-out</a></li>
     </ul>
 
     <script th:src="@{/js/topmenu.js}"></script>

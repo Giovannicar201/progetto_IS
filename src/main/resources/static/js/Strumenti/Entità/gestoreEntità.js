@@ -62,7 +62,7 @@ function creaGestore(){
             '       Modifica </div>' +
             '<div class="actionDiv">'+
             '                  <label>Nome entità:</label>' +
-            '                  <input type="text" class="inputForm">' +
+            '                  <input type="text" class="inputForm" id="nomeIns">' +
             '              </div>' +
             '<div class="actionDiv">' +
             '                  <label>Collisioni:</label>' +
@@ -87,8 +87,15 @@ function creaGestore(){
             '<div class="breakDivAction">' +
             '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
             '       Entità </div>' +
+            '               <div class="actionDiv" id="show1">' +
+            '           </div>' +
+            '       </div>' +
+            '           ' +
             '</div>');
 
+
+            document.getElementById("creaGestore").classList.add("pressed");
+            showEntita();
     } else {
 
         document.getElementById("creaGestore").classList.remove("pressed");

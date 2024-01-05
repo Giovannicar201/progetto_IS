@@ -402,6 +402,62 @@ function gestisciIstruzione(istruzioneElement){
 
 }
 
+function showListEventi(){
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET','/gestoreEventi/trovaEventi',true);
+
+    xhr.onreadystatechange=function (){
+        if(xhr.readyState === 4){
+            if(xhr.status === 200){
+                $("#show").empty();
+
+                let x = JSON.parse(xhr.responseText);
+                console.log(x);
+
+                x.nomiEventi.forEach(function (evento){
+                    $("#show").append(
+                        '<label>' + nome +'</label>');
+                });
+            }
+            if(xhr.status === 500){
+                alert("errore");
+            }
+        }
+    }
+    xhr.send();
+    xhr.close;
+}
+
+function singleEvent(){
+    let xhr = new XMLHttpRequest();
+    let nomeEvento = document.getElementById("nomeEvento").value;
+
+    xhr.open('POST', '/gestoreEventi/visualizzaAnteprima', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4) {
+
+            if (xhr.status === 200) {
+
+                alert("nome preso con successo!")
+
+            }
+
+            if (xhr.status === 500) {
+
+            }
+
+        }
+
+    };
+
+    xhr.send();
+    xhr.close;
+
+}
+
 /**
 *
 * FUNZIONI ASINCRONE ENTITÀ
@@ -467,6 +523,57 @@ function getEntità(){
 
     return JSON.stringify(entitàText);
 
+}
+
+function showEntita(){
+    let xhr= new XMLHttpRequest();
+
+    xhr.open('POST', '/entità/visualizzaListaEntità', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4) {
+
+            if (xhr.status === 200) {
+
+                $("#show1").empty();
+
+                let x = JSON.parse(xhr.responseText);
+                console.log(x);
+
+                x.blobImmagini.forEach(function (entita){
+
+                    let nome = Object.keys(entita)[0];
+                    let src = "data:image;base64," + entita[nome];
+
+                    let entitaWrapper = document.createElement('div');
+                    entitaWrapper.classList.add('imageContainer');
+
+                    entitaWrapper.innerHTML = '<div class="overlay" onclick="submitForm(\'' + nome + '\')">' +
+                        '<img id="' + nome + '" src="' + src + '" style="width: 64px; height: 64px;" class="imgEntity">' +
+                        '</div>';
+
+                    $("#show1").append(entitaWrapper);
+                });
+
+            }
+
+            if (xhr.status === 500) {
+
+                alert("errore");
+
+            }
+
+        }
+
+    };
+
+    xhr.send();
+    xhr.close;
+}
+
+function submitForm(nomeImmagine) {
+    $('#nomeIns').val(nomeImmagine);
 }
 
 function saveImages() {

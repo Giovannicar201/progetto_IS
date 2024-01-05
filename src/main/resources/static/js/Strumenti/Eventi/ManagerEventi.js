@@ -82,10 +82,13 @@ function creaEventi(){
             '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
             '       Eventi' +
             '   </div>' +
+            '    </div>' +
+            '           <div class="actionDiv" id="show">' +
+            '       </div> ' +
             '</div>');
 
         document.getElementById("creaEventi").classList.add("pressed");
-
+        showListEventi()
     } else {
 
         document.getElementById("creaEventi").classList.remove("pressed");
