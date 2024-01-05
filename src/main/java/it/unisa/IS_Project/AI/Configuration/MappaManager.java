@@ -1,7 +1,7 @@
 package it.unisa.IS_Project.AI.Configuration;
 
 import it.unisa.IS_Project.AI.Utility.Parser;
-import it.unisa.IS_Project.Utility.SessionManager;
+import org.json.simple.parser.ParseException;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -18,25 +18,24 @@ public class MappaManager {
     private int altezzaSelezione;
     private int totaleCelleAreaSelezione;
     private int[][] mappa;
-    private static boolean configurato;
 
     private MappaManager() { }
 
     public static MappaManager getInstance() {
-        if(!configurato) {
-            mm.configura();
-            configurato = true;
-        }
-
         return mm;
     }
 
-    private void configura() {
-        setLarghezzaSelezione();
-        setAltezzaSelezione();
-        setTotaleCelleAreaSelezione();
-        setTotaleEntitaPiazzate();
-        generaLog();
+    public static void configura(int rigaPrimoPuntoDiSelezione, int colonnaPrimoPuntoDiSelezione, int rigaSecondoPuntoDiSelezione, int colonnaSecondoPuntoDiSelezione, String mappa) throws ParseException {
+        mm.setRigaPrimoPuntoDiSelezione(rigaPrimoPuntoDiSelezione);
+        mm.setColonnaPrimoPuntoDiSelezione(colonnaPrimoPuntoDiSelezione);
+        mm.setRigaSecondoPuntoDiSelezione(rigaSecondoPuntoDiSelezione);
+        mm.setColonnaSecondoPuntoDiSelezione(colonnaSecondoPuntoDiSelezione);
+        mm.setMappa(mappa);
+        mm.setLarghezzaSelezione();
+        mm.setAltezzaSelezione();
+        mm.setTotaleCelleAreaSelezione();
+        mm.setTotaleEntitaPiazzate();
+        mm.generaLog();
     }
 
     private void generaLog() {
@@ -67,8 +66,8 @@ public class MappaManager {
         this.colonnaSecondoPuntoDiSelezione = colonnaSecondoPuntoDiSelezione;
     }
 
-    public void setMappa(int[][] mappa) {
-        this.mappa = mappa;
+    public void setMappa(String mappa) throws ParseException {
+        this.mappa = Parser.convertiMappa(mappa);
     }
 
     public int getTotaleEntitaPiazzate() {

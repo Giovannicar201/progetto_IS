@@ -3,9 +3,11 @@ package it.unisa.IS_Project.Controller;
 import it.unisa.IS_Project.Model.Exception.GMP.GST.Selezione.MapSelectionException;
 import it.unisa.IS_Project.Model.Exception.GMP.GST.Selezione.PixelArtSelectionException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
+import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionMapSelectionException;
 import it.unisa.IS_Project.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,7 +46,16 @@ public class SelezioneControl {
 
             SessionManager.getEmail(request);
 
-            SessionManager.setSelezioneMappa(request,selezione);
+            JSONObject selezioneJSON = new JSONObject();
+
+            selezioneJSON.put("primaRiga","0");
+            selezioneJSON.put("primaColonna","0");
+            selezioneJSON.put("secondaRiga","6");
+            selezioneJSON.put("secondaColonna","6");
+
+            SessionManager.setSelezioneMappa(request,selezioneJSON.toString());
+
+            System.out.println(SessionManager.getSelezioneMappa(request));
 
         } catch (MissingSessionEmailException e) {
 
@@ -54,6 +65,8 @@ public class SelezioneControl {
                 throw new PixelArtSelectionException("ERRORE - SELEZIONE PIXEL ART IOEXCEPTION.");
             }
 
+        } catch (MissingSessionMapSelectionException e) {
+            throw new RuntimeException(e);
         }
 
     }

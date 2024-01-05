@@ -13,7 +13,7 @@ public class Validator {
     private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
     private static final String NOME_UTENTE_REGEX = "^[a-zA-Z]{1,32}$";
     private static final Pattern NOME_UTENTE_PATTERN = Pattern.compile(NOME_UTENTE_REGEX);
-    private static final String NOME_CARTELLA_REGEX = "^(?=.*[a-zA-Z])[_a-zA-Z]{1,32}$";
+    private static final String NOME_CARTELLA_REGEX = "^(?=.*[a-zA-Z])[a-zA-Z]{1,32}$";
     private static final Pattern NOME_CARTELLA_PATTERN = Pattern.compile(NOME_CARTELLA_REGEX);
     private static final String NOME_ENTITA_REGEX = "^[a-zA-Z]{1,32}$";
     private static final Pattern NOME_ENTITA_PATTERN = Pattern.compile(NOME_ENTITA_REGEX);
