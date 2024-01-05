@@ -30,7 +30,7 @@ public class CartellaServiceImpl implements CartellaService{
         CartellaEntity cartellaEntityQuery = cartellaRepository.findByNome(nomeCartella);
         UtenteEntity utenteEntity = utenteService.get(email);
 
-        if(Validator.isFolderNameValid(nomeCartella))
+        if(!Validator.isFolderNameValid(nomeCartella))
             throw new InvalidFolderNameException("ERRORE - NOME CARTELLA NON VALIDO.");
 
         if(cartellaEntityQuery != null)

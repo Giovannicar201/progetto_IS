@@ -467,7 +467,7 @@ function creaStrumentoGenerativa(){
                 '       Generazione' +
                 '   </div>' +
                 '   <div class="actionDiv">' +
-                '       <button class = "bottone">Genera</button>' +
+                '       <button class = "bottone" onclick="generativeFillCalls()">Genera</button>' +
                 '   </div>');
 
             document.getElementsByClassName("break")[0].style.height = "150%";

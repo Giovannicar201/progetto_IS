@@ -27,8 +27,9 @@ public class CartellaControl {
 
     @RequestMapping(value = "/gestoreCartelle/creaCartella", method = RequestMethod.POST)
 
-    public void creaCartella(@RequestBody String nomeCartella, HttpServletRequest request, HttpServletResponse response)
-            throws FolderCreationException {
+    public void creaCartella(@RequestBody String nomeCartella, HttpServletRequest request, HttpServletResponse response) throws FolderCreationException {
+
+        System.out.println("CARTELLA : " + nomeCartella);
 
         try {
 
@@ -46,6 +47,8 @@ public class CartellaControl {
 
         } catch (InvalidFolderNameException e) {
 
+            System.out.println("NOME INVALIDO : " + nomeCartella);
+
             try {
                 response.sendError(500, "IFNE");
             } catch (IOException ex) {
@@ -53,6 +56,8 @@ public class CartellaControl {
             }
 
         } catch (NotUniqueFolderException e) {
+
+            System.out.println("ESISTE : " + nomeCartella);
 
             try {
                 response.sendError(500, "NUFE");

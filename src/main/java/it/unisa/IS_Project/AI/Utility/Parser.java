@@ -15,16 +15,16 @@ public class Parser {
 
         JSONObject entitaJSON = (JSONObject) entita.get(entita.size() - 1);
 
-        int altezza = Math.toIntExact((Long) entitaJSON.get("riga")) + 1;
-        int larghezza = Math.toIntExact((Long) entitaJSON.get("colonna")) + 1;
+        int altezza = Integer.parseInt((String) entitaJSON.get("riga")) + 1;
+        int larghezza = Integer.parseInt((String) entitaJSON.get("colonna")) + 1;
 
         int[][] matriceMappa = new int[altezza][larghezza];
 
         for (Object obj : entita) {
             entitaJSON = (JSONObject) obj;
 
-            int riga = Math.toIntExact((Long) entitaJSON.get("riga"));
-            int colonna = Math.toIntExact((Long) entitaJSON.get("colonna"));
+            int riga = Integer.parseInt((String) entitaJSON.get("riga"));
+            int colonna = Integer.parseInt((String) entitaJSON.get("colonna"));
             int id = Math.toIntExact((Long) entitaJSON.get("id"));
 
             matriceMappa[riga][colonna] = id;
