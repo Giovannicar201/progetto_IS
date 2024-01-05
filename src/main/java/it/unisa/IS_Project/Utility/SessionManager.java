@@ -21,8 +21,9 @@ public class SessionManager {
 
     public static void setMappa(HttpServletRequest request, String mappa) {
 
-        request.getSession().setAttribute("mappa", mappa);
+        request.getSession().removeAttribute("mappa");
 
+        request.getSession().setAttribute("mappa", mappa);
     }
 
     public static String getMappa(HttpServletRequest request)

@@ -30,22 +30,22 @@ public class MappaControl {
 
     @RequestMapping(value = "/gestoreMappa/creaMappa", method = RequestMethod.POST)
 
-    public void creaMappa(@RequestBody String mappa, HttpServletRequest request, HttpServletResponse response)
-            throws CreateMapException {
+    public void creaMappa(@RequestBody String mappa, HttpServletRequest request, HttpServletResponse response) throws CreateMapException {
 
         JSONParser parser = new JSONParser();
-        String email, nome, altezza, larghezza;
+        String risultato = null;
 
         try {
 
+            String email = SessionManager.getEmail(request);
+
             JSONObject mappaJSON = (JSONObject) parser.parse(mappa);
 
-            email = SessionManager.getEmail(request);
-            nome = (String) mappaJSON.get("nome");
-            altezza = (String) mappaJSON.get("altezza");
-            larghezza = (String) mappaJSON.get("larghezza");
+            String nome = (String) mappaJSON.get("nome");
+            String altezza = (String) mappaJSON.get("altezza");
+            String larghezza = (String) mappaJSON.get("larghezza");
 
-            SessionManager.setMappa(request,mappaService.creaMappa(email,nome,altezza,larghezza));
+            risultato = mappaService.creaMappa(email,nome,altezza,larghezza);
 
         } catch (ParseException e) {
 
@@ -88,6 +88,8 @@ public class MappaControl {
             }
 
         }
+
+        SessionManager.setMappa(request,risultato);
     }
 
     @RequestMapping(value = "/gestoreMappa/visualizzaStatisticheMappa", method = RequestMethod.POST)
@@ -164,8 +166,7 @@ public class MappaControl {
     @RequestMapping(value = "/gestoreMappa/recuperaMappa", method = RequestMethod.POST)
     @ResponseBody
 
-    public String recuperaMappa(HttpServletRequest request, HttpServletResponse response)
-            throws RecoveryMapException {
+    public String recuperaMappa(HttpServletRequest request, HttpServletResponse response) throws RecoveryMapException {
 
         String mappa = new JSONObject().toString();
 

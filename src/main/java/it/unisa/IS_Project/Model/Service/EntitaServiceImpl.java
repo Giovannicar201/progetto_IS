@@ -38,6 +38,9 @@ public class EntitaServiceImpl implements EntitaService{
         CartellaEntity cartellaEntityQuery = cartellaService.get(nomeCartella);
         UtenteEntity utenteEntity = utenteService.get(email);
 
+        System.out.println("NOMI PROP : " + nomiProprieta);
+        System.out.println("VALORI PROP : " + nomiProprieta);
+
         if(immagineEntityQuery == null)
             throw new ImageNotFoundException("ERRORE - IMMAGINE NON ESISTENTE.");
 
@@ -56,6 +59,8 @@ public class EntitaServiceImpl implements EntitaService{
         if(!Validator.isNumberOfPropertyValid(nomiProprieta.size()))
             throw new InvalidNumberOfPropertyException("ERRORE - NUMERO DI PROPRIETÀ NON VALIDO.");
 
+        //controllo che non puoi mettere due volte lo stesso nome
+
         entitaEntity.setUtenteEntity(utenteEntity);
         entitaEntity.setImmagineEntity(immagineEntityQuery);
         entitaEntity.setNome(nome);
@@ -69,11 +74,16 @@ public class EntitaServiceImpl implements EntitaService{
             String nomeProprieta = iteratoreNomi.next();
             String valoreProprieta = iteratoreValori.next();
 
+            System.out.println("NOME PROP : " + nomeProprieta);
+            System.out.println("VALORE PROP : " + nomeProprieta);
+
             ProprietaEntity proprietaEntity = new ProprietaEntity();
 
             proprietaEntity.setNome(nomeProprieta);
             proprietaEntity.setValore(valoreProprieta);
             proprietaEntity.setEntitaEntity(entitaEntity);
+
+            proprietaService.save(proprietaEntity);
         }
 
         entitaRepository.save(entitaEntity);

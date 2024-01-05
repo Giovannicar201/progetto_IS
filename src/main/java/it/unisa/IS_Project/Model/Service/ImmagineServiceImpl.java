@@ -44,11 +44,6 @@ public class ImmagineServiceImpl implements ImmagineService{
         Blob fotoBlob = convertMultipartFileToBlob(foto);
 
         String nomeFoto = foto.getOriginalFilename();
-        ImmagineEntity immagineEntityQuery = immagineRepository.findByNomeAndEmail(nomeFoto,email);
-
-        if(immagineEntityQuery != null)
-            throw new InvalidFileSizeException("ERRORE - IMMAGINE GIA ESISTENTE.");
-
         immagineEntity.setFoto(fotoBlob);
         immagineEntity.setNome(nomeFoto);
         immagineEntity.setUtenteEntity(utenteEntity);

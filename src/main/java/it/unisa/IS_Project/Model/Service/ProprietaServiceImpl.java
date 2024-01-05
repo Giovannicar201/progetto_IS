@@ -59,4 +59,12 @@ public class ProprietaServiceImpl implements ProprietaService{
     public List<ProprietaEntity> getLista(EntitaEntity entita) {
         return proprietaRepository.findAllByEntita(entita);
     }
+
+    @Override
+    @Transactional
+    public void save(ProprietaEntity proprieta) {
+        proprietaRepository.save(proprieta);
+    }
+
+
 }

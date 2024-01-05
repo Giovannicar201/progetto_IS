@@ -15,4 +15,6 @@ public interface ProprietaService {
     void modificaProprieta(String nomeProprieta, String valoreProprieta, EntitaEntity entita) throws PropertyNotFoundException, InvalidPropertyNameException, InvalidPropertyValueException, NotUniquePropertyException;
 
     List<ProprietaEntity> getLista(EntitaEntity entita);
+
+    void save(ProprietaEntity proprieta);
 }

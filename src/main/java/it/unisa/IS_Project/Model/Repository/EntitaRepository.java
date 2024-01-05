@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface EntitaRepository extends JpaRepository<EntitaEntity,Integer> {
     @Query
-    Optional<EntitaEntity> findAllById(int idEntita);
+    EntitaEntity findById(int id);
 
     @Query
     EntitaEntity findByNome(String nomeEntita);

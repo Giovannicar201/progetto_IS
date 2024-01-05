@@ -56,13 +56,11 @@ public class MatitaServiceMappaImpl implements MatitaService{
                 Blob immagine = entitaEntityQuery.getImmagineEntity().getFoto();
                 byte[] bytes = immagine.getBytes(1, (int) immagine.length());
 
-                entitaJSON.put("immagine", Base64.getEncoder().encodeToString(bytes));
+                entitaJSON.put("immagine",Base64.getEncoder().encodeToString(bytes));
             }
         }
 
         mappaJSON.put("mappa",entita);
-
-        System.out.println(mappaJSON);
 
         CoordinateEntity coordinateEntity = new CoordinateEntity();
 

@@ -37,17 +37,16 @@ public class EntitaControl {
         JSONParser parser = new JSONParser();
         List<String> nomiProprieta = new ArrayList<>();
         List<String> valoriProprieta = new ArrayList<>();
-        String email, nome, nomeImmagine, collisioni, nomeCartella;
 
         try {
 
             JSONObject entitaJSON = (JSONObject) parser.parse(entita);
 
-            email = SessionManager.getEmail(request);
-            nomeImmagine = (String) entitaJSON.get("nomeImmagine");
-            nome = (String) entitaJSON.get("nome");
-            collisioni = (String) entitaJSON.get("collisioni");
-            nomeCartella = (String) entitaJSON.get("nomeCartella");
+            String email = SessionManager.getEmail(request);
+            String nomeImmagine = (String) entitaJSON.get("nomeImmagine");
+            String nome = (String) entitaJSON.get("nome");
+            String collisioni = (String) entitaJSON.get("collisioni");
+            String nomeCartella = (String) entitaJSON.get("nomeCartella");
 
             JSONArray proprieta = (JSONArray) entitaJSON.get("proprieta");
 

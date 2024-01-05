@@ -30,44 +30,48 @@ public class MappaServiceImpl implements MappaService{
     public String creaMappa(String email, String nome, String altezza, String larghezza) throws InvalidMapNameException, InvalidMapWidthException, InvalidMapHeightException {
 
         MappaEntity mappaEntity = new MappaEntity();
-        MappaEntity mappaEntityQuery = mappaRepository.findByNome(nome);
         UtenteEntity utenteEntity = utenteService.get(email);
-
-        if(mappaEntityQuery != null)
-            mappaRepository.delete(mappaEntityQuery);
+        
+        mappaRepository.delete();
+        
+        long larghezzaLong = Long.parseLong(larghezza);
+        long altezzaLong = Long.parseLong(altezza);
 
         if(!Validator.isMapNameValid(nome))
             throw new InvalidMapNameException("ERRORE - NOME NON VALIDO.");
 
-        if(!Validator.isMapWidthValid(Long.parseLong(larghezza)))
+        if(!Validator.isMapWidthValid(larghezzaLong))
             throw new InvalidMapWidthException("ERRORE - LARGHEZZA NON VALIDA.");
 
-        if(!Validator.isMapHeightValid(Long.parseLong(altezza)))
+        if(!Validator.isMapHeightValid(altezzaLong))
             throw new InvalidMapHeightException("ERRORE - ALTEZZA NON VALIDA.");
 
         mappaEntity.setNome(nome);
-        mappaEntity.setLarghezza(Long.parseLong(larghezza));
-        mappaEntity.setLunghezza(Long.parseLong(altezza));
+        mappaEntity.setLarghezza(larghezzaLong);
+        mappaEntity.setLunghezza(altezzaLong);
         mappaEntity.setUtenteEntity(utenteEntity);
-
-        mappaRepository.save(mappaEntity);
 
         JSONObject mappaJSON = new JSONObject();
         JSONArray entita = new JSONArray();
 
-        for(int riga = 0; riga < Long.parseLong(larghezza); riga++)
-            for(int colonna = 0; colonna < Long.parseLong(altezza); colonna++) {
+        for(int riga = 0; riga < larghezzaLong; riga++) {
+            for (int colonna = 0; colonna < altezzaLong; colonna++) {
+                
                 JSONObject entitaJSON = new JSONObject();
 
                 entitaJSON.put("id",0);
-                entitaJSON.put("riga", "" + riga + "");
-                entitaJSON.put("colonna","" + colonna + "");
+                entitaJSON.put("riga",riga + "");
+                entitaJSON.put("colonna",colonna + "");
                 entitaJSON.put("immagine","");
 
                 entita.add(entitaJSON);
+                
             }
+        }
 
         mappaJSON.put("mappa",entita);
+
+        mappaRepository.save(mappaEntity);
 
         return mappaJSON.toString();
     }
