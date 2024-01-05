@@ -99,17 +99,18 @@ function drawTheTile(nome, div){
 
 }
 
-function drawTheTileSelection(nome, coordinata1, coordinata2){
+function doTheMapSelection(coordinata1, coordinata2){
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open('POST', '/matita/riempiConEntita', true);
+    xhr.open('POST', '/selezione/selezioneAreaMappa', true);
 
     let entita = {};
 
-    entita.nome = nome;
-    entita.coord1 = coordinata1;
-    entita.coord2 = coordinata2;
+    entita.primaRiga = coordinata1[0].toString();
+    entita.primaColonna = coordinata1[1].toString();
+    entita.secondaRiga = coordinata2[0].toString();
+    entita.secondaColonna = coordinata2[1].toString();
 
     xhr.onreadystatechange = function() {
 

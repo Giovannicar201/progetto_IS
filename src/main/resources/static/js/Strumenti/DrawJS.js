@@ -44,6 +44,9 @@ function initDrawingTools(cella, flag) {
 
                     let primaCoordinata = selectorGriglia[0].split(",");
                     let secondaCoordinata = selectorGriglia[1].split(",");
+
+                    doTheMapSelection(primaCoordinata, secondaCoordinata);
+
                     selectorGriglia = [];
 
                     document.getElementById("selectedPointOne").innerHTML = primaCoordinata;
@@ -122,8 +125,6 @@ function disegnaTileSelezione(){
 
             cella.children[0].src = document.getElementsByClassName("selected")[0].src;
             cella.removeAttribute("style");
-
-            drawTheTileSelection("tile1.png", selectorGriglia[0], selectorGriglia[selectorGriglia.length - 1]);
 
         } else {
 

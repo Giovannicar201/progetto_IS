@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import java.io.IOException;
@@ -18,7 +19,8 @@ public class SelezioneControl {
 
     @RequestMapping(value = "/selezione/selezioneAreaMappa", method = RequestMethod.POST)
 
-    public void selezioneAreaMappa(String selezione, HttpServletRequest request, HttpServletResponse response) throws MapSelectionException {
+    public void selezioneAreaMappa(@RequestBody String selezione, HttpServletRequest request, HttpServletResponse response)
+            throws MapSelectionException {
 
         try {
 
