@@ -658,9 +658,8 @@ function createStyle(colonne, px){
         "    display: grid;" +
         "    grid-template-columns: repeat(" + colonne +","  + px +");" +
         "    width: fit-content;" +
-        "    top: 32px;" +
-        "    margin-top: 7%;" +
-        "    margin-left: 15%;" +
+        "    top: 50px;" +
+        "    margin-left: 1.5%;" +
         "    block-size: fit-content;" +
         "}"));
 
