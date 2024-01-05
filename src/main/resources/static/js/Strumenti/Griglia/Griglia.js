@@ -153,7 +153,7 @@ function creaCartella(){
                 '</div>' +
                 '<div class="breakDivAction">'+
                 '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
-                '       Cartelle Entità' +
+                '       Cartelle' +
                 '   </div>' +
                 '   <div class="actionDiv" id="show">' +
                 '   </div> ' +
@@ -350,7 +350,7 @@ function creaStrumentoRettangolare(){
                 '   <div class="actionDiv">' +
                 '       <label for="selectedPointTwo">Secondo punto - </label>' +
                 '       <div id="selectedPointTwo"></div>' +
-                '   <div class="actionDiv">' +
+                '   <div class="actionDiv" style="margin: 8px 8px 16px 0px;">' +
                 '       <button onclick="selezione()" class="bottone selezione">Selezione area</button>' +
                 '   </div>' +
                 '   </div>' +
