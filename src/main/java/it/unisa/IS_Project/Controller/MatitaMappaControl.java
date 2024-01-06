@@ -32,11 +32,9 @@ public class MatitaMappaControl extends MatitaControl {
     @RequestMapping(value = "/matita/piazzaEntita", method = RequestMethod.POST)
 
     @Override
-    public void piazza(@RequestBody String entita, HttpServletRequest request,
-                       HttpServletResponse response) {
+    public void piazza(@RequestBody String entita, HttpServletRequest request, HttpServletResponse response) {
 
         JSONParser parser = new JSONParser();
-        String nome, riga, colonna;
 
         try {
 
@@ -44,13 +42,11 @@ public class MatitaMappaControl extends MatitaControl {
 
             SessionManager.getEmail(request);
 
-            nome = (String) entitaJSON.get("nome");
-            riga = (String) entitaJSON.get("riga");
-            colonna = (String) entitaJSON.get("colonna");
+            String nome = (String) entitaJSON.get("nome");
+            String riga = (String) entitaJSON.get("riga");
+            String colonna = (String) entitaJSON.get("colonna");
 
-            MatitaServiceMappaImpl matitaServiceMappa = (MatitaServiceMappaImpl) matitaService;
-
-            String mappa = matitaServiceMappa.piazza(SessionManager.getMappa(request), nome,riga,colonna);
+            String mappa = matitaService.piazza(SessionManager.getMappa(request),nome,riga,colonna);
 
             SessionManager.setMappa(request,mappa);
 

@@ -21,4 +21,6 @@ public interface EntitaService {
     String visualizzaListaEntita(String email) throws SQLException;
 
     EntitaEntity get(String nome);
+
+    EntitaEntity get(int id);
 }

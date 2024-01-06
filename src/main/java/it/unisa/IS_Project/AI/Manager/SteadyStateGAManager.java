@@ -12,7 +12,6 @@ public class SteadyStateGAManager {
     private int budgetDiRicerca;
     private final PopolazioneEntity popolazione = new PopolazioneEntity();
     private static boolean configurato;
-    private IndividuoEntity individuoMigliore;
 
     private SteadyStateGAManager() {}
 
@@ -46,6 +45,8 @@ public class SteadyStateGAManager {
      */
     public void definisciPopolazioneIniziale() {
 
+        popolazione.getPopolazione().clear();
+
         for(int i = 0; i < dimensionePopolazione; i++) {
             IndividuoEntity individuo = generaIndividuoPopolazioneIniziale();
 
@@ -71,9 +72,12 @@ public class SteadyStateGAManager {
         List<EntitaEntity> entitaMEDIUM_LOD = em.getEntitaByLOD(LOD.MEDIUM_LOD);
         List<EntitaEntity> entitaLOW_LOD = em.getEntitaByLOD(LOD.LOW_LOD);
 
-        individuo.piazzaEntitaHIGH_LOD(entitaHIGH_LOD);
+        if(entitaHIGH_LOD.size() != 0)
+            individuo.piazzaEntitaHIGH_LOD(entitaHIGH_LOD);
         individuo.piazzaEntitaMEDIUM_LOD(entitaMEDIUM_LOD);
         individuo.piazzaEntitaLOW_LOD(entitaLOW_LOD);
+
+        System.out.println(individuo);
 
         return individuo;
     }
@@ -86,7 +90,7 @@ public class SteadyStateGAManager {
      */
     public IndividuoEntity esegui() {
 
-        individuoMigliore = popolazione.getPopolazione().get(0);
+        IndividuoEntity individuoMigliore = popolazione.getPopolazione().get(0);
 
         for(int i = 0; i < budgetDiRicerca; i++) {
 
@@ -115,6 +119,8 @@ public class SteadyStateGAManager {
                 if(individuo.getValutazione() >= individuoMigliore.getValutazione())
                     individuoMigliore = individuo;
         }
+
+        System.out.println(individuoMigliore);
 
         return individuoMigliore;
     }
@@ -156,6 +162,9 @@ public class SteadyStateGAManager {
         int[][] primoGenitore = genitori.get(0).getAreaSelezionata();
         int[][] secondoGenitore = genitori.get(1).getAreaSelezionata();
 
+        System.out.println(genitori.get(0));
+        System.out.println(genitori.get(1));
+
         int altezza = primoGenitore.length;
         int larghezza = primoGenitore[0].length;
 
@@ -172,6 +181,8 @@ public class SteadyStateGAManager {
         for (int[] riga : secondoGenitore)
             for (int id : riga)
                 secondaMappaDelleOccorrenze.put(id, secondaMappaDelleOccorrenze.getOrDefault(id, 0) + 1);
+
+        System.out.println(primaMappaDelleOccorrenze);
 
         for(int riga = 0; riga < altezza; riga++) {
             for(int colonna = 0; colonna < larghezza; colonna++) {

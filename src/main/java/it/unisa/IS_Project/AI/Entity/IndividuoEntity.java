@@ -6,10 +6,8 @@ import it.unisa.IS_Project.AI.Manager.MappaManager;
 import it.unisa.IS_Project.AI.Utility.Kruskal;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+
+import java.util.*;
 
 @Getter
 @Setter
@@ -63,10 +61,7 @@ public class IndividuoEntity {
         
         Random random = new Random();
 
-        int numeroTotaleSullaSelezioneMEDIUM_LOD = em.getNumeroTotaleSullaSelezioneByLOD(LOD.MEDIUM_LOD);
-        int numeroTotaleSullaSelezioneLOW_LOD = em.getNumeroTotaleSullaSelezioneByLOD(LOD.LOW_LOD);
-
-        int gap = (numeroTotaleSullaSelezioneMEDIUM_LOD + numeroTotaleSullaSelezioneLOW_LOD) / entitaHIGH_LOD.size();
+        int gap = (mm.getTotaleCelleAreaSelezione() / em.getNumeroTotaleSullaSelezioneByLOD(LOD.HIGH_LOD)) - 1;
 
         int riga = 0;
         int colonna = 0;;
@@ -216,7 +211,7 @@ public class IndividuoEntity {
 
     /**
      * Calcola la prima funzione di fitness a partire dalle caratteristiche dell'individuo.
-     * La prima funzione di fitness è rappresentata dall valore ottenuto sommando gli archi del maximum spanning three ottenuto a partire 
+     * La prima funzione di fitness è rappresentata dall valore ottenuto sommando gli archi del maximum spanning tree ottenuto a partire 
      * da un grafo completamente connesso, il quale ha come vertici tutte le entità più importanti. Tale valore va massimizzato siccome è desiderabile che le 
      * entità più importanti siano quanto più distanti tra di loro.
      *
@@ -264,7 +259,7 @@ public class IndividuoEntity {
 
     /**
      * Calcola la seconda funzione di fitness a partire dalle caratteristiche dell'individuo.
-     * La seconda funzione di fitness è rappresentata dall valore ottenuto sommando gli archi del minimum spanning three ottenuto a partire 
+     * La seconda funzione di fitness è rappresentata dall valore ottenuto sommando gli archi del minimum spanning tree ottenuto a partire
      * da un grafo completamente connesso, il quale ha come vertici tutte le entità meno importanti. Tale valore va minimizzato siccome è desiderabile che le 
      * entità meno importanti siano quanto meno distanti tra di loro.
      *

@@ -48,16 +48,7 @@ public class SelezioneControl {
 
             SessionManager.getEmail(request);
 
-            JSONObject selezioneJSON = new JSONObject();
-
-            selezioneJSON.put("primaRiga","0");
-            selezioneJSON.put("primaColonna","0");
-            selezioneJSON.put("secondaRiga","6");
-            selezioneJSON.put("secondaColonna","6");
-
-            SessionManager.setSelezioneMappa(request,selezioneJSON.toString());
-
-            System.out.println(SessionManager.getSelezioneMappa(request));
+            SessionManager.setSelezioneMappa(request,selezione);
 
         } catch (MissingSessionEmailException e) {
 
@@ -66,9 +57,6 @@ public class SelezioneControl {
             } catch (IOException ex) {
                 throw new PixelArtSelectionException("ERRORE - SELEZIONE PIXEL ART IOEXCEPTION.");
             }
-
-        } catch (MissingSessionMapSelectionException e) {
-            throw new RuntimeException(e);
         }
 
     }

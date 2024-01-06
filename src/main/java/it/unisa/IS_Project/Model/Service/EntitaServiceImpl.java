@@ -201,4 +201,9 @@ public class EntitaServiceImpl implements EntitaService{
     public EntitaEntity get(String nome) {
         return entitaRepository.findByNome(nome);
     }
+
+    @Override
+    public EntitaEntity get(int id) {
+        return entitaRepository.findById(id);
+    }
 }

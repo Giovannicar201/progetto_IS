@@ -8,25 +8,17 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 public class EntitaManager {
     private static final EntitaManager epm = new EntitaManager();
     private static final List<EntitaEntity> listaEntita = new ArrayList<>();
-    private static boolean configurato;
 
     private EntitaManager() {}
 
     public static EntitaManager getInstance() {
-
-        if(!configurato) {
-
-            epm.configura();
-
-            configurato = true;
-        }
-
         return epm;
     }
 
@@ -35,13 +27,16 @@ public class EntitaManager {
      *
      * @author Angelo Antonio Prisco
      */
-    private void configura() {
-        setOgniNumeroTotaleSullaMappa();
-        setOgniNumeroTotaleSullaMappaPercentuale();
-        setOgniNumeroTotaleSullaSelezione();
-        setOgniDaPiazzareSullaSelezione();
-        setOgniLOD();
-        generaLog();
+    public static void configura() {
+        
+        listaEntita.clear();
+        
+        epm.setOgniNumeroTotaleSullaMappa();
+        epm.setOgniNumeroTotaleSullaMappaPercentuale();
+        epm.setOgniNumeroTotaleSullaSelezione();
+        epm.setOgniDaPiazzareSullaSelezione();
+        epm.setOgniLOD();
+        epm.generaLog();
     }
 
     /**
@@ -75,10 +70,10 @@ public class EntitaManager {
 
         List<Integer> ids = new ArrayList<>();
 
-        int[][] map = mm.getMappa();
+        int[][] mappa = mm.getMappa();
 
-        for (int[] row : map) {
-            for (int id : row)
+        for (int[] riga : mappa) {
+            for (int id : riga)
 
                 if (!ids.contains(id) && id > 0) {
 
@@ -135,13 +130,13 @@ public class EntitaManager {
         int sommaNumeroTotaleSullaSelezione = 0;
 
         for(EntitaEntity entita : listaEntita){
-            float totalOverSelection = (entita.getNumeroTotaleSullaMappaPercentuale() * mm.getTotaleCelleAreaSelezione()) / 100;
-            float fractionalPart = totalOverSelection - (int) totalOverSelection;
+            float numeroTotaleSullaSelezione = (entita.getNumeroTotaleSullaMappaPercentuale() * mm.getTotaleCelleAreaSelezione()) / 100;
+            float parteFrazionale = numeroTotaleSullaSelezione - (int) numeroTotaleSullaSelezione;
 
-            if(fractionalPart >= 0.5f)
-                entita.setNumeroTotaleSullaSelezione((int) Math.ceil(totalOverSelection));
+            if(parteFrazionale >= 0.5f)
+                entita.setNumeroTotaleSullaSelezione((int) Math.ceil(numeroTotaleSullaSelezione));
             else
-                entita.setNumeroTotaleSullaSelezione((int) Math.floor(totalOverSelection));
+                entita.setNumeroTotaleSullaSelezione((int) Math.floor(numeroTotaleSullaSelezione));
 
             sommaNumeroTotaleSullaSelezione += entita.getNumeroTotaleSullaSelezione();
         }

@@ -1,5 +1,6 @@
 package it.unisa.IS_Project.AI.Service;
 
+import it.unisa.IS_Project.AI.Manager.EntitaManager;
 import it.unisa.IS_Project.AI.Manager.MappaManager;
 import it.unisa.IS_Project.AI.Entity.IndividuoEntity;
 import it.unisa.IS_Project.AI.Manager.SteadyStateGAManager;
@@ -11,6 +12,7 @@ public class IAServiceImpl {
     public String genera(String mappa, int rigaPrimoPuntoDiSelezione, int colonnaPrimoPuntoDiSelezione, int rigaSecondoPuntoDiSelezione, int colonnaSecondoPuntoDiSelezione) throws ParseException {
 
         MappaManager.configura(mappa,rigaPrimoPuntoDiSelezione,colonnaPrimoPuntoDiSelezione,rigaSecondoPuntoDiSelezione,colonnaSecondoPuntoDiSelezione);
+        EntitaManager.configura();
 
         SteadyStateGAManager ssm = SteadyStateGAManager.getInstance(30,10);
 

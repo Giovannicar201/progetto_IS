@@ -51,8 +51,8 @@ public class IAControl {
             SessionManager.getEmail(request);
 
             String mappa = SessionManager.getMappa(request);
-
-            System.out.println(Arrays.deepToString(Parser.convertiMappa(SessionManager.getMappa(request))));
+            JSONObject mappaJSON = (JSONObject) parser.parse(mappa);
+            JSONArray entita = (JSONArray) mappaJSON.get("mappa");
 
             JSONObject selezioneJSON = (JSONObject) parser.parse(SessionManager.getSelezioneMappa(request));
 
@@ -65,12 +65,8 @@ public class IAControl {
             String individuo = iaServiceAdapter.genera(mappa,rigaPrimoPunto,colonnaPrimoPunto,rigaSecondoPunto,colonnaSecondoPunto);
 
             JSONObject individuoJSON = (JSONObject) parser.parse(individuo);
-
-            JSONObject mappaJSON = (JSONObject) parser.parse(mappa);
-
             JSONArray entitaIndividuo = (JSONArray) individuoJSON.get("entita");
 
-            JSONArray entita = (JSONArray) mappaJSON.get("mappa");
 
             for(Object obj : entitaIndividuo) {
                 JSONObject entitaIndividuoJSON = (JSONObject) obj;
@@ -89,8 +85,6 @@ public class IAControl {
                     if (((String) entitaJSON.get("riga")).compareTo(riga) == 0 &&
                             ((String) entitaJSON.get("colonna")).compareTo(colonna) == 0) {
 
-                        System.out.println("ENTRATO");
-
                         entitaJSON.put("id", entitaEntityQuery.getId());
 
                         Blob immagine = entitaEntityQuery.getImmagineEntity().getFoto();
@@ -104,8 +98,6 @@ public class IAControl {
             mappaJSON.put("mappa",entita);
 
             SessionManager.setMappa(request,mappaJSON.toString());
-
-            System.out.println(Arrays.deepToString(Parser.convertiMappa(SessionManager.getMappa(request))));
 
         } catch (MissingSessionMapSelectionException e) {
             throw new RuntimeException(e);

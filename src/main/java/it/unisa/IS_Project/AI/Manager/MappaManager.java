@@ -95,6 +95,8 @@ public class MappaManager {
 
     private void setTotaleEntitaPiazzate() {
 
+        totaleEntitaPiazzate = 0;
+
         for (int[] riga : mappa)
             for (int id : riga)
                 if (id > 0)

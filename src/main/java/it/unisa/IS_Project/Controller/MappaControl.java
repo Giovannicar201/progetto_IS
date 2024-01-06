@@ -30,7 +30,7 @@ public class MappaControl {
 
     @RequestMapping(value = "/gestoreMappa/creaMappa", method = RequestMethod.POST)
 
-    public void creaMappa(@RequestBody String mappa, HttpServletRequest request, HttpServletResponse response) throws CreateMapException {
+    public void creaMappa(@RequestBody String mappa, HttpServletRequest request, HttpServletResponse response) throws CreateMapException, MissingSessionMapException {
 
         JSONParser parser = new JSONParser();
         String risultato = null;

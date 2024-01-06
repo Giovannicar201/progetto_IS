@@ -22,7 +22,7 @@ public class EntitaEntity {
     public String toString() {
 
         return "@entita " +
-                "@id::" + id +
+                "@id::" + id + " " +
                 "@numeroTotaleSullaMappa::" + numeroTotaleSullaMappa + " " +
                 "@numeroTotaleSullaMappaPercentuale::" + numeroTotaleSullaMappaPercentuale + " " +
                 "@numeroTotaleSullaSelezione::" + numeroTotaleSullaSelezione + " " +

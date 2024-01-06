@@ -12,11 +12,11 @@ import java.util.List;
 public class Kruskal {
 
     /**
-     * Crea un grafo completamente connesso e ne calcola il maximum spanning three.
+     * Crea un grafo completamente connesso e ne calcola il maximum spanning tree.
      *
      * @param V Lista di vertici usata per comporre il grafo.
      * @param E Lista di archi usata per comporre il grafo.
-     * @return  Somma dei pesi degli archi che compongono il maximum spanning three.
+     * @return  Somma dei pesi degli archi che compongono il maximum spanning tree.
      * @author Giovanni Carbone
      */
     public static float computaMaxSTCompletamenteConnesso(List<String> V, List<ArcoEntity> E) {
@@ -55,11 +55,11 @@ public class Kruskal {
     }
     
     /**
-     * Crea un grafo completamente connesso e ne calcola il minimum spanning three.
+     * Crea un grafo completamente connesso e ne calcola il minimum spanning tree.
      *
      * @param V Lista di vertici usata per comporre il grafo.
      * @param E Lista di archi usata per comporre il grafo.
-     * @return  Somma dei pesi degli archi che compongono il minimum spanning three.
+     * @return  Somma dei pesi degli archi che compongono il minimum spanning tree.
      * @author Giovanni Carbone
      */
     public static float computaMinSTCompletamenteConnesso(List<String> V, List<ArcoEntity> E) {
