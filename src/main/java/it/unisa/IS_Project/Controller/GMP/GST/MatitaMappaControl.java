@@ -44,15 +44,15 @@ public class MatitaMappaControl extends MatitaControl {
 
             JSONObject entitaJSON = (JSONObject) parser.parse(entita);
 
-            SessionManager.getEmail(request);
-
+            String email = SessionManager.getEmail(request);
+            String mappa = SessionManager.getMappa(request);
             String nome = (String) entitaJSON.get("nome");
             String riga = (String) entitaJSON.get("riga");
             String colonna = (String) entitaJSON.get("colonna");
 
-            String mappa = matitaService.piazza(SessionManager.getMappa(request),nome,riga,colonna);
+            String mappaModificata = matitaService.piazza(email,mappa,nome,riga,colonna);
 
-            SessionManager.setMappa(request,mappa);
+            SessionManager.setMappa(request,mappaModificata);
 
         } catch (ParseException | SQLException e) {
 

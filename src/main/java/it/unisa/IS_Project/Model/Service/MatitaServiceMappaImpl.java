@@ -26,9 +26,9 @@ public class MatitaServiceMappaImpl implements MatitaService {
 
     @Override
     @Transactional
-    public String piazza(String mappa, String nome, String riga, String colonna) throws ParseException, EntityNotFoundException, InvalidColumnException, InvalidRowException, SQLException {
+    public String piazza(String email, String mappa, String nome, String riga, String colonna) throws ParseException, EntityNotFoundException, InvalidColumnException, InvalidRowException, SQLException {
 
-        EntitaEntity entitaEntityQuery = entitaService.get(nome);
+        EntitaEntity entitaEntityQuery = entitaService.get(nome,email);
 
         JSONParser parser = new JSONParser();
 

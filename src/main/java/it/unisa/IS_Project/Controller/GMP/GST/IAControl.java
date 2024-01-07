@@ -42,7 +42,7 @@ public class IAControl {
 
         try {
 
-            SessionManager.getEmail(request);
+            String email = SessionManager.getEmail(request);
 
             String mappa = SessionManager.getMappa(request);
             JSONObject mappaJSON = (JSONObject) parser.parse(mappa);
@@ -71,7 +71,7 @@ public class IAControl {
                 String riga = (String) entitaIndividuoJSON.get("riga");
                 String colonna = (String) entitaIndividuoJSON.get("colonna");
 
-                EntitaEntity entitaEntityQuery = entitaService.get(nome);
+                EntitaEntity entitaEntityQuery = entitaService.get(nome,email);
 
                 for (Object entitaOBJ : entita) {
                     JSONObject entitaJSON = (JSONObject) entitaOBJ;

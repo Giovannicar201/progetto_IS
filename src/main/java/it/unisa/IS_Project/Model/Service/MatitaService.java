@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface MatitaService {
 
-    String piazza(String string, String obj, String riga, String colonna) throws ParseException, EntityNotFoundException, InvalidColumnException, InvalidRowException, SQLException;
+    String piazza(String email, String string, String obj, String riga, String colonna) throws ParseException, EntityNotFoundException, InvalidColumnException, InvalidRowException, SQLException;
 
     void riempi(String string, List<String> objs);
 

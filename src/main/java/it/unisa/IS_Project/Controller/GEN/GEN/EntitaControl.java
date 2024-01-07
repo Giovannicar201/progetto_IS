@@ -1,12 +1,8 @@
 package it.unisa.IS_Project.Controller.GEN.GEN;
 
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.*;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.EliminazioneEntita.GENException;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.EntityNotFoundException;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.GENException;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.ModificaEntita.GENException;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.VisualizzaEntita.GENException;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.VisualizzaListaEntita.GENException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.EntitaService;
 import it.unisa.IS_Project.Utility.SessionManager;
