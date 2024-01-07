@@ -3,6 +3,7 @@ package it.unisa.IS_Project.Controller.GEN.GEN;
 import it.unisa.IS_Project.Exception.GEN.GEN.CreazioneEntita.*;
 import it.unisa.IS_Project.Exception.GEN.GEN.EntityNotFoundException;
 import it.unisa.IS_Project.Exception.GEN.GEN.GENException;
+import it.unisa.IS_Project.Exception.GEN.GEN.ImageAlreadyUsedException;
 import it.unisa.IS_Project.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.EntitaService;
 import it.unisa.IS_Project.Utility.SessionManager;
@@ -120,6 +121,14 @@ public class EntitaControl {
                 response.sendError(500, "ICE");
             } catch (IOException ex) {
                 throw new GENException("ERRORE - COLLISIONI NON VALIDE.");
+            }
+
+        } catch (ImageAlreadyUsedException e) {
+
+            try {
+                response.sendError(500, "IAUE");
+            } catch (IOException ex) {
+                throw new GENException("\"ERRORE - IMMAGINE GIÀ USATA.");
             }
 
         }

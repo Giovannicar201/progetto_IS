@@ -1,6 +1,7 @@
 package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Exception.GEN.GEN.CreazioneEntita.*;
+import it.unisa.IS_Project.Exception.GEN.GEN.ImageAlreadyUsedException;
 import it.unisa.IS_Project.Model.Entity.*;
 import it.unisa.IS_Project.Exception.GEN.GEN.EntityNotFoundException;
 import it.unisa.IS_Project.Model.Repository.*;
@@ -32,7 +33,7 @@ public class EntitaServiceImpl implements EntitaService {
 
     @Override
     @Transactional
-    public void creaEntita(String email, String nomeImmagine, String nome, String collisioni, String nomeCartella, List<String> nomiProprieta, List<String> valoriProprieta) throws InvalidCollisionException, FolderNotFoundException, InvalidNumberOfPropertyException, NotUniqueEntityException, InvalidEntityNameException, ImageNotFoundException {
+    public void creaEntita(String email, String nomeImmagine, String nome, String collisioni, String nomeCartella, List<String> nomiProprieta, List<String> valoriProprieta) throws InvalidCollisionException, FolderNotFoundException, InvalidNumberOfPropertyException, NotUniqueEntityException, InvalidEntityNameException, ImageNotFoundException, ImageAlreadyUsedException {
 
         UtenteEntity utenteEntity = utenteService.get(email);
 
@@ -41,7 +42,12 @@ public class EntitaServiceImpl implements EntitaService {
 
         ImmagineEntity immagineEntityQuery = immagineService.get(nomeImmagine,email);
 
+        EntitaEntity secondaEntitaEntityQuery = entitaRepository.findByImmagineEntity(immagineEntityQuery);
+
         CartellaEntity cartellaEntityQuery = cartellaService.get(nomeCartella,email);
+
+        if(secondaEntitaEntityQuery != null)
+            throw new ImageAlreadyUsedException("ERRORE - IMMAGINE GIÀ USATA.");
 
         if(immagineEntityQuery == null)
             throw new ImageNotFoundException("ERRORE - IMMAGINE NON ESISTENTE.");
@@ -60,12 +66,6 @@ public class EntitaServiceImpl implements EntitaService {
 
         if(!Validator.isNumberOfPropertyValid(nomiProprieta.size()))
             throw new InvalidNumberOfPropertyException("ERRORE - NUMERO DI PROPRIETÀ NON VALIDO.");
-
-        /*
-        *
-        * CONTROLLO CHE NON POSSONO ESSERE CARICATE DUE IMMAGINI CON LO STESSO NOME
-        *
-        * */
 
         entitaEntity.setUtenteEntity(utenteEntity);
         entitaEntity.setImmagineEntity(immagineEntityQuery);
@@ -94,7 +94,7 @@ public class EntitaServiceImpl implements EntitaService {
 
     @Override
     @Transactional
-    public void modificaEntita(String email, String nomeImmagine, String nome, String collisioni, String nomeCartella, List<String> nomiProprieta, List<String> valoriProprieta) throws EntityNotFoundException, FolderNotFoundException, InvalidEntityNameException, InvalidNumberOfPropertyException, NotUniqueEntityException, ImageNotFoundException, InvalidCollisionException {
+    public void modificaEntita(String email, String nomeImmagine, String nome, String collisioni, String nomeCartella, List<String> nomiProprieta, List<String> valoriProprieta) throws EntityNotFoundException, FolderNotFoundException, InvalidEntityNameException, InvalidNumberOfPropertyException, NotUniqueEntityException, ImageNotFoundException, InvalidCollisionException, ImageAlreadyUsedException {
 
         UtenteEntity utenteEntity = utenteService.get(email);
 
