@@ -17,4 +17,7 @@ public interface CartellaRepository extends JpaRepository<CartellaEntity,Integer
 
     @Query
     CartellaEntity findById(int id);
+
+    @Query
+    CartellaEntity findByNome(String nome);
 }

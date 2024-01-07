@@ -25,16 +25,16 @@ public class UtenteEntity {
     private MappaEntity mappaEntity;
 
     @OneToMany(mappedBy = "utenteEntity", cascade = CascadeType.REMOVE)
-    private List<PaletteEntity> paletteEntity; //list
+    private List<PaletteEntity> paletteEntityList;
 
     @OneToMany(mappedBy = "utenteEntity", cascade = CascadeType.REMOVE)
-    private List<CartellaEntity> cartellaEntity; //list
+    private List<CartellaEntity> cartellaEntityList;
 
     @OneToMany(mappedBy = "utenteEntity", cascade = CascadeType.REMOVE)
-    private List<EventoEntity> eventoEntity; //list
+    private List<EventoEntity> eventoEntityList;
 
     @OneToMany(mappedBy = "utenteEntity", cascade = CascadeType.REMOVE)
-    private List<ImmagineEntity> immagineEntity; //list
+    private List<ImmagineEntity> immagineEntityList;
 
     @OneToMany(mappedBy = "utenteEntity",cascade = CascadeType.REMOVE)
     private List<EntitaEntity> entitaEntityList;

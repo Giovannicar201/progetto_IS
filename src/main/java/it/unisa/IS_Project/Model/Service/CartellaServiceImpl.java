@@ -73,7 +73,14 @@ public class CartellaServiceImpl implements CartellaService {
     }
 
     @Override
+    @Transactional
     public CartellaEntity get(int id) {
         return cartellaRepository.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public CartellaEntity get(String nomeCartella) {
+        return cartellaRepository.findByNome(nomeCartella);
     }
 }
