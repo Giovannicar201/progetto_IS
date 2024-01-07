@@ -1,4 +1,4 @@
-package it.unisa.IS_Project.Controller;
+package it.unisa.IS_Project.Controller.GMP.GMP;
 
 import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.CreateMapException;
 import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapHeightException;
@@ -25,6 +25,7 @@ import java.io.IOException;
 
 @Controller
 public class MappaControl {
+
     @Autowired
     public MappaService mappaService;
 
@@ -33,7 +34,6 @@ public class MappaControl {
     public void creaMappa(@RequestBody String mappa, HttpServletRequest request, HttpServletResponse response) throws CreateMapException, MissingSessionMapException {
 
         JSONParser parser = new JSONParser();
-        String risultato = null;
 
         try {
 
@@ -45,7 +45,9 @@ public class MappaControl {
             String altezza = (String) mappaJSON.get("altezza");
             String larghezza = (String) mappaJSON.get("larghezza");
 
-            risultato = mappaService.creaMappa(email,nome,altezza,larghezza);
+            String mappaVuota = mappaService.creaMappa(email,nome,altezza,larghezza);
+
+            SessionManager.setMappa(request,mappaVuota);
 
         } catch (ParseException e) {
 
@@ -88,8 +90,6 @@ public class MappaControl {
             }
 
         }
-
-        SessionManager.setMappa(request,risultato);
     }
 
     @RequestMapping(value = "/gestoreMappa/visualizzaStatisticheMappa", method = RequestMethod.POST)

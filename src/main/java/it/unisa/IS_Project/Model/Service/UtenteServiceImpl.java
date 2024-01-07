@@ -11,17 +11,18 @@ import jakarta.transaction.Transactional;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.security.NoSuchAlgorithmException;
 
 @Service
-public class UtenteServiceImpl implements UtenteService{
+public class UtenteServiceImpl implements UtenteService {
+
     @Autowired
     private UtenteRepository utenteRepository;
 
     @Override
     @Transactional
     public void signup(String email, String nome, String password, String passwordRipetuta) throws NoSuchAlgorithmException, InvalidEmailException, InvalidNameException, InvalidPasswordException, SignupPasswordsMismatchException, NotUniqueUserException {
+
         UtenteEntity utenteEntity = new UtenteEntity();
         UtenteEntity utenteEntityQuery = utenteRepository.findByEmail(email);
 
@@ -53,6 +54,7 @@ public class UtenteServiceImpl implements UtenteService{
     @Override
     @Transactional
     public void login(String email, String password) throws NoSuchAlgorithmException, UserNotFoundException, LoginPasswordsMismatchException, ParseException {
+
         UtenteEntity utenteEntityQuery = utenteRepository.findByEmail(email);
 
         if(utenteEntityQuery == null)

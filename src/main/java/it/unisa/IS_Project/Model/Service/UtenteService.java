@@ -5,7 +5,6 @@ import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginPasswordsMismatchExcep
 import it.unisa.IS_Project.Model.Exception.GAC.Login.UserNotFoundException;
 import it.unisa.IS_Project.Model.Exception.GAC.Signup.*;
 import org.json.simple.parser.ParseException;
-
 import java.security.NoSuchAlgorithmException;
 
 public interface UtenteService {

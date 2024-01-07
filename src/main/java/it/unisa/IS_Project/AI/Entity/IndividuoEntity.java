@@ -6,7 +6,6 @@ import it.unisa.IS_Project.AI.Manager.MappaManager;
 import it.unisa.IS_Project.AI.Utility.Kruskal;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.*;
 
 @Getter

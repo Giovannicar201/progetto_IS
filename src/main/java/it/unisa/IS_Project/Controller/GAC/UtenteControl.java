@@ -1,9 +1,8 @@
-package it.unisa.IS_Project.Controller;
+package it.unisa.IS_Project.Controller.GAC;
 
-import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginException;
+import it.unisa.IS_Project.Model.Exception.GAC.GACException;
 import it.unisa.IS_Project.Model.Exception.GAC.Login.LoginPasswordsMismatchException;
 import it.unisa.IS_Project.Model.Exception.GAC.Login.UserNotFoundException;
-import it.unisa.IS_Project.Model.Exception.GAC.Logout.LogoutException;
 import it.unisa.IS_Project.Model.Exception.GAC.Signup.*;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.UtenteService;
@@ -25,30 +24,31 @@ public class UtenteControl {
     @Autowired
     public UtenteService utenteService;
 
-    @RequestMapping(value = "/auth/signup", method = RequestMethod.POST)
+    @RequestMapping(value = "/gestoreAccessi/signup", method = RequestMethod.POST)
 
-    public void signup(@RequestBody String signup, HttpServletRequest request, HttpServletResponse response) throws SignupException {
+    public void signup(@RequestBody String signup, HttpServletRequest request, HttpServletResponse response) throws GACException {
 
         JSONParser parser = new JSONParser();
-        String email = null, nome, password, passwordRipetuta;
 
         try {
 
             JSONObject signupJSON = (JSONObject) parser.parse(signup);
 
-            email = (String) signupJSON.get("email");
-            nome = (String) signupJSON.get("nome");
-            password = (String) signupJSON.get("password");
-            passwordRipetuta = (String) signupJSON.get("passwordRipetuta");
+            String email = (String) signupJSON.get("email");
+            String nome = (String) signupJSON.get("nome");
+            String password = (String) signupJSON.get("password");
+            String passwordRipetuta = (String) signupJSON.get("passwordRipetuta");
 
             utenteService.signup(email,nome,password,passwordRipetuta);
+
+            SessionManager.setEmail(request,email);
 
         } catch (NoSuchAlgorithmException | ParseException e) {
 
             try {
                 response.sendError(302, "NQTE");
             } catch (IOException ex) {
-                throw new SignupException("ERRORE - NOSUCHALGORITHEXCEPTION || PARSEEXCEPTION.");
+                throw new GACException("ERRORE - NOSUCHALGORITHEXCEPTION || PARSEEXCEPTION.");
             }
 
         } catch (SignupPasswordsMismatchException e) {
@@ -56,7 +56,7 @@ public class UtenteControl {
             try {
                 response.sendError(500, "SPME");
             } catch (IOException ex) {
-                throw new SignupException("ERRORE - SIGNUP IOEXCEPTION.");
+                throw new GACException("ERRORE - LE PASSWORD NON COINCIDONO.");
             }
 
         } catch (InvalidNameException e) {
@@ -64,7 +64,7 @@ public class UtenteControl {
             try {
                 response.sendError(500, "INE");
             } catch (IOException ex) {
-                throw new SignupException("ERRORE - SIGNUP IOEXCEPTION.");
+                throw new GACException("ERRORE - NOME NON VALIDO.");
             }
 
         } catch (InvalidPasswordException e) {
@@ -72,7 +72,7 @@ public class UtenteControl {
             try {
                 response.sendError(500, "IPE");
             } catch (IOException ex) {
-                throw new SignupException("ERRORE - SIGNUP IOEXCEPTION.");
+                throw new GACException("ERRORE - PASSWORD NON VALIDA.");
             }
 
         } catch (InvalidEmailException e) {
@@ -80,7 +80,7 @@ public class UtenteControl {
             try {
                 response.sendError(500, "IEE");
             } catch (IOException ex) {
-                throw new SignupException("ERRORE - SIGNUP IOEXCEPTION.");
+                throw new GACException("ERRORE - EMAIL NON VALIDA.");
             }
 
         } catch (NotUniqueUserException e) {
@@ -88,27 +88,24 @@ public class UtenteControl {
             try {
                 response.sendError(500, "NUUE");
             } catch (IOException ex) {
-                throw new SignupException("ERRORE - SIGNUP IOEXCEPTION.");
+                throw new GACException("ERRORE - UTENTE GIÀ REGISTRATO.");
             }
 
         }
-
-        SessionManager.setEmail(request,email);
     }
 
-    @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/gestoreAccessi/login", method = RequestMethod.POST)
 
-    public void login(@RequestBody String login, HttpServletRequest request, HttpServletResponse response) throws LoginException {
+    public void login(@RequestBody String login, HttpServletRequest request, HttpServletResponse response) throws GACException {
 
         JSONParser parser = new JSONParser();
-        String email, password;
 
         try {
 
             JSONObject loginJSON = (JSONObject) parser.parse(login);
 
-            email = (String) loginJSON.get("email");
-            password = (String) loginJSON.get("password");
+            String email = (String) loginJSON.get("email");
+            String password = (String) loginJSON.get("password");
 
             utenteService.login(email,password);
 
@@ -119,7 +116,7 @@ public class UtenteControl {
             try {
                 response.sendError(302, "NQTE");
             } catch (IOException ex) {
-                throw new LoginException("ERRORE - NOSUCHALGORITHEXCEPTION || PARSEEXCEPTION.");
+                throw new GACException("ERRORE - NOSUCHALGORITHEXCEPTION || PARSEEXCEPTION.");
             }
 
         } catch (UserNotFoundException e) {
@@ -127,7 +124,7 @@ public class UtenteControl {
             try {
                 response.sendError(500, "UNFE");
             } catch (IOException ex) {
-                throw new LoginException("ERRORE - LOGIN IOEXCEPTION.");
+                throw new GACException("ERRORE - UTENTE NON REGISTRATO.");
             }
 
         } catch (LoginPasswordsMismatchException e) {
@@ -135,15 +132,15 @@ public class UtenteControl {
             try {
                 response.sendError(500, "LPME");
             } catch (IOException ex) {
-                throw new LoginException("ERRORE - LOGIN IOEXCEPTION.");
+                throw new GACException("ERRORE - LE PASSWORD NON COINCIDONO.");
             }
 
         }
     }
 
-    @RequestMapping(value = "/auth/logout", method = RequestMethod.POST)
+    @RequestMapping(value = "/gestoreAccessi/logout", method = RequestMethod.POST)
 
-    public void logout(HttpServletRequest request, HttpServletResponse response) throws LogoutException {
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws GACException {
 
         try {
 
@@ -156,7 +153,7 @@ public class UtenteControl {
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new LogoutException("ERRORE - CARICA IMMAGINE IOEXCEPTION.");
+                throw new GACException("ERRORE - NESSUN UTENTE IN SESSIONE.");
             }
 
         }

@@ -1,6 +1,6 @@
-package it.unisa.IS_Project.Controller;
+package it.unisa.IS_Project.Controller.GMP.GCR;
 
-import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.FolderCreationException;
+import it.unisa.IS_Project.Model.Exception.GMP.GCR.GCRException;
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.VisualizzaListaCartelle.VisualizzaListaCartelleException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.InvalidFolderNameException;
@@ -27,9 +27,7 @@ public class CartellaControl {
 
     @RequestMapping(value = "/gestoreCartelle/creaCartella", method = RequestMethod.POST)
 
-    public void creaCartella(@RequestBody String nomeCartella, HttpServletRequest request, HttpServletResponse response) throws FolderCreationException {
-
-        System.out.println("CARTELLA : " + nomeCartella);
+    public void creaCartella(@RequestBody String nomeCartella, HttpServletRequest request, HttpServletResponse response) throws GCRException {
 
         try {
 
@@ -42,27 +40,23 @@ public class CartellaControl {
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new FolderCreationException("ERRORE - CREA CARTELLA IOEXCEPTION.");
+                throw new GCRException("ERRORE - NESSUN UTENTE IN SESSIONE.");
             }
 
         } catch (InvalidFolderNameException e) {
 
-            System.out.println("NOME INVALIDO : " + nomeCartella);
-
             try {
                 response.sendError(500, "IFNE");
             } catch (IOException ex) {
-                throw new FolderCreationException("ERRORE - CREA CARTELLA IOEXCEPTION.");
+                throw new GCRException("ERRORE - NOME CARTELLA NON VALIDO.");
             }
 
         } catch (NotUniqueFolderException e) {
 
-            System.out.println("ESISTE : " + nomeCartella);
-
             try {
                 response.sendError(500, "NUFE");
             } catch (IOException ex) {
-                throw new FolderCreationException("ERRORE - CREA CARTELLA IOEXCEPTION.");
+                throw new GCRException("ERRORE - CARTELLA GIÀ ESISTENTE.");
             }
 
         }
@@ -72,11 +66,14 @@ public class CartellaControl {
     @ResponseBody
 
     public String visualizzaListaCartelle(HttpServletRequest request, HttpServletResponse response) throws VisualizzaListaCartelleException {
+
         String nomiCartelle = new JSONObject().toString();
 
         try {
 
-            nomiCartelle = cartellaService.visualizzaListaCartelle(SessionManager.getEmail(request));
+            String email = SessionManager.getEmail(request);
+
+            nomiCartelle = cartellaService.visualizzaListaCartelle(email);
 
         } catch (MissingSessionEmailException e) {
 
@@ -84,7 +81,7 @@ public class CartellaControl {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
                 throw new VisualizzaListaCartelleException("ERRORE - NESSUN UTENTE IN SESSIONE.");
-            };
+            }
         }
 
         response.setContentType("text/plain");

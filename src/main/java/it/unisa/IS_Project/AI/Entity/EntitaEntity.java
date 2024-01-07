@@ -1,5 +1,6 @@
 package it.unisa.IS_Project.AI.Entity;
 
+import it.unisa.IS_Project.AI.Enum.LOD;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ public class EntitaEntity {
     private float numeroTotaleSullaMappaPercentuale;
     private int numeroTotaleSullaSelezione;
     private int daPiazzareSullaSelezione;
-    private it.unisa.IS_Project.AI.Enum.LOD LOD;
+    private LOD LOD;
 
     @Override
     public String toString() {

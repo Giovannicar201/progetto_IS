@@ -5,7 +5,6 @@ import it.unisa.IS_Project.Model.Entity.UtenteEntity;
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.InvalidFolderNameException;
 import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.NotUniqueFolderException;
 import it.unisa.IS_Project.Model.Repository.CartellaRepository;
-import it.unisa.IS_Project.Model.Repository.UtenteRepository;
 import it.unisa.IS_Project.Utility.Validator;
 import jakarta.transaction.Transactional;
 import org.json.simple.JSONArray;
@@ -16,7 +15,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CartellaServiceImpl implements CartellaService{
+public class CartellaServiceImpl implements CartellaService {
+
     @Autowired
     private CartellaRepository cartellaRepository;
     @Autowired
@@ -25,18 +25,20 @@ public class CartellaServiceImpl implements CartellaService{
 
     @Override
     @Transactional
-    public void creaCartella(String nomeCartella,String email) throws InvalidFolderNameException, NotUniqueFolderException {
-        CartellaEntity cartellaEntity = new CartellaEntity();
-        CartellaEntity cartellaEntityQuery = cartellaRepository.findByNome(nomeCartella);
-        UtenteEntity utenteEntity = utenteService.get(email);
+    public void creaCartella(String nome,String email) throws InvalidFolderNameException, NotUniqueFolderException {
 
-        if(!Validator.isFolderNameValid(nomeCartella))
+        UtenteEntity utenteEntity = utenteService.get(email);
+        
+        CartellaEntity cartellaEntity = new CartellaEntity();
+        CartellaEntity cartellaEntityQuery = cartellaRepository.findByNomeAndUtenteEntity(nome,utenteEntity);
+
+        if(!Validator.isFolderNameValid(nome))
             throw new InvalidFolderNameException("ERRORE - NOME CARTELLA NON VALIDO.");
 
         if(cartellaEntityQuery != null)
             throw new NotUniqueFolderException("ERRORE - CARTELLA GIÀ ESISTENTE.");
 
-        cartellaEntity.setNome(nomeCartella);
+        cartellaEntity.setNome(nome);
         cartellaEntity.setUtenteEntity(utenteEntity);
 
         cartellaRepository.save(cartellaEntity);
@@ -45,10 +47,13 @@ public class CartellaServiceImpl implements CartellaService{
     @Override
     @Transactional
     public String visualizzaListaCartelle(String email) {
+
+        UtenteEntity utenteEntity = utenteService.get(email);
+
         JSONObject cartelleJSON = new JSONObject();
         JSONArray nomiCartelle = new JSONArray();
 
-        List<CartellaEntity> cartelle = cartellaRepository.findAllByEmail(email);
+        List<CartellaEntity> cartelle = cartellaRepository.findAllByUtenteEntity(utenteEntity);
 
         for(CartellaEntity cartellaEntity : cartelle)
             nomiCartelle.add(cartellaEntity.getNome());
@@ -60,17 +65,15 @@ public class CartellaServiceImpl implements CartellaService{
 
     @Override
     @Transactional
-    public CartellaEntity get(String nomeCartella) {
-        return cartellaRepository.findByNome(nomeCartella);
+    public CartellaEntity get(String nome, String email) {
+
+        UtenteEntity utenteEntity = utenteService.get(email);
+
+        return cartellaRepository.findByNomeAndUtenteEntity(nome,utenteEntity);
     }
 
     @Override
-    @Transactional
-    public CartellaEntity update(CartellaEntity newCartellaEntity,String nomeCartella) {
-        CartellaEntity cartellaEntity=cartellaRepository.findByNome(nomeCartella);
-        newCartellaEntity.setNome(nomeCartella);
-        cartellaEntity.setNome(newCartellaEntity.getNome());
-
-        return cartellaRepository.save(cartellaEntity);
+    public CartellaEntity get(int id) {
+        return cartellaRepository.findById(id);
     }
 }
