@@ -1,9 +1,9 @@
 package it.unisa.IS_Project.Controller.GEN.GIM;
 
-import it.unisa.IS_Project.Exception.GEN.GIM.CaricaImmagine.NotUniqueImageException;
+import it.unisa.IS_Project.Exception.GEN.GIM.NotUniqueImageException;
 import it.unisa.IS_Project.Exception.GEN.GIM.GIMException;
 import it.unisa.IS_Project.Exception.Sessione.MissingSessionEmailException;
-import it.unisa.IS_Project.Exception.GEN.GIM.CaricaImmagine.InvalidFileSizeException;
+import it.unisa.IS_Project.Exception.GEN.GIM.InvalidFileSizeException;
 import it.unisa.IS_Project.Model.Service.ImmagineService;
 import it.unisa.IS_Project.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;

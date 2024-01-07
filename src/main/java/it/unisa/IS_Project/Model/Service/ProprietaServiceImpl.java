@@ -2,10 +2,10 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.EntitaEntity;
 import it.unisa.IS_Project.Model.Entity.ProprietaEntity;
-import it.unisa.IS_Project.Exception.GEN.GEN.CreazioneEntita.InvalidPropertyNameException;
-import it.unisa.IS_Project.Exception.GEN.GEN.CreazioneEntita.InvalidPropertyValueException;
-import it.unisa.IS_Project.Exception.GEN.GEN.CreazioneEntita.NotUniquePropertyException;
-import it.unisa.IS_Project.Exception.GEN.GEN.CreazioneEntita.PropertyNotFoundException;
+import it.unisa.IS_Project.Exception.GEN.GEN.InvalidPropertyNameException;
+import it.unisa.IS_Project.Exception.GEN.GEN.InvalidPropertyValueException;
+import it.unisa.IS_Project.Exception.GEN.GEN.NotUniquePropertyException;
+import it.unisa.IS_Project.Exception.GEN.GEN.PropertyNotFoundException;
 import it.unisa.IS_Project.Model.Repository.ProprietaRepository;
 import it.unisa.IS_Project.Utility.Validator;
 import jakarta.transaction.Transactional;

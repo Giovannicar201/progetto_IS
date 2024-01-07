@@ -1,6 +1,6 @@
 package it.unisa.IS_Project.Controller;
 
-import it.unisa.IS_Project.Exception.GEN.GEN.CreazioneEntita.CreateEntityException;
+import it.unisa.IS_Project.Exception.GEN.GEN.CreateEntityException;
 import it.unisa.IS_Project.Model.Entity.EventoEntity;
 import it.unisa.IS_Project.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.EventoService;
@@ -28,7 +28,7 @@ public class EventoControl {
     @RequestMapping(value = "/gestoreEventi/creaEvento", method = RequestMethod.POST)
 
     public String creaEvento(@RequestBody String evento,
-                             HttpServletRequest request, HttpServletResponse response) throws CreateEntityException {
+                             HttpServletRequest request, HttpServletResponse response) {
        /* JSONParser parser = new JSONParser();
         List<String> nomiIstruzioni = new ArrayList<>();
         List<String> valoriIstruzioni = new ArrayList<>();

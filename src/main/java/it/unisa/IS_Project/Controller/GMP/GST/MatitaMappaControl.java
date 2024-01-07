@@ -3,7 +3,7 @@ package it.unisa.IS_Project.Controller.GMP.GST;
 import it.unisa.IS_Project.Exception.GEN.GEN.EntityNotFoundException;
 import it.unisa.IS_Project.Exception.GMP.GST.GSTException;
 import it.unisa.IS_Project.Exception.GMP.GST.InvalidRowException;
-import it.unisa.IS_Project.Exception.GMP.GST.Selezione.InvalidColumnException;
+import it.unisa.IS_Project.Exception.GMP.GST.InvalidColumnException;
 import it.unisa.IS_Project.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Exception.Sessione.MissingSessionMapException;
 import it.unisa.IS_Project.Model.Service.MatitaService;

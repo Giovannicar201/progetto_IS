@@ -1,10 +1,10 @@
 package it.unisa.IS_Project.Controller.GMP.GCR;
 
 import it.unisa.IS_Project.Exception.GMP.GCR.GCRException;
-import it.unisa.IS_Project.Exception.GMP.GCR.VisualizzaListaCartelle.VisualizzaListaCartelleException;
+import it.unisa.IS_Project.Exception.GMP.GCR.VisualizzaListaCartelleException;
 import it.unisa.IS_Project.Exception.Sessione.MissingSessionEmailException;
-import it.unisa.IS_Project.Exception.GMP.GCR.CreaCartella.InvalidFolderNameException;
-import it.unisa.IS_Project.Exception.GMP.GCR.CreaCartella.NotUniqueFolderException;
+import it.unisa.IS_Project.Exception.GMP.GCR.InvalidFolderNameException;
+import it.unisa.IS_Project.Exception.GMP.GCR.NotUniqueFolderException;
 import it.unisa.IS_Project.Model.Service.CartellaService;
 import it.unisa.IS_Project.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;

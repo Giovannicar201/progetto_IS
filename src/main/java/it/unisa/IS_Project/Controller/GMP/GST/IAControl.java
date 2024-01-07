@@ -93,6 +93,8 @@ public class IAControl {
 
             SessionManager.setMappa(request,mappaJSON.toString());
 
+            System.out.println(SessionManager.getMappa(request));
+
         } catch (ParseException | SQLException e) {
 
             try {

@@ -1,9 +1,7 @@
 package it.unisa.IS_Project.Model.Service;
 
-import it.unisa.IS_Project.Exception.GAC.Signup.*;
+import it.unisa.IS_Project.Exception.GAC.*;
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
-import it.unisa.IS_Project.Exception.GAC.Login.LoginPasswordsMismatchException;
-import it.unisa.IS_Project.Exception.GAC.Login.UserNotFoundException;
 import it.unisa.IS_Project.Model.Repository.UtenteRepository;
 import it.unisa.IS_Project.Utility.Utility;
 import it.unisa.IS_Project.Utility.Validator;

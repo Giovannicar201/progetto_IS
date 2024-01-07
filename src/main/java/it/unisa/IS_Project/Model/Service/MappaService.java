@@ -1,9 +1,9 @@
 package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.MappaEntity;
-import it.unisa.IS_Project.Exception.GMP.GMP.CreazioneMappa.InvalidMapHeightException;
-import it.unisa.IS_Project.Exception.GMP.GMP.CreazioneMappa.InvalidMapNameException;
-import it.unisa.IS_Project.Exception.GMP.GMP.CreazioneMappa.InvalidMapWidthException;
+import it.unisa.IS_Project.Exception.GMP.GMP.InvalidMapHeightException;
+import it.unisa.IS_Project.Exception.GMP.GMP.InvalidMapNameException;
+import it.unisa.IS_Project.Exception.GMP.GMP.InvalidMapWidthException;
 import org.json.simple.parser.ParseException;
 
 public interface MappaService {

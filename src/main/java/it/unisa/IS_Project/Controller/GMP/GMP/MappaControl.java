@@ -1,8 +1,8 @@
 package it.unisa.IS_Project.Controller.GMP.GMP;
 
-import it.unisa.IS_Project.Exception.GMP.GMP.CreazioneMappa.InvalidMapHeightException;
-import it.unisa.IS_Project.Exception.GMP.GMP.CreazioneMappa.InvalidMapNameException;
-import it.unisa.IS_Project.Exception.GMP.GMP.CreazioneMappa.InvalidMapWidthException;
+import it.unisa.IS_Project.Exception.GMP.GMP.InvalidMapHeightException;
+import it.unisa.IS_Project.Exception.GMP.GMP.InvalidMapNameException;
+import it.unisa.IS_Project.Exception.GMP.GMP.InvalidMapWidthException;
 import it.unisa.IS_Project.Exception.GMP.GMP.GMPException;
 import it.unisa.IS_Project.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Exception.Sessione.MissingSessionMapException;
@@ -46,6 +46,12 @@ public class MappaControl {
             String mappaVuota = mappaService.creaMappa(email,nome,altezza,larghezza);
 
             SessionManager.setMappa(request,mappaVuota);
+
+            try {
+                System.out.println(SessionManager.getMappa(request));
+            } catch (MissingSessionMapException e) {
+                throw new RuntimeException(e);
+            }
 
         } catch (ParseException e) {
 

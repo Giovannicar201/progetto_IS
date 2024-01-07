@@ -2,7 +2,7 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Exception.GEN.GEN.EntityNotFoundException;
 import it.unisa.IS_Project.Exception.GMP.GST.InvalidRowException;
-import it.unisa.IS_Project.Exception.GMP.GST.Selezione.InvalidColumnException;
+import it.unisa.IS_Project.Exception.GMP.GST.InvalidColumnException;
 import org.json.simple.parser.ParseException;
 
 import java.sql.SQLException;

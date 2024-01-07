@@ -1,9 +1,6 @@
 package it.unisa.IS_Project.Controller.GAC;
 
-import it.unisa.IS_Project.Exception.GAC.GACException;
-import it.unisa.IS_Project.Exception.GAC.Login.LoginPasswordsMismatchException;
-import it.unisa.IS_Project.Exception.GAC.Login.UserNotFoundException;
-import it.unisa.IS_Project.Exception.GAC.Signup.*;
+import it.unisa.IS_Project.Exception.GAC.*;
 import it.unisa.IS_Project.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.UtenteService;
 import it.unisa.IS_Project.Utility.SessionManager;
