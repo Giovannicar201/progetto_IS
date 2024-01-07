@@ -1,6 +1,5 @@
 package it.unisa.IS_Project.Controller;
 
-import it.unisa.IS_Project.Exception.GEN.GEN.CreateEntityException;
 import it.unisa.IS_Project.Model.Entity.EventoEntity;
 import it.unisa.IS_Project.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.EventoService;
