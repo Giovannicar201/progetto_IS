@@ -1,8 +1,8 @@
 package it.unisa.IS_Project.Controller;
 
+import it.unisa.IS_Project.Exception.GEN.GEN.CreazioneEntita.CreateEntityException;
 import it.unisa.IS_Project.Model.Entity.EventoEntity;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.*;
-import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
+import it.unisa.IS_Project.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.EventoService;
 import it.unisa.IS_Project.Model.Service.UtenteService;
 import it.unisa.IS_Project.Utility.SessionManager;
@@ -10,15 +10,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -32,7 +28,7 @@ public class EventoControl {
     @RequestMapping(value = "/gestoreEventi/creaEvento", method = RequestMethod.POST)
 
     public String creaEvento(@RequestBody String evento,
-                             HttpServletRequest request, HttpServletResponse response) throws CreateEntityException{
+                             HttpServletRequest request, HttpServletResponse response) throws CreateEntityException {
        /* JSONParser parser = new JSONParser();
         List<String> nomiIstruzioni = new ArrayList<>();
         List<String> valoriIstruzioni = new ArrayList<>();

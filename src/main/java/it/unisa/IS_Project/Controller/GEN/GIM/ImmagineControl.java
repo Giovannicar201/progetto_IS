@@ -1,8 +1,9 @@
 package it.unisa.IS_Project.Controller.GEN.GIM;
 
-import it.unisa.IS_Project.Model.Exception.GEN.GIM.GIMException;
-import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
-import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagine.InvalidFileSizeException;
+import it.unisa.IS_Project.Exception.GEN.GIM.CaricaImmagine.NotUniqueImageException;
+import it.unisa.IS_Project.Exception.GEN.GIM.GIMException;
+import it.unisa.IS_Project.Exception.Sessione.MissingSessionEmailException;
+import it.unisa.IS_Project.Exception.GEN.GIM.CaricaImmagine.InvalidFileSizeException;
 import it.unisa.IS_Project.Model.Service.ImmagineService;
 import it.unisa.IS_Project.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -47,6 +48,14 @@ public class ImmagineControl {
                 throw new GIMException("ERRORE - NESSUN UTENTE IN SESSIONE.");
             }
 
+        } catch (NotUniqueImageException e) {
+
+            try {
+                response.sendError(500, "NUIE");
+            } catch (IOException ex) {
+                throw new GIMException("ERRORE - IMMAGINE GIÀ ESISTENTE.");
+            }
+
         } catch (InvalidFileSizeException e) {
 
             try {
@@ -54,7 +63,6 @@ public class ImmagineControl {
             } catch (IOException ex) {
                 throw new GIMException("ERRORE - DIMENSIONE DELL'IMMAGINE NON VALIDA.");
             }
-
         }
     }
 

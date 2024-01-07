@@ -1,14 +1,15 @@
 package it.unisa.IS_Project.Model.Service;
 
+import it.unisa.IS_Project.Exception.GEN.GIM.CaricaImmagine.NotUniqueImageException;
 import it.unisa.IS_Project.Model.Entity.ImmagineEntity;
-import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagine.InvalidFileSizeException;
+import it.unisa.IS_Project.Exception.GEN.GIM.CaricaImmagine.InvalidFileSizeException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public interface ImmagineService {
-    void caricaImmagine(MultipartFile immagine, String email) throws SQLException, IOException, InvalidFileSizeException;
+    void caricaImmagine(MultipartFile immagine, String email) throws SQLException, IOException, InvalidFileSizeException, NotUniqueImageException;
 
     void integraPixelArt(MultipartFile immagine, String nomeFoto, String email);
 

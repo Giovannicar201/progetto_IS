@@ -331,7 +331,7 @@ function creaEvento() {
         "istruzioni" : getIstruzioni()
     };
 
-    xhr.open('POST', '/eventi/creaEvento', true);
+    xhr.open('POST', '/gestoreEventi/creaEvento', true);
 
     xhr.onreadystatechange = function() {
 
@@ -470,7 +470,7 @@ function creaEntità() {
 
     let entità = getEntità();
 
-    xhr.open('POST', '/entità/creaEntità', true);
+    xhr.open('POST', '/gestoreEntita/creaEntità', true);
 
     xhr.onreadystatechange = function() {
 
@@ -528,7 +528,7 @@ function getEntità(){
 function showEntita(){
     let xhr= new XMLHttpRequest();
 
-    xhr.open('POST', '/entità/visualizzaListaEntità', true);
+    xhr.open('POST', '/gestoreEntita/visualizzaListaEntità', true);
 
     xhr.onreadystatechange = function() {
 
@@ -608,7 +608,7 @@ function login() {
     loginForm.email = email;
     loginForm.password = password;
 
-    xhr.open('POST', '/auth/login', true);
+    xhr.open('POST', '/gestoreAccessi/login', true);
 
     xhr.onreadystatechange = function() {
 
@@ -652,7 +652,7 @@ function signup() {
     signupForm.password = password;
     signupForm.passwordRipetuta = passwordRipetuta;
 
-    xhr.open('POST', '/auth/signup', true);
+    xhr.open('POST', '/gestoreAccessi/signup', true);
 
     xhr.onreadystatechange = function() {
 
@@ -685,7 +685,7 @@ function logout(){
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open('POST', '/auth/logout', true);
+    xhr.open('POST', '/gestoreAccessi/logout', true);
 
     xhr.onreadystatechange = function() {
 

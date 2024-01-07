@@ -1,11 +1,11 @@
 package it.unisa.IS_Project.Controller.GMP.GMP;
 
-import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapHeightException;
-import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapNameException;
-import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapWidthException;
-import it.unisa.IS_Project.Model.Exception.GMP.GMP.GMPException;
-import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
-import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionMapException;
+import it.unisa.IS_Project.Exception.GMP.GMP.CreazioneMappa.InvalidMapHeightException;
+import it.unisa.IS_Project.Exception.GMP.GMP.CreazioneMappa.InvalidMapNameException;
+import it.unisa.IS_Project.Exception.GMP.GMP.CreazioneMappa.InvalidMapWidthException;
+import it.unisa.IS_Project.Exception.GMP.GMP.GMPException;
+import it.unisa.IS_Project.Exception.Sessione.MissingSessionEmailException;
+import it.unisa.IS_Project.Exception.Sessione.MissingSessionMapException;
 import it.unisa.IS_Project.Model.Service.MappaService;
 import it.unisa.IS_Project.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;

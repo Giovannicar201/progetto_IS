@@ -2,8 +2,8 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.CartellaEntity;
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
-import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.InvalidFolderNameException;
-import it.unisa.IS_Project.Model.Exception.GMP.GCR.CreaCartella.NotUniqueFolderException;
+import it.unisa.IS_Project.Exception.GMP.GCR.CreaCartella.InvalidFolderNameException;
+import it.unisa.IS_Project.Exception.GMP.GCR.CreaCartella.NotUniqueFolderException;
 import it.unisa.IS_Project.Model.Repository.CartellaRepository;
 import it.unisa.IS_Project.Utility.Validator;
 import jakarta.transaction.Transactional;

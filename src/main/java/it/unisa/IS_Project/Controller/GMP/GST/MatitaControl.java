@@ -1,6 +1,6 @@
 package it.unisa.IS_Project.Controller.GMP.GST;
 
-import it.unisa.IS_Project.Model.Exception.GMP.GST.GSTException;
+import it.unisa.IS_Project.Exception.GMP.GST.GSTException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 

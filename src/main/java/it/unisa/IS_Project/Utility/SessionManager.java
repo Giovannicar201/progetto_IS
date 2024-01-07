@@ -1,6 +1,6 @@
 package it.unisa.IS_Project.Utility;
 
-import it.unisa.IS_Project.Model.Exception.Sessione.*;
+import it.unisa.IS_Project.Exception.Sessione.*;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class SessionManager {

@@ -1,9 +1,9 @@
 package it.unisa.IS_Project.Controller.GEN.GEN;
 
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.*;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.EntityNotFoundException;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.GENException;
-import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
+import it.unisa.IS_Project.Exception.GEN.GEN.CreazioneEntita.*;
+import it.unisa.IS_Project.Exception.GEN.GEN.EntityNotFoundException;
+import it.unisa.IS_Project.Exception.GEN.GEN.GENException;
+import it.unisa.IS_Project.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.EntitaService;
 import it.unisa.IS_Project.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;

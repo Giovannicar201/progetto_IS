@@ -2,9 +2,9 @@ package it.unisa.IS_Project.Model.Service;
 
 import it.unisa.IS_Project.Model.Entity.CoordinateEntity;
 import it.unisa.IS_Project.Model.Entity.EntitaEntity;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.EntityNotFoundException;
-import it.unisa.IS_Project.Model.Exception.GMP.GST.InvalidRowException;
-import it.unisa.IS_Project.Model.Exception.GMP.GST.Selezione.InvalidColumnException;
+import it.unisa.IS_Project.Exception.GEN.GEN.EntityNotFoundException;
+import it.unisa.IS_Project.Exception.GMP.GST.InvalidRowException;
+import it.unisa.IS_Project.Exception.GMP.GST.Selezione.InvalidColumnException;
 import it.unisa.IS_Project.Utility.Validator;
 import jakarta.transaction.Transactional;
 import org.json.simple.JSONArray;

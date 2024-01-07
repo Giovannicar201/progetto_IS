@@ -1,8 +1,8 @@
 package it.unisa.IS_Project.Controller.GMP.GST;
 
-import it.unisa.IS_Project.Model.Exception.GMP.GMP.GMPException;
-import it.unisa.IS_Project.Model.Exception.GMP.GST.Selezione.PixelArtSelectionException;
-import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
+import it.unisa.IS_Project.Exception.GMP.GMP.GMPException;
+import it.unisa.IS_Project.Exception.GMP.GST.Selezione.PixelArtSelectionException;
+import it.unisa.IS_Project.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,8 +1,9 @@
 package it.unisa.IS_Project.Model.Service;
 
+import it.unisa.IS_Project.Exception.GEN.GIM.CaricaImmagine.NotUniqueImageException;
 import it.unisa.IS_Project.Model.Entity.ImmagineEntity;
 import it.unisa.IS_Project.Model.Entity.UtenteEntity;
-import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagine.InvalidFileSizeException;
+import it.unisa.IS_Project.Exception.GEN.GIM.CaricaImmagine.InvalidFileSizeException;
 import it.unisa.IS_Project.Model.Repository.ImmagineRepository;
 import jakarta.transaction.Transactional;
 import org.json.simple.JSONArray;
@@ -31,10 +32,11 @@ public class ImmagineServiceImpl implements ImmagineService {
 
     @Override
     @Transactional
-    public void caricaImmagine(MultipartFile immagine, String email) throws SQLException, IOException, InvalidFileSizeException {
+    public void caricaImmagine(MultipartFile immagine, String email) throws SQLException, IOException, InvalidFileSizeException, NotUniqueImageException {
+
+        UtenteEntity utenteEntity = utenteService.get(email);
 
         ImmagineEntity immagineEntity = new ImmagineEntity();
-        UtenteEntity utenteEntity = utenteService.get(email);
         
         if(!isImageSizeValid(immagine))
             throw new InvalidFileSizeException("ERRORE - DIMENSIONE NON VALIDA.");
@@ -42,6 +44,11 @@ public class ImmagineServiceImpl implements ImmagineService {
         Blob immagineBlob = convertMultipartFileToBlob(immagine);
 
         String nome = immagine.getOriginalFilename();
+
+        ImmagineEntity immagineEntityQuery = immagineRepository.findByNomeAndUtenteEntity(nome,utenteEntity);
+
+        if(immagineEntityQuery != null)
+            throw new NotUniqueImageException("ERRORE - IMMAGINE GIÀ ESISTENTE.");
 
         immagineEntity.setImmagine(immagineBlob);
         immagineEntity.setNome(nome);

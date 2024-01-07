@@ -1,8 +1,8 @@
 package it.unisa.IS_Project.Model.Service;
 
+import it.unisa.IS_Project.Exception.GEN.GEN.CreazioneEntita.*;
 import it.unisa.IS_Project.Model.Entity.EntitaEntity;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.*;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.EntityNotFoundException;
+import it.unisa.IS_Project.Exception.GEN.GEN.EntityNotFoundException;
 
 import java.sql.SQLException;
 import java.util.List;
