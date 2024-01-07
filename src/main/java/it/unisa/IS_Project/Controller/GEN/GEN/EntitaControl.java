@@ -1,11 +1,12 @@
-package it.unisa.IS_Project.Controller;
+package it.unisa.IS_Project.Controller.GEN.GEN;
 
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.CreazioneEntita.*;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.EliminazioneEntita.DeleteEntityException;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.EliminazioneEntita.GENException;
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.EntityNotFoundException;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.ModificaEntita.ModifyEntityException;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.VisualizzaEntita.ViewEntityException;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.VisualizzaListaEntita.ViewEntityListException;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.GENException;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.ModificaEntita.GENException;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.VisualizzaEntita.GENException;
+import it.unisa.IS_Project.Model.Exception.GEN.GEN.VisualizzaListaEntita.GENException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Service.EntitaService;
 import it.unisa.IS_Project.Utility.SessionManager;
@@ -29,10 +30,9 @@ public class EntitaControl {
     @Autowired
     public EntitaService entitaService;
 
-    @RequestMapping(value = "/entità/creaEntità", method = RequestMethod.POST)
+    @RequestMapping(value = "/gestoreEntita/creaEntità", method = RequestMethod.POST)
 
-    public void creaEntita(@RequestBody String entita, HttpServletRequest request, HttpServletResponse response)
-            throws CreateEntityException {
+    public void creaEntita(@RequestBody String entita, HttpServletRequest request, HttpServletResponse response) throws GENException {
 
         JSONParser parser = new JSONParser();
         List<String> nomiProprieta = new ArrayList<>();
@@ -67,7 +67,7 @@ public class EntitaControl {
             try {
                 response.sendError(302, "NQTE");
             } catch (IOException ex) {
-                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ PARSEEXCEPTION.");
+                throw new GENException("ERRORE - PARSEEXCEPTION.");
             }
 
         } catch (MissingSessionEmailException e) {
@@ -75,7 +75,7 @@ public class EntitaControl {
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - NESSUN UTENTE IN SESSIONE.");
             }
 
         } catch (FolderNotFoundException e) {
@@ -83,7 +83,7 @@ public class EntitaControl {
             try {
                 response.sendError(500, "MSEE");
             } catch (IOException ex) {
-                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - CARTELLA NON ESISTENTE.");
             }
 
         } catch (InvalidEntityNameException e) {
@@ -91,7 +91,7 @@ public class EntitaControl {
             try {
                 response.sendError(500, "IENE");
             } catch (IOException ex) {
-                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - NOME NON VALIDO.");
             }
 
         } catch (InvalidNumberOfPropertyException e) {
@@ -99,7 +99,7 @@ public class EntitaControl {
             try {
                 response.sendError(500, "INPE");
             } catch (IOException ex) {
-                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - NUMERO DI PROPRIETÀ NON VALIDO.");
             }
 
         } catch (NotUniqueEntityException e) {
@@ -107,7 +107,7 @@ public class EntitaControl {
             try {
                 response.sendError(500, "NUEE");
             } catch (IOException ex) {
-                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - ENTITÀ GIÀ ESISTENTE.");
             }
 
         } catch (ImageNotFoundException e) {
@@ -115,7 +115,7 @@ public class EntitaControl {
             try {
                 response.sendError(500, "INFE");
             } catch (IOException ex) {
-                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - IMMAGINE NON ESISTENTE.");
             }
 
         } catch (InvalidCollisionException e) {
@@ -123,15 +123,15 @@ public class EntitaControl {
             try {
                 response.sendError(500, "ICE");
             } catch (IOException ex) {
-                throw new CreateEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - COLLISIONI NON VALIDE.");
             }
 
         }
     }
 
-    @RequestMapping(value = "/entità/modificaEntità", method = RequestMethod.POST)
+    @RequestMapping(value = "/gestoreEntita/modificaEntità", method = RequestMethod.POST)
 
-    public void modificaEntita(@RequestBody String entita, HttpServletRequest request, HttpServletResponse response) throws  ModifyEntityException {
+    public void modificaEntita(@RequestBody String entita, HttpServletRequest request, HttpServletResponse response) throws GENException {
 
         JSONParser parser = new JSONParser();
         List<String> nomiProprieta = new ArrayList<>();
@@ -167,7 +167,7 @@ public class EntitaControl {
             try {
                 response.sendError(302, "NQTE");
             } catch (IOException ex) {
-                throw new ModifyEntityException("ERRORE - CREAZIONE ENTITÀ PARSEEXCEPTION.");
+                throw new GENException("ERRORE - PARSEEXCEPTION.");
             }
 
         } catch (MissingSessionEmailException e) {
@@ -175,7 +175,7 @@ public class EntitaControl {
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new ModifyEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - NESSUN UTENTE IN SESSIONE.");
             }
 
         } catch (FolderNotFoundException e) {
@@ -183,7 +183,7 @@ public class EntitaControl {
             try {
                 response.sendError(500, "MSEE");
             } catch (IOException ex) {
-                throw new ModifyEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - CARTELLA NON ESISTENTE.");
             }
 
         } catch (InvalidEntityNameException e) {
@@ -191,7 +191,7 @@ public class EntitaControl {
             try {
                 response.sendError(500, "IENE");
             } catch (IOException ex) {
-                throw new ModifyEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - NOME NON VALIDO.");
             }
 
         } catch (InvalidNumberOfPropertyException e) {
@@ -199,7 +199,7 @@ public class EntitaControl {
             try {
                 response.sendError(500, "INPE");
             } catch (IOException ex) {
-                throw new ModifyEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - NUMERO DI PROPRIETÀ NON VALIDO.");
             }
 
         } catch (NotUniqueEntityException e) {
@@ -207,7 +207,7 @@ public class EntitaControl {
             try {
                 response.sendError(500, "NUEE");
             } catch (IOException ex) {
-                throw new ModifyEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - ENTITÀ GIÀ ESISTENTE.");
             }
 
         } catch (ImageNotFoundException e) {
@@ -215,7 +215,7 @@ public class EntitaControl {
             try {
                 response.sendError(500, "INFE");
             } catch (IOException ex) {
-                throw new ModifyEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - IMMAGINE NON ESISTENTE.");
             }
 
         } catch (InvalidCollisionException e) {
@@ -223,37 +223,28 @@ public class EntitaControl {
             try {
                 response.sendError(500, "ICE");
             } catch (IOException ex) {
-                throw new ModifyEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
-            }
-
-        } catch (EntityNotFoundException e) {
-
-            try {
-                response.sendError(500, "ENFE");
-            } catch (IOException ex) {
-                throw new ModifyEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - COLLISIONI NON VALIDE.");
             }
 
         }
-
     }
 
-    @RequestMapping(value = "/entità/eliminaEntità", method = RequestMethod.POST)
+    @RequestMapping(value = "/gestoreEntita/eliminaEntità", method = RequestMethod.POST)
 
-    public void eliminaEntita(@RequestBody String nome, HttpServletRequest request, HttpServletResponse response ) throws DeleteEntityException {
+    public void eliminaEntita(@RequestBody String nome, HttpServletRequest request, HttpServletResponse response ) throws GENException {
 
         try {
 
-            SessionManager.getEmail(request);
+            String email = SessionManager.getEmail(request);
 
-            entitaService.eliminaEntita(nome);
+            entitaService.eliminaEntita(nome,email);
 
         } catch (MissingSessionEmailException e) {
 
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new DeleteEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - NESSUN UTENTE IN SESSIONE.");
             }
 
         } catch (EntityNotFoundException e) {
@@ -261,18 +252,17 @@ public class EntitaControl {
             try {
                 response.sendError(500, "ENFE");
             } catch (IOException ex) {
-                throw new DeleteEntityException("ERRORE - CREAZIONE ENTITÀ IOEXCEPTION.");
+                throw new GENException("ERRORE - ENTITÀ NON ESISTENTE.");
             }
 
         }
 
     }
 
-    @RequestMapping(value = "/entità/visualizzaListaEntità", method = RequestMethod.POST)
+    @RequestMapping(value = "/gestoreEntita/visualizzaListaEntità", method = RequestMethod.POST)
     @ResponseBody
 
-    public String visualizzaListaEntita(HttpServletRequest request, HttpServletResponse response )
-            throws ViewEntityListException {
+    public String visualizzaListaEntita(HttpServletRequest request, HttpServletResponse response ) throws GENException {
 
         String immagini = new JSONObject().toString();
 
@@ -285,7 +275,7 @@ public class EntitaControl {
             try {
                 response.sendError(302, "NQTE");
             } catch (IOException ex) {
-                throw new ViewEntityListException("ERRORE - VISUALIZZA LISTA IMMAGINI SQLEXCEPTION.");
+                throw new GENException("ERRORE - SQL EXCEPTION.");
             }
 
         } catch (MissingSessionEmailException e) {
@@ -293,7 +283,7 @@ public class EntitaControl {
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new ViewEntityListException("ERRORE - NESSUN UTENTE IN SESSIONE.");
+                throw new GENException("ERRORE - NESSUN UTENTE IN SESSIONE.");
             }
         }
 
@@ -302,24 +292,25 @@ public class EntitaControl {
         return immagini;
     }
 
-    @RequestMapping(value = "/entità/visualizzaEntità", method = RequestMethod.POST)
+    @RequestMapping(value = "/gestoreEntita/visualizzaEntità", method = RequestMethod.POST)
     @ResponseBody
 
-    public String visualizzaEntita(@RequestBody String nome, HttpServletRequest request, HttpServletResponse response ) throws ViewEntityException {
+    public String visualizzaEntita(@RequestBody String nome, HttpServletRequest request, HttpServletResponse response ) throws GENException {
+
         String entita = new JSONObject().toString();
 
         try {
 
-            SessionManager.getEmail(request);
+            String email = SessionManager.getEmail(request);
 
-            entita = entitaService.visualizzaEntita(nome);
+            entita = entitaService.visualizzaEntita(nome,email);
 
         } catch (MissingSessionEmailException e) {
 
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new ViewEntityException("ERRORE - VISUALIZZA IMMAGINE IOEXCEPTION.");
+                throw new GENException("ERRORE - NESSUN UTENTE IN SESSIONE.");
             }
 
         } catch (EntityNotFoundException e) {
@@ -327,7 +318,7 @@ public class EntitaControl {
             try {
                 response.sendError(500, "ENFE");
             } catch (IOException ex) {
-                throw new ViewEntityException("ERRORE - VISUALIZZA IMMAGINE IOEXCEPTION.");
+                throw new GENException("ERRORE - ENTITÀ NON ESISTENTE.");
             }
 
         }

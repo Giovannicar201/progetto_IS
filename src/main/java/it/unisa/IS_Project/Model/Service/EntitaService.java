@@ -12,15 +12,15 @@ public interface EntitaService {
 
     void modificaEntita(String email, String nomeImmagine, String nome, String collisioni, String nomeCartella, List<String> nomiProprieta, List<String> valoriProprieta) throws EntityNotFoundException, FolderNotFoundException, InvalidEntityNameException, InvalidNumberOfPropertyException, NotUniqueEntityException, ImageNotFoundException, InvalidCollisionException;
 
-    void eliminaEntita(String nome) throws EntityNotFoundException;
+    void eliminaEntita(String nome, String email) throws EntityNotFoundException;
 
-    String visualizzaEntita(String nome) throws EntityNotFoundException;
+    String visualizzaEntita(String nome, String email) throws EntityNotFoundException;
 
     String visualizzaListaEntitaInCartella(String email, String nomeCartella) throws SQLException;
 
     String visualizzaListaEntita(String email) throws SQLException;
 
-    EntitaEntity get(String nome);
+    EntitaEntity get(String nome, String email);
 
     EntitaEntity get(int id);
 }

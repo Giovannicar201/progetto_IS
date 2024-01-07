@@ -1,7 +1,6 @@
-package it.unisa.IS_Project.Controller;
+package it.unisa.IS_Project.Controller.GEN.GIM;
 
-import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagine.UploadImageException;
-import it.unisa.IS_Project.Model.Exception.GEN.GIM.VisualizzaListaImmagini.ViewImagesListException;
+import it.unisa.IS_Project.Model.Exception.GEN.GIM.GIMException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Exception.GEN.GIM.CaricaImmagine.InvalidFileSizeException;
 import it.unisa.IS_Project.Model.Service.ImmagineService;
@@ -18,11 +17,13 @@ import java.sql.SQLException;
 
 @Controller
 public class ImmagineControl {
+    
     @Autowired
     public ImmagineService immagineService;
+    
     @RequestMapping(value = "/gestoreImmagini/caricaImmagine", method = RequestMethod.POST)
 
-    public void caricaImmagine(@RequestPart("file") MultipartFile immagine, HttpServletRequest request, HttpServletResponse response) throws UploadImageException {
+    public void caricaImmagine(@RequestPart("file") MultipartFile immagine, HttpServletRequest request, HttpServletResponse response) throws GIMException {
 
         try {
 
@@ -32,14 +33,18 @@ public class ImmagineControl {
 
         } catch (IOException | SQLException e) {
 
-            throw new UploadImageException("ERRORE - CARICA IMMAGINE IOEXCEPTION || SQLEXCEPTION.");
+            try {
+                response.sendError(302, "NQTE");
+            } catch (IOException ex) {
+                throw new GIMException("ERRORE - IOEXCEPTION || SQLEXCEPTION.");
+            }
 
         } catch (MissingSessionEmailException e) {
 
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new UploadImageException("ERRORE - CARICA IMMAGINE IOEXCEPTION.");
+                throw new GIMException("ERRORE - NESSUN UTENTE IN SESSIONE.");
             }
 
         } catch (InvalidFileSizeException e) {
@@ -47,7 +52,7 @@ public class ImmagineControl {
             try {
                 response.sendError(500, "IFSE");
             } catch (IOException ex) {
-                throw new UploadImageException("ERRORE - DIMENSIONE DELL'IMMAGINE NON VALIDA.");
+                throw new GIMException("ERRORE - DIMENSIONE DELL'IMMAGINE NON VALIDA.");
             }
 
         }
@@ -55,7 +60,7 @@ public class ImmagineControl {
 
     @RequestMapping(value = "/gestoreImmagini/integraImmagine", method = RequestMethod.POST)
 
-    public void integraPixelArt(@RequestPart("file") MultipartFile immagine, HttpServletRequest request, HttpServletResponse response) throws UploadImageException {
+    public void integraPixelArt(@RequestPart("file") MultipartFile immagine, HttpServletRequest request, HttpServletResponse response) throws GIMException {
 
         //SE LATO JS SI SETTA IL NOME DELL'IMMAGINE POSSIAMO FARE UN UNICO METODO
         //NEL CASO VA RIPORTATO QUESTO CAMBIAMENTO NELL'ODD
@@ -68,14 +73,14 @@ public class ImmagineControl {
 
         } catch (IOException | SQLException e) {
 
-            throw new UploadImageException("ERRORE - CARICA IMMAGINE IOEXCEPTION || SQLEXCEPTION.");
+            throw new GIMException("ERRORE - CARICA IMMAGINE IOEXCEPTION || SQLEXCEPTION.");
 
         } catch (MissingSessionEmailException e) {
 
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new UploadImageException("ERRORE - CARICA IMMAGINE IOEXCEPTION.");
+                throw new GIMException("ERRORE - CARICA IMMAGINE IOEXCEPTION.");
             }
 
         } catch (InvalidFileSizeException e) {
@@ -83,7 +88,7 @@ public class ImmagineControl {
             try {
                 response.sendError(500, "IFSE");
             } catch (IOException ex) {
-                throw new UploadImageException("ERRORE - DIMENSIONE DELL'IMMAGINE NON VALIDA.");
+                throw new GIMException("ERRORE - DIMENSIONE DELL'IMMAGINE NON VALIDA.");
             }
 
         }
@@ -92,21 +97,22 @@ public class ImmagineControl {
     @RequestMapping(value = "/gestoreImmagini/visualizzaListaImmagini", method = RequestMethod.GET)
     @ResponseBody
 
-    public String visualizzaListaImmagini(HttpServletRequest request, HttpServletResponse response)
-            throws ViewImagesListException {
+    public String visualizzaListaImmagini(HttpServletRequest request, HttpServletResponse response) throws GIMException {
 
         String immagini = new JSONObject().toString();
 
         try {
 
-            immagini = immagineService.visualizzaListaImmagini(SessionManager.getEmail(request));
+            String email = SessionManager.getEmail(request);
+
+            immagini = immagineService.visualizzaListaImmagini(email);
 
         }catch (SQLException e) {
 
             try {
-                response.sendError(302, "MSEE");
+                response.sendError(302, "NQTE");
             } catch (IOException ex) {
-                throw new ViewImagesListException("ERRORE - VISUALIZZA LISTA IMMAGINI SQLEXCEPTION.");
+                throw new GIMException("ERRORE - SQLEXCEPTION.");
             }
 
         } catch (MissingSessionEmailException e) {
@@ -114,7 +120,7 @@ public class ImmagineControl {
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new ViewImagesListException("ERRORE - NESSUN UTENTE IN SESSIONE.");
+                throw new GIMException("ERRORE - NESSUN UTENTE IN SESSIONE.");
             }
         }
 

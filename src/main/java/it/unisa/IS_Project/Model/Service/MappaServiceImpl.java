@@ -13,15 +13,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MappaServiceImpl implements MappaService{
+public class MappaServiceImpl implements MappaService {
+
     @Autowired
     private UtenteService utenteService;
-    @Autowired
-    private EntitaService entitaService;
     @Autowired
     private MappaRepository mappaRepository;
 
@@ -101,14 +99,7 @@ public class MappaServiceImpl implements MappaService{
 
     @Override
     @Transactional
-    @Scheduled(fixedRate = 30000)
     public MappaEntity update(MappaEntity newMappaEntity, String nomeMappa) {
-        MappaEntity mappaEntity=mappaRepository.findByNome(nomeMappa);
-        newMappaEntity.setNome(nomeMappa);
-        mappaEntity.setNome(newMappaEntity.getNome());
-        mappaEntity.setLunghezza(newMappaEntity.getLunghezza());
-        mappaEntity.setLarghezza(newMappaEntity.getLarghezza());
-        MappaEntity saved=mappaRepository.save(mappaEntity);
-        return saved;
+        return null;
     }
 }

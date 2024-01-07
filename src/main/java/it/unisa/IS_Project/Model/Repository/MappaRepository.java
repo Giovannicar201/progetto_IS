@@ -1,12 +1,12 @@
 package it.unisa.IS_Project.Model.Repository;
 
 import it.unisa.IS_Project.Model.Entity.MappaEntity;
+import it.unisa.IS_Project.Model.Entity.UtenteEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 
 @Repository
@@ -18,7 +18,7 @@ public interface MappaRepository extends JpaRepository<MappaEntity,Integer> {
     MappaEntity findAllByEmail(@Param("email") String email);
 
     @Query
-    MappaEntity findByNome(String nome);
+    MappaEntity findByNomeAndUtenteEntity(String nome, UtenteEntity utente);
 
     @Modifying
     @Query("DELETE FROM MappaEntity")

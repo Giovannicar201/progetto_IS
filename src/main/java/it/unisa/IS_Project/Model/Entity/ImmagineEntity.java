@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 import java.sql.Blob;
 
 @Data
@@ -20,10 +19,10 @@ public class ImmagineEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idFoto")
-    private int idFoto;
+    private int id;
     private String nome;
     @Lob
-    private Blob foto;
+    private Blob immagine;
 
     @OneToOne(mappedBy = "immagineEntity",cascade = CascadeType.REMOVE)
     private EntitaEntity entitaEntity;

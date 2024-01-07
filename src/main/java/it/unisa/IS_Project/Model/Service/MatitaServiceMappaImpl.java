@@ -19,14 +19,14 @@ import java.util.Base64;
 import java.util.List;
 
 @Service
-public class MatitaServiceMappaImpl implements MatitaService{
+public class MatitaServiceMappaImpl implements MatitaService {
+
     @Autowired
     private EntitaService entitaService;
 
     @Override
     @Transactional
-    public String piazza(String mappa, String nome, String riga, String colonna)
-            throws ParseException, EntityNotFoundException, InvalidColumnException, InvalidRowException, SQLException {
+    public String piazza(String mappa, String nome, String riga, String colonna) throws ParseException, EntityNotFoundException, InvalidColumnException, InvalidRowException, SQLException {
 
         EntitaEntity entitaEntityQuery = entitaService.get(nome);
 
@@ -53,7 +53,7 @@ public class MatitaServiceMappaImpl implements MatitaService{
 
                 entitaJSON.put("id",entitaEntityQuery.getId());
 
-                Blob immagine = entitaEntityQuery.getImmagineEntity().getFoto();
+                Blob immagine = entitaEntityQuery.getImmagineEntity().getImmagine();
                 byte[] bytes = immagine.getBytes(1, (int) immagine.length());
 
                 entitaJSON.put("immagine",Base64.getEncoder().encodeToString(bytes));
@@ -67,7 +67,6 @@ public class MatitaServiceMappaImpl implements MatitaService{
         coordinateEntity.setPrimaryKeyCoordinate(new CoordinateEntity.PrimaryKeyCoordinate(riga,colonna,entitaEntityQuery.getId()));
 
         return mappaJSON.toString();
-
     }
 
     @Override

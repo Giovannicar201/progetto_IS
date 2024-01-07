@@ -18,7 +18,7 @@ public class ProprietaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProprieta")
-    private int idProprieta;
+    private int id;
     private String nome;
     private String valore;
 

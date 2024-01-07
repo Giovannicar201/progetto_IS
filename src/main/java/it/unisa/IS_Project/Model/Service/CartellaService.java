@@ -12,6 +12,4 @@ public interface CartellaService {
     CartellaEntity get(String nome, String email);
 
     CartellaEntity get(int id);
-
-    CartellaEntity get(String nomeCartella);
 }

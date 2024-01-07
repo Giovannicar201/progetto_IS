@@ -1,10 +1,9 @@
 package it.unisa.IS_Project.Controller.GMP.GMP;
 
-import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.CreateMapException;
 import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapHeightException;
 import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapNameException;
 import it.unisa.IS_Project.Model.Exception.GMP.GMP.CreazioneMappa.InvalidMapWidthException;
-import it.unisa.IS_Project.Model.Exception.GMP.GMP.RecuperaMappa.RecoveryMapException;
+import it.unisa.IS_Project.Model.Exception.GMP.GMP.GMPException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionMapException;
 import it.unisa.IS_Project.Model.Service.MappaService;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.io.IOException;
 
-
 @Controller
 public class MappaControl {
 
@@ -31,7 +29,7 @@ public class MappaControl {
 
     @RequestMapping(value = "/gestoreMappa/creaMappa", method = RequestMethod.POST)
 
-    public void creaMappa(@RequestBody String mappa, HttpServletRequest request, HttpServletResponse response) throws CreateMapException, MissingSessionMapException {
+    public void creaMappa(@RequestBody String mappa, HttpServletRequest request, HttpServletResponse response) throws GMPException {
 
         JSONParser parser = new JSONParser();
 
@@ -54,7 +52,7 @@ public class MappaControl {
             try {
                 response.sendError(302, "NQTE");
             } catch (IOException ex) {
-                throw new CreateMapException("ERRORE - CREAZIONE MAPPA PARSEEXCEPTION.");
+                throw new GMPException("ERRORE - PARSEEXCEPTION.");
             }
 
         } catch (MissingSessionEmailException e) {
@@ -62,7 +60,7 @@ public class MappaControl {
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new CreateMapException("ERRORE - CREAZIONE MAPPA IOEXCEPTION.");
+                throw new GMPException("ERRORE - NESSUN UTENTE IN SESSIONE.");
             }
 
         } catch (InvalidMapWidthException e) {
@@ -70,7 +68,7 @@ public class MappaControl {
             try {
                 response.sendError(500, "IMWE");
             } catch (IOException ex) {
-                throw new CreateMapException("ERRORE - CREAZIONE MAPPA IOEXCEPTION.");
+                throw new GMPException("ERRORE - LARGHEZZA NON VALIDA.");
             }
 
         } catch (InvalidMapHeightException e) {
@@ -78,7 +76,7 @@ public class MappaControl {
             try {
                 response.sendError(500, "IMHE");
             } catch (IOException ex) {
-                throw new CreateMapException("ERRORE - CREAZIONE MAPPA IOEXCEPTION.");
+                throw new GMPException("ERRORE - ALTEZZA NON VALIDA.");
             }
 
         } catch (InvalidMapNameException e) {
@@ -86,7 +84,7 @@ public class MappaControl {
             try {
                 response.sendError(500, "IMNE");
             } catch (IOException ex) {
-                throw new CreateMapException("ERRORE - CREAZIONE MAPPA IOEXCEPTION.");
+                throw new GMPException("ERRORE - NOME NON VALIDO.");
             }
 
         }
@@ -96,7 +94,7 @@ public class MappaControl {
     @ResponseBody
 
     public String visualizzaStatisticheMappa(HttpServletRequest request, HttpServletResponse response)
-            throws CreateMapException {
+            throws GMPException {
 
         /*String statistiche = new JSONObject().toString();
 
@@ -166,7 +164,7 @@ public class MappaControl {
     @RequestMapping(value = "/gestoreMappa/recuperaMappa", method = RequestMethod.POST)
     @ResponseBody
 
-    public String recuperaMappa(HttpServletRequest request, HttpServletResponse response) throws RecoveryMapException {
+    public String caricaMappa(HttpServletRequest request, HttpServletResponse response) throws GMPException {
 
         String mappa = new JSONObject().toString();
 
@@ -181,7 +179,7 @@ public class MappaControl {
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new RecoveryMapException("ERRORE - RECUPERA MAPPA IOEXCEPTION.");
+                throw new GMPException("ERRORE - NESSUN UTENTE IN SESSIONE.");
             }
 
         } catch (MissingSessionMapException e) {
@@ -189,7 +187,7 @@ public class MappaControl {
             try {
                 response.sendError(302, "MSME");
             } catch (IOException ex) {
-                throw new RecoveryMapException("ERRORE - RECUPERA MAPPA IOEXCEPTION.");
+                throw new GMPException("ERRORE - NESSUNA MAPPA IN SESSIONE.");
             }
 
         }

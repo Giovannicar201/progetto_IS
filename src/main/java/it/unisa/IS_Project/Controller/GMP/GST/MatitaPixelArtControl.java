@@ -1,4 +1,4 @@
-package it.unisa.IS_Project.Controller;
+package it.unisa.IS_Project.Controller.GMP.GST;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

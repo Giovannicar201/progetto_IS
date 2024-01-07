@@ -1,6 +1,8 @@
-package it.unisa.IS_Project.Controller;
+package it.unisa.IS_Project.Controller.GMP.GST;
 
 import it.unisa.IS_Project.Model.Exception.GEN.GEN.EntityNotFoundException;
+import it.unisa.IS_Project.Model.Exception.GMP.GMP.GMPException;
+import it.unisa.IS_Project.Model.Exception.GMP.GST.GSTException;
 import it.unisa.IS_Project.Model.Exception.GMP.GST.InvalidRowException;
 import it.unisa.IS_Project.Model.Exception.GMP.GST.Selezione.InvalidColumnException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
@@ -21,10 +23,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 @Controller
 public class MatitaMappaControl extends MatitaControl {
+
     @Qualifier("matitaServiceMappaImpl")
     @Autowired
     protected MatitaService matitaService;
@@ -32,7 +36,7 @@ public class MatitaMappaControl extends MatitaControl {
     @RequestMapping(value = "/matita/piazzaEntita", method = RequestMethod.POST)
 
     @Override
-    public void piazza(@RequestBody String entita, HttpServletRequest request, HttpServletResponse response) {
+    public void piazza(@RequestBody String entita, HttpServletRequest request, HttpServletResponse response) throws GSTException {
 
         JSONParser parser = new JSONParser();
 
@@ -51,19 +55,54 @@ public class MatitaMappaControl extends MatitaControl {
             SessionManager.setMappa(request,mappa);
 
         } catch (ParseException | SQLException e) {
-            //TO DO
-        } catch (MissingSessionMapException e) {
-            throw new RuntimeException(e);
-        } catch (MissingSessionEmailException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidColumnException e) {
-            throw new RuntimeException(e);
-        } catch (EntityNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidRowException e) {
-            throw new RuntimeException(e);
-        }
 
+            try {
+                response.sendError(302, "NQTE");
+            } catch (IOException ex) {
+                throw new GSTException("ERRORE - PARSEEXCEPTION || SQLEXCEPTION.");
+            }
+
+        } catch (MissingSessionMapException e) {
+
+            try {
+                response.sendError(302, "MSME");
+            } catch (IOException ex) {
+                throw new GSTException("ERRORE - NESSUNA MAPPA IN SESSIONE.");
+            }
+
+        } catch (MissingSessionEmailException e) {
+
+            try {
+                response.sendError(302, "MSEE");
+            } catch (IOException ex) {
+                throw new GSTException("ERRORE - NESSUN UTENTE IN SESSIONE.");
+            }
+
+        } catch (InvalidColumnException e) {
+
+            try {
+                response.sendError(500, "ICE");
+            } catch (IOException ex) {
+                throw new GSTException("ERRORE - COLONNA NON VALIDA.");
+            }
+
+        } catch (EntityNotFoundException e) {
+
+            try {
+                response.sendError(500, "ENFE");
+            } catch (IOException ex) {
+                throw new GSTException("ERRORE - ENTITA NON ESISTENTE.");
+            }
+
+        } catch (InvalidRowException e) {
+
+            try {
+                response.sendError(500, "IRE");
+            } catch (IOException ex) {
+                throw new GSTException("ERRORE - RIGA NON VALIDA.");
+            }
+
+        }
     }
 
     @RequestMapping(value = "/matita/riempiConEntita", method = RequestMethod.POST)
@@ -80,29 +119,38 @@ public class MatitaMappaControl extends MatitaControl {
     @RequestMapping(value = "/matita/visualizzaListaEntitaInCartella", method = RequestMethod.POST)
     @ResponseBody
 
-    public String visualizzaListaEntitaInCartella(@RequestBody String nome, HttpServletRequest request, HttpServletResponse response) {
-
+    public String visualizzaListaEntitaInCartella(@RequestBody String nome, HttpServletRequest request, HttpServletResponse response) throws GSTException {
 
         JSONParser parser = new JSONParser();
 
-        String email = null, nomeCartella;
-
         try {
 
-            email = SessionManager.getEmail(request);
+            String email = SessionManager.getEmail(request);
 
             JSONObject nomeJSON = (JSONObject) parser.parse(nome);
 
-            nomeCartella = (String) nomeJSON.get("nome");
+            String nomeCartella = (String) nomeJSON.get("nome");
 
             return matitaService.visualizzaLista(email,nomeCartella);
 
+        } catch (ParseException | SQLException e) {
+
+            try {
+                response.sendError(302, "NQTE");
+            } catch (IOException ex) {
+                throw new GSTException("ERRORE - PARSEEXCEPTION || SQLEXCEPTION.");
+            }
+
         } catch (MissingSessionEmailException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+
+            try {
+                response.sendError(302, "MSEE");
+            } catch (IOException ex) {
+                throw new GSTException("ERRORE - NESSUN UTENTE IN SESSIONE.");
+            }
+
         }
+
+        return null;
     }
 }

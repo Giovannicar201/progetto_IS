@@ -1,13 +1,11 @@
-package it.unisa.IS_Project.Controller;
+package it.unisa.IS_Project.Controller.GMP.GST;
 
-import it.unisa.IS_Project.Model.Exception.GMP.GST.Selezione.MapSelectionException;
+import it.unisa.IS_Project.Model.Exception.GMP.GMP.GMPException;
 import it.unisa.IS_Project.Model.Exception.GMP.GST.Selezione.PixelArtSelectionException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
-import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionMapSelectionException;
 import it.unisa.IS_Project.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +17,7 @@ public class SelezioneControl {
 
     @RequestMapping(value = "/selezione/selezioneAreaMappa", method = RequestMethod.POST)
 
-    public void selezioneAreaMappa(@RequestBody String selezione, HttpServletRequest request, HttpServletResponse response)
-            throws MapSelectionException {
+    public void selezioneAreaMappa(@RequestBody String selezione, HttpServletRequest request, HttpServletResponse response) throws GMPException {
 
         try {
 
@@ -33,7 +30,7 @@ public class SelezioneControl {
             try {
                 response.sendError(302, "MSEE");
             } catch (IOException ex) {
-                throw new MapSelectionException("ERRORE - SELEZIONE MAPPA IOEXCEPTION.");
+                throw new GMPException("ERRORE - NESSUN UTENTE IN SESSIONE.");
             }
 
         }

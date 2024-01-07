@@ -1,15 +1,11 @@
-package it.unisa.IS_Project.Controller;
+package it.unisa.IS_Project.Controller.GMP.GST;
 
 import it.unisa.IS_Project.AI.Service.IAServiceAdapter;
-import it.unisa.IS_Project.AI.Utility.Parser;
 import it.unisa.IS_Project.Model.Entity.EntitaEntity;
-import it.unisa.IS_Project.Model.Exception.GEN.GEN.EntityNotFoundException;
-import it.unisa.IS_Project.Model.Exception.GMP.GST.InvalidRowException;
-import it.unisa.IS_Project.Model.Exception.GMP.GST.Selezione.InvalidColumnException;
+import it.unisa.IS_Project.Model.Exception.GMP.GMP.GMPException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionMapException;
 import it.unisa.IS_Project.Model.Exception.Sessione.MissingSessionMapSelectionException;
-import it.unisa.IS_Project.Model.Repository.EntitaRepository;
 import it.unisa.IS_Project.Model.Service.EntitaService;
 import it.unisa.IS_Project.Model.Service.MatitaService;
 import it.unisa.IS_Project.Utility.SessionManager;
@@ -24,25 +20,23 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Base64;
 
 @Controller
 public class IAControl {
+
     @Qualifier("matitaServiceMappaImpl")
     @Autowired
     protected MatitaService matitaService;
     @Autowired
     protected EntitaService entitaService;
-    @Autowired
-    protected EntitaRepository entitaRepository;
 
     @RequestMapping(value = "/IA/genera", method = RequestMethod.POST)
 
-    public void genera(HttpServletRequest request, HttpServletResponse response) {
+    public void genera(HttpServletRequest request, HttpServletResponse response) throws GMPException {
 
         JSONParser parser = new JSONParser();
 
@@ -73,7 +67,7 @@ public class IAControl {
 
                 int id = Math.toIntExact((Long) entitaIndividuoJSON.get("id"));
 
-                String nome = entitaRepository.findById(id).getNome();
+                String nome = entitaService.get(id).getNome();
                 String riga = (String) entitaIndividuoJSON.get("riga");
                 String colonna = (String) entitaIndividuoJSON.get("colonna");
 
@@ -87,7 +81,7 @@ public class IAControl {
 
                         entitaJSON.put("id", entitaEntityQuery.getId());
 
-                        Blob immagine = entitaEntityQuery.getImmagineEntity().getFoto();
+                        Blob immagine = entitaEntityQuery.getImmagineEntity().getImmagine();
                         byte[] bytes = immagine.getBytes(1, (int) immagine.length());
 
                         entitaJSON.put("immagine", Base64.getEncoder().encodeToString(bytes));
@@ -99,16 +93,38 @@ public class IAControl {
 
             SessionManager.setMappa(request,mappaJSON.toString());
 
+        } catch (ParseException | SQLException e) {
+
+            try {
+                response.sendError(302, "NQTE");
+            } catch (IOException ex) {
+                throw new GMPException("ERRORE - PARSEEXCEPTION || SQLEXCEPTION.");
+            }
+
         } catch (MissingSessionMapSelectionException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+
+            try {
+                response.sendError(302, "MSMSE");
+            } catch (IOException ex) {
+                throw new GMPException("ERRORE - NESSUNA SELEZIONE MAPPA IN SESSIONE.");
+            }
+
         } catch (MissingSessionMapException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+
+            try {
+                response.sendError(302, "MSME");
+            } catch (IOException ex) {
+                throw new GMPException("ERRORE - NESSUNA MAPPA IN SESSIONE.");
+            }
+
         } catch (MissingSessionEmailException e) {
-            throw new RuntimeException(e);
+
+            try {
+                response.sendError(302, "MSEE");
+            } catch (IOException ex) {
+                throw new GMPException("ERRORE - NESSUN UTENTE IN SESSIONE.");
+            }
+
         }
 
     }

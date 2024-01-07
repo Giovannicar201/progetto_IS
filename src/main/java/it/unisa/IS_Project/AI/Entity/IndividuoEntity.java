@@ -19,7 +19,7 @@ public class IndividuoEntity {
     /**
      * Crea un individuo rappresentativo dell'area selezionata all'interno della quale verranno piazzate le entità generate.
      *
-     * @author Giovanni Carbone
+     * @author Angelo Antonio Prisco
      */
     public IndividuoEntity() {
 
