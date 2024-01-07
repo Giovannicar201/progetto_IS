@@ -105,12 +105,18 @@ public class Validator {
         return altezza >= 0 && altezza <= 32;
     }
 
-    public static boolean isRowValidMOCK(String riga) {
-        return true;
+    public static boolean isRowValid(String riga, long altezza) {
+        if(riga == null)
+            return  false;
+
+        return Integer.parseInt(riga) >= 0 && Integer.parseInt(riga) <= (altezza - 1);
     }
 
-    public static boolean isColumnValidMOCK(String colonna) {
-        return true;
+    public static boolean isColumnValid(String colonna, long larghezza) {
+        if(colonna == null)
+            return  false;
+
+        return Integer.parseInt(colonna) >= 0 && Integer.parseInt(colonna) <= (larghezza - 1);
     }
 
 

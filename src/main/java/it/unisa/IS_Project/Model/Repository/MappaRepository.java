@@ -18,7 +18,7 @@ public interface MappaRepository extends JpaRepository<MappaEntity,Integer> {
     MappaEntity findAllByEmail(@Param("email") String email);
 
     @Query
-    MappaEntity findByNomeAndUtenteEntity(String nome, UtenteEntity utente);
+    MappaEntity findByUtenteEntity(UtenteEntity utente);
 
     @Modifying
     @Query("DELETE FROM MappaEntity")

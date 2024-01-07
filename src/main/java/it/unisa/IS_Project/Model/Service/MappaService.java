@@ -12,4 +12,6 @@ public interface MappaService {
     String visualizzaStatisticheMappa(String mappa) throws ParseException;
 
     MappaEntity update(MappaEntity newMappaEntity, String nomeMappa);
+
+    MappaEntity get(String email);
 }

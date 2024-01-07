@@ -5,6 +5,7 @@ import it.unisa.IS_Project.Model.Entity.EntitaEntity;
 import it.unisa.IS_Project.Exception.GEN.GEN.EntityNotFoundException;
 import it.unisa.IS_Project.Exception.GMP.GST.InvalidRowException;
 import it.unisa.IS_Project.Exception.GMP.GST.Selezione.InvalidColumnException;
+import it.unisa.IS_Project.Model.Entity.MappaEntity;
 import it.unisa.IS_Project.Utility.Validator;
 import jakarta.transaction.Transactional;
 import org.json.simple.JSONArray;
@@ -23,6 +24,8 @@ public class MatitaServiceMappaImpl implements MatitaService {
 
     @Autowired
     private EntitaService entitaService;
+    @Autowired
+    private MappaService mappaService;
 
     @Override
     @Transactional
@@ -30,15 +33,17 @@ public class MatitaServiceMappaImpl implements MatitaService {
 
         EntitaEntity entitaEntityQuery = entitaService.get(nome,email);
 
+        MappaEntity mappaEntity = mappaService.get(email);
+
         JSONParser parser = new JSONParser();
 
         if(entitaEntityQuery == null)
             throw new EntityNotFoundException("ERRORE - ENTITA NON ESISTENTE.");
 
-        if(!Validator.isRowValidMOCK(riga))
+        if(!Validator.isRowValid(riga,mappaEntity.getAltezza()))
             throw new InvalidRowException("ERRORE - RIGA NON VALIDA.");
 
-        if(!Validator.isColumnValidMOCK(colonna))
+        if(!Validator.isColumnValid(colonna,mappaEntity.getLarghezza()))
             throw new InvalidColumnException("ERRORE - COLONNA NON VALIDA.");
 
         JSONObject mappaJSON = (JSONObject) parser.parse(mappa);

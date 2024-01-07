@@ -27,8 +27,9 @@ public class MappaServiceImpl implements MappaService {
     @Transactional
     public String creaMappa(String email, String nome, String altezza, String larghezza) throws InvalidMapNameException, InvalidMapWidthException, InvalidMapHeightException {
 
-        MappaEntity mappaEntity = new MappaEntity();
         UtenteEntity utenteEntity = utenteService.get(email);
+
+        MappaEntity mappaEntity = new MappaEntity();
         
         mappaRepository.delete();
         
@@ -46,7 +47,7 @@ public class MappaServiceImpl implements MappaService {
 
         mappaEntity.setNome(nome);
         mappaEntity.setLarghezza(larghezzaLong);
-        mappaEntity.setLunghezza(altezzaLong);
+        mappaEntity.setAltezza(altezzaLong);
         mappaEntity.setUtenteEntity(utenteEntity);
 
         JSONObject mappaJSON = new JSONObject();
@@ -77,6 +78,7 @@ public class MappaServiceImpl implements MappaService {
     @Override
     @Transactional
     public String visualizzaStatisticheMappa(String mappa) throws ParseException {
+
         JSONParser parser = new JSONParser();
         JSONObject statistiche = new JSONObject();
 
@@ -101,5 +103,13 @@ public class MappaServiceImpl implements MappaService {
     @Transactional
     public MappaEntity update(MappaEntity newMappaEntity, String nomeMappa) {
         return null;
+    }
+
+    @Override
+    public MappaEntity get(String email) {
+
+        UtenteEntity utenteEntity = utenteService.get(email);
+
+        return mappaRepository.findByUtenteEntity(utenteEntity);
     }
 }

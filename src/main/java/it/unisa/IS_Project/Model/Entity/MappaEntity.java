@@ -19,7 +19,7 @@ public class MappaEntity {
     @Column(name = "idMappa")
     private int id;
     private String nome;
-    private long lunghezza;
+    private long altezza;
     private long larghezza;
 
     @OneToOne(fetch = FetchType.LAZY)
