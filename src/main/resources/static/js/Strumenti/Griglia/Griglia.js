@@ -614,6 +614,8 @@ function drawFromAsyncCall(mapDiv){
 
    let div = document.getElementById("griglia");
 
+   div.innerHTML = "";
+
     let cella = document.createElement("div");
 
     let img = document.createElement("img");
