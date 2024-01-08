@@ -144,6 +144,8 @@ function getMapFromTheSession(){
 
             console.log(map);
 
+            $("#griglia").empty();
+
             map.mappa.forEach(function (mapDiv){
 
                 drawFromAsyncCall(mapDiv);

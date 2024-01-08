@@ -612,9 +612,7 @@ function disegna(div, righe, colonne) {
 
 function drawFromAsyncCall(mapDiv){
 
-   let div = document.getElementById("griglia");
-
-   div.innerHTML = "";
+    let div = document.getElementById("griglia");
 
     let cella = document.createElement("div");
 
