@@ -43,6 +43,8 @@ public class MappaControl {
             String altezza = (String) mappaJSON.get("altezza");
             String larghezza = (String) mappaJSON.get("larghezza");
 
+            System.out.println(altezza + " " + larghezza);
+
             String mappaVuota = mappaService.creaMappa(email,nome,altezza,larghezza);
 
             SessionManager.setMappa(request,mappaVuota);

@@ -25,7 +25,8 @@ public class MappaServiceImpl implements MappaService {
 
     @Override
     @Transactional
-    public String creaMappa(String email, String nome, String altezza, String larghezza) throws InvalidMapNameException, InvalidMapWidthException, InvalidMapHeightException {
+    public String creaMappa(String email, String nome, String altezza, String larghezza)
+            throws InvalidMapNameException, InvalidMapWidthException, InvalidMapHeightException {
 
         UtenteEntity utenteEntity = utenteService.get(email);
 
@@ -53,8 +54,8 @@ public class MappaServiceImpl implements MappaService {
         JSONObject mappaJSON = new JSONObject();
         JSONArray entita = new JSONArray();
 
-        for(int riga = 0; riga < larghezzaLong; riga++) {
-            for (int colonna = 0; colonna < altezzaLong; colonna++) {
+        for(int riga = 0; riga < altezzaLong; riga++) {
+            for (int colonna = 0; colonna < larghezzaLong; colonna++) {
                 
                 JSONObject entitaJSON = new JSONObject();
 

@@ -1,7 +1,6 @@
 package it.unisa.IS_Project.Controller.GMP.GST;
 
 import it.unisa.IS_Project.Exception.GMP.GMP.GMPException;
-import it.unisa.IS_Project.Exception.GMP.GST.Selezione.PixelArtSelectionException;
 import it.unisa.IS_Project.Exception.Sessione.MissingSessionEmailException;
 import it.unisa.IS_Project.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,7 +38,8 @@ public class SelezioneControl {
 
     @RequestMapping(value = "/selezione/selezionePixelArt", method = RequestMethod.POST)
 
-    public void selezioneAreaPixelArt(String selezione, HttpServletRequest request, HttpServletResponse response) throws PixelArtSelectionException {
+    public void selezioneAreaPixelArt(String selezione, HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
 
         try {
 
@@ -49,11 +49,8 @@ public class SelezioneControl {
 
         } catch (MissingSessionEmailException e) {
 
-            try {
                 response.sendError(302, "MSEE");
-            } catch (IOException ex) {
-                throw new PixelArtSelectionException("ERRORE - SELEZIONE PIXEL ART IOEXCEPTION.");
-            }
+
         }
 
     }

@@ -48,6 +48,9 @@ function createMapFunction(altezza, larghezza, nome){
     let map = {};
 
     map.nome = nome;
+
+    console.log(altezza + " " + larghezza);
+
     map.altezza = altezza.toString();
     map.larghezza = larghezza.toString();
 
@@ -146,6 +149,8 @@ function getMapFromTheSession(){
                 drawFromAsyncCall(mapDiv);
 
             });
+
+            console.log(map.mappa[map.mappa.length - 1].colonna);
 
             createStyle(parseInt(map.mappa[map.mappa.length - 1].colonna) + 1, "32px");
 
